@@ -8,7 +8,7 @@ blind spots:
     exam         meta      muse-spark-1.3      writes the hidden blind tests from the issue only
     planner      meta      muse-spark-1.3      plans the day from the user's targets and schedule
     judge        subq      subq-preview        judges every agent output: code, loop rounds, plans
-    baseline     anthropic claude-opus-5-5     the "LLM reads the diff" reviewer we compare against
+    baseline     meta      muse-spark-1.3      the "LLM reads the diff" reviewer we compare against
 
 Override any role with RECEIPTS_ROLE_<ROLE>=anthropic|meta|subq.
 Every call is cached under .receipts_cache/ by a hash of
@@ -39,7 +39,7 @@ _load_dotenv()
 CACHE_DIR = Path(os.environ.get("RECEIPTS_CACHE", Path(__file__).resolve().parent.parent / ".receipts_cache"))
 
 DEFAULT_ROLES = {"implementer": "meta", "exam": "meta", "planner": "meta", "router": "meta", "analyst": "meta",
-                 "judge": "subq", "baseline": "anthropic"}
+                 "judge": "subq", "baseline": "meta"}
 
 # Meta model per role, chosen by strength. Each entry is tried in order.
 META_MODELS = {

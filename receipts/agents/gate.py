@@ -244,6 +244,17 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 "\n*Static review only: this repository isn't yours, so its code was never run. Spec used: "
                 f"{target.spec_source}.*")
 
+    async def meta_chat(ctx: Context, sender: str, text: str, profile: dict) -> str:
+        key = f"chatlog:{sender}"
+        history = ctx.storage.get(key) or []
+        try:
+            answer = await asyncio.to_thread(understand.chat, text, profile, history)
+        except Exception as e:  # noqa: BLE001
+            ctx.logger.warning(f"meta chat failed: {e}")
+            return "I couldn't reach Meta just now. Try again in a moment, or say `help`."
+        ctx.storage.set(key, (history + [{"role": "user", "text": text}, {"role": "assistant", "text": answer}])[-16:])
+        return answer
+
     def describe(profile: dict) -> str:
         p = profile["policy"]
         lines = [f"- Today's targets: {profile['targets'] or 'not told yet'}",
@@ -256,7 +267,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
         return "**What I remember about you**\n" + "\n".join(lines)
 
     OPEN = re.compile(r"^(help|\?|commands|demo( list|s)?|(check\s+)?demo\s+[\w-]+|me|profile|settings|policy|"
-                      r"history|strict (on|off)|(un)?mute [a-z]\d{3}|wrong|right|correct|good catch|"
+                      r"history|models|which models?|strict (on|off)|(un)?mute [a-z]\d{3}|wrong|right|correct|good catch|"
                       r"that's wrong|false block|bad verdict|(link|i am|i'm)\s+.+)$")
 
     async def handle(ctx: Context, sender: str, text: str, depth: int = 0) -> None:
@@ -329,8 +340,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 if cmd and (OPEN.match(cmd.lower()) or targets.PR_URL.search(cmd)):
                     await handle(ctx, sender, cmd, depth + 1)
                     return
-                await reply(ctx, sender, (routed["answer"] + "\n\n" if routed["answer"] and not cmd else "")
-                            + access.GUEST_HELP)
+                await reply(ctx, sender, await meta_chat(ctx, sender, t, {}))
                 return
             await reply(ctx, sender, "That needs my owner.\n\n" + access.GUEST_HELP)
             return
@@ -495,6 +505,13 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 rows = "\n".join(f"- {icon[h['decision']]} {h['decision']} · {h['target']}"
                                  + (f" · {', '.join(h['rules'])}" if h["rules"] else "") for h in reversed(hist))
                 await reply(ctx, sender, f"**Your last {len(hist)} verdicts**\n{rows}")
+        elif low in ("models", "which models", "which model", "what models do you use"):
+            roles = {"understanding your messages": "router", "planning your day": "planner",
+                     "writing hidden exams": "exam", "writing and fixing code": "implementer",
+                     "ship / don't-ship votes (no text)": "judge"}
+            await reply(ctx, sender, "**Models I use**\n" + "\n".join(
+                f"- {what}: {llm.who(role)}" for what, role in roles.items())
+                + "\n\nEvery reply you read is written by my own code or by Meta. SubQ only votes.")
         elif low in ("me", "profile", "settings", "policy", "what do you know about me"):
             await reply(ctx, sender, describe(profile))
         elif low in ("help", "?", "commands") or depth > 0:
@@ -513,7 +530,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                     await reply(ctx, sender, routed["answer"])
                 await handle(ctx, sender, cmd, depth + 1)
             else:
-                await reply(ctx, sender, routed["answer"] or HELP)
+                await reply(ctx, sender, await meta_chat(ctx, sender, t, profile))
 
     @chat.on_message(ChatMessage)
     async def on_chat(ctx: Context, sender: str, msg: ChatMessage):

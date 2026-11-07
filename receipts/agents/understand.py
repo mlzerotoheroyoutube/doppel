@@ -92,3 +92,20 @@ def route(message: str, profile: dict) -> dict:
         except ValueError:
             return {"command": "", "answer": reply.strip()[:2000]}
     return {"command": str(data.get("command") or "").strip().strip("`"), "answer": str(data.get("answer") or "")}
+
+
+# ---------------------------------------------------------------- full chat answers (Meta)
+
+CHAT_SYSTEM = """You are Receipts, a friendly, expert engineering teammate powered by Meta Muse. \
+You can talk about anything: code, product, business, planning, or general questions. Be concise and \
+concrete, use markdown, and answer the actual question. You also have tools the user can trigger in plain \
+English: verifying GitHub pull requests, fixing issues and opening PRs, watching repos, planning the day, \
+listing repos, PRs and issues, and starting new projects. When one of those would help, say so in one line."""
+
+
+def chat(message: str, profile: dict, history: list[dict]) -> str:
+    """A full answer from Meta Muse Spark, with the last few turns and what we remember."""
+    turns = "\n".join(f"{h['role']}: {h['text'][:1500]}" for h in history[-8:]) or "(new conversation)"
+    prompt = (f"# What you know about this user\n{_profile_text(profile)}\n\n"
+              f"# Conversation so far\n{turns}\n\n# User\n{message.strip()[:6000]}")
+    return llm.complete(CHAT_SYSTEM, prompt, effort="medium", role="router").strip()
