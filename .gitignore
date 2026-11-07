@@ -9,3 +9,4 @@ agent*_data.json
 logs/
 build/
 *.egg-info/
+.doppel/

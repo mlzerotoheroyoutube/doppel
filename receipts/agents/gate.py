@@ -19,7 +19,7 @@ from uagents import Agent, Context, Model, Protocol
 from uagents_core.contrib.protocols.chat import (ChatAcknowledgement, ChatMessage, TextContent,
                                                  chat_protocol_spec)
 
-from .. import blind, github_ops, llm, mutation, planner, publish, tamper
+from .. import blind, connections, github_ops, llm, mutation, planner, playbook, publish, tamper
 from ..models import Receipt
 from ..verify import blind_receipts, decide, mutation_receipts, subq_gate, to_markdown
 from . import access, memory, targets, understand
@@ -51,7 +51,7 @@ HELP = """**Doppel** is a teammate that only ships work it can prove.
   SubQ judges each round, and it reworks until approved (max 3 rounds)
 - paste a GitHub PR link, or `demo list` then `demo i1-bad-ignores-qty`, to verify one PR
 
-**Any device**
+**Calendar & email**\n- `calendar`: today's events · `emails`: unread mail, triaged by Meta\n\n**Any device**
 - `link <name>` here, and use the same name from the HTTP API on any other device: one memory, everywhere
 
 **Teach me**
@@ -83,6 +83,11 @@ class ApiReply(Model):
     ok: bool
     messages: list[str] = []
     error: str = ""
+
+
+class ApiProfile(Model):
+    ok: bool
+    profile: dict
 
 
 class ApiHealth(Model):
@@ -357,9 +362,45 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 profile["targets"] = profile["schedule"] = body
             memory.save(ctx.storage, sender, profile)
             inbox = "\n".join(f"- {i['decision']} · {i['target']}" for i in profile["inbox"][-10:])
-            await reply(ctx, sender, f"Planning your day with {llm.who('planner')}; {llm.who('judge')} will review it…")
+            schedule = profile["schedule"]
+            try:
+                cal = await asyncio.to_thread(connections.calendar_text)
+                schedule = f"{schedule}\nCalendar today: {cal}".strip()
+            except Exception:  # noqa: BLE001 - no calendar: plan from what was said
+                pass
+            await reply(ctx, sender, f"Planning your day with {llm.who('planner')} (using your calendar); "
+                                     f"{llm.who('judge')} will review it…")
             await ctx.send(addr["planner"], PlanRequest(user=sender, targets=profile["targets"],
-                                                        schedule=profile["schedule"], inbox=inbox))
+                                                        schedule=schedule, inbox=inbox))
+            return
+        if low in ("calendar", "my calendar", "what's on my calendar", "whats on my calendar", "agenda"):
+            try:
+                ev = await asyncio.to_thread(connections.calendar_events)
+            except Exception as e:  # noqa: BLE001
+                await reply(ctx, sender, f"I can't read your calendar: {e}. Connect it in the Doppel web page.")
+                return
+            tag = " (simulated)" if connections.mode("calendar") == "simulated" else ""
+            await reply(ctx, sender, f"**Today's calendar{tag}**\n" + ("\n".join(
+                f"- **{e['start']}" + (f"–{e['end']}" if e["end"] else "") + f"** {e['title']}" for e in ev)
+                or "Nothing on your calendar today."))
+            return
+        if low in ("emails", "email", "inbox emails", "check my email", "check my emails", "mail"):
+            try:
+                mails = await asyncio.to_thread(connections.unread_emails)
+            except Exception as e:  # noqa: BLE001
+                await reply(ctx, sender, f"I can't read your email: {e}. Connect Gmail in the Doppel web page.")
+                return
+            tag = " (simulated)" if connections.mode("gmail") == "simulated" else ""
+            listing = "\n".join(f"- **{m['from']}**: {m['subject']}" for m in mails) or "No unread email."
+            try:
+                summary = await asyncio.to_thread(
+                    llm.complete, "You triage an engineer's unread email. Be brief and concrete.",
+                    f"Unread email:\n{listing}\n\nIn at most 3 bullets: what needs action today, in priority "
+                    "order, and which ones Doppel could handle (e.g. checking a PR). No preamble.",
+                    "low", "planner")
+            except Exception:  # noqa: BLE001
+                summary = ""
+            await reply(ctx, sender, f"**Unread email{tag}**\n{listing}" + (f"\n\n**What matters**\n{summary}" if summary else ""))
             return
         if low in ("plan", "my plan", "show plan"):
             await reply(ctx, sender, planner.to_markdown(profile["plan"]) if profile["plan"]
@@ -628,11 +669,13 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 owner, name = repo.split("/")
                 try:  # issues labelled doppel-fix: work started from GitHub
                     for iss in await asyncio.to_thread(publish.labeled_issues, owner, name):
-                        started = state.setdefault("fixing", {})
-                        if str(iss["number"]) in started:
+                        # Its own storage key (no profile save can overwrite it) + a label swap on GitHub,
+                        # so an issue is picked up exactly once, even across restarts.
+                        key = f"fixing:{repo.lower()}#{iss['number']}"
+                        if ctx.storage.get(key):
                             continue
-                        started[str(iss["number"])] = int(time.time())
-                        memory.save(ctx.storage, user, profile)
+                        ctx.storage.set(key, int(time.time()))
+                        await asyncio.to_thread(publish.mark_working, owner, name, iss["number"])
                         label, base, issue, info = await asyncio.to_thread(
                             targets.issue_target, f"fix issue {iss['number']} in {repo}")
                         await asyncio.to_thread(publish.comment_issue, owner, name, iss["number"],
@@ -704,6 +747,25 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
         except Exception as e:  # noqa: BLE001
             return ApiReply(ok=False, messages=drain(ctx, req.user), error=str(e)[:300])
         return ApiReply(ok=True, messages=drain(ctx, req.user))
+
+    @gate.on_rest_post("/api/profile", ApiPoll, ApiProfile)
+    async def api_profile(ctx: Context, req: ApiPoll) -> ApiProfile:
+        """Everything Doppel remembers about the owner, for the Memory page."""
+        if not authorized(req.token) or req.user.lower() != access.owner():
+            return ApiProfile(ok=False, profile={})
+        p = memory.load(ctx.storage, f"rest:{req.user}")
+        pb = playbook.load()
+        view = {
+            "targets": p.get("targets", ""), "schedule": p.get("schedule", ""),
+            "plan": (p.get("plan") or {}).get("plan", {}), "plan_review": (p.get("plan") or {}).get("judge", {}),
+            "repos": sorted(p.get("repos", {})), "inbox": p.get("inbox", [])[-15:],
+            "history": p.get("history", [])[-15:], "policy": p.get("policy", {}),
+            "learned": sorted(memory.learned_downgrades(p)), "feedback": len(p.get("feedback", [])),
+            "devices": len(p.get("channels", [])),
+            "playbook": {"version": pb.get("version", 0), "domains": pb.get("domains", {}),
+                         "history": pb.get("history", [])[-10:]},
+        }
+        return ApiProfile(ok=True, profile=view)
 
     @gate.on_rest_post("/api/messages", ApiPoll, ApiReply)
     async def api_messages(ctx: Context, req: ApiPoll) -> ApiReply:

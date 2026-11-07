@@ -99,3 +99,12 @@ def labeled_issues(owner: str, repo: str, labels: tuple = ("doppel-fix", "receip
                 seen.add(i["number"])
                 out.append({"number": i["number"], "title": i["title"]})
     return out
+
+
+def mark_working(owner: str, repo: str, number: int) -> None:
+    """Swap doppel-fix (or receipts-fix) for doppel-working so the issue is never picked up twice."""
+    subprocess.run(["gh", "label", "create", "doppel-working", "-R", f"{owner}/{repo}", "--color", "FBCA04",
+                    "--description", "Doppel is working on this issue"], capture_output=True, text=True, timeout=30)
+    subprocess.run(["gh", "issue", "edit", str(number), "-R", f"{owner}/{repo}", "--add-label", "doppel-working",
+                    "--remove-label", "doppel-fix", "--remove-label", "receipts-fix"],
+                   capture_output=True, text=True, timeout=30)

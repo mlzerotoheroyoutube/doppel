@@ -17,4 +17,4 @@ receipts = "receipts.__main__:main"
 include = ["receipts*"]
 
 [tool.setuptools.package-data]
-receipts = ["agents/AGENT_README.md"]
+receipts = ["agents/AGENT_README.md", "web/index.html"]

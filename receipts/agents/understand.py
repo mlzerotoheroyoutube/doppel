@@ -31,6 +31,8 @@ PROMPT = """# Commands you can run (use the exact syntax)
 - `prs <owner>/<repo>` / `issues <owner>/<repo>` / `check prs in <owner>/<repo>`
 - `new issue in <owner>/<repo>: <title> -- <details>`
 - `new project <repo-name>: <project idea>`   start a new repo with a tested starter project
+- `calendar`                               today's calendar events
+- `emails`                                 unread email, triaged
 - `history`, `me`, `strict on|off`, `mute T00x`, `unmute T00x`, `wrong`, `right`, `link <name>`, `help`
 
 # What you know about this user

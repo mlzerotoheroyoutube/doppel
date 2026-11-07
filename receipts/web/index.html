@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doppel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<style>
+:root {
+  --bg: #f6f6f4; --panel: #ffffff; --ink: #17171a; --muted: #6b6b73; --line: #e6e6e1;
+  --accent: #6d4aff; --accent-ink: #ffffff; --me: #efeafe; --ok: #138a52; --bad: #c43c3c; --warn: #b7791f;
+  --code: #f2f1ee; --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f0f12; --panel: #17171c; --ink: #ececf1; --muted: #9b9ba6; --line: #2a2a31;
+    --accent: #8f74ff; --me: #241e3d; --code: #1f1f26; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 Inter, system-ui, sans-serif;
+       -webkit-font-smoothing: antialiased; }
+body { overflow-x: hidden; }
+.app { display: grid; grid-template-rows: auto auto 1fr auto; grid-template-columns: minmax(0, 1fr); height: 100dvh;
+       max-width: 920px; margin: 0 auto; }
+.app > * { min-width: 0; }
+header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+.logo { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), #2fd3b0);
+        display: grid; place-items: center; color: #fff; font-weight: 700; letter-spacing: -.5px; }
+.title { font-weight: 650; letter-spacing: -.2px; }
+.subtitle { color: var(--muted); font-size: 12.5px; }
+.status { margin-left: auto; display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--muted); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.dot.on { background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 22%, transparent); }
+.dot.off { background: var(--bad); }
+main { overflow-y: auto; padding: 18px 16px 8px; scroll-behavior: smooth; }
+.empty { text-align: center; color: var(--muted); margin: 8vh auto 0; max-width: 520px; }
+.empty h1 { color: var(--ink); font-size: 26px; letter-spacing: -.6px; margin: 0 0 6px; }
+.roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 22px 0 0; text-align: left; }
+.role { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: 12.5px; }
+.role b { display: block; color: var(--ink); font-size: 13px; }
+.msg { display: flex; margin: 10px 0; }
+.msg.me { justify-content: flex-end; }
+.bubble { max-width: min(680px, 92%); padding: 11px 14px; border-radius: 14px; background: var(--panel);
+          border: 1px solid var(--line); box-shadow: var(--shadow); overflow-wrap: anywhere; }
+.me .bubble { background: var(--me); border-color: transparent; box-shadow: none; }
+.bubble.progress { background: transparent; border: 1px dashed var(--line); box-shadow: none; color: var(--muted); font-size: 13.5px; padding: 7px 12px; }
+.bubble p { margin: .35em 0; } .bubble h2, .bubble h3 { margin: .5em 0 .3em; letter-spacing: -.2px; }
+.bubble h2 { font-size: 17px; } .bubble h3 { font-size: 15px; }
+.bubble ul { margin: .3em 0; padding-left: 1.2em; }
+.bubble code { font: 12.5px/1.5 "JetBrains Mono", ui-monospace, monospace; background: var(--code); padding: 1px 5px; border-radius: 5px; }
+.bubble pre { background: var(--code); padding: 10px 12px; border-radius: 10px; overflow-x: auto; }
+.bubble pre code { background: none; padding: 0; }
+.bubble a { color: var(--accent); }
+.bubble details { margin: .3em 0; } .bubble summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+.who { font-size: 11.5px; color: var(--muted); margin: 0 0 2px 4px; }
+footer { padding: 10px 16px 16px; border-top: 1px solid var(--line); background: var(--bg); }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+.chip { flex: none; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 999px;
+        padding: 6px 11px; font: 500 12.5px Inter, sans-serif; cursor: pointer; transition: border-color .15s, transform .1s; }
+.chip:hover { border-color: var(--accent); } .chip:active { transform: scale(.97); }
+form { display: flex; gap: 8px; }
+textarea { flex: 1; resize: none; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 12px;
+           padding: 11px 13px; font: 15px/1.4 Inter, sans-serif; max-height: 160px; outline: none; }
+textarea:focus { border-color: var(--accent); }
+button.send { border: 0; background: var(--accent); color: var(--accent-ink); border-radius: 12px; padding: 0 18px;
+              font: 600 14px Inter, sans-serif; cursor: pointer; }
+button.send:disabled { opacity: .5; cursor: default; }
+.lock { position: fixed; inset: 0; background: color-mix(in srgb, var(--bg) 92%, transparent); display: none; place-items: center; }
+.lock.show { display: grid; }
+.lock .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); width: min(340px, 90vw); }
+.lock input { width: 100%; margin: 12px 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: 15px Inter; }
+nav { display: flex; gap: 4px; padding: 0 16px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.card { min-width: 0; overflow-wrap: anywhere; } .view { min-width: 0; }
+nav button { border: 0; background: none; color: var(--muted); font: 600 13.5px Inter, sans-serif; padding: 10px 12px;
+             border-bottom: 2px solid transparent; cursor: pointer; }
+nav button.on { color: var(--ink); border-bottom-color: var(--accent); }
+.view { display: none; overflow-y: auto; padding: 18px 16px 24px; }
+.view.on { display: block; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 12px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow); }
+.card h3 { margin: 0 0 8px; font-size: 14px; letter-spacing: -.1px; display: flex; align-items: center; gap: 8px; }
+.card .muted, .muted { color: var(--muted); font-size: 13px; }
+.card ul { margin: 6px 0 0; padding-left: 1.1em; font-size: 13.5px; }
+.card li { margin: 3px 0; }
+.pill { display: inline-block; font: 600 11px Inter; padding: 2px 8px; border-radius: 999px; background: var(--code); color: var(--muted); }
+.pill.ok { background: color-mix(in srgb, var(--ok) 15%, transparent); color: var(--ok); }
+.pill.sim { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+.pill.bad { background: color-mix(in srgb, var(--bad) 15%, transparent); color: var(--bad); }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.seg button { border: 0; background: var(--panel); color: var(--muted); font: 600 12.5px Inter; padding: 6px 10px; cursor: pointer; }
+.seg button.on { background: var(--accent); color: var(--accent-ink); }
+.field { width: 100%; margin-top: 8px; padding: 9px 11px; border-radius: 10px; border: 1px solid var(--line);
+         background: var(--bg); color: var(--ink); font: 13.5px Inter; }
+.btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 10px; padding: 7px 12px;
+       font: 600 12.5px Inter; cursor: pointer; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.small { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.small a { color: var(--accent); }
+.block { display: grid; grid-template-columns: 92px 1fr; gap: 8px; font-size: 13.5px; padding: 4px 0; border-top: 1px dashed var(--line); }
+.block:first-child { border-top: 0; }
+.big { font-size: 26px; font-weight: 700; letter-spacing: -.5px; }
+@media (max-width: 560px) { .subtitle { display: none; } main, .view { padding: 12px 10px 6px; } footer { padding: 8px 10px 12px; }
+                            nav { padding: 0 8px; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">D</div>
+    <div>
+      <div class="title">Doppel</div>
+      <div class="subtitle">Your double: does the work behind the scenes, double-checks it, asks only when it must.</div>
+    </div>
+    <div class="status"><span class="dot" id="dot"></span><span id="state">connecting…</span></div>
+  </header>
+  <nav>
+    <button class="on" data-tab="chat">Chat</button>
+    <button data-tab="memory">Memory</button>
+    <button data-tab="connections">Connections</button>
+  </nav>
+  <section class="view" id="memory"><div class="grid" id="memgrid"><div class="muted">Loading…</div></div></section>
+  <section class="view" id="connections"><div class="grid" id="conngrid"><div class="muted">Loading…</div></div></section>
+  <main id="log">
+    <div class="empty" id="empty">
+      <h1>What should Doppel take care of?</h1>
+      <div>Check a pull request, fix an issue, plan your day, or just ask. Meta does the work; SubQ decides what ships.</div>
+      <div class="roles" id="roles"></div>
+    </div>
+  </main>
+  <footer>
+    <div class="chips" id="chips"></div>
+    <form id="form">
+      <textarea id="input" rows="1" placeholder="Ask Doppel… e.g. “what PRs are open in receipts-demo-store”" autofocus></textarea>
+      <button class="send" id="send" type="submit">Send</button>
+    </form>
+  </footer>
+</div>
+<div class="lock" id="lock"><div class="card">
+  <div class="title">Enter passcode</div>
+  <div class="subtitle" style="display:block">Shown in the terminal that started the web page.</div>
+  <input id="pass" type="password" autocomplete="one-time-code">
+  <button class="send" id="unlock" style="width:100%;padding:10px">Unlock</button>
+</div></div>
+<script>
+const $ = (id) => document.getElementById(id);
+const CHIPS = ["calendar", "emails", "plan my day", "my repos", "what PRs are open in receipts-demo-store",
+  "issues mlzerotoheroyoutube/receipts-demo-calendar", "demo i1-bad-hardcoded", "inbox", "models", "help"];
+const PROGRESS = /^(Fetching|Checking|Working on|Planning your|Round \d|Writing the hidden|Exam frozen|Reviewing|Approved\. Opening|Creating `)/;
+const ROLE_NAMES = { router: "Understands you", planner: "Plans your day", exam: "Writes hidden exams",
+                     implementer: "Writes code", judge: "Decides what ships" };
+
+function render(md) {
+  const html = window.marked ? marked.parse(md, { breaks: true }) : md.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  return window.DOMPurify ? DOMPurify.sanitize(html, { ADD_TAGS: ["details", "summary"] }) : html;
+}
+function add(who, text) {
+  $("empty")?.remove();
+  const row = document.createElement("div");
+  row.className = "msg " + (who === "me" ? "me" : "them");
+  const wrap = document.createElement("div");
+  if (who !== "me") { const w = document.createElement("div"); w.className = "who"; w.textContent = "Doppel"; wrap.appendChild(w); }
+  const b = document.createElement("div");
+  b.className = "bubble" + (who !== "me" && PROGRESS.test(text) ? " progress" : "");
+  b.innerHTML = who === "me" ? "" : render(text);
+  if (who === "me") b.textContent = text;
+  wrap.appendChild(b); row.appendChild(wrap); $("log").appendChild(row);
+  $("log").scrollTop = $("log").scrollHeight;
+}
+async function api(path, body) {
+  const r = await fetch(path, { method: body ? "POST" : "GET", headers: { "Content-Type": "application/json" },
+                                body: body ? JSON.stringify(body) : undefined });
+  if (r.status === 401) { $("lock").classList.add("show"); throw new Error("locked"); }
+  return r.json();
+}
+async function send(text) {
+  text = text.trim(); if (!text) return;
+  add("me", text); $("input").value = ""; autosize();
+  $("send").disabled = true;
+  try {
+    const out = await api("/chat", { text });
+    if (!out.ok && out.error) add("them", "⚠️ " + out.error);
+    (out.messages || []).forEach(m => add("them", m));
+  } catch (e) { if (e.message !== "locked") add("them", "⚠️ Couldn't reach Doppel."); }
+  $("send").disabled = false; $("input").focus();
+}
+async function poll() {
+  try { const out = await api("/poll", {}); (out.messages || []).forEach(m => add("them", m)); } catch (e) {}
+  setTimeout(poll, 2500);
+}
+async function health() {
+  try {
+    const h = await api("/health");
+    $("dot").className = "dot " + (h.ok ? "on" : "off");
+    $("state").textContent = h.ok ? "online" : "offline";
+    if (h.locked) $("lock").classList.add("show");
+    if (h.ok && $("roles") && !$("roles").childElementCount) {
+      for (const [k, v] of Object.entries(h.roles || {})) {
+        if (!ROLE_NAMES[k]) continue;
+        const d = document.createElement("div"); d.className = "role";
+        d.innerHTML = `<b>${ROLE_NAMES[k]}</b>${v.replace(/[&<>]/g, "")}`; $("roles").appendChild(d);
+      }
+    }
+  } catch (e) { $("dot").className = "dot off"; $("state").textContent = "offline"; }
+  setTimeout(health, 15000);
+}
+function autosize() { const t = $("input"); t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight, 160) + "px"; }
+for (const c of CHIPS) {
+  const b = document.createElement("button"); b.className = "chip"; b.type = "button"; b.textContent = c;
+  b.onclick = () => c.endsWith(": ") ? ($("input").value = c, $("input").focus()) : send(c);
+  $("chips").appendChild(b);
+}
+$("form").onsubmit = (e) => { e.preventDefault(); send($("input").value); };
+$("input").addEventListener("input", autosize);
+$("input").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send($("input").value); } });
+$("unlock").onclick = async () => {
+  await api("/login", { passcode: $("pass").value });
+  $("lock").classList.remove("show"); health();
+};
+// ---------------------------------------------------------------- tabs
+function show(tab) {
+  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
+  $("log").style.display = tab === "chat" ? "" : "none";
+  document.querySelector("footer").style.display = tab === "chat" ? "" : "none";
+  $("memory").classList.toggle("on", tab === "memory");
+  $("connections").classList.toggle("on", tab === "connections");
+  if (tab === "memory") loadMemory();
+  if (tab === "connections") loadConnections();
+}
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => show(b.dataset.tab));
+const esc = (t) => String(t ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const icon = { BLOCK: "🛑", WARN: "⚠️", PASS: "✅" };
+
+async function loadMemory() {
+  const g = $("memgrid");
+  let out;
+  try { out = await api("/memory"); } catch (e) { return; }
+  if (!out.ok) { g.innerHTML = `<div class="muted">Couldn't load memory: ${esc(out.error || "not available")}</div>`; return; }
+  const p = out.profile, plan = p.plan || {}, pol = p.policy || {}, pb = p.playbook || {};
+  const blocks = (plan.blocks || []).map(b => `<div class="block"><b>${esc(b.start)}–${esc(b.end)}</b><span>${esc(b.task)}</span></div>`).join("");
+  const lessons = Object.entries(pb.domains || {}).map(([d, v]) =>
+    `<li><b>${esc(d)}</b>: ${(v.lessons || []).length} lesson(s)${v.model ? `, model ${esc(v.model)}` : ""}</li>` +
+    (v.lessons || []).map(l => `<li class="muted">${esc(l)}</li>`).join("")).join("");
+  const pbhist = (pb.history || []).slice(-5).reverse().map(h => `<li>v${esc(h.version)} · ${esc(h.domain)} · ${esc(h.change)} (validation ${Math.round((h.val || 0) * 100)}%)</li>`).join("");
+  g.innerHTML = `
+    <div class="card"><h3>🎯 Today</h3><div class="muted">${esc(p.targets || "No targets yet. Tell me in Chat: today: …")}</div>
+      ${blocks ? `<div style="margin-top:10px">${blocks}</div>` : ""}
+      ${p.plan_review && p.plan_review.decision ? `<div class="small">Plan ${p.plan_review.decision === "APPROVE" ? "approved" : "flagged"} by SubQ</div>` : ""}</div>
+    <div class="card"><h3>👀 Watched repos</h3>
+      ${(p.repos || []).map(r => `<div class="row" style="margin-top:4px;justify-content:space-between"><span>${esc(r)}</span>
+        <button class="btn" onclick="act('unwatch ${esc(r)}')">Unwatch</button></div>`).join("") || '<div class="muted">None. Try: watch owner/repo</div>'}</div>
+    <div class="card"><h3>📥 Watcher inbox</h3><ul>${(p.inbox || []).slice().reverse().map(i => `<li>${icon[i.decision] || "•"} ${esc(i.target)}</li>`).join("") || '<li class="muted">Nothing yet</li>'}</ul></div>
+    <div class="card"><h3>🧾 Recent verdicts</h3><ul>${(p.history || []).slice().reverse().map(h => `<li>${icon[h.decision] || "•"} ${esc(h.target)}${h.rules && h.rules.length ? ` <span class="pill">${esc(h.rules.join(", "))}</span>` : ""}</li>`).join("") || '<li class="muted">None yet</li>'}</ul></div>
+    <div class="card"><h3>⚙️ Your rules</h3>
+      <div class="row" style="justify-content:space-between"><span>Strict mode (warnings block)</span>
+        <div class="seg"><button class="${pol.strict ? "on" : ""}" onclick="act('strict on')">On</button><button class="${pol.strict ? "" : "on"}" onclick="act('strict off')">Off</button></div></div>
+      <div class="small">Muted rules: ${esc((pol.muted || []).join(", ") || "none")} · Learned from your feedback: ${esc((p.learned || []).join(", ") || "nothing yet")} · ${esc(p.feedback)} feedback · ${esc(p.devices)} device(s) linked</div></div>
+    <div class="card"><h3>🧠 What Doppel has learned</h3><div class="muted">Playbook v${esc(pb.version || 0)}: lessons are adopted only if they beat the current version on held-out work.</div>
+      <ul>${lessons || '<li class="muted">No lessons yet</li>'}</ul>${pbhist ? `<div class="small">Recent changes</div><ul>${pbhist}</ul>` : ""}</div>`;
+}
+async function act(cmd) {
+  const out = await api("/chat", { text: cmd });
+  (out.messages || []).forEach(m => add("them", m));
+  setTimeout(loadMemory, 400);
+}
+
+const CONN = {
+  github: { name: "GitHub", emoji: "🐙", about: "Repos, PRs, issues, status checks and fixes. Uses the signed-in gh login on this laptop." },
+  calendar: { name: "Google Calendar", emoji: "📅", about: "Today's meetings feed your plan and quiet hours. Read-only." },
+  gmail: { name: "Gmail", emoji: "✉️", about: "Unread mail, triaged by Meta (`emails` in Chat). Read-only; never marks mail as read." },
+};
+async function loadConnections() {
+  let st; try { st = await api("/connections"); } catch (e) { return; }
+  const g = $("conngrid");
+  const pill = (c, k) => k === "github" ? (c.connected ? `<span class="pill ok">Connected · ${esc(c.account)}</span>` : `<span class="pill bad">Not signed in</span>`)
+    : c.mode === "real" ? `<span class="pill ok">Connected</span>` : c.mode === "simulated" ? `<span class="pill sim">Simulated</span>` : `<span class="pill">Off</span>`;
+  g.innerHTML = Object.entries(CONN).map(([k, meta]) => {
+    const c = st[k] || {};
+    let body = "";
+    if (k === "github") body = `<div class="small">To switch account: <code>gh auth switch</code> in a terminal on this laptop.</div>`;
+    if (k === "calendar") body = `
+      <div class="row"><div class="seg">${["simulated", "real", "off"].map(m => `<button class="${c.mode === m ? "on" : ""}" onclick="setMode('calendar','${m}')">${m[0].toUpperCase() + m.slice(1)}</button>`).join("")}</div></div>
+      <input class="field" id="ics" type="password" placeholder="${c.has_real ? "iCal link saved (paste to replace)" : "Paste your private iCal link"}">
+      <div class="small">Google Calendar → Settings → your calendar → Integrate calendar → <b>Secret address in iCal format</b>. Stored only on this laptop.</div>
+      <div class="row"><button class="btn primary" onclick="saveCal()">Save</button><button class="btn" onclick="testConn('calendar')">Test</button><span class="small" id="t-calendar"></span></div>`;
+    if (k === "gmail") body = `
+      <div class="row"><div class="seg">${["simulated", "real", "off"].map(m => `<button class="${c.mode === m ? "on" : ""}" onclick="setMode('gmail','${m}')">${m[0].toUpperCase() + m.slice(1)}</button>`).join("")}</div></div>
+      <input class="field" id="gaddr" type="email" placeholder="you@gmail.com" value="${esc(c.address || "")}">
+      <input class="field" id="gpass" type="password" placeholder="${c.has_real ? "App password saved (type to replace)" : "16-character Google app password"}">
+      <div class="small">Google Account → Security → 2-Step Verification → <b>App passwords</b>. Stored only on this laptop; read-only IMAP.</div>
+      <div class="row"><button class="btn primary" onclick="saveGmail()">Save</button><button class="btn" onclick="testConn('gmail')">Test</button><span class="small" id="t-gmail"></span></div>`;
+    return `<div class="card"><h3>${meta.emoji} ${meta.name} ${pill(c, k)}</h3><div class="muted">${meta.about}</div>${body}
+      ${k === "github" ? `<div class="row"><button class="btn" onclick="testConn('github')">Test</button><span class="small" id="t-github"></span></div>` : ""}</div>`;
+  }).join("");
+}
+async function setMode(which, mode) { await api("/connections", { [which + "_mode"]: mode }); loadConnections(); }
+async function saveCal() {
+  const v = $("ics").value.trim();
+  await api("/connections", v ? { calendar_ics_url: v, calendar_mode: "real" } : {});
+  loadConnections();
+}
+async function saveGmail() {
+  const a = $("gaddr").value.trim(), pw = $("gpass").value.trim();
+  const body = {}; if (a) body.gmail_address = a; if (pw) { body.gmail_app_password = pw; body.gmail_mode = "real"; }
+  await api("/connections", body); loadConnections();
+}
+async function testConn(which) {
+  const el = $("t-" + which); if (el) el.textContent = "testing…";
+  const r = await api("/connections/test", { which });
+  if ($("t-" + which)) $("t-" + which).textContent = (r.ok ? "✅ " : "⚠️ ") + (r.detail || "");
+}
+health(); poll();
+</script>
+</body>
+</html>
