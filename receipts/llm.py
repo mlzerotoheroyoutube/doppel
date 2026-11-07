@@ -38,7 +38,7 @@ _load_dotenv()
 
 CACHE_DIR = Path(os.environ.get("RECEIPTS_CACHE", Path(__file__).resolve().parent.parent / ".receipts_cache"))
 
-DEFAULT_ROLES = {"implementer": "meta", "exam": "meta", "planner": "meta",
+DEFAULT_ROLES = {"implementer": "meta", "exam": "meta", "planner": "meta", "router": "meta",
                  "judge": "subq", "baseline": "anthropic"}
 
 # Meta model per role, chosen by strength. Each entry is tried in order.
@@ -46,6 +46,7 @@ META_MODELS = {
     "implementer": [os.environ.get("RECEIPTS_META_CODER", "muse-wonder-1.0"), "muse-spark-1.3"],
     "exam": [os.environ.get("RECEIPTS_META_MODEL", "muse-spark-1.3")],
     "planner": [os.environ.get("RECEIPTS_META_MODEL", "muse-spark-1.3")],
+    "router": [os.environ.get("RECEIPTS_META_MODEL", "muse-spark-1.3")],
 }
 
 PROVIDERS = {
@@ -82,7 +83,8 @@ def who(role: str) -> str:
 
 def _key(provider: str, model: str, system: str, prompt: str, effort: str) -> str:
     h = hashlib.sha256()
-    for part in (provider, model, effort, system, prompt):
+    trial = os.environ.get("RECEIPTS_TRIAL", "")  # benchmark trials: fresh samples per trial
+    for part in (provider, model, effort, system, prompt) + ((f"trial={trial}",) if trial else ()):
         h.update(part.encode())
         h.update(b"\0")
     return h.hexdigest()[:32]

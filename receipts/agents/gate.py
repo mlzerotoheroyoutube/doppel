@@ -22,7 +22,7 @@ from uagents_core.contrib.protocols.chat import (ChatAcknowledgement, ChatMessag
 from .. import blind, llm, mutation, planner, tamper
 from ..models import Receipt
 from ..verify import blind_receipts, decide, mutation_receipts, to_markdown
-from . import memory, targets
+from . import memory, targets, understand
 from .messages import (DifferentialRequest, DifferentialResult, FixDone, FixProgress, FixRequest, JudgeRequest,
                        JudgeResult, MutationRequest, MutationResult, PlanRequest, PlanResult, SuiteRequest,
                        SuiteResult, TamperRequest, TamperResult, WriteTestsRequest, WriteTestsResult)
@@ -214,7 +214,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                  f"- Verdicts given you: {len(profile['history'])}, feedback given: {len(profile['feedback'])}"]
         return "**What I remember about you**\n" + "\n".join(lines)
 
-    async def handle(ctx: Context, sender: str, text: str) -> None:
+    async def handle(ctx: Context, sender: str, text: str, depth: int = 0) -> None:
         t = text.strip()
         low = t.lower()
         profile = memory.load(ctx.storage, sender)
@@ -343,8 +343,23 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 await reply(ctx, sender, f"**Your last {len(hist)} verdicts**\n{rows}")
         elif low in ("me", "profile", "settings", "policy", "what do you know about me"):
             await reply(ctx, sender, describe(profile))
-        else:
+        elif low in ("help", "?", "commands") or depth > 0:
             await reply(ctx, sender, HELP)
+        else:
+            # Plain English: Meta Muse Spark maps it to a command or answers from memory.
+            try:
+                routed = await asyncio.to_thread(understand.route, t, profile)
+            except Exception as e:  # noqa: BLE001 - never leave the user without an answer
+                ctx.logger.warning(f"router failed: {e}")
+                await reply(ctx, sender, HELP)
+                return
+            cmd = routed["command"]
+            if cmd and cmd.lower() not in ("help",) and cmd.lower() != low:
+                if routed["answer"]:
+                    await reply(ctx, sender, routed["answer"])
+                await handle(ctx, sender, cmd, depth + 1)
+            else:
+                await reply(ctx, sender, routed["answer"] or HELP)
 
     @chat.on_message(ChatMessage)
     async def on_chat(ctx: Context, sender: str, msg: ChatMessage):

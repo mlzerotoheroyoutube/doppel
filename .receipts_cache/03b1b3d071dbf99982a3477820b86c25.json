@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "low",
+ "text": "{\"command\": \"\", \"answer\": \"I'm the Receipts front desk \u2014 I verify AI-written PRs, fix GitHub issues in a checked loop, plan your day, and watch repos for you.\"}"
+}

@@ -191,8 +191,19 @@ def judge(issue: str, base: Path, workdir: Path, verdict, rounds: list[Round]) -
             "raw": a}
 
 
+def evidence_only_judge(verdict) -> dict:
+    """The 'no SubQ' configuration: ship whenever Receipts doesn't block."""
+    blocks = [r.title for r in verdict.receipts if r.severity == "block"]
+    ok = verdict.decision != "BLOCK"
+    return {"decision": "APPROVE" if ok else "REJECT", "p_ship": 1.0 if ok else 0.0,
+            "problem": "none" if ok else "evidence", "reasons": blocks or ["Receipts did not block"],
+            "feedback": sanitize_feedback("Evidence: " + " ".join(blocks)) if blocks else "",
+            "regressed_from_earlier_round": False}
+
+
 def run(issue: str, base: Path, max_rounds: int = 3,
-        on_event: Callable[[str], None] = lambda s: None) -> LoopResult:
+        on_event: Callable[[str], None] = lambda s: None, use_subq: bool = True,
+        mutants: int = 40) -> LoopResult:
     workdir = sandbox.copy_project(base)
     result = LoopResult("gave_up", workdir=str(workdir))
 
@@ -216,10 +227,13 @@ def run(issue: str, base: Path, max_rounds: int = 3,
             continue
 
         on_event(f"Round {n}: changed {', '.join(written)}. Collecting evidence…")
-        verdict = verify(base, workdir, issue, blind_src=exam)
+        verdict = verify(base, workdir, issue, blind_src=exam, judge=use_subq, mutants=mutants)
         report = to_markdown(verdict)
-        on_event(f"Round {n}: Receipts says {verdict.decision}. {llm.who('judge')} is judging…")
-        j = judge(issue, base, workdir, verdict, result.rounds)
+        if use_subq:
+            on_event(f"Round {n}: Receipts says {verdict.decision}. {llm.who('judge')} is judging…")
+            j = judge(issue, base, workdir, verdict, result.rounds)
+        else:
+            j = evidence_only_judge(verdict)
         rnd = Round(n, summary, written, cumulative_diff(base, workdir), verdict.decision, report, j)
         result.rounds.append(rnd)
 

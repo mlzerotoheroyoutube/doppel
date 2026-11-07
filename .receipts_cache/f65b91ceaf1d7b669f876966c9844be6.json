@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "low",
+ "text": "{\"command\": \"https://github.com/mlzerotoheroyoutube/receipts-demo-store/pull/4\", \"answer\": \"I'll verify that PR for you now.\"}"
+}
