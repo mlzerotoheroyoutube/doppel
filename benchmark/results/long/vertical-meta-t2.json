@@ -1,0 +1,21 @@
+{
+ "suite": "vertical",
+ "config": "meta",
+ "steps": [
+  {
+   "step": 1,
+   "shipped": true,
+   "rounds": 1,
+   "grades": {
+    "1": [
+     46,
+     46
+    ]
+   },
+   "step_correct": true,
+   "all_correct_so_far": true,
+   "seconds": 84.6
+  }
+ ],
+ "seconds": 84.6
+}
