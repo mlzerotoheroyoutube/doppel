@@ -67,7 +67,9 @@ def main() -> None:
         await ctx.send(sender, ChatAcknowledgement(acknowledged_msg_id=msg.msg_id, timestamp=datetime.now(timezone.utc)))
         text = msg.text()
         print(f"\n<<< {text}", flush=True)
-        if any(mark in text for mark in VERDICT_MARKERS):
+        progress = ("Fetching", "Checking", "Working on", "Planning your", "Round ", "Writing the hidden",
+                    "Exam frozen", "Reviewing", "Approved. Opening", "Creating `", "On it", "I'll ")
+        if any(mark in text for mark in VERDICT_MARKERS) or not text.startswith(progress):
             await send_next(ctx)
 
     @proto.on_message(ChatAcknowledgement)

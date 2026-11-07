@@ -340,6 +340,9 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 if cmd and (OPEN.match(cmd.lower()) or targets.PR_URL.search(cmd)):
                     await handle(ctx, sender, cmd, depth + 1)
                     return
+                if cmd:  # an owner-only action: say so plainly, never pretend to do it
+                    await reply(ctx, sender, "That needs my owner.\n\n" + access.GUEST_HELP)
+                    return
                 await reply(ctx, sender, await meta_chat(ctx, sender, t, {}))
                 return
             await reply(ctx, sender, "That needs my owner.\n\n" + access.GUEST_HELP)
