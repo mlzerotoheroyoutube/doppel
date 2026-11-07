@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "low",
+ "text": "{\"command\": \"plan\", \"answer\": \"Here's your plan for today.\"}"
+}

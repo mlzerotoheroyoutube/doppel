@@ -1,0 +1,80 @@
+[
+ {
+  "task": "store-1-percent",
+  "category": "generic",
+  "config": "subq",
+  "shipped": true,
+  "rounds": 1,
+  "judge": [
+   "none"
+  ],
+  "correct": true,
+  "grade": "7 passed, 9 deselected in 0.01s",
+  "seconds": 69.3
+ },
+ {
+  "task": "store-2-shipping",
+  "category": "generic",
+  "config": "subq",
+  "shipped": true,
+  "rounds": 1,
+  "judge": [
+   "none"
+  ],
+  "correct": true,
+  "grade": "7 passed, 9 deselected in 0.01s",
+  "seconds": 66.5
+ },
+ {
+  "task": "cal-1-overlap",
+  "category": "generic",
+  "config": "subq",
+  "shipped": true,
+  "rounds": 1,
+  "judge": [
+   "none"
+  ],
+  "correct": true,
+  "grade": "4 passed, 26 deselected in 0.01s",
+  "seconds": 42.1
+ },
+ {
+  "task": "store-3-remove-qty",
+  "category": "complex",
+  "config": "subq",
+  "shipped": true,
+  "rounds": 1,
+  "judge": [
+   "none"
+  ],
+  "correct": true,
+  "grade": "8 passed, 8 deselected in 0.01s",
+  "seconds": 58.0
+ },
+ {
+  "task": "cal-2-free-slots",
+  "category": "complex",
+  "config": "subq",
+  "shipped": true,
+  "rounds": 1,
+  "judge": [
+   "none"
+  ],
+  "correct": true,
+  "grade": "8 passed, 22 deselected in 0.01s",
+  "seconds": 30.5
+ },
+ {
+  "task": "cal-3-12h-times",
+  "category": "complex",
+  "config": "subq",
+  "shipped": true,
+  "rounds": 1,
+  "judge": [
+   "none"
+  ],
+  "correct": true,
+  "grade": "22 passed, 8 deselected in 0.01s",
+  "seconds": 28.9
+ }
+]
