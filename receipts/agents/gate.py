@@ -21,13 +21,13 @@ from uagents_core.contrib.protocols.chat import (ChatAcknowledgement, ChatMessag
 
 from .. import blind, github_ops, llm, mutation, planner, publish, tamper
 from ..models import Receipt
-from ..verify import blind_receipts, decide, mutation_receipts, to_markdown
-from . import memory, targets, understand
+from ..verify import blind_receipts, decide, mutation_receipts, subq_gate, to_markdown
+from . import access, memory, targets, understand
 from .messages import (DifferentialRequest, DifferentialResult, FixDone, FixProgress, FixRequest, JudgeRequest,
                        JudgeResult, MutationRequest, MutationResult, PlanRequest, PlanResult, SuiteRequest,
                        SuiteResult, TamperRequest, TamperResult, WriteTestsRequest, WriteTestsResult)
 
-TIMEOUT = 900
+TIMEOUT = 600
 WATCH_SECONDS = float(os.environ.get("RECEIPTS_WATCH_SECONDS", "120"))
 README = Path(__file__).with_name("AGENT_README.md")
 
@@ -192,6 +192,16 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
         receipts += r
         stats.update(s)
 
+        # SubQ votes ship / don't ship on the whole evidence (rule J001). If SubQ is down,
+        # the verdict stands on the evidence alone and says so.
+        try:
+            j = await asyncio.to_thread(subq_gate, target.base, target.head, target.issue,
+                                        decide(list(receipts), dict(stats)))
+            if j is not None:
+                receipts.append(j)
+        except Exception as e:  # noqa: BLE001
+            ctx.logger.warning(f"SubQ gate unavailable: {e}")
+            receipts.append(Receipt("judge", "J000", "info", "SubQ was unavailable; this verdict uses the evidence only."))
         profile = memory.load(ctx.storage, user)
         receipts, notes = memory.apply_policy(profile, receipts)
         verdict = decide(receipts, stats)
@@ -219,6 +229,21 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 md += f"\n\n(Couldn't post to GitHub: {e})"
         return md
 
+    async def static_review(ctx: Context, user: str, target: targets.Target) -> str:
+        """For repos the owner doesn't own: never execute their code. Tamper rules + SubQ on the diff."""
+        receipts = await asyncio.to_thread(tamper.check, target.base, target.head, target.issue)
+        try:
+            j = await asyncio.to_thread(subq_gate, target.base, target.head, target.issue, decide(list(receipts), {}))
+            if j is not None:
+                receipts.append(j)
+        except Exception as e:  # noqa: BLE001
+            receipts.append(Receipt("judge", "J000", "info", f"SubQ was unavailable ({str(e)[:80]})."))
+        verdict = decide(receipts, {"mode": "static"})
+        run_pipeline.last_decision = verdict.decision
+        return (to_markdown(verdict, target.label) +
+                "\n*Static review only: this repository isn't yours, so its code was never run. Spec used: "
+                f"{target.spec_source}.*")
+
     def describe(profile: dict) -> str:
         p = profile["policy"]
         lines = [f"- Today's targets: {profile['targets'] or 'not told yet'}",
@@ -230,10 +255,21 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                  f"- Verdicts given you: {len(profile['history'])}, feedback given: {len(profile['feedback'])}"]
         return "**What I remember about you**\n" + "\n".join(lines)
 
+    OPEN = re.compile(r"^(help|\?|commands|demo( list|s)?|(check\s+)?demo\s+[\w-]+|me|profile|settings|policy|"
+                      r"history|strict (on|off)|(un)?mute [a-z]\d{3}|wrong|right|correct|good catch|"
+                      r"that's wrong|false block|bad verdict|(link|i am|i'm)\s+.+)$")
+
     async def handle(ctx: Context, sender: str, text: str, depth: int = 0) -> None:
-        t = text.strip()
+        t = text.strip()[:8000]
         low = t.lower()
         profile = memory.load(ctx.storage, sender)
+        owner = access.is_owner(ctx.storage, sender)
+        if not owner and depth == 0 and not access.guest_allowed(ctx.storage, sender):
+            await reply(ctx, sender, "You've reached the guest limit for this hour. Try again later.")
+            return
+        if not owner and depth > 0 and not targets.PR_URL.search(t) and not OPEN.match(low):
+            await reply(ctx, sender, "That needs my owner.\n\n" + access.GUEST_HELP)
+            return
 
         if targets.PR_URL.search(t) or (m := re.fullmatch(r"(?:check\s+)?demo\s+([\w-]+)", low)) and m.group(1) != "list":
             try:
@@ -245,9 +281,20 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             except targets.TargetError as e:
                 await reply(ctx, sender, f"I couldn't load that: {e}")
                 return
+            mine = bool(target.gh) and owner and \
+                target.gh["owner"].lower() == (await asyncio.to_thread(github_ops.me)).lower()
+            if target.gh and not mine:
+                await reply(ctx, sender, f"Reviewing **{target.label}** statically (tamper rules + SubQ). "
+                                         "I don't run code from repositories that aren't yours.")
+                try:
+                    await reply(ctx, sender, await static_review(ctx, sender, target))
+                except Exception as e:  # noqa: BLE001
+                    ctx.logger.exception("static review failed")
+                    await reply(ctx, sender, f"Something failed while reviewing: {e}")
+                return
             await reply(ctx, sender, f"Checking **{target.label}**.\n\n"
                                      "Six agents are on it: test suite · tamper detector · blind-test writer · "
-                                     "before/after runner · judge · bug planter. This takes about a minute.")
+                                     "before/after runner · bug planter, then SubQ decides. About a minute.")
             try:
                 await reply(ctx, sender, await run_pipeline(ctx, sender, target))
             except Exception as e:  # noqa: BLE001 - always answer the user
@@ -255,9 +302,13 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 await reply(ctx, sender, f"Something failed while checking: {e}\n\nNo verdict was recorded. Try again.")
             return
 
-        if (m := re.fullmatch(r"(?:link|i am|i'm)\s+([a-z0-9_.-]{1,40})", low)):
+        if (m := re.fullmatch(r"(?:link|i am|i'm)\s+([a-z0-9_.-]{1,40})(?:\s+(\S+))?", low)):
             if sender.startswith("rest:"):
                 await reply(ctx, sender, "You're already using your name on this device.")
+                return
+            if m.group(1) != access.owner() or not access.check_link_code(m.group(2) or ""):
+                await reply(ctx, sender, "Linking needs the owner's name and the one-time code from the agent's "
+                                         "`.env`: `link <name> <code>`.")
                 return
             old = memory.load(ctx.storage, sender)
             memory.link(ctx.storage, sender, m.group(1))
@@ -267,6 +318,21 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             memory.save(ctx.storage, sender, merged)
             await reply(ctx, sender, f"Linked. This chat and every device that uses the name **{m.group(1)}** "
                                      "now share one memory: plan, watched repos, settings and history.")
+            return
+        if not owner and not OPEN.match(low):
+            if depth == 0:  # plain English from a guest: answer it, but never run owner commands
+                try:
+                    routed = await asyncio.to_thread(understand.route, t, {})
+                except Exception:  # noqa: BLE001
+                    routed = {"command": "", "answer": ""}
+                cmd = routed["command"]
+                if cmd and (OPEN.match(cmd.lower()) or targets.PR_URL.search(cmd)):
+                    await handle(ctx, sender, cmd, depth + 1)
+                    return
+                await reply(ctx, sender, (routed["answer"] + "\n\n" if routed["answer"] and not cmd else "")
+                            + access.GUEST_HELP)
+                return
+            await reply(ctx, sender, "That needs my owner.\n\n" + access.GUEST_HELP)
             return
         if low.startswith(("today:", "today ", "my day:", "plan my day")) or low.startswith(("targets:", "schedule:")):
             body = t.split(":", 1)[1].strip() if ":" in t else ""
@@ -497,8 +563,19 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             text = f"🚀 **Pull request opened:** {msg.pr_url}\n\n" + text
         await reply(ctx, msg.user, text)
 
+    watching = {"busy": False}
+
     @gate.on_interval(period=WATCH_SECONDS)
     async def watch(ctx: Context):
+        if watching["busy"]:  # a slow tick is still running; skip instead of piling up
+            return
+        watching["busy"] = True
+        try:
+            await watch_once(ctx)
+        finally:
+            watching["busy"] = False
+
+    async def watch_once(ctx: Context):
         """Check watched repos for new PRs or new pushes; verify them; notify or hold for the digest."""
         icon = {"BLOCK": "🛑", "WARN": "⚠️", "PASS": "✅"}
         for user in memory.all_users(ctx.storage):
@@ -579,8 +656,8 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
         (verifying, fixing, planning) arrives later via /api/messages."""
         if not authorized(req.token):
             return ApiReply(ok=False, error="bad or missing token")
-        if not HANDLE.match(req.user):
-            return ApiReply(ok=False, error="user must be 1-40 letters, digits, . _ or -")
+        if not HANDLE.match(req.user) or req.user.lower() != access.owner():
+            return ApiReply(ok=False, error="user must be the owner's handle")
         channel = f"rest:{req.user}"
         task = asyncio.create_task(handle(ctx, channel, req.text))
         try:

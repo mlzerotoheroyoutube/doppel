@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented multi_list as a multiplication-table 2D list and added tests covering the example, dimensions, empty sizes, and row independence.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to generate a two-dimensional array.\\\"\\\"\\\"\\n\\n\\ndef multi_list(rownum, colnum):\\n    \\\"\\\"\\\"Write a function to generate a two-dimensional array.\\\"\\\"\\\"\\n    return [[row * col for col in range(colnum)] for row in range(rownum)]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_multi_list_example():\\n    assert solution.multi_list(3, 4) == [[0, 0, 0, 0], [0, 1, 2, 3], [0, 2, 4, 6]]\\n\\n\\ndef test_multi_list_single_element():\\n    assert solution.multi_list(1, 1) == [[0]]\\n\\n\\ndef test_multi_list_dimensions_and_values():\\n    assert solution.multi_list(2, 3) == [[0, 0, 0], [0, 1, 2]]\\n    assert solution.multi_list(4, 2) == [[0, 0], [0, 1], [0, 2], [0, 3]]\\n\\n\\ndef test_multi_list_empty_dimensions():\\n    assert solution.multi_list(0, 4) == []\\n    assert solution.multi_list(3, 0) == [[], [], []]\\n    assert solution.multi_list(0, 0) == []\\n\\n\\ndef test_multi_list_rows_are_independent():\\n    result = solution.multi_list(2, 2)\\n    result[0][0] = 99\\n    assert result[1] == [0, 1]\\n\"}}\n```"
+}

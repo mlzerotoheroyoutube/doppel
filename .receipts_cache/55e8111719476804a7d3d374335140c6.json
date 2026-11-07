@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented find_star_num using the formula 6*n*(n-1)+1 and added tests for known star numbers.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the n'th star number.\\\"\\\"\\\"\\n\\n\\ndef find_star_num(n):\\n    \\\"\\\"\\\"Write a function to find the n'th star number.\\\"\\\"\\\"\\n    return 6 * n * (n - 1) + 1\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_star_num_example():\\n    assert solution.find_star_num(3) == 37\\n\\n\\ndef test_find_star_num_known_values():\\n    expected = {\\n        1: 1,\\n        2: 13,\\n        3: 37,\\n        4: 73,\\n        5: 121,\\n        6: 181,\\n        7: 253,\\n        10: 541,\\n        100: 59401,\\n    }\\n    for n, value in expected.items():\\n        assert solution.find_star_num(n) == value\\n\"}}\n```"
+}

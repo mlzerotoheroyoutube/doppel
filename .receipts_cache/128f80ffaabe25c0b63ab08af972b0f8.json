@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented minimum(a, b) to return the smaller value and added tests covering ordering, equality, negatives, zero, and floats.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the minimum of two numbers.\\\"\\\"\\\"\\n\\n\\ndef minimum(a, b):\\n    \\\"\\\"\\\"Write a python function to find the minimum of two numbers.\\\"\\\"\\\"\\n    return a if a <= b else b\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_minimum_first_is_smaller():\\n    assert solution.minimum(1, 2) == 1\\n\\n\\ndef test_minimum_second_is_smaller():\\n    assert solution.minimum(2, 1) == 1\\n\\n\\ndef test_minimum_equal_values():\\n    assert solution.minimum(3, 3) == 3\\n\\n\\ndef test_minimum_negative_numbers():\\n    assert solution.minimum(-1, -5) == -5\\n    assert solution.minimum(-5, -1) == -5\\n\\n\\ndef test_minimum_with_zero():\\n    assert solution.minimum(0, 1) == 0\\n    assert solution.minimum(1, 0) == 0\\n    assert solution.minimum(0, -1) == -1\\n\\n\\ndef test_minimum_floats():\\n    assert solution.minimum(1.5, 2.5) == 1.5\\n    assert solution.minimum(2.5, 1.5) == 1.5\\n\"}}\n```"
+}

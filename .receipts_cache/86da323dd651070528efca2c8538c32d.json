@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented surfacearea_cube as 6 * l**2 and added tests covering the example and additional values.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the surface area of a cube.\\\"\\\"\\\"\\n\\n\\ndef surfacearea_cube(l):\\n    \\\"\\\"\\\"Write a function to find the surface area of a cube.\\\"\\\"\\\"\\n    return 6 * l ** 2\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_surfacearea_cube_example():\\n    assert solution.surfacearea_cube(5) == 150\\n\\n\\ndef test_surfacearea_cube_other_values():\\n    assert solution.surfacearea_cube(0) == 0\\n    assert solution.surfacearea_cube(1) == 6\\n    assert solution.surfacearea_cube(2) == 24\\n    assert solution.surfacearea_cube(10) == 600\\n    assert solution.surfacearea_cube(2.5) == 37.5\\n\"}}\n```"
+}

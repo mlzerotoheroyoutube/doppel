@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented find(n, m) as integer quotient using floor division and added tests covering the example, remainder, zero, negative, and division-by-zero cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find quotient of two numbers.\\\"\\\"\\\"\\n\\n\\ndef find(n, m):\\n    \\\"\\\"\\\"Write a python function to find quotient of two numbers.\\\"\\\"\\\"\\n    return n // m\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_example():\\n    assert solution.find(10, 3) == 3\\n\\n\\ndef test_find_exact_division():\\n    assert solution.find(10, 2) == 5\\n    assert solution.find(9, 3) == 3\\n\\n\\ndef test_find_discards_remainder():\\n    assert solution.find(10, 4) == 2\\n    assert solution.find(1, 2) == 0\\n\\n\\ndef test_find_zero_numerator():\\n    assert solution.find(0, 5) == 0\\n\\n\\ndef test_find_negative_numbers():\\n    assert solution.find(-10, 3) == -4\\n    assert solution.find(10, -3) == -4\\n    assert solution.find(-9, 3) == -3\\n\\n\\ndef test_find_division_by_zero():\\n    with pytest.raises(ZeroDivisionError):\\n        solution.find(10, 0)\\n\"}}\n```"
+}

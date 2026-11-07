@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented reverse_string_list to reverse each string in the list and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to reverse strings in a given list of string values.\\\"\\\"\\\"\\n\\n\\ndef reverse_string_list(stringlist):\\n    \\\"\\\"\\\"Write a function to reverse strings in a given list of string values.\\\"\\\"\\\"\\n    return [string[::-1] for string in stringlist]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_reverse_string_list_example():\\n    assert solution.reverse_string_list(\\n        ['Red', 'Green', 'Blue', 'White', 'Black']\\n    ) == ['deR', 'neerG', 'eulB', 'etihW', 'kcalB']\\n\\n\\ndef test_reverse_string_list_empty_list():\\n    assert solution.reverse_string_list([]) == []\\n\\n\\ndef test_reverse_string_list_various_strings():\\n    assert solution.reverse_string_list(['', 'a', 'ab', 'abc', 'a b']) == ['', 'a', 'ba', 'cba', 'b a']\\n\\n\\ndef test_reverse_string_list_does_not_mutate_input():\\n    original = ['Red', 'Green']\\n    result = solution.reverse_string_list(original)\\n    assert original == ['Red', 'Green']\\n    assert result == ['deR', 'neerG']\\n    assert result is not original\\n\"}}\n```"
+}

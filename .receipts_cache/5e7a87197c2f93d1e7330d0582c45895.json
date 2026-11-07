@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented harmonic_sum as the sum 1 + 1/2 + ... + 1/n and added tests covering the example and small cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the harmonic sum of n-1.\\\"\\\"\\\"\\n\\n\\ndef harmonic_sum(n):\\n    \\\"\\\"\\\"Write a function to calculate the harmonic sum of n-1.\\\"\\\"\\\"\\n    return sum(1.0 / i for i in range(1, n + 1))\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_harmonic_sum_example():\\n    assert solution.harmonic_sum(7) == 2.5928571428571425\\n\\n\\ndef test_harmonic_sum_small_values():\\n    assert solution.harmonic_sum(1) == 1.0\\n    assert solution.harmonic_sum(2) == 1.5\\n    assert solution.harmonic_sum(3) == pytest.approx(1.8333333333333333)\\n    assert solution.harmonic_sum(5) == pytest.approx(2.283333333333333)\\n\\n\\ndef test_harmonic_sum_zero():\\n    assert solution.harmonic_sum(0) == 0\\n\"}}\n```"
+}

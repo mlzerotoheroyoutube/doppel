@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented min_product_tuple to return the minimum product of elements within each tuple and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the minimum product from the pairs of tuples within a given list.\\\"\\\"\\\"\\n\\nfrom math import prod\\n\\n\\ndef min_product_tuple(list1):\\n    \\\"\\\"\\\"Write a function to find the minimum product from the pairs of tuples within a given list.\\\"\\\"\\\"\\n    return min(prod(pair) for pair in list1)\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\nfrom solution import min_product_tuple\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert min_product_tuple([(2, 7), (2, 6), (1, 8), (4, 9)]) == 8\\n\\n\\ndef test_single_tuple():\\n    assert min_product_tuple([(3, 5)]) == 15\\n\\n\\ndef test_negative_and_zero_products():\\n    assert min_product_tuple([(2, 7), (-3, 4), (1, 8)]) == -12\\n    assert min_product_tuple([(2, 7), (0, 100), (1, 8)]) == 0\\n    assert min_product_tuple([(-2, -5), (2, 6), (1, 8)]) == 8\\n\\n\\ndef test_order_does_not_matter():\\n    assert min_product_tuple([(4, 9), (1, 8), (2, 6), (2, 7)]) == 8\\n\\n\\ndef test_empty_list_raises():\\n    with pytest.raises(ValueError):\\n        min_product_tuple([])\\n\"}}\n```"
+}

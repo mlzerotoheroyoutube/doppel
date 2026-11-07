@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Corrected the mathematically invalid negative-numbers test expectation: (-5, -3) contains no element from [-10, -1], so the true smallest covering range is (-3, 0); the already-correct solution is unchanged.\", \"files\": {\"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\nfrom solution import find_minimum_range\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert find_minimum_range([[3, 6, 8, 10, 15], [1, 5, 12], [4, 8, 15, 16], [2, 6]]) == (4, 6)\\n\\n\\ndef test_single_array():\\n    assert find_minimum_range([[1, 2, 3]]) == (1, 1)\\n\\n\\ndef test_single_element_arrays():\\n    assert find_minimum_range([[5], [1], [9]]) == (1, 9)\\n\\n\\ndef test_same_value_in_each_array():\\n    assert find_minimum_range([[5], [5], [5]]) == (5, 5)\\n\\n\\ndef test_unsorted_arrays():\\n    assert find_minimum_range([[15, 3, 6], [12, 1, 5]]) == (5, 6)\\n\\n\\ndef test_tie_prefers_smallest_start():\\n    assert find_minimum_range([[1, 4], [2, 5]]) == (1, 2)\\n\\n\\ndef test_negative_numbers():\\n    assert find_minimum_range([[-10, -1], [-5, 0], [-3]]) == (-3, 0)\\n\\n\\ndef test_empty_input_raises():\\n    with pytest.raises(ValueError):\\n        find_minimum_range([])\\n\\n\\ndef test_empty_array_raises():\\n    with pytest.raises(ValueError):\\n        find_minimum_range([[1, 2], []])\\n\"}}\n```"
+}

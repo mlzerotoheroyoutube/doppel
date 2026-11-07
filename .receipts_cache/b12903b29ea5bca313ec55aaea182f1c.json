@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented Find_Max to return the first longest sublist (or [] for an empty list) and added tests covering the example, ties, and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the sublist having maximum length.\\\"\\\"\\\"\\n\\n\\ndef Find_Max(lst):\\n    \\\"\\\"\\\"Write a python function to find the sublist having maximum length.\\n\\n    Return the first sublist with the maximum length, or an empty list\\n    if ``lst`` is empty.\\n    \\\"\\\"\\\"\\n    return max(lst, key=len, default=[])\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import Find_Max\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert Find_Max([['A'], ['A', 'B'], ['A', 'B', 'C']]) == ['A', 'B', 'C']\\n\\n\\ndef test_longest_not_last():\\n    assert Find_Max([[1, 2, 3], [1], [1, 2]]) == [1, 2, 3]\\n\\n\\ndef test_tie_returns_first_longest():\\n    assert Find_Max([['A', 'B'], ['C'], ['D', 'E']]) == ['A', 'B']\\n\\n\\ndef test_empty_list():\\n    assert Find_Max([]) == []\\n\\n\\ndef test_single_and_empty_sublists():\\n    assert Find_Max([[1]]) == [1]\\n    assert Find_Max([[]]) == []\\n    assert Find_Max([[], [1], []]) == [1]\\n\"}}\n```"
+}

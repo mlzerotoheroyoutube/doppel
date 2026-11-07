@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented remove_uppercase using re.sub to remove uppercase substrings and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove uppercase substrings from a given string by using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef remove_uppercase(str1):\\n    \\\"\\\"\\\"Write a function to remove uppercase substrings from a given string by using regex.\\\"\\\"\\\"\\n    return re.sub(r\\\"[A-Z]+\\\", \\\"\\\", str1)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_remove_uppercase_example():\\n    assert solution.remove_uppercase('cAstyoUrFavoRitETVshoWs') == 'cstyoravoitshos'\\n\\n\\ndef test_remove_uppercase_no_uppercase():\\n    assert solution.remove_uppercase('hello world') == 'hello world'\\n    assert solution.remove_uppercase('') == ''\\n\\n\\ndef test_remove_uppercase_all_uppercase():\\n    assert solution.remove_uppercase('HELLO') == ''\\n    assert solution.remove_uppercase('ABCXYZ') == ''\\n\\n\\ndef test_remove_uppercase_consecutive_substrings():\\n    assert solution.remove_uppercase('fooBARbazQUXqux') == 'foobazqux'\\n    assert solution.remove_uppercase('ABCdefGHI') == 'def'\\n\\n\\ndef test_remove_uppercase_preserves_other_characters():\\n    assert solution.remove_uppercase('Hello, World! 123') == 'ello, orld! 123'\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented min_of_three using built-in min and added tests covering the example and other orderings.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find minimum of three numbers.\\\"\\\"\\\"\\n\\n\\ndef min_of_three(a, b, c):\\n    \\\"\\\"\\\"Write a function to find minimum of three numbers.\\\"\\\"\\\"\\n    return min(a, b, c)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.min_of_three(10, 20, 0) == 0\\n\\n\\ndef test_first_is_minimum():\\n    assert solution.min_of_three(1, 2, 3) == 1\\n\\n\\ndef test_second_is_minimum():\\n    assert solution.min_of_three(2, 1, 3) == 1\\n\\n\\ndef test_third_is_minimum():\\n    assert solution.min_of_three(3, 2, 1) == 1\\n\\n\\ndef test_all_equal():\\n    assert solution.min_of_three(5, 5, 5) == 5\\n\\n\\ndef test_negative_numbers():\\n    assert solution.min_of_three(-1, -10, 0) == -10\\n\\n\\ndef test_floats():\\n    assert solution.min_of_three(1.5, 0.5, 2.5) == 0.5\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented upper_ctr to count uppercase characters (noting 'PYthon' has 2, so the example's input was likely meant to be 'Python'), and added tests covering it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count the upper case characters in a given string.\\\"\\\"\\\"\\n\\n\\ndef upper_ctr(str):\\n    \\\"\\\"\\\"Write a python function to count the upper case characters in a given string.\\\"\\\"\\\"\\n    return sum(1 for char in str if char.isupper())\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_upper_ctr_counts_uppercase_characters():\\n    assert solution.upper_ctr('Python') == 1\\n    assert solution.upper_ctr('PYthon') == 2\\n    assert solution.upper_ctr('HELLO') == 5\\n    assert solution.upper_ctr('hello') == 0\\n    assert solution.upper_ctr('') == 0\\n    assert solution.upper_ctr('Hello World! 123') == 2\\n    assert solution.upper_ctr('aBcDeF') == 3\\n\"}}\n```"
+}

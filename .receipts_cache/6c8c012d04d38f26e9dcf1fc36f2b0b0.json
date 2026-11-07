@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented sum_of_digits to total all decimal digits across the list (ignoring signs) and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to compute the sum of digits of each number of a given list.\\\"\\\"\\\"\\n\\n\\ndef sum_of_digits(nums):\\n    \\\"\\\"\\\"Write a function to compute the sum of digits of each number of a given list.\\\"\\\"\\\"\\n    total = 0\\n    for num in nums:\\n        for char in str(num):\\n            if \\\"0\\\" <= char <= \\\"9\\\":\\n                total += int(char)\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.sum_of_digits([10, 2, 56]) == 14\\n\\n\\ndef test_empty_list():\\n    assert solution.sum_of_digits([]) == 0\\n\\n\\ndef test_zero_and_single_digits():\\n    assert solution.sum_of_digits([0, 5, 9]) == 14\\n\\n\\ndef test_multi_digit_numbers():\\n    assert solution.sum_of_digits([123, 456, 999]) == 48\\n\\n\\ndef test_negative_numbers():\\n    assert solution.sum_of_digits([-10, -2, -56]) == 14\\n    assert solution.sum_of_digits([-123]) == 6\\n\"}}\n```"
+}

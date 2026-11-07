@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented max_val to return the maximum numeric value in a heterogeneous list, ignoring non-numeric entries and returning None when there are none.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the maximum value in a given heterogeneous list.\\\"\\\"\\\"\\n\\n\\ndef max_val(listval):\\n    \\\"\\\"\\\"Write a function to find the maximum value in a given heterogeneous list.\\\"\\\"\\\"\\n    numeric_values = [value for value in listval if isinstance(value, (int, float))]\\n    return max(numeric_values) if numeric_values else None\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_max_val_example():\\n    assert solution.max_val(['Python', 3, 2, 4, 5, 'version']) == 5\\n\\n\\ndef test_max_val_all_numeric():\\n    assert solution.max_val([1, 9, 2, 7]) == 9\\n    assert solution.max_val([42]) == 42\\n\\n\\ndef test_max_val_floats_and_negatives():\\n    assert solution.max_val(['text', -1.5, 2.75, -10]) == 2.75\\n    assert solution.max_val([-5, -1, -3, 'text']) == -1\\n\\n\\ndef test_max_val_ignores_non_numeric_values():\\n    assert solution.max_val([None, '100', 3, 'Python', 10, [100]]) == 10\\n\\n\\ndef test_max_val_no_numeric_values():\\n    assert solution.max_val(['Python', 'version']) is None\\n    assert solution.max_val([]) is None\\n\"}}\n```"
+}

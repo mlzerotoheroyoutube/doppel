@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented replace_char using str.replace to replace all occurrences and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to replace characters in a string.\\\"\\\"\\\"\\n\\n\\ndef replace_char(str1, ch, newch):\\n    \\\"\\\"\\\"Write a function to replace characters in a string.\\\"\\\"\\\"\\n    return str1.replace(ch, newch)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import replace_char\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_replace_char_example():\\n    assert replace_char(\\\"polygon\\\", 'y', 'l') == \\\"pollgon\\\"\\n\\n\\ndef test_replace_char_multiple_occurrences():\\n    assert replace_char(\\\"banana\\\", 'a', 'o') == \\\"bonono\\\"\\n\\n\\ndef test_replace_char_no_occurrence():\\n    assert replace_char(\\\"hello\\\", 'x', 'y') == \\\"hello\\\"\\n\\n\\ndef test_replace_char_empty_string():\\n    assert replace_char(\\\"\\\", 'a', 'b') == \\\"\\\"\\n\\n\\ndef test_replace_char_delete_character():\\n    assert replace_char(\\\"hello\\\", 'l', '') == \\\"heo\\\"\\n\"}}\n```"
+}

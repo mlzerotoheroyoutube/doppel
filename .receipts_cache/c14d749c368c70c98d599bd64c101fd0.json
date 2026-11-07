@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented median_trapezium as the average of the two bases and added tests covering the example, height independence, and float inputs.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the median of a trapezium.\\\"\\\"\\\"\\n\\n\\ndef median_trapezium(base1, base2, height):\\n    \\\"\\\"\\\"Write a function to find the median of a trapezium.\\n\\n    The median (midline) of a trapezium joins the midpoints of the\\n    non-parallel sides, so its length is the average of the two\\n    parallel bases and does not depend on the height.\\n    \\\"\\\"\\\"\\n    return (base1 + base2) / 2\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_median_trapezium_example():\\n    assert solution.median_trapezium(15, 25, 35) == 20\\n\\n\\ndef test_median_trapezium_is_average_of_bases():\\n    assert solution.median_trapezium(10, 20, 5) == 15\\n    assert solution.median_trapezium(4, 6, 100) == 5\\n    assert solution.median_trapezium(7, 7, 3) == 7\\n\\n\\ndef test_median_trapezium_independent_of_height():\\n    assert solution.median_trapezium(15, 25, 1) == solution.median_trapezium(15, 25, 100) == 20\\n\\n\\ndef test_median_trapezium_float_inputs():\\n    assert solution.median_trapezium(2.5, 5.5, 10) == 4.0\\n    assert solution.median_trapezium(1, 2, 3) == 1.5\\n\"}}\n```"
+}

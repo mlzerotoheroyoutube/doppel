@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented find_angle as 180 - a - b and added tests covering the example and common triangles.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the third angle of a triangle using two angles.\\\"\\\"\\\"\\n\\n\\ndef find_angle(a, b):\\n    \\\"\\\"\\\"Write a function to find the third angle of a triangle using two angles.\\\"\\\"\\\"\\n    return 180 - a - b\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import find_angle\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_angle_example():\\n    assert find_angle(47, 89) == 44\\n\\n\\ndef test_find_angle_right_triangle():\\n    assert find_angle(90, 45) == 45\\n    assert find_angle(90, 60) == 30\\n\\n\\ndef test_find_angle_equilateral():\\n    assert find_angle(60, 60) == 60\\n\\n\\ndef test_find_angle_angles_sum_to_180():\\n    for a, b in [(10, 20), (30, 40), (100, 50), (1, 2)]:\\n        assert a + b + find_angle(a, b) == 180\\n\"}}\n```"
+}

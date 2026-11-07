@@ -13,6 +13,8 @@ import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 
+MAX_REPO_KB = 50_000        # GitHub reports repo size in KB
+MAX_CHANGED_FILES = 60
 PR_URL = re.compile(r"github\.com/([\w.-]+)/([\w.-]+)/pull/(\d+)")
 LINKED_ISSUE = re.compile(r"(?i)\b(?:fix(?:es|ed)?|close[sd]?|resolve[sd]?)\s+#(\d+)")
 
@@ -69,6 +71,10 @@ def from_github(url: str) -> Target:
         raise TargetError("that doesn't look like a GitHub pull request link")
     owner, repo, num = m.group(1), m.group(2), m.group(3)
     pr = _gh_api(f"/repos/{owner}/{repo}/pulls/{num}")
+    if (pr.get("base", {}).get("repo", {}).get("size") or 0) > MAX_REPO_KB:
+        raise TargetError(f"that repository is over {MAX_REPO_KB // 1000} MB; I only check small and mid-size repos")
+    if (pr.get("changed_files") or 0) > MAX_CHANGED_FILES:
+        raise TargetError(f"that PR changes {pr['changed_files']} files; I check PRs of up to {MAX_CHANGED_FILES} files")
     body = pr.get("body") or ""
     if (linked := LINKED_ISSUE.search(body)):
         issue = _gh_api(f"/repos/{owner}/{repo}/issues/{linked.group(1)}")
@@ -87,6 +93,8 @@ def from_github(url: str) -> Target:
     _export(clone, base_sha, work / "base")
     _export(clone, head_sha, work / "head")
     base, head = _project_root(work / "base"), _project_root(work / "head")
+    if not any(base.rglob("*.py")):
+        raise TargetError("that repository has no Python code; Receipts checks Python projects tested with pytest")
     head = work / "head" / base.relative_to(work / "base")
     return Target(f"{owner}/{repo}#{num} · {pr['title']}", base, head, spec, source,
                   {"owner": owner, "repo": repo, "number": int(num), "sha": head_sha})

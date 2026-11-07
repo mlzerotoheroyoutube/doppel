@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented convert_list_dictionary using zip to build a list of nested dictionaries and added tests for the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to convert more than one list to nested dictionary.\\\"\\\"\\\"\\n\\n\\ndef convert_list_dictionary(l1, l2, l3):\\n    \\\"\\\"\\\"Write a function to convert more than one list to nested dictionary.\\\"\\\"\\\"\\n    return [{key: {name: value}} for key, name, value in zip(l1, l2, l3)]\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import convert_list_dictionary\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_convert_list_dictionary_example():\\n    assert convert_list_dictionary(\\n        [\\\"S001\\\", \\\"S002\\\", \\\"S003\\\", \\\"S004\\\"],\\n        [\\\"Adina Park\\\", \\\"Leyton Marsh\\\", \\\"Duncan Boyle\\\", \\\"Saim Richards\\\"],\\n        [85, 98, 89, 92],\\n    ) == [\\n        {'S001': {'Adina Park': 85}},\\n        {'S002': {'Leyton Marsh': 98}},\\n        {'S003': {'Duncan Boyle': 89}},\\n        {'S004': {'Saim Richards': 92}},\\n    ]\\n\\n\\ndef test_convert_list_dictionary_empty():\\n    assert convert_list_dictionary([], [], []) == []\\n\\n\\ndef test_convert_list_dictionary_single_element():\\n    assert convert_list_dictionary([\\\"S001\\\"], [\\\"Adina Park\\\"], [85]) == [\\n        {'S001': {'Adina Park': 85}}\\n    ]\\n\"}}\n```"
+}

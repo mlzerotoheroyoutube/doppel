@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement is_lower by returning string.lower() and add tests covering the example and common cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to convert the given string to lower case.\\\"\\\"\\\"\\n\\n\\ndef is_lower(string):\\n    \\\"\\\"\\\"Write a python function to convert the given string to lower case.\\\"\\\"\\\"\\n    return string.lower()\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_is_lower_example():\\n    assert solution.is_lower(\\\"InValid\\\") == \\\"invalid\\\"\\n\\n\\ndef test_is_lower_uppercase():\\n    assert solution.is_lower(\\\"HELLO\\\") == \\\"hello\\\"\\n\\n\\ndef test_is_lower_already_lowercase():\\n    assert solution.is_lower(\\\"hello\\\") == \\\"hello\\\"\\n\\n\\ndef test_is_lower_mixed_with_numbers_and_symbols():\\n    assert solution.is_lower(\\\"HeLLo WoRLD 123!\\\") == \\\"hello world 123!\\\"\\n\\n\\ndef test_is_lower_empty_string():\\n    assert solution.is_lower(\\\"\\\") == \\\"\\\"\\n\"}}\n```"
+}

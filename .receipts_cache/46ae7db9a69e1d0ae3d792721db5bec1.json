@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented add_consecutive_nums as pairwise sums of adjacent elements and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to add consecutive numbers of a given list.\\\"\\\"\\\"\\n\\n\\ndef add_consecutive_nums(nums):\\n    \\\"\\\"\\\"Write a function to add consecutive numbers of a given list.\\\"\\\"\\\"\\n    return [nums[i] + nums[i + 1] for i in range(len(nums) - 1)]\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import add_consecutive_nums\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert add_consecutive_nums([1, 1, 3, 4, 4, 5, 6, 7]) == [2, 4, 7, 8, 9, 11, 13]\\n\\n\\ndef test_empty_list():\\n    assert add_consecutive_nums([]) == []\\n\\n\\ndef test_single_element():\\n    assert add_consecutive_nums([5]) == []\\n\\n\\ndef test_two_elements():\\n    assert add_consecutive_nums([2, 3]) == [5]\\n\\n\\ndef test_negative_and_zero():\\n    assert add_consecutive_nums([-1, 0, 1, -2]) == [-1, 1, -1]\\n\\n\\ndef test_does_not_mutate_input():\\n    nums = [1, 2, 3]\\n    assert add_consecutive_nums(nums) == [3, 5]\\n    assert nums == [1, 2, 3]\\n\"}}\n```"
+}

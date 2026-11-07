@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented extract_rear to return the last character of each string in the tuple and added tests for the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to extract only the rear index element of each string in the given tuple.\\\"\\\"\\\"\\n\\n\\ndef extract_rear(test_tuple):\\n    \\\"\\\"\\\"Write a function to extract only the rear index element of each string in the given tuple.\\\"\\\"\\\"\\n    return [element[-1] for element in test_tuple]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_extract_rear_example():\\n    assert solution.extract_rear(('Mers', 'for', 'Vers')) == ['s', 'r', 's']\\n\\n\\ndef test_extract_rear_empty_tuple():\\n    assert solution.extract_rear(()) == []\\n\\n\\ndef test_extract_rear_single_character_strings():\\n    assert solution.extract_rear(('a', 'b', 'c')) == ['a', 'b', 'c']\\n\\n\\ndef test_extract_rear_various_lengths_and_characters():\\n    assert solution.extract_rear(('hello!', 'world?', 'x', 'abc123')) == ['!', '?', 'x', '3']\\n    assert isinstance(solution.extract_rear(('ab', 'cd')), list)\\n\"}}\n```"
+}

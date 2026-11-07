@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented `match` using a regex search for an uppercase letter followed by one or more lowercase letters, returning 'Yes' or 'No'.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find sequences of one upper case letter followed by lower case letters in the given string by using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef match(text):\\n    \\\"\\\"\\\"Write a function to find sequences of one upper case letter followed by lower case letters in the given string by using regex.\\\"\\\"\\\"\\n    if re.search(r\\\"[A-Z][a-z]+\\\", text):\\n        return 'Yes'\\n    return 'No'\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_match_example():\\n    assert solution.match(\\\"Geeks\\\") == 'Yes'\\n\\n\\ndef test_match_uppercase_followed_by_lowercase_in_string():\\n    assert solution.match(\\\"hello World\\\") == 'Yes'\\n    assert solution.match(\\\"aBcd\\\") == 'Yes'\\n\\n\\ndef test_match_no_uppercase_followed_by_lowercase():\\n    assert solution.match(\\\"geeks\\\") == 'No'\\n    assert solution.match(\\\"GEEKS\\\") == 'No'\\n    assert solution.match(\\\"G\\\") == 'No'\\n    assert solution.match(\\\"123\\\") == 'No'\\n    assert solution.match(\\\"\\\") == 'No'\\n\"}}\n```"
+}

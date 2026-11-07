@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented big_sum as min(nums) + max(nums) and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the sum of the largest and smallest value in a given array.\\\"\\\"\\\"\\n\\n\\ndef big_sum(nums):\\n    \\\"\\\"\\\"Write a python function to find the sum of the largest and smallest value in a given array.\\\"\\\"\\\"\\n    return min(nums) + max(nums)\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\nfrom solution import big_sum\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert big_sum([1, 2, 3]) == 4\\n\\n\\ndef test_unsorted_and_duplicates():\\n    assert big_sum([5, 1, 9, 1, 9]) == 10\\n\\n\\ndef test_single_element():\\n    assert big_sum([7]) == 14\\n\\n\\ndef test_negative_numbers():\\n    assert big_sum([-10, -3, 4]) == -6\\n\\n\\ndef test_floats():\\n    assert big_sum([1.5, 2.5, -0.5]) == 2.0\\n\\n\\ndef test_empty_raises_value_error():\\n    with pytest.raises(ValueError):\\n        big_sum([])\\n\"}}\n```"
+}

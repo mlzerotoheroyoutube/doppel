@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented get_carol using the Carol number formula (2^n - 1)^2 - 2 and added tests for the example and initial values.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the n\u2019th carol number.\\\"\\\"\\\"\\n\\n\\ndef get_carol(n):\\n    \\\"\\\"\\\"Write a function to find the n\u2019th carol number.\\\"\\\"\\\"\\n    return (2**n - 1) ** 2 - 2\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_get_carol_example():\\n    assert solution.get_carol(2) == 7\\n\\n\\ndef test_get_carol_first_values():\\n    expected = {\\n        1: -1,\\n        2: 7,\\n        3: 47,\\n        4: 223,\\n        5: 959,\\n        6: 3967,\\n        7: 16127,\\n    }\\n    for n, value in expected.items():\\n        assert solution.get_carol(n) == value\\n\"}}\n```"
+}

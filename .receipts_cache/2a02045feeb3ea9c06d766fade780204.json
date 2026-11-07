@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented rectangle_area as l * b and added tests for the example, zero, and float inputs.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the area of a rectangle.\\\"\\\"\\\"\\n\\n\\ndef rectangle_area(l, b):\\n    \\\"\\\"\\\"Write a function to find the area of a rectangle.\\\"\\\"\\\"\\n    return l * b\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_rectangle_area_example():\\n    assert solution.rectangle_area(10, 20) == 200\\n\\n\\ndef test_rectangle_area_zero():\\n    assert solution.rectangle_area(0, 20) == 0\\n    assert solution.rectangle_area(10, 0) == 0\\n\\n\\ndef test_rectangle_area_float():\\n    assert solution.rectangle_area(2.5, 4) == 10.0\\n\\n\\ndef test_rectangle_area_square():\\n    assert solution.rectangle_area(5, 5) == 25\\n\"}}\n```"
+}

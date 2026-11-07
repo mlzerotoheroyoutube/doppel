@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented max_length_list using max with a lambda key, returning (length, longest sublist) and handling empty input, with added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the list with maximum length using lambda function.\\\"\\\"\\\"\\n\\n\\ndef max_length_list(input_list):\\n    \\\"\\\"\\\"Write a function to find the list with maximum length using lambda function.\\\"\\\"\\\"\\n    if not input_list:\\n        return (0, [])\\n    longest = max(input_list, key=lambda sublist: len(sublist))\\n    return (len(longest), longest)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.max_length_list([[0], [1, 3], [5, 7], [9, 11], [13, 15, 17]]) == (3, [13, 15, 17])\\n\\n\\ndef test_single_list():\\n    assert solution.max_length_list([[1, 2]]) == (2, [1, 2])\\n\\n\\ndef test_max_in_middle():\\n    assert solution.max_length_list([[1], [1, 2, 3], [1, 2]]) == (3, [1, 2, 3])\\n\\n\\ndef test_tie_returns_first_longest():\\n    assert solution.max_length_list([[1, 2], [3, 4], [5]]) == (2, [1, 2])\\n\\n\\ndef test_empty_input():\\n    assert solution.max_length_list([]) == (0, [])\\n\\n\\ndef test_empty_sublists():\\n    assert solution.max_length_list([[], []]) == (0, [])\\n    assert solution.max_length_list([[], [1], []]) == (1, [1])\\n\"}}\n```"
+}

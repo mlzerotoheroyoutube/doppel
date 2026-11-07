@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented sort_counter to return dict items sorted by value in descending order and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to sort counter by value.\\\"\\\"\\\"\\n\\n\\ndef sort_counter(dict1):\\n    \\\"\\\"\\\"Write a function to sort counter by value.\\\"\\\"\\\"\\n    return sorted(dict1.items(), key=lambda item: item[1], reverse=True)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import sort_counter\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_sort_counter_example():\\n    assert sort_counter({'Math': 81, 'Physics': 83, 'Chemistry': 87}) == [\\n        ('Chemistry', 87),\\n        ('Physics', 83),\\n        ('Math', 81),\\n    ]\\n\\n\\ndef test_sort_counter_empty():\\n    assert sort_counter({}) == []\\n\\n\\ndef test_sort_counter_single_item():\\n    assert sort_counter({'Math': 81}) == [('Math', 81)]\\n\\n\\ndef test_sort_counter_orders_by_value_descending():\\n    assert sort_counter({'a': 1, 'b': 3, 'c': 2}) == [('b', 3), ('c', 2), ('a', 1)]\\n    assert sort_counter({'a': -1, 'b': 0, 'c': -5}) == [('b', 0), ('a', -1), ('c', -5)]\\n\\n\\ndef test_sort_counter_does_not_mutate_input():\\n    data = {'Math': 81, 'Physics': 83}\\n    sort_counter(data)\\n    assert data == {'Math': 81, 'Physics': 83}\\n\"}}\n```"
+}

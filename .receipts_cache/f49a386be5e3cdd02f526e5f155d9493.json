@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented `overlapping` to return True when the two sequences share any element and added tests for it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to check whether the value exists in a sequence or not.\\\"\\\"\\\"\\n\\n\\ndef overlapping(list1, list2):\\n    \\\"\\\"\\\"Write a python function to check whether the value exists in a sequence or not.\\\"\\\"\\\"\\n    return any(value in list2 for value in list1)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_overlapping_no_common_element():\\n    assert solution.overlapping([1, 2, 3, 4, 5], [6, 7, 8, 9]) is False\\n\\n\\ndef test_overlapping_with_common_element():\\n    assert solution.overlapping([1, 2, 3, 4, 5], [5, 6, 7]) is True\\n    assert solution.overlapping([1, 2, 3], [3, 2, 1]) is True\\n\\n\\ndef test_overlapping_empty_sequences():\\n    assert solution.overlapping([], [1, 2, 3]) is False\\n    assert solution.overlapping([1, 2, 3], []) is False\\n    assert solution.overlapping([], []) is False\\n\\n\\ndef test_overlapping_other_types_and_unhashable():\\n    assert solution.overlapping([\\\"a\\\", \\\"b\\\"], [\\\"c\\\", \\\"b\\\"]) is True\\n    assert solution.overlapping([[1], [2]], [[3], [2]]) is True\\n    assert solution.overlapping([[1], [2]], [[3]]) is False\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented largest_neg to return the most negative value (per the example) and added tests covering that behavior.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the largest negative number from the given list.\\\"\\\"\\\"\\n\\n\\ndef largest_neg(list1):\\n    \\\"\\\"\\\"Write a python function to find the largest negative number from the given list.\\\"\\\"\\\"\\n    negatives = [num for num in list1 if num < 0]\\n    if not negatives:\\n        return None\\n    return min(negatives)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import largest_neg\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert largest_neg([1, 2, 3, -4, -6]) == -6\\n\\n\\ndef test_only_negatives():\\n    assert largest_neg([-1, -10, -3]) == -10\\n\\n\\ndef test_single_negative():\\n    assert largest_neg([5, -2, 7]) == -2\\n\\n\\ndef test_no_negatives_returns_none():\\n    assert largest_neg([1, 2, 3]) is None\\n    assert largest_neg([]) is None\\n\\n\\ndef test_zero_is_not_negative():\\n    assert largest_neg([0, -1]) == -1\\n    assert largest_neg([0, 1]) is None\\n\\n\\ndef test_floats():\\n    assert largest_neg([-1.5, -0.5, 2.0]) == -1.5\\n\"}}\n```"
+}

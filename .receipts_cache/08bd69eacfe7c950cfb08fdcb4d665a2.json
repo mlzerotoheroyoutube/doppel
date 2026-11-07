@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented string_to_tuple by removing spaces and converting the string to a tuple of characters, matching the documented example.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to convert a given string to a tuple.\\\"\\\"\\\"\\n\\n\\ndef string_to_tuple(str1):\\n    \\\"\\\"\\\"Write a function to convert a given string to a tuple.\\\"\\\"\\\"\\n    return tuple(str1.replace(\\\" \\\", \\\"\\\"))\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import string_to_tuple\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_from_issue():\\n    assert string_to_tuple(\\\"python 3.0\\\") == ('p', 'y', 't', 'h', 'o', 'n', '3', '.', '0')\\n\\n\\ndef test_string_without_spaces():\\n    assert string_to_tuple(\\\"python\\\") == ('p', 'y', 't', 'h', 'o', 'n')\\n\\n\\ndef test_spaces_are_removed():\\n    assert string_to_tuple(\\\"a b c\\\") == ('a', 'b', 'c')\\n    assert string_to_tuple(\\\" hello world \\\") == ('h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd')\\n\\n\\ndef test_empty_string():\\n    assert string_to_tuple(\\\"\\\") == ()\\n\\n\\ndef test_returns_tuple_preserving_other_characters():\\n    result = string_to_tuple(\\\"a1!\\\")\\n    assert result == ('a', '1', '!')\\n    assert isinstance(result, tuple)\\n\"}}\n```"
+}

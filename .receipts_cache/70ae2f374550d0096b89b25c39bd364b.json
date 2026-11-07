@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented moddiv_list using map with a lambda computing pairwise modulo and added tests for it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find modulo division of two lists using map and lambda function.\\\"\\\"\\\"\\n\\n\\ndef moddiv_list(nums1, nums2):\\n    \\\"\\\"\\\"Write a function to find modulo division of two lists using map and lambda function.\\\"\\\"\\\"\\n    return list(map(lambda x, y: x % y, nums1, nums2))\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import moddiv_list\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_moddiv_list_example():\\n    assert moddiv_list([4, 5, 6], [1, 2, 3]) == [0, 1, 0]\\n\\n\\ndef test_moddiv_list_empty():\\n    assert moddiv_list([], []) == []\\n\\n\\ndef test_moddiv_list_single_and_general():\\n    assert moddiv_list([10], [3]) == [1]\\n    assert moddiv_list([10, 20, 30, 7], [3, 6, 4, 2]) == [1, 2, 2, 1]\\n    assert moddiv_list([5, 5, 5], [5, 5, 5]) == [0, 0, 0]\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented repeat_tuples to return a tuple containing the input tuple repeated N times and added tests for the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to repeat the given tuple n times.\\\"\\\"\\\"\\n\\n\\ndef repeat_tuples(test_tup, N):\\n    \\\"\\\"\\\"Write a function to repeat the given tuple n times.\\\"\\\"\\\"\\n    return (test_tup,) * N\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_repeat_tuples_example():\\n    assert solution.repeat_tuples((1, 3), 4) == ((1, 3), (1, 3), (1, 3), (1, 3))\\n\\n\\ndef test_repeat_tuples_once():\\n    assert solution.repeat_tuples((1, 3), 1) == ((1, 3),)\\n\\n\\ndef test_repeat_tuples_zero_times():\\n    assert solution.repeat_tuples((1, 3), 0) == ()\\n\\n\\ndef test_repeat_tuples_returns_tuple():\\n    result = solution.repeat_tuples(('a', 'b'), 3)\\n    assert isinstance(result, tuple)\\n    assert result == (('a', 'b'), ('a', 'b'), ('a', 'b'))\\n\\n\\ndef test_repeat_tuples_empty_tuple():\\n    assert solution.repeat_tuples((), 3) == ((), (), ())\\n\\n\\ndef test_repeat_tuples_negative_times():\\n    assert solution.repeat_tuples((1, 3), -2) == ()\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented positive_count as the ratio of numbers > 0 rounded to 2 decimal places (0.0 for empty input) and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the ration of positive numbers in an array of integers.\\\"\\\"\\\"\\n\\n\\ndef positive_count(nums):\\n    \\\"\\\"\\\"Write a function to find the ration of positive numbers in an array of integers.\\\"\\\"\\\"\\n    if not nums:\\n        return 0.0\\n    positive = sum(1 for num in nums if num > 0)\\n    return round(positive / len(nums), 2)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.positive_count([0, 1, 2, -1, -5, 6, 0, -3, -2, 3, 4, 6, 8]) == 0.54\\n\\n\\ndef test_all_positive():\\n    assert solution.positive_count([1, 2, 3]) == 1.0\\n\\n\\ndef test_all_negative():\\n    assert solution.positive_count([-1, -2, -3]) == 0.0\\n\\n\\ndef test_all_zero():\\n    assert solution.positive_count([0, 0, 0]) == 0.0\\n\\n\\ndef test_half_positive():\\n    assert solution.positive_count([1, -1]) == 0.5\\n\\n\\ndef test_rounding():\\n    assert solution.positive_count([1, -1, -1]) == 0.33\\n    assert solution.positive_count([1, 2, -1]) == 0.67\\n\\n\\ndef test_empty():\\n    assert solution.positive_count([]) == 0.0\\n\"}}\n```"
+}

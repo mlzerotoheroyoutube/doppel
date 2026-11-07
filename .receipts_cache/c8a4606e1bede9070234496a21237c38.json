@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented breakSum using memoized recursion returning max(n, breakSum(n//2) + breakSum(n//3) + breakSum(n//4)) and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the maximum sum we can make by dividing number in three parts recursively and summing them up together for the given number.\\\"\\\"\\\"\\n\\nfrom functools import lru_cache\\n\\n\\n@lru_cache(maxsize=None)\\ndef _break_sum(n):\\n    if n <= 1:\\n        return n\\n    broken_sum = _break_sum(n // 2) + _break_sum(n // 3) + _break_sum(n // 4)\\n    return max(n, broken_sum)\\n\\n\\ndef breakSum(n):\\n    \\\"\\\"\\\"Write a function to find the maximum sum we can make by dividing number in three parts recursively and summing them up together for the given number.\\\"\\\"\\\"\\n    if n < 0:\\n        return n\\n    return _break_sum(n)\\n\", \"tests/test_solution.py\": \"import solution\\n\\nfrom solution import breakSum\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_break_sum_example():\\n    assert breakSum(12) == 13\\n\\n\\ndef test_break_sum_small_numbers():\\n    expected = {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 11: 11}\\n    for n, want in expected.items():\\n        assert breakSum(n) == want\\n\\n\\ndef test_break_sum_recursive_splits():\\n    assert breakSum(12) == 13\\n    assert breakSum(16) == 17\\n    assert breakSum(24) == 27\\n\"}}\n```"
+}

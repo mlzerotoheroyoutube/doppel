@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement check_value to return True only when every dictionary value equals n, and add tests covering the example and related cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to check if all values are same in a dictionary.\\\"\\\"\\\"\\n\\n\\ndef check_value(dict, n):\\n    \\\"\\\"\\\"Write a function to check if all values are same in a dictionary.\\\"\\\"\\\"\\n    return all(value == n for value in dict.values())\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_check_value_example_from_issue():\\n    assert solution.check_value({'Cierra Vega': 12, 'Alden Cantrell': 12, 'Kierra Gentry': 12, 'Pierre Cox': 12}, 10) is False\\n\\n\\ndef test_check_value_all_values_equal_n():\\n    assert solution.check_value({'Cierra Vega': 12, 'Alden Cantrell': 12, 'Kierra Gentry': 12, 'Pierre Cox': 12}, 12) is True\\n\\n\\ndef test_check_value_values_differ():\\n    assert solution.check_value({'a': 12, 'b': 10}, 12) is False\\n    assert solution.check_value({'a': 12, 'b': 10}, 10) is False\\n\\n\\ndef test_check_value_single_value():\\n    assert solution.check_value({'a': 7}, 7) is True\\n    assert solution.check_value({'a': 7}, 8) is False\\n\\n\\ndef test_check_value_empty_dict():\\n    assert solution.check_value({}, 10) is True\\n\"}}\n```"
+}

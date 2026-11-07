@@ -231,7 +231,12 @@ def run(issue: str, base: Path, max_rounds: int = 3,
         report = to_markdown(verdict)
         if use_subq:
             on_event(f"Round {n}: Receipts says {verdict.decision}. {llm.who('judge')} is judging…")
-            j = judge(issue, base, workdir, verdict, result.rounds)
+            try:
+                j = judge(issue, base, workdir, verdict, result.rounds)
+            except Exception as e:  # noqa: BLE001 - SubQ down: decide on the evidence, and say so
+                j = evidence_only_judge(verdict)
+                j["reasons"].append(f"SubQ was unavailable ({str(e)[:80]}); decided on evidence only")
+                on_event(f"Round {n}: SubQ unavailable, deciding on the evidence alone.")
         else:
             j = evidence_only_judge(verdict)
         rnd = Round(n, summary, written, cumulative_diff(base, workdir), verdict.decision, report, j)

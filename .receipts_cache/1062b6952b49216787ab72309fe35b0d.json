@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented remove_lowercase using regex to strip lowercase substrings and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove lowercase substrings from a given string by using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef remove_lowercase(str1):\\n    \\\"\\\"\\\"Write a function to remove lowercase substrings from a given string by using regex.\\\"\\\"\\\"\\n    return re.sub(r\\\"[a-z]+\\\", \\\"\\\", str1)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import remove_lowercase\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_remove_lowercase_example():\\n    assert remove_lowercase('KDeoALOklOOHserfLoAJSIskdsf') == 'KDALOOOHLAJSI'\\n\\n\\ndef test_remove_lowercase_empty_string():\\n    assert remove_lowercase('') == ''\\n\\n\\ndef test_remove_lowercase_no_lowercase():\\n    assert remove_lowercase('HELLO WORLD 123!') == 'HELLO WORLD 123!'\\n\\n\\ndef test_remove_lowercase_all_lowercase():\\n    assert remove_lowercase('hello world') == ' '\\n    assert remove_lowercase('abcdef') == ''\\n\\n\\ndef test_remove_lowercase_preserves_other_characters():\\n    assert remove_lowercase('Ab1c D2e!F') == 'A1 D2!F'\\n    assert remove_lowercase('aB_cD-e') == 'B_C-D'\\n\"}}\n```"
+}

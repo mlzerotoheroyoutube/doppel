@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented dig_let to return (letters, digits) counting alphabetic and digit characters, and added tests covering letters, digits, mixed, empty, and punctuation inputs.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the number of digits and letters in a string.\\\"\\\"\\\"\\n\\n\\ndef dig_let(s):\\n    \\\"\\\"\\\"Write a function to calculate the number of digits and letters in a string.\\\"\\\"\\\"\\n    letters = sum(1 for ch in s if ch.isalpha())\\n    digits = sum(1 for ch in s if ch.isdigit())\\n    return (letters, digits)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_dig_let_letters_only():\\n    assert solution.dig_let(\\\"python\\\") == (6, 0)\\n    assert solution.dig_let(\\\"Hello\\\") == (5, 0)\\n\\n\\ndef test_dig_let_digits_only():\\n    assert solution.dig_let(\\\"12345\\\") == (0, 5)\\n\\n\\ndef test_dig_let_mixed():\\n    assert solution.dig_let(\\\"python3\\\") == (6, 1)\\n    assert solution.dig_let(\\\"a1b2c3\\\") == (3, 3)\\n    assert solution.dig_let(\\\"Hello123\\\") == (5, 3)\\n\\n\\ndef test_dig_let_empty_and_other_chars():\\n    assert solution.dig_let(\\\"\\\") == (0, 0)\\n    assert solution.dig_let(\\\"hello world! 2024\\\") == (10, 4)\\n    assert solution.dig_let(\\\"!@# $%\\\") == (0, 0)\\n\"}}\n```"
+}

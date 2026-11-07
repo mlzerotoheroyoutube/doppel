@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented square_Sum as the sum of squares of the first n odd natural numbers and added tests for known values.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the sum of squares of first n odd natural numbers.\\\"\\\"\\\"\\n\\n\\ndef square_Sum(n):\\n    \\\"\\\"\\\"Write a python function to find the sum of squares of first n odd natural numbers.\\\"\\\"\\\"\\n    return sum((2 * i - 1) ** 2 for i in range(1, n + 1))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_square_sum_example():\\n    assert solution.square_Sum(2) == 10\\n\\n\\ndef test_square_sum_known_values():\\n    expected = {\\n        0: 0,\\n        1: 1,\\n        2: 10,\\n        3: 35,\\n        4: 84,\\n        5: 165,\\n        6: 286,\\n        10: 1330,\\n    }\\n    for n, value in expected.items():\\n        assert solution.square_Sum(n) == value\\n\"}}\n```"
+}

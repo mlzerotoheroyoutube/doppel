@@ -6,3 +6,4 @@ benchmark/results/*/
 agent*_data.json
 *_data.json
 .env
+logs/
