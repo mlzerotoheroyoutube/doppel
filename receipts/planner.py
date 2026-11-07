@@ -1,6 +1,6 @@
 """Day planning: Meta drafts the plan, SubQ judges it, Meta revises once.
 
-The planner knows what the Fetch.ai personal layer remembers about the user:
+The planner gets what the gate agent remembers about the user:
 targets for today, schedule, watched repos, pending PR verdicts and how they
 like to be notified.
 """

@@ -7,13 +7,14 @@ Receipts is an independent verifier for AI-written pull requests, built for the
 blocks a PR unless it can show evidence (receipts) that the change really fixes
 the issue and breaks nothing.
 
-## The teammate (Fetch.ai × Meta × SubQ)
+## The teammate (Meta × SubQ, published on Fetch.ai Agentverse)
 
-Talk to it in ASI:One. It's built from Fetch.ai uAgents, and each model does what it's best at:
+It's built as a set of agents with Fetch.ai's uAgents framework and published on Agentverse, so you talk to it in ASI:One. Fetch.ai is how it's built and published; the thinking is done by Meta and SubQ, each doing what it's best at:
 
 | Layer | What | Who |
 |---|---|---|
-| Personal layer | Remembers your targets, schedule, repos, strictness and feedback; plans your day; watches your repos; decides when to interrupt you | **Fetch.ai** agents (gate, planner, watcher, coder, six verifier workers) |
+| Agents and publishing | Gate (chat protocol, per-user memory, repo watcher), planner, coder and six verifier workers, published on Agentverse and used from ASI:One | **Fetch.ai** uAgents + Agentverse |
+| Personal memory | Your targets, schedule, repos, strictness and feedback; when to interrupt you | Our code, stored in the agent's storage |
 | Models | Coding loop (`muse-wonder-1.0`, falling back to `muse-spark-1.3`), hidden exam and day planning (`muse-spark-1.3`) | **Meta** Model API |
 | Judge | Every agent output: each round of the coding loop, blind-test failures, the daily plan | **SubQ** |
 | Ground truth | Suite, tamper rules, planted bugs, before/after differential | Deterministic, no model |
@@ -72,7 +73,7 @@ Everything in this repository was written during the event on Nov 7, 2026. The g
 - `receipts/llm.py`: role-based model routing (Meta, SubQ, Anthropic) with a replay cache
 - `receipts/loop.py`: the work loop: implement, collect evidence, judge, rework
 - `receipts/planner.py`: Meta plans the day; SubQ reviews the plan
-- `receipts/agents/`: Fetch.ai uAgents: gate (chat protocol + memory + watcher), planner, coder, six verifier workers
+- `receipts/agents/`: agents built with Fetch.ai uAgents: gate (chat protocol + memory + watcher), planner, coder, six verifier workers
 - `demo_store/`: the sample shop the demo PRs target, with three open issues
 - `benchmark/`: 18 PRs (12 bad, 6 honest) mimicking common AI-agent failures, and the runner
 

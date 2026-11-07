@@ -20,7 +20,9 @@ itself in a loop, and opens a PR only when independent checkers agree the work i
 
 Routing lives in `receipts/llm.py`. Each role is overridable with `RECEIPTS_ROLE_<ROLE>`.
 
-### The agents (Fetch.ai uAgents, all used from one ASI:One chat)
+### The agents (built with Fetch.ai uAgents, published on Agentverse, used from one ASI:One chat)
+
+Fetch.ai is the agent framework and the publishing channel only; no Fetch.ai models are used.
 
 ```
 ASI:One chat ⇄ Gate (chat protocol, per-user memory)
@@ -48,7 +50,7 @@ ASI:One chat ⇄ Gate (chat protocol, per-user memory)
 | Prize | What qualifies |
 |---|---|
 | Overall | Autonomous loop with proof at every step, live |
-| Fetch.ai | Gate, planner, watcher and workers in ASI:One; multi-agent; memory per user |
+| Fetch.ai | Built with uAgents and published on Agentverse; used entirely from ASI:One; multi-agent |
 | Subquadratic | SubQ is the judge and the final gate; long context is essential |
 | Meta Model API | Muse Spark writes the hidden exam and plans the day |
 
