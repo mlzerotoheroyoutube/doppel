@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented max_product_tuple to return the largest product of the two elements in each tuple and added tests covering the example and other cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the maximum product from the pairs of tuples within a given list.\\\"\\\"\\\"\\n\\n\\ndef max_product_tuple(list1):\\n    \\\"\\\"\\\"Write a function to find the maximum product from the pairs of tuples within a given list.\\\"\\\"\\\"\\n    return max(x * y for x, y in list1)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_max_product_tuple_example():\\n    assert solution.max_product_tuple([(2, 7), (2, 6), (1, 8), (4, 9)]) == 36\\n\\n\\ndef test_max_product_tuple_single_pair():\\n    assert solution.max_product_tuple([(3, 5)]) == 15\\n\\n\\ndef test_max_product_tuple_selects_largest_product():\\n    assert solution.max_product_tuple([(1, 10), (5, 5), (3, 4)]) == 25\\n\\n\\ndef test_max_product_tuple_with_zero_and_negative_products():\\n    assert solution.max_product_tuple([(-2, 3), (0, 9), (1, 4)]) == 4\\n\\n\\ndef test_max_product_tuple_two_negative_numbers():\\n    assert solution.max_product_tuple([(-3, -4), (2, 2)]) == 12\\n\"}}\n```"
+}

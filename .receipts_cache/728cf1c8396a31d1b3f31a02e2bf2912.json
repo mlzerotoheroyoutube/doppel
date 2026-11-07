@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented perimeter_triangle as sum of its three sides and added corresponding tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the perimeter of a triangle.\\\"\\\"\\\"\\n\\n\\ndef perimeter_triangle(a, b, c):\\n    \\\"\\\"\\\"Write a function to find the perimeter of a triangle.\\\"\\\"\\\"\\n    return a + b + c\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_perimeter_triangle_example():\\n    assert solution.perimeter_triangle(10, 20, 30) == 60\\n\\n\\ndef test_perimeter_triangle_other_values():\\n    assert solution.perimeter_triangle(1, 2, 3) == 6\\n    assert solution.perimeter_triangle(3, 4, 5) == 12\\n    assert solution.perimeter_triangle(0, 0, 0) == 0\\n    assert solution.perimeter_triangle(1.5, 2.5, 3.0) == 7.0\\n\"}}\n```"
+}

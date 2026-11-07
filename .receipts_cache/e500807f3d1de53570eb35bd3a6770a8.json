@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Re-check of first-year value = after-tax cash + match + vested equity:\n\nPre-tax cash = salary + bonus. After-tax = pre-tax * (1-0.35) = pre-tax * 0.65.\nMatch = min(% * salary, cap), untaxed.\nVested equity by month 12 = grant * 12/48 = grant * 0.25.\n\nNorth:\n- Bonus = 10% * 155,000 = 15,500\n- Pre-tax = 155,000 + 15,500 = 170,500\n- After-tax = 170,500 * 0.65 = 110,825\n- Match = 5% * 155,000 = 7,750; cap 20,000 => 7,750\n- Vested = 80,000 * 12/48 = 20,000\n- Total = 110,825 + 7,750 + 20,000 = 138,575\n\nSouth:\n- Bonus = 0% * 155,000 = 0\n- Pre-tax = 155,000 + 0 = 155,000\n- After-tax = 155,000 * 0.65 = 100,750\n- Match = 6% * 155,000 = 9,300; cap 6,000 => 6,000\n- Vested = 80,000 * 12/48 = 20,000\n- Total = 100,750 + 6,000 + 20,000 = 126,750\n\n138,575 > 126,750, so North is higher. No errors found.\n\n{\"choice\": \"North\", \"value\": 138575}"
+}

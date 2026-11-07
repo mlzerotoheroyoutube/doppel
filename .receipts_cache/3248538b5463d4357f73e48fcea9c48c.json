@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Re-checking from today, ignoring sunk cost:\n\n- Sunk $900,000 is gone in both cases, so exclude it.\n- Continue: future cost $500,000, expected future revenue = 0.70 * $800,000 + 0.30 * $0 = $560,000. EV = $560,000 - $500,000 = $60,000.\n- Stop: future cost $0, sale $0. EV = $0.\n- $60,000 > $0, so continue is optimal with value $60,000.\n\n{\"choice\": \"continue\", \"value\": 60000}"
+}

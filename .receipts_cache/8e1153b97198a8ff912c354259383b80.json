@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented max_difference as the maximum absolute difference within each pair and added tests covering the example and related cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the maximum difference between available pairs in the given tuple list.\\\"\\\"\\\"\\n\\n\\ndef max_difference(test_list):\\n    \\\"\\\"\\\"Write a function to find the maximum difference between available pairs in the given tuple list.\\\"\\\"\\\"\\n    return max(abs(first - second) for first, second in test_list)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.max_difference([(3, 5), (1, 7), (10, 3), (1, 2)]) == 7\\n\\n\\ndef test_absolute_difference_when_second_is_larger():\\n    assert solution.max_difference([(3, 5), (1, 7)]) == 6\\n\\n\\ndef test_single_pair():\\n    assert solution.max_difference([(4, 9)]) == 5\\n\\n\\ndef test_negative_numbers():\\n    assert solution.max_difference([(-5, 3), (2, 2), (-1, -4)]) == 8\\n\\n\\ndef test_equal_pairs():\\n    assert solution.max_difference([(2, 2), (7, 7)]) == 0\\n\"}}\n```"
+}

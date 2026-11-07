@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented `check` to return \\\"Yes\\\" only for non-empty strings consisting solely of '0' and '1', and added tests covering binary and non-binary cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to check whether the given string is a binary string or not.\\\"\\\"\\\"\\n\\n\\ndef check(string):\\n    \\\"\\\"\\\"Write a python function to check whether the given string is a binary string or not.\\\"\\\"\\\"\\n    if not isinstance(string, str) or not string:\\n        return \\\"No\\\"\\n    return \\\"Yes\\\" if all(char in \\\"01\\\" for char in string) else \\\"No\\\"\\n\", \"tests/test_solution.py\": \"import solution\\n\\nfrom solution import check\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_binary_strings():\\n    assert check(\\\"01010101010\\\") == \\\"Yes\\\"\\n    assert check(\\\"0\\\") == \\\"Yes\\\"\\n    assert check(\\\"1\\\") == \\\"Yes\\\"\\n    assert check(\\\"0000\\\") == \\\"Yes\\\"\\n    assert check(\\\"1111\\\") == \\\"Yes\\\"\\n    assert check(\\\"1010\\\") == \\\"Yes\\\"\\n\\n\\ndef test_non_binary_strings():\\n    assert check(\\\"geeks101\\\") == \\\"No\\\"\\n    assert check(\\\"012\\\") == \\\"No\\\"\\n    assert check(\\\"2\\\") == \\\"No\\\"\\n    assert check(\\\"010a\\\") == \\\"No\\\"\\n    assert check(\\\"01 01\\\") == \\\"No\\\"\\n    assert check(\\\"\\\") == \\\"No\\\"\\n\"}}\n```"
+}

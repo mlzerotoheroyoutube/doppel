@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Monthly payment for fully amortized loan:\nr = APR/12, n = months, P = 50000\nPMT = P * r / (1 - (1+r)^-n)\nTotal interest = n*PMT - P\nTotal cost = Total interest + fee\n\nFee: 2% of 50000 = 1000 for A and B, 0 for C.\n\nLoan A: 4.9% APR, 3-yr\nr = 0.049/12 = 0.00408333, n = 36\n(1+r)^36 \u2248 1.15800731\nPMT = 50000*0.00408333 / (1-1/1.15800731)\n\u2248 204.1667 / 0.13644759 \u2248 1496.30\nTotal paid \u2248 36*1496.3010 = 53866.84\nInterest \u2248 53866.84-50000 = 3866.84\nCost A \u2248 3866.84 + 1000 = 4866.84\n\nLoan B: 5.9% APR, 6-yr\nr = 0.059/12 = 0.00491667, n = 72\n(1+r)^72 \u2248 1.42352\nPMT \u2248 245.8333 / 0.297516 \u2248 826.29\nTotal paid \u2248 72*826.29 = 59492.61\nInterest \u2248 9492.61\nCost B \u2248 9492.61 + 1000 = 10492.61\n\nLoan C: 6.9% APR, 6-yr\nr = 0.069/12 = 0.00575, n = 72\n(1+r)^72 \u2248 1.51106\nPMT \u2248 287.5 / 0.338215 \u2248 850.05\nTotal paid \u2248 72*850.05 = 61203.70\nInterest \u2248 11203.70\nCost C \u2248 11203.70 + 0 = 11203.70\n\n4866.84 < 10492.61 < 11203.70, so Loan A is lowest.\n\n{\"choice\": \"A\", \"value\": 4866.84}"
+}

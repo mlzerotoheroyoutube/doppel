@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Re-check from today forward:\n\n- Sunk cost $900,000 is gone in both cases, so exclude it.\n- Stop option: sell for $0 with no further cost. EV stop = 0 USD.\n- Continue option: pay $200,000 future cost.\n  Expected gross = 0.70 * 500,000 + 0.30 * 100,000\n  = 350,000 + 30,000 = 380,000 USD.\n  Expected net from today = 380,000 - 200,000 = 180,000 USD.\n- Compare: 180,000 > 0, so continue is better.\n\nPrevious calculation verified correct.\n{\"choice\": \"continue\", \"value\": 180000}"
+}

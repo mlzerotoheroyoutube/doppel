@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented specified_element to extract the N-th element from each sublist and added tests for it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to extract every specified element from a given two dimensional list.\\\"\\\"\\\"\\n\\n\\ndef specified_element(nums, N):\\n    \\\"\\\"\\\"Write a function to extract every specified element from a given two dimensional list.\\\"\\\"\\\"\\n    return [row[N] for row in nums]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_specified_element_example():\\n    assert solution.specified_element([[1, 2, 3, 2], [4, 5, 6, 2], [7, 1, 9, 5]], 0) == [1, 4, 7]\\n\\n\\ndef test_specified_element_other_indices():\\n    nums = [[1, 2, 3, 2], [4, 5, 6, 2], [7, 1, 9, 5]]\\n    assert solution.specified_element(nums, 1) == [2, 5, 1]\\n    assert solution.specified_element(nums, 3) == [2, 2, 5]\\n    assert solution.specified_element(nums, -1) == [2, 2, 5]\\n\\n\\ndef test_specified_element_empty_and_single():\\n    assert solution.specified_element([], 0) == []\\n    assert solution.specified_element([[10, 20]], 1) == [20]\\n    assert solution.specified_element([[\\\"a\\\", \\\"b\\\"], [\\\"c\\\", \\\"d\\\"]], 0) == [\\\"a\\\", \\\"c\\\"]\\n\"}}\n```"
+}

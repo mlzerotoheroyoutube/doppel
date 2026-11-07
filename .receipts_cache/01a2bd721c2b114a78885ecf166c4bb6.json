@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Mid-market base: 95,000 EUR * 1.09 = 103,550 USD\n\nBank:\nSell rate = 1.09 * 1.015 = 1.10635 USD/EUR\nEUR needed = 95,000 + 25 fee = 95,025 EUR\nTotal USD = 95,025 * 1.10635 = 105,130.90875 = 105,130.91\n\nPlatform:\nSell rate = 1.09 * 1.002 = 1.09218 USD/EUR\nUSD base = 95,000 * 1.09218 = 103,757.10\nFee 0.35% => Total = 103,757.10 * 1.0035 = 104,120.24985 = 104,120.25\n\nUSD payment to supplier:\nSupplier rate = 1.09 * 1.02 = 1.1118 USD/EUR\nUSD base = 95,000 * 1.1118 = 105,621.00\nLess 2% discount => Total = 105,621.00 * 0.98 = 103,508.58\n\nComparison: 103,508.58 usd < 104,120.25 platform < 105,130.91 bank\nLowest is usd.\n{\"choice\": \"usd\", \"value\": 103508.58}"
+}

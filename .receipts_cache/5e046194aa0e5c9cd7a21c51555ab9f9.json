@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented parabola_vertex using the vertex formula and added tests covering the example, other parabolas, and the invalid a=0 case.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the vertex of a parabola.\\\"\\\"\\\"\\n\\n\\ndef parabola_vertex(a, b, c):\\n    \\\"\\\"\\\"Return the vertex ``(x, y)`` of ``y = a*x**2 + b*x + c``.\\n\\n    Raises:\\n        ValueError: If ``a`` is zero, since that is not a parabola.\\n    \\\"\\\"\\\"\\n    if a == 0:\\n        raise ValueError(\\\"'a' must be non-zero for a parabola\\\")\\n    x_vertex = -b / (2 * a)\\n    y_vertex = a * x_vertex**2 + b * x_vertex + c\\n    return (x_vertex, y_vertex)\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.parabola_vertex(5, 3, 2) == (-0.3, 1.55)\\n\\n\\ndef test_vertex_at_origin():\\n    assert solution.parabola_vertex(1, 0, 0) == (0.0, 0.0)\\n\\n\\ndef test_upward_parabola():\\n    assert solution.parabola_vertex(1, -2, 1) == (1.0, 0.0)\\n\\n\\ndef test_downward_parabola():\\n    assert solution.parabola_vertex(-2, 4, 1) == (1.0, 3.0)\\n\\n\\ndef test_zero_a_raises():\\n    with pytest.raises(ValueError):\\n        solution.parabola_vertex(0, 1, 2)\\n\"}}\n```"
+}

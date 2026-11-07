@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented empty_dit to return True only when every dictionary in the list is empty, and added tests covering that behavior.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to check whether all dictionaries in a list are empty or not.\\\"\\\"\\\"\\n\\n\\ndef empty_dit(list1):\\n    \\\"\\\"\\\"Write a function to check whether all dictionaries in a list are empty or not.\\\"\\\"\\\"\\n    return all(not d for d in list1)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_all_empty_dicts():\\n    assert solution.empty_dit([{}, {}, {}]) is True\\n\\n\\ndef test_single_empty_dict():\\n    assert solution.empty_dit([{}]) is True\\n\\n\\ndef test_single_non_empty_dict():\\n    assert solution.empty_dit([{\\\"a\\\": 1}]) is False\\n\\n\\ndef test_mixed_empty_and_non_empty_dicts():\\n    assert solution.empty_dit([{}, {\\\"a\\\": 1}, {}]) is False\\n\\n\\ndef test_all_non_empty_dicts():\\n    assert solution.empty_dit([{\\\"a\\\": 1}, {\\\"b\\\": 2}]) is False\\n\\n\\ndef test_empty_list():\\n    assert solution.empty_dit([]) is True\\n\"}}\n```"
+}

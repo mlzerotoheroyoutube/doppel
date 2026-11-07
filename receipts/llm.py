@@ -38,7 +38,7 @@ _load_dotenv()
 
 CACHE_DIR = Path(os.environ.get("RECEIPTS_CACHE", Path(__file__).resolve().parent.parent / ".receipts_cache"))
 
-DEFAULT_ROLES = {"implementer": "meta", "exam": "meta", "planner": "meta", "router": "meta",
+DEFAULT_ROLES = {"implementer": "meta", "exam": "meta", "planner": "meta", "router": "meta", "analyst": "meta",
                  "judge": "subq", "baseline": "anthropic"}
 
 # Meta model per role, chosen by strength. Each entry is tried in order.
@@ -47,6 +47,7 @@ META_MODELS = {
     "exam": [os.environ.get("RECEIPTS_META_MODEL", "muse-spark-1.3")],
     "planner": [os.environ.get("RECEIPTS_META_MODEL", "muse-spark-1.3")],
     "router": [os.environ.get("RECEIPTS_META_MODEL", "muse-spark-1.3")],
+    "analyst": [os.environ.get("RECEIPTS_META_MODEL", "muse-spark-1.3")],
 }
 
 PROVIDERS = {

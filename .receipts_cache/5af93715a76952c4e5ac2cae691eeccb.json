@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented sum_series to sum n, n-2, n-4, ... while terms are positive, and added tests for even, odd, and non-positive inputs.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the sum of the positive integers of n+(n-2)+(n-4)... (until n-x =< 0).\\\"\\\"\\\"\\n\\n\\ndef sum_series(n):\\n    \\\"\\\"\\\"Write a function to calculate the sum of the positive integers of n+(n-2)+(n-4)... (until n-x =< 0).\\\"\\\"\\\"\\n    total = 0\\n    while n > 0:\\n        total += n\\n        n -= 2\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_sum_series_example():\\n    assert solution.sum_series(6) == 12\\n\\n\\ndef test_sum_series_even_numbers():\\n    assert solution.sum_series(2) == 2\\n    assert solution.sum_series(4) == 6\\n    assert solution.sum_series(10) == 30\\n\\n\\ndef test_sum_series_odd_numbers():\\n    assert solution.sum_series(1) == 1\\n    assert solution.sum_series(3) == 4\\n    assert solution.sum_series(5) == 9\\n    assert solution.sum_series(7) == 16\\n\\n\\ndef test_sum_series_non_positive_numbers():\\n    assert solution.sum_series(0) == 0\\n    assert solution.sum_series(-1) == 0\\n    assert solution.sum_series(-6) == 0\\n\"}}\n```"
+}

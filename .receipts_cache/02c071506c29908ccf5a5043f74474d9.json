@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Re-checked principal P=20000, r=APR/12, n months, payment = P*r*(1+r)^n/((1+r)^n-1), total interest = payment*n-P, total cost = interest+fee, fee=400 for A,C.\n\nLoan A: r=0.049/12=0.0040833333, n=60\n(1+r)^n \u2248 1.27698413\npayment \u2248 20000*0.0040833333*1.27698413/0.27698413 \u2248 376.50907\ntotal paid \u2248 22590.54429\ninterest \u2248 2590.54429\ncost = 2590.54429+400 \u2248 2990.54429\n\nLoan B: r=0.089/12=0.0074166667, n=72\n(1+r)^n \u2248 1.70238377\npayment \u2248 252.52025934/0.70238377 \u2248 359.51893\ntotal paid \u2248 25885.36271\ninterest \u2248 5885.36271\ncost = 5885.36271+0 \u2248 5885.36271\n\nLoan C: r=0.059/12=0.0049166667, n=72\n(1+r)^n \u2248 1.42351988\npayment \u2248 139.97945469/0.42351988 \u2248 330.51449\ntotal paid \u2248 23797.04296\ninterest \u2248 3797.04296\ncost = 3797.04296+400 \u2248 4197.04296\n\nA \u2248 $2990.54 < C \u2248 $4197.04 < B \u2248 $5885.36. Lowest is A.\n{\"choice\": \"A\", \"value\": 2990.54}"
+}

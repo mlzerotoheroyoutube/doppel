@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Loan principal P = 20000.\n\nMonthly rate r = APR/12, n months.\nPayment = P * r*(1+r)^n / ((1+r)^n -1)\nTotal paid = payment * n\nInterest = Total paid - P\nTotal cost = Interest + fee, fee = 2%*20000 = 400 for A,C, 0 for B.\n\nLoan A: r = 0.049/12 = 0.0040833333, n=60\n(1+r)^n = exp(60*ln(1+r)) \u2248 1.27698413\npayment = 20000*0.0040833333*1.27698413 / 0.27698413\n \u2248 104.28703726 / 0.27698413 \u2248 376.50907\nTotal paid \u2248 376.50907*60 = 22590.54424\nInterest \u2248 2590.54424\n+400 fee = 2990.54424\n\nLoan B: r = 0.089/12 = 0.0074166667, n=72\n(1+r)^n \u2248 1.70238377\npayment = 20000*r*FV/(FV-1)\n \u2248 252.52025928 / 0.70238377 \u2248 359.51893\nTotal paid \u2248 359.51893*72 = 25885.36272\nInterest \u2248 5885.36272\n+0 fee = 5885.36272\n\nLoan C: r = 0.059/12 = 0.0049166667, n=72\n(1+r)^n \u2248 1.42351988\npayment \u2248 139.97945469 / 0.42351988 \u2248 330.51449\nTotal paid \u2248 330.51449*72 = 23797.04296\nInterest \u2248 3797.04296\n+400 fee = 4197.04296\n\nComparison:\nA \u2248 $2,990.54 < C \u2248 $4,197.04 < B \u2248 $5,885.36\n\nLowest is Loan A.\n\n{\"choice\": \"A\", \"value\": 2990.54}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North calculation:\nSalary + Bonus = 185,000 + 15%*185,000 = 185,000 + 27,750 = 212,750\nAfter-tax cash = 212,750 * (1-0.30) = 212,750 * 0.70 = 148,925\n\nRetirement match = 3%*185,000 = 5,550, capped at 6,000 => 5,550\n\nEquity vested by month 12 = 80,000 * 1/4 with 1-year cliff = 20,000 vests at 12 months\n\nNorth first-year value = 148,925 + 5,550 + 20,000 = 174,475\n\nSouth calculation:\nSalary + Bonus = 140,000 + 10%*140,000 = 140,000 + 14,000 = 154,000\nAfter-tax cash = 154,000 * 0.70 = 107,800\n\nRetirement match = 6%*140,000 = 8,400, capped at 6,000 => 6,000\n\nEquity vested by month 12 = 160,000 * 12/48 monthly over 4 years = 160,000 * 0.25 = 40,000\n\nSouth first-year value = 107,800 + 6,000 + 40,000 = 153,800\n\n174,475 > 153,800, so North is higher.\n{\"choice\": \"North\", \"value\": 174475}"
+}

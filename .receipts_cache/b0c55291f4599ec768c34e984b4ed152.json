@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented Find_Min_Length using min() over sublist lengths and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the minimum length of sublist.\\\"\\\"\\\"\\n\\n\\ndef Find_Min_Length(lst):\\n    \\\"\\\"\\\"Write a python function to find the minimum length of sublist.\\\"\\\"\\\"\\n    return min(len(sublist) for sublist in lst)\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\nfrom solution import Find_Min_Length\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert Find_Min_Length([[1], [1, 2]]) == 1\\n\\n\\ndef test_minimum_length_in_various_positions():\\n    assert Find_Min_Length([[1, 2, 3], [4, 5], [6]]) == 1\\n    assert Find_Min_Length([[1], [2, 3], [4, 5, 6]]) == 1\\n    assert Find_Min_Length([[1, 2], [3, 4]]) == 2\\n\\n\\ndef test_single_and_empty_sublists():\\n    assert Find_Min_Length([[1, 2, 3]]) == 3\\n    assert Find_Min_Length([[], [1], [1, 2]]) == 0\\n    assert Find_Min_Length([[]]) == 0\\n\\n\\ndef test_empty_input_raises_value_error():\\n    with pytest.raises(ValueError):\\n        Find_Min_Length([])\\n\"}}\n```"
+}

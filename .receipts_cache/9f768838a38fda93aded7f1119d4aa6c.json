@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented snake_to_camel as PascalCase conversion and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to convert snake case string to camel case string.\\\"\\\"\\\"\\n\\n\\ndef snake_to_camel(word):\\n    \\\"\\\"\\\"Write a function to convert snake case string to camel case string.\\\"\\\"\\\"\\n    return \\\"\\\".join(part.capitalize() for part in word.split(\\\"_\\\") if part)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import snake_to_camel\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert snake_to_camel('python_program') == 'PythonProgram'\\n\\n\\ndef test_single_word():\\n    assert snake_to_camel('python') == 'Python'\\n\\n\\ndef test_multiple_words():\\n    assert snake_to_camel('python_program_is_fun') == 'PythonProgramIsFun'\\n\\n\\ndef test_empty_string():\\n    assert snake_to_camel('') == ''\\n\\n\\ndef test_repeated_leading_and_trailing_underscores():\\n    assert snake_to_camel('__python__program__') == 'PythonProgram'\\n\"}}\n```"
+}

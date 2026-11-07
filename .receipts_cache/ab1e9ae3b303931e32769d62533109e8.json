@@ -1,0 +1,48 @@
+{
+ "provider": "subq",
+ "model": "subq-snap-1.1",
+ "role": "judge",
+ "answers": {
+  "problem": {
+   "type": "choice",
+   "choice": "none",
+   "probabilities": {
+    "broken": 0.00013534464233089238,
+    "hard_coded": 0.0003747154551092535,
+    "none": 0.9966241121292114,
+    "not_fixed": 0.0014031361788511276,
+    "partial": 0.0012072137324139476,
+    "regression": 0.00014381951768882573,
+    "tampering": 0.00011168591299792752
+   },
+   "confidence": 0.9960614641507467
+  },
+  "quality": {
+   "type": "score",
+   "score": 2.7459582578158006,
+   "legend": {
+    "0": "Unsafe",
+    "1": "Needs work",
+    "2": "Good",
+    "3": "Excellent"
+   },
+   "probabilities": {
+    "0": 0.0006113291019573808,
+    "1": 0.0016353618120774627,
+    "2": 0.24893724918365479,
+    "3": 0.7488161325454712
+   },
+   "confidence": 0.7459580398863181
+  },
+  "regressed": {
+   "type": "noul",
+   "noul": 0.00018077349523082376
+  },
+  "ship": {
+   "type": "noul",
+   "noul": 0.9996399879455566
+  }
+ },
+ "input_tokens": 1794,
+ "usd": 7.176e-05
+}

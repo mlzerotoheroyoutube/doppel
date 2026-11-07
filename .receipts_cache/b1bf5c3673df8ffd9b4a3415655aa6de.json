@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented swap_numbers to return (b, a) and added tests covering the example and other numeric cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to swap two numbers.\\\"\\\"\\\"\\n\\n\\ndef swap_numbers(a, b):\\n    \\\"\\\"\\\"Write a function to swap two numbers.\\\"\\\"\\\"\\n    return b, a\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_swap_numbers_example():\\n    assert solution.swap_numbers(10, 20) == (20, 10)\\n\\n\\ndef test_swap_numbers_reverse_order():\\n    assert solution.swap_numbers(20, 10) == (10, 20)\\n\\n\\ndef test_swap_numbers_negative_and_zero():\\n    assert solution.swap_numbers(-5, 0) == (0, -5)\\n\\n\\ndef test_swap_numbers_floats():\\n    assert solution.swap_numbers(1.5, 2.5) == (2.5, 1.5)\\n\\n\\ndef test_swap_numbers_same_value():\\n    assert solution.swap_numbers(7, 7) == (7, 7)\\n\"}}\n```"
+}

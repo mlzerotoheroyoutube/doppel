@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented intersection_array using filter with a lambda and added tests for the example, empty, disjoint, and ordering cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the intersection of two arrays using lambda function.\\\"\\\"\\\"\\n\\n\\ndef intersection_array(array_nums1, array_nums2):\\n    \\\"\\\"\\\"Write a function to find the intersection of two arrays using lambda function.\\\"\\\"\\\"\\n    return list(filter(lambda x: x in array_nums2, array_nums1))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_intersection_array_example():\\n    assert solution.intersection_array(\\n        [1, 2, 3, 5, 7, 8, 9, 10], [1, 2, 4, 8, 9]\\n    ) == [1, 2, 8, 9]\\n\\n\\ndef test_intersection_array_no_common_elements():\\n    assert solution.intersection_array([1, 2, 3], [4, 5, 6]) == []\\n\\n\\ndef test_intersection_array_empty_input():\\n    assert solution.intersection_array([], [1, 2, 3]) == []\\n    assert solution.intersection_array([1, 2, 3], []) == []\\n    assert solution.intersection_array([], []) == []\\n\\n\\ndef test_intersection_array_preserves_order_of_first_array():\\n    assert solution.intersection_array([5, 1, 4, 2], [2, 5]) == [5, 2]\\n\"}}\n```"
+}

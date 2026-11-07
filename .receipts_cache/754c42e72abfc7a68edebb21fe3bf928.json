@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented degree_radian using math.degrees and added tests covering the example and common conversions.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to convert radians to degrees.\\\"\\\"\\\"\\n\\nimport math\\n\\n\\ndef degree_radian(radian):\\n    \\\"\\\"\\\"Write a function to convert radians to degrees.\\\"\\\"\\\"\\n    return math.degrees(radian)\\n\", \"tests/test_solution.py\": \"import math\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_degree_radian_example():\\n    assert solution.degree_radian(90) == 5156.620156177409\\n\\n\\ndef test_degree_radian_zero():\\n    assert solution.degree_radian(0) == 0.0\\n\\n\\ndef test_degree_radian_pi():\\n    assert math.isclose(solution.degree_radian(math.pi), 180.0)\\n\\n\\ndef test_degree_radian_one_radian():\\n    assert math.isclose(solution.degree_radian(1), 57.29577951308232)\\n\\n\\ndef test_degree_radian_negative():\\n    assert math.isclose(solution.degree_radian(-math.pi), -180.0)\\n\"}}\n```"
+}

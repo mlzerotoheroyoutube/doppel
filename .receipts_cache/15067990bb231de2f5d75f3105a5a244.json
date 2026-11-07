@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = (Price - $9) * min(Demand, 900) - $12,000\n\n- $19: sold = min(2601,900)=900. Profit = (19-9)*900 - 12000 = 10*900-12000 = -3000\n- $24: sold = min(1157,900)=900. Profit = (24-9)*900 - 12000 = 15*900-12000 = 1500\n- $29: sold = min(975,900)=900. Profit = (29-9)*900 - 12000 = 20*900-12000 = 6000\n- $34: sold = min(173,900)=173. Profit = (34-9)*173 - 12000 = 25*173-12000 = -7675\n- $39: sold = min(70,900)=70. Profit = (39-9)*70 - 12000 = 30*70-12000 = -9900\n\nMaximum profit is at price $29 with $6,000 profit.\n{\"choice\": \"29\", \"value\": 6000}"
+}

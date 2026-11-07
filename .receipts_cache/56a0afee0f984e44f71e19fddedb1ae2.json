@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented remove_splchar to keep only alphanumeric characters and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove everything except alphanumeric characters from a string.\\\"\\\"\\\"\\n\\n\\ndef remove_splchar(text):\\n    \\\"\\\"\\\"Write a function to remove everything except alphanumeric characters from a string.\\\"\\\"\\\"\\n    return \\\"\\\".join(char for char in text if char.isalnum())\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import remove_splchar\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert remove_splchar('python  @#&^%$*program123') == 'pythonprogram123'\\n\\n\\ndef test_empty_string():\\n    assert remove_splchar('') == ''\\n\\n\\ndef test_only_special_characters():\\n    assert remove_splchar(' @#&^%$*_-+.! ') == ''\\n\\n\\ndef test_preserves_letters_and_digits():\\n    assert remove_splchar('AbC123xYz') == 'AbC123xYz'\\n\\n\\ndef test_removes_spaces_punctuation_and_underscore():\\n    assert remove_splchar('hello, world_2024!') == 'helloworld2024'\\n\\n\\ndef test_unicode_alphanumeric_preserved():\\n    assert remove_splchar('caf\u00e9 123!') == 'caf\u00e9123'\\n\"}}\n```"
+}

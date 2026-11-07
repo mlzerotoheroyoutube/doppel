@@ -1,0 +1,27 @@
+{
+ "provider": "subq",
+ "model": "subq-snap-1.1",
+ "role": "judge",
+ "answers": {
+  "error": {
+   "type": "choice",
+   "choice": "none",
+   "probabilities": {
+    "arithmetic": 0.004978165030479431,
+    "ignored_constraint": 0.0010391105897724628,
+    "misread": 0.00027282294468022883,
+    "none": 0.9927616715431213,
+    "sunk_cost": 6.966837645450141e-06,
+    "units_or_currency": 0.00044367765076458454,
+    "wrong_formula": 0.0004974821349605918
+   },
+   "confidence": 0.9915552834669749
+  },
+  "right": {
+   "type": "noul",
+   "noul": 0.9984872341156006
+  }
+ },
+ "input_tokens": 1002,
+ "usd": 4.008e-05
+}

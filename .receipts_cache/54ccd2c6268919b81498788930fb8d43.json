@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Eligibility for 800 units within 25 days from one supplier:\n\n- Alpha: 1300 max >= 800 passes quantity, but 35 days > 25 days fails deadline. Disqualified.\n- Bravo: 1600 max >= 800 passes quantity, 24 days <= 25 days passes deadline. Qualified.\n- Cobalt: 600 max < 800 fails quantity, 18 days passes deadline. Disqualified for quantity.\n\nOnly Bravo qualifies.\n\nBravo landed cost for 800 units:\nGoods = 1,892.36 JPY * 800 = 1,513,888 JPY\nGoods in USD = 1,513,888 * 0.0067 = 10,143.0496 USD\nGoods + shipping = 10,143.0496 + 2,400.00 = 12,543.0496 USD\nDuty = 12% * 12,543.0496 = 1,505.165952 USD\nTotal = 12,543.0496 * 1.12 = 14,048.215552 USD \u2248 14,048.22 USD\n\nLowest qualified is Bravo.\n{\"choice\": \"Bravo\", \"value\": 14048.22}"
+}

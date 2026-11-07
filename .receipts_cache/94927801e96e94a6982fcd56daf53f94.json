@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented surfacearea_sphere as 4*pi*r^2 and added tests covering the example, zero, and unit radius.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the surface area of a sphere.\\\"\\\"\\\"\\n\\nimport math\\n\\n\\ndef surfacearea_sphere(r):\\n    \\\"\\\"\\\"Write a function to find the surface area of a sphere.\\\"\\\"\\\"\\n    return 4 * math.pi * r ** 2\\n\", \"tests/test_solution.py\": \"import math\\n\\nimport solution\\nfrom solution import surfacearea_sphere\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_surfacearea_sphere_example():\\n    assert surfacearea_sphere(10) == 1256.6370614359173\\n\\n\\ndef test_surfacearea_sphere_zero():\\n    assert surfacearea_sphere(0) == 0.0\\n\\n\\ndef test_surfacearea_sphere_unit():\\n    assert surfacearea_sphere(1) == 4 * math.pi\\n\\n\\ndef test_surfacearea_sphere_other_radius():\\n    assert surfacearea_sphere(2.5) == 4 * math.pi * 2.5**2\\n\"}}\n```"
+}

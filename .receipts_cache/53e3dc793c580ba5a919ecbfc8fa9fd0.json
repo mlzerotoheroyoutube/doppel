@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented hexagonal_num using the formula n * (2n - 1) and added tests covering the example and initial sequence values.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the nth hexagonal number.\\\"\\\"\\\"\\n\\n\\ndef hexagonal_num(n):\\n    \\\"\\\"\\\"Write a function to find the nth hexagonal number.\\\"\\\"\\\"\\n    return n * (2 * n - 1)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import hexagonal_num\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_hexagonal_num_example():\\n    assert hexagonal_num(10) == 190\\n\\n\\ndef test_hexagonal_num_first_values():\\n    expected = [1, 6, 15, 28, 45, 66, 91, 120, 153, 190]\\n    for n, value in enumerate(expected, start=1):\\n        assert hexagonal_num(n) == value\\n\\n\\ndef test_hexagonal_num_zero():\\n    assert hexagonal_num(0) == 0\\n\\n\\ndef test_hexagonal_num_larger_value():\\n    assert hexagonal_num(100) == 19900\\n\"}}\n```"
+}

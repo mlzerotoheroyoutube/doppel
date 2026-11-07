@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented hamming_Distance as the popcount of the XOR of the two integers and added tests covering the example and other known cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the hamming distance between given two integers.\\\"\\\"\\\"\\n\\n\\ndef hamming_Distance(n1, n2):\\n    \\\"\\\"\\\"Write a python function to find the hamming distance between given two integers.\\\"\\\"\\\"\\n    return bin(n1 ^ n2).count(\\\"1\\\")\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import hamming_Distance\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert hamming_Distance(4, 8) == 2\\n\\n\\ndef test_identical_integers():\\n    assert hamming_Distance(0, 0) == 0\\n    assert hamming_Distance(7, 7) == 0\\n    assert hamming_Distance(12345, 12345) == 0\\n\\n\\ndef test_known_distances():\\n    assert hamming_Distance(1, 4) == 2\\n    assert hamming_Distance(3, 1) == 1\\n    assert hamming_Distance(0, 5) == 2\\n    assert hamming_Distance(93, 73) == 2\\n    assert hamming_Distance(255, 0) == 8\\n    assert hamming_Distance(2**20, 0) == 1\\n\\n\\ndef test_symmetry():\\n    assert hamming_Distance(4, 8) == hamming_Distance(8, 4)\\n    assert hamming_Distance(10, 15) == hamming_Distance(15, 10)\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented string_to_list by splitting the string on whitespace and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"[link text](https:// [link text](https:// [link text](https://)))write a function to convert a string to a list.\\\"\\\"\\\"\\n\\n\\ndef string_to_list(string):\\n    \\\"\\\"\\\"[link text](https:// [link text](https:// [link text](https://)))write a function to convert a string to a list.\\\"\\\"\\\"\\n    return string.split()\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import string_to_list\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_string_to_list_example():\\n    assert string_to_list(\\\"python programming\\\") == ['python', 'programming']\\n\\n\\ndef test_string_to_list_single_word():\\n    assert string_to_list(\\\"python\\\") == ['python']\\n\\n\\ndef test_string_to_list_empty_string():\\n    assert string_to_list(\\\"\\\") == []\\n\\n\\ndef test_string_to_list_multiple_words():\\n    assert string_to_list(\\\"a b c\\\") == ['a', 'b', 'c']\\n\\n\\ndef test_string_to_list_extra_whitespace():\\n    assert string_to_list(\\\"  python   programming  \\\") == ['python', 'programming']\\n    assert string_to_list(\\\"python\\\\tprogramming\\\\ncode\\\") == ['python', 'programming', 'code']\\n\"}}\n```"
+}

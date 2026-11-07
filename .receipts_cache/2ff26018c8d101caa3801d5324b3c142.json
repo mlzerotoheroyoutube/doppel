@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented is_coprime using math.gcd == 1 and added tests covering examples, non-coprime pairs, 0/1, and negatives.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to check whether the given number is co-prime or not.\\\"\\\"\\\"\\n\\nimport math\\n\\n\\ndef is_coprime(x, y):\\n    \\\"\\\"\\\"Write a python function to check whether the given number is co-prime or not.\\\"\\\"\\\"\\n    return math.gcd(x, y) == 1\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import is_coprime\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert is_coprime(17, 13) == True\\n\\n\\ndef test_coprime_pairs():\\n    assert is_coprime(6, 35) is True\\n    assert is_coprime(13, 27) is True\\n    assert is_coprime(1, 1) is True\\n    assert is_coprime(1, 100) is True\\n\\n\\ndef test_non_coprime_pairs():\\n    assert is_coprime(6, 10) is False\\n    assert is_coprime(12, 18) is False\\n    assert is_coprime(7, 7) is False\\n    assert is_coprime(2, 4) is False\\n\\n\\ndef test_zero_edge_cases():\\n    assert is_coprime(0, 1) is True\\n    assert is_coprime(1, 0) is True\\n    assert is_coprime(0, 2) is False\\n    assert is_coprime(0, 0) is False\\n\\n\\ndef test_negative_numbers():\\n    assert is_coprime(-17, 13) is True\\n    assert is_coprime(17, -13) is True\\n    assert is_coprime(-6, -10) is False\\n\"}}\n```"
+}

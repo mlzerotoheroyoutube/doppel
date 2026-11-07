@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step-by-step recomputation for 2500 units, deadline <=30 days:\n\nEligibility:\n- Alpha: 2500 max >= 2500 yes, 24 days <=30 yes => qualifies\n- Bravo: 5000 max >= 2500 yes, 35 days <=30 no => disqualified\n- Cobalt: 3000 max >= 2500 yes, 10 days <=30 yes => qualifies\n\nAlpha cost in USD:\nGoods = 10.18 EUR * 2500 = 25450 EUR\nGoods USD = 25450 * 1.08 = 27486.00\nSubtotal = 27486.00 + 900.00 shipping = 28386.00\nDuty = 0.08 * 28386.00 = 2270.88\nTotal = 28386.00 + 2270.88 = 30656.88\n\nCobalt cost in USD:\nGoods = 13.07 * 2500 = 32675.00\nSubtotal = 32675.00 + 900.00 = 33575.00\nDuty = 0\nTotal = 33575.00\n\nComparison of qualified: Alpha 30656.88 < Cobalt 33575.00.\nLowest is Alpha.\n\n{\"choice\": \"Alpha\", \"value\": 30656.88}"
+}

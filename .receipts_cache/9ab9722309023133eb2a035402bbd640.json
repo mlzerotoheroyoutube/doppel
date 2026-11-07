@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented circle_circumference using 2 * 3.1415 * r to match the documented example and added tests for it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the circumference of a circle.\\\"\\\"\\\"\\n\\n\\ndef circle_circumference(r):\\n    \\\"\\\"\\\"Write a function to find the circumference of a circle.\\\"\\\"\\\"\\n    return 2 * 3.1415 * r\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_circle_circumference_example():\\n    assert solution.circle_circumference(10) == 62.830000000000005\\n\\n\\ndef test_circle_circumference_zero():\\n    assert solution.circle_circumference(0) == 0\\n\\n\\ndef test_circle_circumference_unit():\\n    assert solution.circle_circumference(1) == 6.283\\n\\n\\ndef test_circle_circumference_other_values():\\n    assert abs(solution.circle_circumference(2) - 12.566) < 1e-9\\n    assert abs(solution.circle_circumference(2.5) - 15.7075) < 1e-9\\n\"}}\n```"
+}

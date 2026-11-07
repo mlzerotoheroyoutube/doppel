@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented perimeter_pentagon as 5 * a and added tests covering the example and other side lengths.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the perimeter of a pentagon.\\\"\\\"\\\"\\n\\n\\ndef perimeter_pentagon(a):\\n    \\\"\\\"\\\"Write a function to find the perimeter of a pentagon.\\\"\\\"\\\"\\n    return 5 * a\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import perimeter_pentagon\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_perimeter_pentagon_example():\\n    assert perimeter_pentagon(5) == 25\\n\\n\\ndef test_perimeter_pentagon_other_values():\\n    assert perimeter_pentagon(0) == 0\\n    assert perimeter_pentagon(1) == 5\\n    assert perimeter_pentagon(2.5) == 12.5\\n    assert perimeter_pentagon(10) == 50\\n\"}}\n```"
+}

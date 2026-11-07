@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented get_pell iteratively using P(0)=0, P(1)=1, P(n)=2*P(n-1)+P(n-2) and added tests for the sequence.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the nth pell number.\\\"\\\"\\\"\\n\\n\\ndef get_pell(n):\\n    \\\"\\\"\\\"Write a function to calculate the nth pell number.\\\"\\\"\\\"\\n    if n < 0:\\n        raise ValueError(\\\"n must be non-negative\\\")\\n    a, b = 0, 1\\n    for _ in range(n):\\n        a, b = b, 2 * b + a\\n    return a\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_get_pell_example():\\n    assert solution.get_pell(4) == 12\\n\\n\\n@pytest.mark.parametrize(\\n    \\\"n, expected\\\",\\n    [\\n        (0, 0),\\n        (1, 1),\\n        (2, 2),\\n        (3, 5),\\n        (4, 12),\\n        (5, 29),\\n        (6, 70),\\n        (7, 169),\\n        (8, 408),\\n        (9, 985),\\n        (10, 2378),\\n        (11, 5741),\\n        (12, 13860),\\n    ],\\n)\\ndef test_get_pell_known_values(n, expected):\\n    assert solution.get_pell(n) == expected\\n\\n\\ndef test_get_pell_negative():\\n    with pytest.raises(ValueError):\\n        solution.get_pell(-1)\\n\"}}\n```"
+}

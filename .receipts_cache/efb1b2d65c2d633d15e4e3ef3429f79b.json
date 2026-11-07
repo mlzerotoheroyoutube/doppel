@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented lateralsuface_cylinder as 2 * 3.1415 * r * h to match the documented example, and added tests for it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the lateral surface area of a cylinder.\\\"\\\"\\\"\\n\\n\\ndef lateralsuface_cylinder(r, h):\\n    \\\"\\\"\\\"Write a function to find the lateral surface area of a cylinder.\\\"\\\"\\\"\\n    # Use 3.1415 for pi so the documented example matches exactly.\\n    return 2 * 3.1415 * r * h\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_lateralsuface_cylinder_example():\\n    assert solution.lateralsuface_cylinder(10, 5) == 314.15000000000003\\n\\n\\ndef test_lateralsuface_cylinder_known_values():\\n    assert solution.lateralsuface_cylinder(1, 1) == 6.283\\n    assert abs(solution.lateralsuface_cylinder(3, 7) - 131.943) < 1e-9\\n    assert abs(solution.lateralsuface_cylinder(2.5, 4) - 62.83) < 1e-9\\n\\n\\ndef test_lateralsuface_cylinder_zero():\\n    assert solution.lateralsuface_cylinder(0, 5) == 0.0\\n    assert solution.lateralsuface_cylinder(10, 0) == 0.0\\n\"}}\n```"
+}

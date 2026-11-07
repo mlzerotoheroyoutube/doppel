@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented pos_count to count numbers greater than zero and added tests covering mixed, empty, zero, and all-negative cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count positive numbers in a list.\\\"\\\"\\\"\\n\\n\\ndef pos_count(list):\\n    \\\"\\\"\\\"Write a python function to count positive numbers in a list.\\\"\\\"\\\"\\n    return sum(1 for item in list if item > 0)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_pos_count_example():\\n    assert solution.pos_count([1, -2, 3, -4]) == 2\\n\\n\\ndef test_pos_count_empty():\\n    assert solution.pos_count([]) == 0\\n\\n\\ndef test_pos_count_zero_is_not_positive():\\n    assert solution.pos_count([0, 0, -1]) == 0\\n\\n\\ndef test_pos_count_all_positive():\\n    assert solution.pos_count([1, 2, 3]) == 3\\n\\n\\ndef test_pos_count_all_negative():\\n    assert solution.pos_count([-1, -2, -3]) == 0\\n\\n\\ndef test_pos_count_floats():\\n    assert solution.pos_count([0.5, -0.5, 2.5, 0.0]) == 2\\n\"}}\n```"
+}

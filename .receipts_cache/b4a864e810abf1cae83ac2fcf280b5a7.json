@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented inclusive range sum in sum_range_list and added tests covering the example and boundary cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find sum of the numbers in a list between the indices of a specified range.\\\"\\\"\\\"\\n\\n\\ndef sum_range_list(list1, m, n):\\n    \\\"\\\"\\\"Write a function to find sum of the numbers in a list between the indices of a specified range.\\\"\\\"\\\"\\n    return sum(list1[m:n + 1])\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.sum_range_list([2, 1, 5, 6, 8, 3, 4, 9, 10, 11, 8, 12], 8, 10) == 29\\n\\n\\ndef test_full_range():\\n    assert solution.sum_range_list([1, 2, 3, 4], 0, 3) == 10\\n\\n\\ndef test_single_index():\\n    assert solution.sum_range_list([1, 2, 3, 4], 2, 2) == 3\\n\\n\\ndef test_range_at_start():\\n    assert solution.sum_range_list([1, 2, 3, 4], 0, 1) == 3\\n\\n\\ndef test_range_at_end():\\n    assert solution.sum_range_list([1, 2, 3, 4], 2, 3) == 7\\n\\n\\ndef test_empty_list():\\n    assert solution.sum_range_list([], 0, 0) == 0\\n\"}}\n```"
+}

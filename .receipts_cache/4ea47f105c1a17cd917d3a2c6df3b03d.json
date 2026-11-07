@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented is_num_decagonal using the formula n*(4*n-3) and added tests covering the example and known decagonal numbers.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the nth decagonal number.\\\"\\\"\\\"\\n\\n\\ndef is_num_decagonal(n):\\n    \\\"\\\"\\\"Write a function to find the nth decagonal number.\\n\\n    The nth decagonal number is given by ``n * (4 * n - 3)``,\\n    e.g. the 3rd decagonal number is ``3 * 9 == 27``.\\n    \\\"\\\"\\\"\\n    return n * (4 * n - 3)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.is_num_decagonal(3) == 27\\n\\n\\ndef test_first_decagonal_numbers():\\n    expected = [1, 10, 27, 52, 85, 126, 175, 232, 297, 370]\\n    for n, value in enumerate(expected, start=1):\\n        assert solution.is_num_decagonal(n) == value\\n\\n\\ndef test_zero():\\n    assert solution.is_num_decagonal(0) == 0\\n\\n\\ndef test_larger_number():\\n    assert solution.is_num_decagonal(100) == 39700\\n\"}}\n```"
+}

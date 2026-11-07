@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented centered_hexagonal_number using 3*n*(n-1)+1 and added tests for the example and known sequence values.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find nth centered hexagonal number.\\\"\\\"\\\"\\n\\n\\ndef centered_hexagonal_number(n):\\n    \\\"\\\"\\\"Write a function to find nth centered hexagonal number.\\\"\\\"\\\"\\n    return 3 * n * (n - 1) + 1\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_centered_hexagonal_number_example():\\n    assert solution.centered_hexagonal_number(10) == 271\\n\\n\\ndef test_centered_hexagonal_number_first_values():\\n    expected = [1, 7, 19, 37, 61, 91, 127, 169, 217, 271]\\n    for n, value in enumerate(expected, start=1):\\n        assert solution.centered_hexagonal_number(n) == value\\n\\n\\ndef test_centered_hexagonal_number_larger_values():\\n    assert solution.centered_hexagonal_number(15) == 631\\n    assert solution.centered_hexagonal_number(20) == 1141\\n    assert solution.centered_hexagonal_number(100) == 29701\\n\"}}\n```"
+}

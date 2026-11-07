@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented zero_count as the count of zeroes divided by the array length, rounded to two decimal places (0.0 for an empty array), and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the ration of zeroes in an array of integers.\\\"\\\"\\\"\\n\\n\\ndef zero_count(nums):\\n    \\\"\\\"\\\"Write a function to find the ration of zeroes in an array of integers.\\n\\n    Return the number of elements equal to ``0`` divided by the total\\n    number of elements, rounded to two decimal places. An empty array\\n    has a ratio of ``0.0``.\\n    \\\"\\\"\\\"\\n    values = list(nums)\\n    if not values:\\n        return 0.0\\n    return round(values.count(0) / len(values), 2)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import zero_count\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert zero_count([0, 1, 2, -1, -5, 6, 0, -3, -2, 3, 4, 6, 8]) == 0.15\\n\\n\\ndef test_no_zeroes():\\n    assert zero_count([1, 2, -1, -5]) == 0.0\\n\\n\\ndef test_all_zeroes():\\n    assert zero_count([0, 0, 0, 0]) == 1.0\\n\\n\\ndef test_half_zeroes():\\n    assert zero_count([0, 1]) == 0.5\\n\\n\\ndef test_rounding():\\n    assert zero_count([0, 1, 1]) == 0.33\\n    assert zero_count([0, 0, 1]) == 0.67\\n\\n\\ndef test_empty():\\n    assert zero_count([]) == 0.0\\n\"}}\n```"
+}

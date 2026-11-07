@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented find_lists to count list elements in the input tuple and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find number of lists present in the given tuple.\\\"\\\"\\\"\\n\\n\\ndef find_lists(Input):\\n    \\\"\\\"\\\"Write a function to find number of lists present in the given tuple.\\\"\\\"\\\"\\n    return sum(1 for item in Input if isinstance(item, list))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_lists_example():\\n    assert solution.find_lists(([1, 2, 3, 4], [5, 6, 7, 8])) == 2\\n\\n\\ndef test_find_lists_empty_tuple():\\n    assert solution.find_lists(()) == 0\\n\\n\\ndef test_find_lists_no_lists():\\n    assert solution.find_lists((1, 2, 3, \\\"four\\\", (5, 6), {\\\"a\\\": 1})) == 0\\n\\n\\ndef test_find_lists_mixed_types():\\n    assert solution.find_lists(([1], 2, [3, 4], \\\"five\\\", [], None)) == 3\\n\\n\\ndef test_find_lists_single_list():\\n    assert solution.find_lists(([1, 2],)) == 1\\n\"}}\n```"
+}

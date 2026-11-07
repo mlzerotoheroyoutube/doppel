@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Mid-market base:\n95,000 EUR * 1.09 = 103,550 USD\n\n1. bank:\nRate = 1.09 * 1.005 = 1.09545 USD/EUR\nEUR needed = 95,000 + 15 fee = 95,015\nCost = 95,015 * 1.09545 = 104,084.18 USD\n\n2. platform:\nRate = 1.09 * 1.002 = 1.09218 USD/EUR\nUSD for EUR = 95,000 * 1.09218 = 103,757.10\nFee 0.60%: total = 103,757.10 * 1.006 = 104,379.64 USD\n\n3. usd to supplier:\nRate = 1.09 * 1.02 = 1.1118 USD/EUR\nUSD amount = 95,000 * 1.1118 = 105,621.00\nLess 2% discount: 105,621.00 * 0.98 = 103,508.58 USD\n\nEffective factor 1.02 * 0.98 = 0.9996, i.e. just below mid-market.\n\nCheapest is usd payment at 103,508.58 USD.\n{\"choice\": \"usd\", \"value\": 103508.58}"
+}

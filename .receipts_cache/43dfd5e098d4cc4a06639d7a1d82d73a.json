@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented check_equilateral to return True only for positive equal sides and added tests covering the example, equilateral, non-equilateral, and non-positive cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to print check if the triangle is equilateral or not.\\\"\\\"\\\"\\n\\n\\ndef check_equilateral(x, y, z):\\n    \\\"\\\"\\\"Write a function to print check if the triangle is equilateral or not.\\\"\\\"\\\"\\n    return bool(x > 0 and x == y == z)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_from_issue():\\n    assert solution.check_equilateral(6, 8, 12) == False\\n\\n\\ndef test_equilateral_triangles():\\n    assert solution.check_equilateral(5, 5, 5) == True\\n    assert solution.check_equilateral(1, 1, 1) == True\\n    assert solution.check_equilateral(2.5, 2.5, 2.5) == True\\n\\n\\ndef test_non_equilateral_triangles():\\n    assert solution.check_equilateral(5, 5, 8) == False\\n    assert solution.check_equilateral(5, 8, 5) == False\\n    assert solution.check_equilateral(8, 5, 5) == False\\n    assert solution.check_equilateral(3, 4, 5) == False\\n\\n\\ndef test_non_positive_sides_are_not_equilateral():\\n    assert solution.check_equilateral(0, 0, 0) == False\\n    assert solution.check_equilateral(-5, -5, -5) == False\\n\"}}\n```"
+}

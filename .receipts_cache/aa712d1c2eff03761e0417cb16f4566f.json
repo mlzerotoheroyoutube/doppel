@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented pos_nos to return positive numbers (>0) in order as a tuple, matching the documented example, and added tests covering that behavior.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to print positive numbers in a list.\\\"\\\"\\\"\\n\\n\\ndef pos_nos(list1):\\n    \\\"\\\"\\\"Return the positive numbers in ``list1`` as a tuple, in order.\\n\\n    Numbers greater than zero are positive; zero and negative\\n    numbers are excluded. This matches the documented example:\\n    ``pos_nos([-1, -2, 1, 2]) == (1, 2)``.\\n    \\\"\\\"\\\"\\n    return tuple(number for number in list1 if number > 0)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_documented_example():\\n    assert solution.pos_nos([-1, -2, 1, 2]) == (1, 2)\\n\\n\\ndef test_all_positive_numbers():\\n    assert solution.pos_nos([1, 2, 3]) == (1, 2, 3)\\n\\n\\ndef test_no_positive_numbers():\\n    assert solution.pos_nos([-1, -2, -3]) == ()\\n\\n\\ndef test_empty_list():\\n    assert solution.pos_nos([]) == ()\\n\\n\\ndef test_zero_is_not_positive():\\n    assert solution.pos_nos([0, -1, 2, 0, 3]) == (2, 3)\\n\\n\\ndef test_preserves_order_and_supports_floats():\\n    assert solution.pos_nos([5, -0.5, 0, 0.5, -2, 3]) == (5, 0.5, 3)\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented text_match_string using a regex for a word character at the start of the string, returning 'Found a match!' or 'Not matched!'.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function that matches a word at the beginning of a string.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef text_match_string(text):\\n    \\\"\\\"\\\"Write a function that matches a word at the beginning of a string.\\\"\\\"\\\"\\n    if re.search(r'^\\\\w+', text):\\n        return 'Found a match!'\\n    else:\\n        return 'Not matched!'\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_text_match_string_matches_word_at_beginning():\\n    assert solution.text_match_string(\\\"python\\\") == \\\"Found a match!\\\"\\n    assert solution.text_match_string(\\\"Python is great\\\") == \\\"Found a match!\\\"\\n    assert solution.text_match_string(\\\"The quick brown fox\\\") == \\\"Found a match!\\\"\\n\\n\\ndef test_text_match_string_leading_space_not_matched():\\n    assert solution.text_match_string(\\\" python\\\") == \\\"Not matched!\\\"\\n\\n\\ndef test_text_match_string_no_word_at_beginning():\\n    assert solution.text_match_string(\\\"\\\") == \\\"Not matched!\\\"\\n    assert solution.text_match_string(\\\" hello\\\") == \\\"Not matched!\\\"\\n    assert solution.text_match_string(\\\"!python\\\") == \\\"Not matched!\\\"\\n\"}}\n```"
+}

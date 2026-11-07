@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit per price = (Price - $12) * units sold - $5,000\nwhere units sold = min(demand, capacity 2000).\n\n- $19: Q = min(2553,2000)=2000\n  Contribution = (19-12)*2000 = 7*2000 = 14,000\n  Profit = 14,000 - 5,000 = 9,000\n\n- $24: Q = 900\n  Contribution = (24-12)*900 = 12*900 = 10,800\n  Profit = 10,800 - 5,000 = 5,800\n\n- $29: Q = 764\n  Contribution = (29-12)*764 = 17*764 = 12,988\n  Profit = 12,988 - 5,000 = 7,988\n\n- $34: Q = 267\n  Contribution = (34-12)*267 = 22*267 = 5,874\n  Profit = 5,874 - 5,000 = 874\n\n- $39: Q = 74\n  Contribution = (39-12)*74 = 27*74 = 1,998\n  Profit = 1,998 - 5,000 = -3,002\n\nMaximum is $19 with $9,000 profit.\n{\"choice\": \"19\", \"value\": 9000}"
+}

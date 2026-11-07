@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented count to count only True boolean values and added tests covering the example, empty, all-true, all-false, and non-boolean cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count true booleans in the given list.\\\"\\\"\\\"\\n\\n\\ndef count(lst):\\n    \\\"\\\"\\\"Write a python function to count true booleans in the given list.\\\"\\\"\\\"\\n    return sum(1 for value in lst if value is True)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_count_example():\\n    assert solution.count([True, False, True]) == 2\\n\\n\\ndef test_count_empty():\\n    assert solution.count([]) == 0\\n\\n\\ndef test_count_none_true():\\n    assert solution.count([False, False, False]) == 0\\n\\n\\ndef test_count_all_true():\\n    assert solution.count([True, True, True, True]) == 4\\n\\n\\ndef test_count_only_counts_true_booleans():\\n    assert solution.count([True, 1, 1.0, \\\"True\\\", False, None]) == 1\\n\"}}\n```"
+}

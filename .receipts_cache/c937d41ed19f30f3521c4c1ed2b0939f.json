@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented set_to_tuple as a sorted tuple conversion and added tests for ordering, strings, empty and single-element sets.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to convert the given set into ordered tuples.\\\"\\\"\\\"\\n\\n\\ndef set_to_tuple(s):\\n    \\\"\\\"\\\"Write a function to convert the given set into ordered tuples.\\\"\\\"\\\"\\n    return tuple(sorted(s))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_from_issue():\\n    assert solution.set_to_tuple({1, 2, 3, 4, 5}) == (1, 2, 3, 4, 5)\\n\\n\\ndef test_returns_sorted_tuple_regardless_of_set_order():\\n    assert solution.set_to_tuple({5, 1, 4, 2, 3}) == (1, 2, 3, 4, 5)\\n    assert solution.set_to_tuple({-1, 10, 0, -5, 3}) == (-5, -1, 0, 3, 10)\\n\\n\\ndef test_empty_set():\\n    assert solution.set_to_tuple(set()) == ()\\n\\n\\ndef test_single_element_set():\\n    assert solution.set_to_tuple({42}) == (42,)\\n\\n\\ndef test_strings_are_sorted():\\n    assert solution.set_to_tuple({\\\"banana\\\", \\\"apple\\\", \\\"cherry\\\"}) == (\\n        \\\"apple\\\",\\n        \\\"banana\\\",\\n        \\\"cherry\\\",\\n    )\\n\\n\\ndef test_returns_tuple_and_does_not_modify_input():\\n    s = {3, 1, 2}\\n    result = solution.set_to_tuple(s)\\n    assert isinstance(result, tuple)\\n    assert s == {1, 2, 3}\\n\"}}\n```"
+}

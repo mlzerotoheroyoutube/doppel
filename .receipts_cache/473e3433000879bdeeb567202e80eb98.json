@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented area_polygon using the regular polygon area formula and added tests for known polygons.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the area of a regular polygon.\\\"\\\"\\\"\\n\\nimport math\\n\\n\\ndef area_polygon(s, l):\\n    \\\"\\\"\\\"Write a function to calculate the area of a regular polygon.\\\"\\\"\\\"\\n    return (s * l ** 2) / (4 * math.tan(math.pi / s))\\n\", \"tests/test_solution.py\": \"import math\\n\\nimport pytest\\n\\nimport solution\\nfrom solution import area_polygon\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_square_example():\\n    assert area_polygon(4, 20) == 400.00000000000006\\n\\n\\ndef test_equilateral_triangle():\\n    assert area_polygon(3, 1) == pytest.approx(math.sqrt(3) / 4)\\n\\n\\ndef test_regular_pentagon():\\n    assert area_polygon(5, 1) == pytest.approx(1.7204774005889672)\\n\\n\\ndef test_regular_hexagon():\\n    assert area_polygon(6, 2) == pytest.approx(6 * math.sqrt(3))\\n\\n\\ndef test_zero_side_length():\\n    assert area_polygon(5, 0) == pytest.approx(0.0)\\n\"}}\n```"
+}

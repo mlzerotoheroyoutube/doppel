@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Requirement: 2000 units from one supplier, delivery <= 20 days.\n\n- Alpha: max 4000 >= 2000 quantity OK, but 24 days > 20 days, FAILS deadline. Disqualified.\n- Bravo: max 4000 >= 2000 OK, 18 days <= 20 OK. Qualifies.\n  Goods = 1,568.94 JPY * 2000 = 3,137,880 JPY\n  In USD = 3,137,880 * 0.0067 = 21,023.796 USD\n  + shipping 900 = 21,923.796 USD\n  Duty 8% = 21,923.796 * 0.08 = 1,753.90368\n  Total landed = 21,923.796 * 1.08 = 23,677.69968 USD\n- Cobalt: max 2000 >= 2000 OK, 18 days <= 20 OK. Qualifies.\n  Goods = 12.18 * 2000 = 24,360 USD\n  + shipping 2,400 = 26,760 USD\n  Duty 0% = 0\n  Total landed = 26,760 USD\n\nQualified: Bravo ~23,677.70 vs Cobalt 26,760. Lowest is Bravo.\n\n{\"choice\": \"Bravo\", \"value\": 23677.70}\n"
+}

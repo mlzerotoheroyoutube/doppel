@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented sum_negativenum using a lambda with filter and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the sum of the negative numbers of a given list of numbers using lambda function.\\\"\\\"\\\"\\n\\n\\ndef sum_negativenum(nums):\\n    \\\"\\\"\\\"Write a function to calculate the sum of the negative numbers of a given list of numbers using lambda function.\\\"\\\"\\\"\\n    return sum(filter(lambda x: x < 0, nums))\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import sum_negativenum\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert sum_negativenum([2, 4, -6, -9, 11, -12, 14, -5, 17]) == -32\\n\\n\\ndef test_empty_list():\\n    assert sum_negativenum([]) == 0\\n\\n\\ndef test_no_negative_numbers():\\n    assert sum_negativenum([0, 1, 2, 3]) == 0\\n\\n\\ndef test_all_negative_numbers():\\n    assert sum_negativenum([-1, -2, -3]) == -6\\n\\n\\ndef test_zero_is_not_negative():\\n    assert sum_negativenum([0, -5, 5]) == -5\\n\\n\\ndef test_negative_floats():\\n    assert sum_negativenum([-1.5, 2.5, -2.5]) == -4.0\\n\"}}\n```"
+}

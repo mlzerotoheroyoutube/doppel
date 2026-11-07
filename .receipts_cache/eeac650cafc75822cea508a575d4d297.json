@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Re-checking step-by-step:\n\nFormula: Monthly Profit = (Price - Variable Cost $12) * Q - Fixed Cost $12,000\nwhere Q = units sold = min(Demand at Price, Capacity 2000), because all unit margins are positive so make as much as you can sell up to capacity.\n\n- $19: margin = 19-12 = 7\n  Q = min(1899,2000) = 1899\n  Contribution = 7 * 1899 = 13,293\n  Profit = 13,293 - 12,000 = 1,293\n\n- $24: margin = 24-12 = 12\n  Q = min(2039,2000) = 2000 capped, unmet 39 lost\n  Contribution = 12 * 2000 = 24,000\n  Profit = 24,000 - 12,000 = 12,000\n\n- $29: margin = 29-12 = 17\n  Q = min(438,2000) = 438\n  Contribution = 17 * 438 = 7,446\n  Profit = 7,446 - 12,000 = -4,554\n\n- $34: margin = 34-12 = 22\n  Q = min(282,2000) = 282\n  Contribution = 22 * 282 = 6,204\n  Profit = 6,204 - 12,000 = -5,796\n\n- $39: margin = 39-12 = 27\n  Q = min(90,2000) = 90\n  Contribution = 27 * 90 = 2,430\n  Profit = 2,430 - 12,000 = -9,570\n\nAll arithmetic verified. Maximum is $24 with $12,000 profit.\n{\"choice\": \"24\", \"value\": 12000}"
+}

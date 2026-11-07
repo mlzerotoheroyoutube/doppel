@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement sort_mixed_list to return integers sorted numerically followed by strings sorted alphabetically, with tests for the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to sort a given mixed list of integers and strings.\\\"\\\"\\\"\\n\\n\\ndef sort_mixed_list(mixed_list):\\n    \\\"\\\"\\\"Write a function to sort a given mixed list of integers and strings.\\\"\\\"\\\"\\n    return sorted(mixed_list, key=lambda x: (isinstance(x, str), x))\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import sort_mixed_list\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert sort_mixed_list([19, 'red', 12, 'green', 'blue', 10, 'white', 'green', 1]) == [1, 10, 12, 19, 'blue', 'green', 'green', 'red', 'white']\\n\\n\\ndef test_empty_list():\\n    assert sort_mixed_list([]) == []\\n\\n\\ndef test_only_integers():\\n    assert sort_mixed_list([3, 1, 2]) == [1, 2, 3]\\n\\n\\ndef test_only_strings():\\n    assert sort_mixed_list(['banana', 'apple', 'cherry']) == ['apple', 'banana', 'cherry']\\n\\n\\ndef test_duplicates_and_negative_integers():\\n    assert sort_mixed_list(['b', -1, 'a', 0, -5, 'a', 2]) == [-5, -1, 0, 2, 'a', 'a', 'b']\\n\\n\\ndef test_does_not_mutate_input():\\n    original = [19, 'red', 1]\\n    assert sort_mixed_list(original) == [1, 19, 'red']\\n    assert original == [19, 'red', 1]\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Sunk $900,000 is gone either way, so ignore it for the forward decision.\n\n1. Stop now:\n   No further cost, sell for $150,000.\n   EV from today = +$150,000.\n\n2. Continue:\n   Pay $500,000 more.\n   Expected gross return = 0.5 * $500,000 + 0.5 * $50,000 = $250,000 + $25,000 = $275,000.\n   EV from today = -$500,000 + $275,000 = -$225,000.\n\n$150,000 > -$225,000, so stop maximizes expected value from today.\n{\"choice\": \"stop\", \"value\": 150000}"
+}

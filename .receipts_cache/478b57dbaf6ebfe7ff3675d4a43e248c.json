@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North calculation:\nCash = 155,000 + 10%*155,000 = 155,000 + 15,500 = 170,500\nAfter-tax cash = 170,500 * (1 - 0.25) = 127,875\nMatch = min(3%*155,000 = 4,650, 9,000) = 4,650\nVested equity = 0 * 12/48 = 0\nTotal North = 127,875 + 4,650 + 0 = 132,525\n\nSouth calculation:\nCash = 140,000 + 15%*140,000 = 140,000 + 21,000 = 161,000\nAfter-tax cash = 161,000 * (1 - 0.25) = 120,750\nMatch = min(6%*140,000 = 8,400, 20,000) = 8,400\nVested equity = 0 * 12/48 = 0\nTotal South = 120,750 + 8,400 + 0 = 129,150\n\nNorth 132,525 > South 129,150, so North is higher.\n{\"choice\": \"North\", \"value\": 132525}"
+}

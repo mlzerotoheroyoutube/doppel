@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented recursive_list_sum to recursively sum numbers in nested lists/tuples and added tests covering the example, flat, empty, deeply nested, float, and tuple cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function of recursion list sum.\\\"\\\"\\\"\\n\\n\\ndef recursive_list_sum(data_list):\\n    \\\"\\\"\\\"Write a function of recursion list sum.\\\"\\\"\\\"\\n    total = 0\\n    for item in data_list:\\n        if isinstance(item, (list, tuple)):\\n            total += recursive_list_sum(item)\\n        else:\\n            total += item\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.recursive_list_sum([1, 2, [3, 4], [5, 6]]) == 21\\n\\n\\ndef test_empty_list():\\n    assert solution.recursive_list_sum([]) == 0\\n\\n\\ndef test_flat_list():\\n    assert solution.recursive_list_sum([1, 2, 3, 4]) == 10\\n\\n\\ndef test_deeply_nested_list():\\n    assert solution.recursive_list_sum([1, [2, [3, [4]]]]) == 10\\n\\n\\ndef test_nested_empty_lists():\\n    assert solution.recursive_list_sum([[], [1, []], 2]) == 3\\n\\n\\ndef test_floats():\\n    assert solution.recursive_list_sum([1.5, [2.5], 2]) == 6.0\\n\\n\\ndef test_tuples_and_mixed_nesting():\\n    assert solution.recursive_list_sum((1, [2, (3, 4)])) == 10\\n\"}}\n```"
+}

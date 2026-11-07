@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented check(n) to return whether n equals twice its decimal reverse minus one, handling sign for negatives, and added tests covering true and false cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to check if a given number is one less than twice its reverse.\\\"\\\"\\\"\\n\\n\\ndef check(n):\\n    \\\"\\\"\\\"Write a python function to check if a given number is one less than twice its reverse.\\\"\\\"\\\"\\n    sign = -1 if n < 0 else 1\\n    reverse = sign * int(str(abs(n))[::-1])\\n    return n == 2 * reverse - 1\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import check\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_from_issue():\\n    assert check(70) == False\\n\\n\\ndef test_true_cases():\\n    # Single digit: 2 * 1 - 1 == 1\\n    assert check(1) == True\\n    # Reverse of 73 is 37: 2 * 37 - 1 == 73\\n    assert check(73) == True\\n\\n\\ndef test_false_cases():\\n    assert check(0) == False\\n    assert check(2) == False\\n    assert check(10) == False\\n    # Reverse of 37 is 73: 2 * 73 - 1 == 145 != 37\\n    assert check(37) == False\\n    assert check(100) == False\\n    assert check(-1) == False\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Monthly rate = APR/12, n = years*12\nPayment M = P*r/(1-(1+r)^-n)\nInterest = n*M - P\nTotal borrowing cost = Interest + upfront fee\n\nLoan A: P=80000, r=0.089/12=0.0074167, n=48, fee=0\nM_A = 80000*0.0074167/(1-1.0074167^-48) \u2248 $1987.01\nTotal paid \u2248 48*1987.0069 = $95376.33\nInterest_A \u2248 95376.33-80000 = $15376.33\nCost_A \u2248 15376.33+0 = $15376.33\n\nLoan B: same r,n as A, fee=0.03*80000=2400\nInterest_B = Interest_A \u2248 $15376.33\nCost_B \u2248 15376.33+2400 = $17776.33\n\nLoan C: P=80000, r=0.059/12=0.0049167, n=72, fee=0.01*80000=800\nM_C = 80000*0.0049167/(1-1.0049167^-72) \u2248 $1322.06\nTotal paid \u2248 72*1322.0579 = $95188.17\nInterest_C \u2248 95188.17-80000 = $15188.17\nCost_C \u2248 15188.17+800 = $15988.17\n\n15376.33 < 15988.17 < 17776.33, so Loan A is lowest.\n\n{\"choice\": \"A\", \"value\": 15376.33}"
+}

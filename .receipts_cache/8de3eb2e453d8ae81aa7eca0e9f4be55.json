@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented multiply_num as product of all numbers divided by the sequence length, with tests covering the example and other cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to multiply all the numbers in a list and divide with the length of the list.\\\"\\\"\\\"\\n\\n\\ndef multiply_num(numbers):\\n    \\\"\\\"\\\"Write a function to multiply all the numbers in a list and divide with the length of the list.\\\"\\\"\\\"\\n    numbers = list(numbers)\\n    product = 1\\n    for number in numbers:\\n        product *= number\\n    return product / len(numbers)\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\nfrom solution import multiply_num\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_from_issue():\\n    assert multiply_num((8, 2, 3, -1, 7)) == -67.2\\n\\n\\ndef test_list_input():\\n    assert multiply_num([2, 3, 4]) == 8.0\\n\\n\\ndef test_single_number():\\n    assert multiply_num([5]) == 5.0\\n\\n\\ndef test_zero_in_list():\\n    assert multiply_num([3, 0, 7]) == 0.0\\n\\n\\ndef test_floats_and_negatives():\\n    assert multiply_num([1.5, 2]) == 1.5\\n    assert multiply_num([-2, 3]) == -3.0\\n\\n\\ndef test_empty_list():\\n    with pytest.raises(ZeroDivisionError):\\n        multiply_num([])\\n\"}}\n```"
+}

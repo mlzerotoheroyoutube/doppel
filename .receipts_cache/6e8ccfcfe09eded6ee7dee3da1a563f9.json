@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented maximum(a, b) to return the larger of two numbers and added tests covering the example, order, equality, negatives, and floats.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the maximum of two numbers.\\\"\\\"\\\"\\n\\n\\ndef maximum(a, b):\\n    \\\"\\\"\\\"Write a python function to find the maximum of two numbers.\\\"\\\"\\\"\\n    return a if a >= b else b\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_maximum_example():\\n    assert solution.maximum(5, 10) == 10\\n\\n\\ndef test_maximum_first_larger():\\n    assert solution.maximum(10, 5) == 10\\n\\n\\ndef test_maximum_equal():\\n    assert solution.maximum(7, 7) == 7\\n\\n\\ndef test_maximum_negative_numbers():\\n    assert solution.maximum(-5, -10) == -5\\n    assert solution.maximum(-10, -5) == -5\\n\\n\\ndef test_maximum_floats():\\n    assert solution.maximum(2.5, 1.5) == 2.5\\n    assert solution.maximum(-1.5, 0.5) == 0.5\\n\\n\\ndef test_maximum_mixed_int_and_float():\\n    assert solution.maximum(3, 3.5) == 3.5\\n    assert solution.maximum(4.5, 4) == 4.5\\n\"}}\n```"
+}

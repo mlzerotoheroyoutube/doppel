@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North cash: salary 185,000 + bonus 15% = 185,000 * 1.15 = 212,750 taxable.\nAfter-tax at 35%: 212,750 * 0.65 = 138,287.5\n\nNorth match: 6% of 185,000 = 11,100, cap 20,000 => 11,100 not taxed.\nNorth equity vested: 0.00 * 12/48 = 0\nNorth total = 138,287.5 + 11,100 + 0 = 149,387.5\n\nSouth cash: salary 170,000 + bonus 0% = 170,000 taxable.\nAfter-tax at 35%: 170,000 * 0.65 = 110,500\n\nSouth match: 5% of 170,000 = 8,500, cap 6,000 => 6,000 not taxed.\nSouth equity vested: 0.00 * 25% cliff = 0\nSouth total = 110,500 + 6,000 + 0 = 116,500\n\n149,387.5 > 116,500, so North is higher.\n{\"choice\": \"North\", \"value\": 149387.5}"
+}

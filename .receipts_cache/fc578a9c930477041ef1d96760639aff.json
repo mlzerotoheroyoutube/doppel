@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = (Price - $12) * units sold - $12,000 fixed\nunits sold = min(demand, capacity 2000) since margin >0 at all prices.\n\n- $19: sold = min(1899,2000)=1899\n  margin = 19-12=7\n  contribution = 7*1899 = 13,293\n  profit = 13,293 - 12,000 = 1,293\n\n- $24: sold = min(2039,2000)=2000 capped\n  margin = 24-12=12\n  contribution = 12*2000 = 24,000\n  profit = 24,000 - 12,000 = 12,000\n\n- $29: sold = 438\n  margin = 29-12=17\n  contribution = 17*438 = 7,446\n  profit = 7,446 - 12,000 = -4,554\n\n- $34: sold = 282\n  margin = 34-12=22\n  contribution = 22*282 = 6,204\n  profit = 6,204 - 12,000 = -5,796\n\n- $39: sold = 90\n  margin = 39-12=27\n  contribution = 27*90 = 2,430\n  profit = 2,430 - 12,000 = -9,570\n\nMaximum is $24 with $12,000 monthly profit.\n{\"choice\": \"24\", \"value\": 12000}"
+}

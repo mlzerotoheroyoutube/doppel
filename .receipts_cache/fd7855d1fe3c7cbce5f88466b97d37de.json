@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented otherside_rightangle using the Pythagorean theorem and added tests for it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the third side of a right angled triangle.\\\"\\\"\\\"\\n\\nimport math\\n\\n\\ndef otherside_rightangle(w, h):\\n    \\\"\\\"\\\"Write a function to find the third side of a right angled triangle.\\\"\\\"\\\"\\n    return math.sqrt(w ** 2 + h ** 2)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_otherside_rightangle_example():\\n    assert solution.otherside_rightangle(7, 8) == 10.63014581273465\\n\\n\\ndef test_otherside_rightangle_3_4_5():\\n    assert solution.otherside_rightangle(3, 4) == 5.0\\n\\n\\ndef test_otherside_rightangle_is_symmetric():\\n    assert solution.otherside_rightangle(8, 7) == solution.otherside_rightangle(7, 8)\\n\\n\\ndef test_otherside_rightangle_zero():\\n    assert solution.otherside_rightangle(0, 0) == 0.0\\n    assert solution.otherside_rightangle(0, 5) == 5.0\\n\"}}\n```"
+}

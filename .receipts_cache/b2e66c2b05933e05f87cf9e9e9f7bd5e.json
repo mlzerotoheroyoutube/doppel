@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented elementwise bitwise AND via zip in and_tuples and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to extract the elementwise and tuples from the given two tuples.\\\"\\\"\\\"\\n\\n\\ndef and_tuples(test_tup1, test_tup2):\\n    \\\"\\\"\\\"Write a function to extract the elementwise and tuples from the given two tuples.\\\"\\\"\\\"\\n    return tuple(a & b for a, b in zip(test_tup1, test_tup2))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_and_tuples_example():\\n    assert solution.and_tuples((10, 4, 6, 9), (5, 2, 3, 3)) == (0, 0, 2, 1)\\n\\n\\ndef test_and_tuples_returns_tuple():\\n    result = solution.and_tuples((7, 8), (3, 15))\\n    assert isinstance(result, tuple)\\n    assert result == (3, 8)\\n\\n\\ndef test_and_tuples_with_zeros_and_identical_values():\\n    assert solution.and_tuples((0, 0, 5), (5, 0, 5)) == (0, 0, 5)\\n    assert solution.and_tuples((1, 2, 3), (1, 2, 3)) == (1, 2, 3)\\n\\n\\ndef test_and_tuples_empty_and_single_element():\\n    assert solution.and_tuples((), ()) == ()\\n    assert solution.and_tuples((12,), (10,)) == (8,)\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented index_minimum to return the first element of the tuple with the smallest second element, handling empty input.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to extract the index minimum value record from the given tuples.\\\"\\\"\\\"\\n\\n\\ndef index_minimum(test_list):\\n    \\\"\\\"\\\"Write a function to extract the index minimum value record from the given tuples.\\\"\\\"\\\"\\n    if not test_list:\\n        return None\\n    return min(test_list, key=lambda record: record[1])[0]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_index_minimum_example():\\n    assert solution.index_minimum([('Rash', 143), ('Manjeet', 200), ('Varsha', 100)]) == 'Varsha'\\n\\n\\ndef test_index_minimum_single_record():\\n    assert solution.index_minimum([('Only', 42)]) == 'Only'\\n\\n\\ndef test_index_minimum_order_and_negative_values():\\n    assert solution.index_minimum([('A', 5), ('B', -3), ('C', 0)]) == 'B'\\n    assert solution.index_minimum([('C', 0), ('B', -3), ('A', 5)]) == 'B'\\n\\n\\ndef test_index_minimum_first_wins_on_tie():\\n    assert solution.index_minimum([('A', 10), ('B', 10), ('C', 20)]) == 'A'\\n\\n\\ndef test_index_minimum_empty_list():\\n    assert solution.index_minimum([]) is None\\n\"}}\n```"
+}

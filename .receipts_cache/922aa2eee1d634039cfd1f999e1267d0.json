@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement smallest_num using the built-in min and add tests for the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find smallest number in a list.\\\"\\\"\\\"\\n\\n\\ndef smallest_num(xs):\\n    \\\"\\\"\\\"Write a python function to find smallest number in a list.\\\"\\\"\\\"\\n    return min(xs)\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_smallest_num_example():\\n    assert solution.smallest_num([10, 20, 1, 45, 99]) == 1\\n\\n\\ndef test_smallest_num_single_element():\\n    assert solution.smallest_num([7]) == 7\\n\\n\\ndef test_smallest_num_negative_numbers():\\n    assert solution.smallest_num([3, -2, 5, 0]) == -2\\n\\n\\ndef test_smallest_num_floats_and_duplicates():\\n    assert solution.smallest_num([2.5, 1.5, 1.5, 4.0]) == 1.5\\n\\n\\ndef test_smallest_num_does_not_mutate_input():\\n    xs = [4, 2, 9]\\n    assert solution.smallest_num(xs) == 2\\n    assert xs == [4, 2, 9]\\n\\n\\ndef test_smallest_num_empty_list():\\n    with pytest.raises(ValueError):\\n        solution.smallest_num([])\\n\"}}\n```"
+}

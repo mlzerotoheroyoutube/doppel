@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement long_words to return, in original order, words whose length is strictly greater than n from either a sentence string or a list of words.\", \"files\": {\"solution.py\": \"'''Write a function to shortlist words that are longer than n from a given list of words.'''\\n\\nimport builtins\\n\\n\\ndef long_words(n, str):\\n    '''Write a function to shortlist words that are longer than n from a given list of words.'''\\n    if isinstance(str, builtins.str):\\n        words = str.split()\\n    else:\\n        words = str\\n    return [word for word in words if len(word) > n]\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented perimeter of a cylinder as the perimeter of its axial rectangular section, 2 * (diameter + height), and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the perimeter of a cylinder.\\\"\\\"\\\"\\n\\n\\ndef perimeter(diameter, height):\\n    \\\"\\\"\\\"Write a python function to find the perimeter of a cylinder.\\\"\\\"\\\"\\n    return 2 * (diameter + height)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_perimeter_example():\\n    assert solution.perimeter(2, 4) == 12\\n\\n\\ndef test_perimeter_other_values():\\n    assert solution.perimeter(0, 0) == 0\\n    assert solution.perimeter(3, 5) == 16\\n    assert solution.perimeter(1, 1) == 4\\n    assert solution.perimeter(1.5, 2.5) == 8.0\\n\"}}\n```"
+}

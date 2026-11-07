@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Re-check from today (t=0), ignoring sunk cost:\n\n- Sunk $900,000 is gone in both branches, so excluded from forward EV.\n- Probability: 0.5 success, 0.5 failure.\n\nOption stop:\nCost from today = $0\nSalvage inflow = $150,000\nEV_stop = 0 + 150,000 = $150,000\n\nOption continue:\nCost from today = -$500,000\nExpected inflow = 0.5*500,000 + 0.5*50,000\n= 250,000 + 25,000 = $275,000\nEV_continue = -500,000 + 275,000 = -$225,000\n\nComparison: $150,000 > -$225,000\nMaximizing choice is stop, value $150,000.\n{\"choice\": \"stop\", \"value\": 150000}"
+}

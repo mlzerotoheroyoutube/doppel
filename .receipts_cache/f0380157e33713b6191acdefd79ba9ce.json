@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented count(s, c) to return the number of occurrences of c in s and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count the occurrence of a given character in a string.\\\"\\\"\\\"\\n\\n\\ndef count(s, c):\\n    \\\"\\\"\\\"Write a python function to count the occurrence of a given character in a string.\\\"\\\"\\\"\\n    if not c:\\n        return 0\\n    return s.count(c)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_count_example():\\n    assert solution.count(\\\"abcc\\\", \\\"c\\\") == 2\\n\\n\\ndef test_count_no_occurrence():\\n    assert solution.count(\\\"abc\\\", \\\"z\\\") == 0\\n\\n\\ndef test_count_empty_string():\\n    assert solution.count(\\\"\\\", \\\"a\\\") == 0\\n\\n\\ndef test_count_all_same_character():\\n    assert solution.count(\\\"aaaa\\\", \\\"a\\\") == 4\\n\\n\\ndef test_count_case_sensitive():\\n    assert solution.count(\\\"aAaA\\\", \\\"a\\\") == 2\\n    assert solution.count(\\\"aAaA\\\", \\\"A\\\") == 2\\n\\n\\ndef test_count_first_and_last():\\n    assert solution.count(\\\"abca\\\", \\\"a\\\") == 2\\n\\n\\ndef test_count_empty_character():\\n    assert solution.count(\\\"abc\\\", \\\"\\\") == 0\\n\"}}\n```"
+}

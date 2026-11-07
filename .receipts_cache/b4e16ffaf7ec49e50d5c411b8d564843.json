@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Recomputed with monthly rate r = APR/12, n months, payment\nP = L*r/(1-(1+r)^-n), interest = P*n-L, cost = interest+fee.\n\nL=35000.\n\nLoan A: r=0.089/12=0.0074167, n=60\n(1+r)^60 ~1.55793\nP = 259.5833 / 0.35812 ~724.85\nPaid ~43490.74, interest ~8490.74, fee 0\nCost A ~8490.74\n\nLoan B: r=0.059/12=0.0049167, n=72\n(1+r)^72 ~1.42352\nP = 172.0833 / 0.29752 ~578.40\nPaid ~41644.83, interest ~6644.83, fee=1050\nCost B ~7694.83\n\nLoan C: r=0.079/12=0.0065833, n=36\n(1+r)^36 ~1.26646\nP = 230.4167 / 0.21040 ~1095.16\nPaid ~39425.72, interest ~4425.72, fee=350\nCost C ~4775.72\n\nLowest is Loan C.\n\n{\"choice\": \"C\", \"value\": 4775.72}"
+}

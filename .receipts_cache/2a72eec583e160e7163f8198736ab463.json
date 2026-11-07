@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = (Price - Unit Variable Cost) * Units Sold - Fixed Cost\nUnits Sold = min(Demand at Price, Capacity 2000)\n\nAll demands are < 2000, so Units Sold = Demand.\n\n- $19: Margin 19-6=13. 13 * 1055 = 13715. 13715 - 8000 = 5715\n- $24: Margin 24-6=18. 18 * 380 = 6840. 6840 - 8000 = -1160\n- $29: Margin 29-6=23. 23 * 1215 = 27945. 27945 - 8000 = 19945\n- $34: Margin 34-6=28. 28 * 239 = 6692. 6692 - 8000 = -1308\n- $39: Margin 39-6=33. 33 * 98 = 3234. 3234 - 8000 = -4766\n\nMaximum profit is at $29 with $19,945.\n{\"choice\": \"29\", \"value\": 19945}"
+}

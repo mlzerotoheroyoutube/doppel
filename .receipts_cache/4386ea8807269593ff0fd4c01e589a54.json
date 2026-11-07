@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented element-wise integer division of tuples using zip and added tests covering the example and related cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to perform mathematical division operation across the given tuples.\\\"\\\"\\\"\\n\\n\\ndef division_elements(test_tup1, test_tup2):\\n    \\\"\\\"\\\"Write a function to perform mathematical division operation across the given tuples.\\\"\\\"\\\"\\n    return tuple(ele1 // ele2 for ele1, ele2 in zip(test_tup1, test_tup2))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_division_elements_example():\\n    assert solution.division_elements((10, 4, 6, 9), (5, 2, 3, 3)) == (2, 2, 2, 3)\\n\\n\\ndef test_division_elements_elementwise():\\n    assert solution.division_elements((20, 15, 8), (4, 3, 2)) == (5, 5, 4)\\n    assert solution.division_elements((7, 5), (2, 2)) == (3, 2)\\n    assert solution.division_elements((0, 0), (1, 5)) == (0, 0)\\n\\n\\ndef test_division_elements_empty():\\n    assert solution.division_elements((), ()) == ()\\n\"}}\n```"
+}

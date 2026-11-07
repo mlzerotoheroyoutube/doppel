@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Re-checking from today, sunk cost is irrelevant:\n\n- Sunk $1,500,000 is gone in both options, exclude.\n- Continue: EV = 0.70 * $1,200,000 + 0.30 * $0 - $350,000 = $840,000 - $350,000 = $490,000\n- Stop: EV = $150,000 + $0 cost = $150,000\n\n$490,000 > $150,000, so continue is optimal.\n{\"choice\": \"continue\", \"value\": 490000}"
+}

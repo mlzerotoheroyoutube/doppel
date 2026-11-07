@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented chkList to return True when all elements equal the first (including empty/singleton lists, using equality so unhashable elements work) and added tests covering these cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to check whether the elements in a list are same or not.\\\"\\\"\\\"\\n\\n\\ndef chkList(lst):\\n    \\\"\\\"\\\"Write a python function to check whether the elements in a list are same or not.\\\"\\\"\\\"\\n    if not lst:\\n        return True\\n    first = lst[0]\\n    return all(element == first for element in lst)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import chkList\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_all_same_strings():\\n    assert chkList(['one', 'one', 'one']) == True\\n\\n\\ndef test_all_same_numbers():\\n    assert chkList([1, 1, 1, 1]) == True\\n\\n\\ndef test_different_elements():\\n    assert chkList(['one', 'two', 'one']) == False\\n    assert chkList([1, 1, 2]) == False\\n    assert chkList([1, 2, 1]) == False\\n\\n\\ndef test_empty_and_single_element():\\n    assert chkList([]) == True\\n    assert chkList(['only']) == True\\n    assert chkList([42]) == True\\n\\n\\ndef test_unhashable_elements():\\n    assert chkList([[1, 2], [1, 2]]) == True\\n    assert chkList([[1, 2], [2, 1]]) == False\\n\"}}\n```"
+}

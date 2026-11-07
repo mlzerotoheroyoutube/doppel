@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented inversion_elements using bitwise inversion (~x, i.e. -x-1) for each tuple element and added tests covering the example, empty, zero/negative, and double-inversion cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the inversions of tuple elements in the given tuple list.\\\"\\\"\\\"\\n\\n\\ndef inversion_elements(test_tup):\\n    \\\"\\\"\\\"Write a function to find the inversions of tuple elements in the given tuple list.\\\"\\\"\\\"\\n    return tuple(~element for element in test_tup)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_inversion_elements_example():\\n    assert solution.inversion_elements((7, 8, 9, 1, 10, 7)) == (-8, -9, -10, -2, -11, -8)\\n\\n\\ndef test_inversion_elements_empty():\\n    assert solution.inversion_elements(()) == ()\\n\\n\\ndef test_inversion_elements_zero_and_negatives():\\n    assert solution.inversion_elements((0, -1, -8, 5)) == (-1, 0, 7, -6)\\n\\n\\ndef test_inversion_elements_returns_tuple_and_double_inversion_restores_original():\\n    original = (3, -4, 0, 12)\\n    result = solution.inversion_elements(original)\\n    assert isinstance(result, tuple)\\n    assert solution.inversion_elements(result) == original\\n\"}}\n```"
+}

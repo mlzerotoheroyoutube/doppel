@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North calculation:\n- Taxable cash = $185,000 salary + 10% bonus = $185,000 + $18,500 = $203,500\n- After-tax cash at 25% = $203,500 * 0.75 = $152,625\n- Retirement match = 5% * $185,000 = $9,250, capped at $9,000 = $9,000\n- Equity vested by month 12 = $0 grant * 25% cliff = $0\n- Total North = $152,625 + $9,000 + $0 = $161,625\n\nSouth calculation:\n- Taxable cash = $155,000 salary + 0% bonus = $155,000\n- After-tax cash at 25% = $155,000 * 0.75 = $116,250\n- Retirement match = 5% * $155,000 = $7,750, capped at $6,000 = $6,000\n- Equity vested by month 12 = $0 grant = $0\n- Total South = $116,250 + $6,000 + $0 = $122,250\n\nNorth $161,625 > South $122,250.\n{\"choice\": \"North\", \"value\": 161625}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Recomputing both offers from scratch for first-year value = after-tax cash + match + vested equity:\n\n**North:**\n- Gross cash = 185,000 + 0%*185,000 = 185,000\n- After-tax cash = 185,000 * 0.75 = 138,750\n- Retirement match = min(0.03*185,000, 6,000) = min(5,550, 6,000) = 5,550\n- Equity vested by month 12 = 80,000 * 12/48 = 80,000 * 0.25 = 20,000\n- Total = 138,750 + 5,550 + 20,000 = 164,300\n\n**South:**\n- Gross cash = 170,000 + 10%*170,000 = 170,000 + 17,000 = 187,000\n- After-tax cash = 187,000 * 0.75 = 140,250\n- Retirement match = min(0.05*170,000, 6,000) = min(8,500, 6,000) = 6,000\n- Equity vested by month 12 = 0 * 12/48 = 0\n- Total = 140,250 + 6,000 + 0 = 146,250\n\n164,300 > 146,250, so North remains higher. No arithmetic slip found; prior calculation verifies.\n{\"choice\": \"North\", \"value\": 164300}"
+}

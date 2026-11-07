@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented volume_sphere using the formula 4/3 * pi * r^3 and added tests for the documented example and other radii.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the volume of a sphere.\\\"\\\"\\\"\\n\\nimport math\\n\\n\\ndef volume_sphere(r):\\n    \\\"\\\"\\\"Write a function to find the volume of a sphere.\\\"\\\"\\\"\\n    return 4 / 3 * math.pi * r ** 3\\n\", \"tests/test_solution.py\": \"import math\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_volume_sphere_example():\\n    assert solution.volume_sphere(10) == 4188.790204786391\\n\\n\\ndef test_volume_sphere_zero():\\n    assert solution.volume_sphere(0) == 0.0\\n\\n\\ndef test_volume_sphere_unit():\\n    assert math.isclose(solution.volume_sphere(1), 4.1887902047863905, rel_tol=1e-12)\\n\\n\\ndef test_volume_sphere_other_radius():\\n    assert math.isclose(solution.volume_sphere(3), 113.09733552923255, rel_tol=1e-12, abs_tol=1e-12)\\n\"}}\n```"
+}

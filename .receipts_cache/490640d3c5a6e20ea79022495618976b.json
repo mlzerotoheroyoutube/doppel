@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented distance_lat_long using the spherical law of cosines with an Earth radius of 6371.01, matching the documented example, and added tests covering that example and related cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate distance between two points using latitude and longitude.\\\"\\\"\\\"\\n\\nfrom math import acos, cos, sin\\n\\n\\ndef distance_lat_long(slat, slon, elat, elon):\\n    \\\"\\\"\\\"Write a function to calculate distance between two points using latitude and longitude.\\\"\\\"\\\"\\n    return 6371.01 * acos(sin(slat) * sin(elat) + cos(slat) * cos(elat) * cos(slon - elon))\\n\", \"tests/test_solution.py\": \"import math\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_distance_lat_long_example():\\n    assert solution.distance_lat_long(23.5, 67.5, 25.5, 69.5) == 12179.372041317429\\n\\n\\ndef test_distance_lat_long_same_point():\\n    assert solution.distance_lat_long(0, 0, 0, 0) == 0.0\\n\\n\\ndef test_distance_lat_long_one_radian():\\n    assert math.isclose(solution.distance_lat_long(0, 0, 0, 1), 6371.01, rel_tol=1e-12)\\n    assert math.isclose(solution.distance_lat_long(0, 0, 1, 0), 6371.01, rel_tol=1e-12)\\n\\n\\ndef test_distance_lat_long_symmetry():\\n    assert solution.distance_lat_long(23.5, 67.5, 25.5, 69.5) == solution.distance_lat_long(25.5, 69.5, 23.5, 67.5)\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented opposite_Signs to return True only when one integer is positive and the other is negative, and added tests for opposite, same-sign, and zero cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to check whether the given two integers have opposite sign or not.\\\"\\\"\\\"\\n\\n\\ndef opposite_Signs(x, y):\\n    \\\"\\\"\\\"Write a python function to check whether the given two integers have opposite sign or not.\\\"\\\"\\\"\\n    return (x > 0 and y < 0) or (x < 0 and y > 0)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_opposite_signs_example():\\n    assert solution.opposite_Signs(1, -2) == True\\n\\n\\ndef test_opposite_signs_reversed():\\n    assert solution.opposite_Signs(-1, 2) == True\\n\\n\\ndef test_same_sign_is_not_opposite():\\n    assert solution.opposite_Signs(1, 2) == False\\n    assert solution.opposite_Signs(-1, -2) == False\\n\\n\\ndef test_zero_is_not_opposite_to_any_sign():\\n    assert solution.opposite_Signs(0, 1) == False\\n    assert solution.opposite_Signs(0, -1) == False\\n    assert solution.opposite_Signs(1, 0) == False\\n    assert solution.opposite_Signs(-1, 0) == False\\n    assert solution.opposite_Signs(0, 0) == False\\n\"}}\n```"
+}

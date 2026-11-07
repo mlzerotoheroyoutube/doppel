@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Re-checking step-by-step:\n\nNorth:\n- Salary = $185,000.00, bonus = 15% of salary = 0.15 * 185,000 = 27,750\n- Taxable cash = 185,000 + 27,750 = 212,750\n- After-tax at 35%: 212,750 * (1-0.35) = 212,750 * 0.65 = 138,287.5\n- Match = 6% of salary = 0.06 * 185,000 = 11,100, capped at 20,000 => 11,100, not taxed\n- Equity grant = $0.00, 4 years monthly = 48 months, vested by month 12 = 12/48 = 25% => 0.00 * 0.25 = 0\n- Total North = 138,287.5 + 11,100 + 0 = 149,387.5\n\nSouth:\n- Salary = $170,000.00, bonus = 0% of salary = 0\n- Taxable cash = 170,000\n- After-tax at 35%: 170,000 * 0.65 = 110,500\n- Match = 5% of salary = 0.05 * 170,000 = 8,500, capped at 6,000 => 6,000, not taxed\n- Equity grant = $0.00, 4 years with 1-year cliff = 25% at month 12 => 0.00 * 0.25 = 0\n- Total South = 110,500 + 6,000 + 0 = 116,500\n\n149,387.5 > 116,500, so North is higher.\n{\"choice\": \"North\", \"value\": 149387.5}"
+}

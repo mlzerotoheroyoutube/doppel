@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented closest_num to return the immediate predecessor N - 1 and added tests covering the example and other integer cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the closest smaller number than n.\\\"\\\"\\\"\\n\\n\\ndef closest_num(N):\\n    \\\"\\\"\\\"Write a function to find the closest smaller number than n.\\\"\\\"\\\"\\n    return N - 1\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_closest_num_example():\\n    assert solution.closest_num(11) == 10\\n\\n\\ndef test_closest_num_various_integers():\\n    assert solution.closest_num(10) == 9\\n    assert solution.closest_num(2) == 1\\n    assert solution.closest_num(1) == 0\\n    assert solution.closest_num(0) == -1\\n    assert solution.closest_num(-1) == -2\\n    assert solution.closest_num(100) == 99\\n    assert solution.closest_num(-100) == -101\\n    assert solution.closest_num(1000000) == 999999\\n\\n\\ndef test_closest_num_result_is_smaller():\\n    for n in (11, 5, 0, -3, 42):\\n        result = solution.closest_num(n)\\n        assert result < n\\n        assert result + 1 == n\\n\"}}\n```"
+}

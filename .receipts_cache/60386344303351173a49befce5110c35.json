@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented position_max to return all indices of the maximum value and added tests covering duplicates, single, negative, and empty inputs.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find all index positions of the maximum values in a given list.\\\"\\\"\\\"\\n\\n\\ndef position_max(list1):\\n    \\\"\\\"\\\"Write a function to find all index positions of the maximum values in a given list.\\\"\\\"\\\"\\n    if not list1:\\n        return []\\n    max_value = max(list1)\\n    return [index for index, value in enumerate(list1) if value == max_value]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_position_max_example():\\n    assert solution.position_max([12, 33, 23, 10, 67, 89, 45, 667, 23, 12, 11, 10, 54]) == [7]\\n\\n\\ndef test_position_max_multiple_maxima():\\n    assert solution.position_max([5, 1, 5, 2, 5]) == [0, 2, 4]\\n\\n\\ndef test_position_max_single_element():\\n    assert solution.position_max([42]) == [0]\\n\\n\\ndef test_position_max_all_equal():\\n    assert solution.position_max([3, 3, 3]) == [0, 1, 2]\\n\\n\\ndef test_position_max_negative_numbers():\\n    assert solution.position_max([-5, -1, -9, -1]) == [1, 3]\\n\\n\\ndef test_position_max_empty_list():\\n    assert solution.position_max([]) == []\\n\"}}\n```"
+}

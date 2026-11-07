@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented power(a, b) using exponentiation and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the value of 'a' to the power 'b'.\\\"\\\"\\\"\\n\\n\\ndef power(a, b):\\n    \\\"\\\"\\\"Write a function to calculate the value of 'a' to the power 'b'.\\\"\\\"\\\"\\n    return a ** b\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_power_example():\\n    assert solution.power(3, 4) == 81\\n\\n\\ndef test_power_zero_exponent():\\n    assert solution.power(5, 0) == 1\\n    assert solution.power(0, 0) == 1\\n\\n\\ndef test_power_one_exponent_and_base():\\n    assert solution.power(7, 1) == 7\\n    assert solution.power(1, 100) == 1\\n\\n\\ndef test_power_negative_exponent():\\n    assert solution.power(2, -2) == 0.25\\n    assert solution.power(4, -1) == 0.25\\n\\n\\ndef test_power_negative_base():\\n    assert solution.power(-2, 3) == -8\\n    assert solution.power(-2, 2) == 4\\n\\n\\ndef test_power_zero_base():\\n    assert solution.power(0, 5) == 0\\n\\n\\ndef test_power_float():\\n    assert solution.power(9, 0.5) == 3.0\\n    assert solution.power(2.5, 2) == 6.25\\n    assert solution.power(2, 0.5) == 2 ** 0.5\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Mid-market USD value of 95,000 EUR:\n95,000 * 1.09 = 103,550 USD\n\nBank:\nrate = 1.09 * 1.015 = 1.10635\nEUR to buy = 95,000 + 25 = 95,025\nUSD = 95,025 * 1.10635 = 105,130.91\n\nPlatform:\nrate = 1.09 * 1.002 = 1.09218\nUSD before fee = 95,000 * 1.09218 = 103,757.10\nfee = 0.35% => total = 103,757.10 * 1.0035 = 104,120.25\n\nUSD to supplier:\nrate = 1.09 * 1.02 = 1.1118\nUSD before discount = 95,000 * 1.1118 = 105,621.00\ndiscount 2% => total = 105,621.00 * 0.98 = 103,508.58\n\nLowest is usd.\n{\"choice\": \"usd\", \"value\": 103508.58}"
+}

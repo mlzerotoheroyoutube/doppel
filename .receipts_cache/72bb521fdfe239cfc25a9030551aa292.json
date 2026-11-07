@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented square_perimeter as 4*a and added tests covering the example and other cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the perimeter of a square.\\\"\\\"\\\"\\n\\n\\ndef square_perimeter(a):\\n    \\\"\\\"\\\"Write a function to find the perimeter of a square.\\\"\\\"\\\"\\n    return 4 * a\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_square_perimeter_example():\\n    assert solution.square_perimeter(10) == 40\\n\\n\\ndef test_square_perimeter_zero():\\n    assert solution.square_perimeter(0) == 0\\n\\n\\ndef test_square_perimeter_other_values():\\n    assert solution.square_perimeter(1) == 4\\n    assert solution.square_perimeter(5) == 20\\n    assert solution.square_perimeter(2.5) == 10.0\\n\"}}\n```"
+}

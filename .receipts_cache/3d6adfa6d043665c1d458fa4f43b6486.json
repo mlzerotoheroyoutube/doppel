@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented median_numbers by returning the middle of the three sorted values as a float, with tests covering orderings, duplicates, negatives, and floats.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the median of three specific numbers.\\\"\\\"\\\"\\n\\n\\ndef median_numbers(a, b, c):\\n    \\\"\\\"\\\"Write a function to find the median of three specific numbers.\\\"\\\"\\\"\\n    return float(sorted((a, b, c))[1])\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import median_numbers\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert median_numbers(25, 55, 65) == 55.0\\n\\n\\ndef test_median_any_order():\\n    for args in [\\n        (25, 55, 65),\\n        (25, 65, 55),\\n        (55, 25, 65),\\n        (55, 65, 25),\\n        (65, 25, 55),\\n        (65, 55, 25),\\n    ]:\\n        assert median_numbers(*args) == 55.0\\n\\n\\ndef test_median_duplicates():\\n    assert median_numbers(1, 1, 2) == 1.0\\n    assert median_numbers(2, 1, 1) == 1.0\\n    assert median_numbers(5, 5, 5) == 5.0\\n\\n\\ndef test_median_negative_and_float():\\n    assert median_numbers(-10, 0, 10) == 0.0\\n    assert median_numbers(0, -10, 10) == 0.0\\n    assert median_numbers(1.5, 2.5, 9.0) == 2.5\\n    assert median_numbers(-3.5, -1.5, -2.5) == -2.5\\n\"}}\n```"
+}

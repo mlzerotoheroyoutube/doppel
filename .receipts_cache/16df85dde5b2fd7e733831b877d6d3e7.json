@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented ascii_value using ord() and added tests covering the example and other characters.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the ascii value of a character.\\\"\\\"\\\"\\n\\n\\ndef ascii_value(k):\\n    \\\"\\\"\\\"Write a function to find the ascii value of a character.\\\"\\\"\\\"\\n    return ord(k)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import ascii_value\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_ascii_value_example():\\n    assert ascii_value('A') == 65\\n\\n\\ndef test_ascii_value_various_characters():\\n    assert ascii_value('a') == 97\\n    assert ascii_value('Z') == 90\\n    assert ascii_value('z') == 122\\n    assert ascii_value('0') == 48\\n    assert ascii_value(' ') == 32\\n    assert ascii_value('!') == 33\\n    assert ascii_value('\\\\n') == 10\\n\"}}\n```"
+}

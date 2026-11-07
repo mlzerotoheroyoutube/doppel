@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented find_Volume as (l * b * h) / 2 and added tests covering the example and additional cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the volume of a triangular prism.\\\"\\\"\\\"\\n\\n\\ndef find_Volume(l, b, h):\\n    \\\"\\\"\\\"Write a python function to find the volume of a triangular prism.\\\"\\\"\\\"\\n    return (l * b * h) / 2\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_volume_example():\\n    assert solution.find_Volume(10, 8, 6) == 240\\n\\n\\ndef test_find_volume_other_values():\\n    assert solution.find_Volume(2, 3, 4) == 12\\n    assert solution.find_Volume(5, 4, 3) == 30\\n    assert solution.find_Volume(1, 1, 1) == 0.5\\n\\n\\ndef test_find_volume_zero_and_float():\\n    assert solution.find_Volume(0, 8, 6) == 0\\n    assert solution.find_Volume(10, 0, 6) == 0\\n    assert solution.find_Volume(2.5, 4, 2) == 10.0\\n\"}}\n```"
+}

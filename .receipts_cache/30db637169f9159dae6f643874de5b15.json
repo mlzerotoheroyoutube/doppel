@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented group_keyvalue by grouping values into lists per key in input order, and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to group a sequence of key-value pairs into a dictionary of lists.\\\"\\\"\\\"\\n\\n\\ndef group_keyvalue(l):\\n    \\\"\\\"\\\"Write a function to group a sequence of key-value pairs into a dictionary of lists.\\\"\\\"\\\"\\n    grouped = {}\\n    for key, value in l:\\n        grouped.setdefault(key, []).append(value)\\n    return grouped\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_group_keyvalue_example():\\n    assert solution.group_keyvalue([('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]) == {'yellow': [1, 3], 'blue': [2, 4], 'red': [1]}\\n\\n\\ndef test_group_keyvalue_empty():\\n    assert solution.group_keyvalue([]) == {}\\n\\n\\ndef test_group_keyvalue_single_pair():\\n    assert solution.group_keyvalue([('a', 1)]) == {'a': [1]}\\n\\n\\ndef test_group_keyvalue_preserves_value_order():\\n    assert solution.group_keyvalue([('x', 3), ('x', 1), ('x', 2)]) == {'x': [3, 1, 2]}\\n\\n\\ndef test_group_keyvalue_non_string_keys_and_varied_values():\\n    assert solution.group_keyvalue([(1, 'a'), (2, 'b'), (1, 'c'), (None, 0)]) == {1: ['a', 'c'], 2: ['b'], None: [0]}\\n\"}}\n```"
+}

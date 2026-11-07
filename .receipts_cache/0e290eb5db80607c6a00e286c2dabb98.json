@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Principal P = 20000.\n\nMonthly rate r = APR/12, months n.\nPayment PMT = P*r / (1-(1+r)^-n)\nTotal paid = PMT*n\nInterest = PMT*n - P\nBorrowing cost = Interest + fee, fee = pct*P upfront.\n\nLoan A: 7.9% APR, 6 yr\nr = 0.079/12 = 0.0065833333, n=72\nln(1+r) = 0.0065617578, *72 = 0.47244656\n(1+r)^72 = 1.60391347\n(1+r)^-72 = 0.62347480\n1-(1+r)^-72 = 0.37652520\nP*r = 131.6666667\nPMT = 131.6666667 / 0.37652520 = 349.68907\nTotal = 349.68907*72 = 25177.61303\nInterest = 5177.61303, fee = 0\nCost A = 5177.61\n\nLoan B: 7.9% APR, 5 yr\nr = 0.0065833333, n=60\nln(1+r)*60 = 0.39370547\n(1+r)^60 = 1.48246385\n(1+r)^-60 = 0.67455312\n1-(1+r)^-60 = 0.32544688\nPMT = 131.6666667 / 0.32544688 = 404.57139\nTotal = 404.57139*60 = 24274.28365\nInterest = 4274.28365, fee = 0.01*20000 = 200\nCost B = 4474.28365 = 4474.28\n\nLoan C: 4.9% APR, 3 yr\nr = 0.049/12 = 0.0040833333, n=36\nln(1+r) = 0.00407501915, *36 = 0.14670069\n(1+r)^36 = 1.15800731\n(1+r)^-36 = 0.86355199\n1-(1+r)^-36 = 0.13644801\nP*r = 81.6666667\nPMT = 81.6666667 / 0.13644801 = 598.52040\nTotal = 598.52040*36 = 21546.73442\nInterest = 1546.73442, fee = 0.02*20000 = 400\nCost C = 1946.73442 = 1946.73\n\nCompare: A 5177.61, B 4474.28, C 1946.73.\nLowest is Loan C.\n\n{\"choice\": \"C\", \"value\": 1946.73}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented add_lists by concatenating the tuple with the list converted to a tuple, and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to add the given list to the given tuples.\\\"\\\"\\\"\\n\\n\\ndef add_lists(test_list, test_tup):\\n    \\\"\\\"\\\"Write a function to add the given list to the given tuples.\\\"\\\"\\\"\\n    return test_tup + tuple(test_list)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import add_lists\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_add_lists_example():\\n    assert add_lists([5, 6, 7], (9, 10)) == (9, 10, 5, 6, 7)\\n\\n\\ndef test_add_lists_empty_list():\\n    assert add_lists([], (9, 10)) == (9, 10)\\n\\n\\ndef test_add_lists_empty_tuple():\\n    assert add_lists([5, 6, 7], ()) == (5, 6, 7)\\n\\n\\ndef test_add_lists_both_empty():\\n    assert add_lists([], ()) == ()\\n\\n\\ndef test_add_lists_returns_tuple_and_does_not_mutate_inputs():\\n    test_list = [1, 2]\\n    test_tup = (3, 4)\\n    result = add_lists(test_list, test_tup)\\n    assert result == (3, 4, 1, 2)\\n    assert isinstance(result, tuple)\\n    assert test_list == [1, 2]\\n    assert test_tup == (3, 4)\\n\"}}\n```"
+}

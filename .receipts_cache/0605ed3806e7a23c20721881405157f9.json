@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented tetrahedral_number using n(n+1)(n+2)/6 and added tests for known values.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the nth tetrahedral number.\\\"\\\"\\\"\\n\\n\\ndef tetrahedral_number(n):\\n    \\\"\\\"\\\"Write a function to find the nth tetrahedral number.\\\"\\\"\\\"\\n    return n * (n + 1) * (n + 2) / 6\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_tetrahedral_number_example():\\n    assert solution.tetrahedral_number(5) == 35.0\\n\\n\\ndef test_tetrahedral_number_known_values():\\n    expected = {\\n        0: 0.0,\\n        1: 1.0,\\n        2: 4.0,\\n        3: 10.0,\\n        4: 20.0,\\n        5: 35.0,\\n        6: 56.0,\\n        7: 84.0,\\n        8: 120.0,\\n        10: 220.0,\\n    }\\n    for n, value in expected.items():\\n        assert solution.tetrahedral_number(n) == value\\n\"}}\n```"
+}

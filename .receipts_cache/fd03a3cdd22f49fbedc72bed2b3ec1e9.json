@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Re-check from today - sunk $1,500,000 is irrelevant:\n\n1. Stop now:\nEV = $150,000 sale, no new cost = $150,000\n\n2. Continue:\nCost to finish = $350,000\nExpected gross = 0.30 * $1,200,000 + 0.70 * $100,000\n= $360,000 + $70,000 = $430,000\nExpected net from today = $430,000 - $350,000 = $80,000\n\n$150,000 > $80,000, so stop maximizes expected value from today.\n{\"choice\": \"stop\", \"value\": 150000}"
+}

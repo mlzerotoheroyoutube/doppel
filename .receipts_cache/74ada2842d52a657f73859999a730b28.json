@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented multiple_split using re.split on newline and asterisk delimiters, and added tests for the documented behavior.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to split the given string with multiple delimiters by using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef multiple_split(text):\\n    \\\"\\\"\\\"Write a function to split the given string with multiple delimiters by using regex.\\\"\\\"\\\"\\n    return re.split(r\\\"[\\\\n*]\\\", text)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_multiple_split_example():\\n    assert solution.multiple_split('Forces of the \\\\ndarkness*are coming into the play.') == ['Forces of the ', 'darkness', 'are coming into the play.']\\n\\n\\ndef test_multiple_split_uses_both_delimiters():\\n    assert solution.multiple_split('one*two\\\\nthree*four') == ['one', 'two', 'three', 'four']\\n\\n\\ndef test_multiple_split_single_delimiter_kinds():\\n    assert solution.multiple_split('one*two') == ['one', 'two']\\n    assert solution.multiple_split('one\\\\ntwo') == ['one', 'two']\\n\\n\\ndef test_multiple_split_without_delimiters():\\n    assert solution.multiple_split('are coming into the play.') == ['are coming into the play.']\\n    assert solution.multiple_split('') == ['']\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented `remove` to strip all digits from each string in the list and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to remove all digits from a list of strings.\\\"\\\"\\\"\\n\\n\\ndef remove(list):\\n    \\\"\\\"\\\"Write a python function to remove all digits from a list of strings.\\\"\\\"\\\"\\n    return [\\\"\\\".join(char for char in string if not char.isdigit()) for string in list]\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import remove\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert remove(['4words', '3letters', '4digits']) == ['words', 'letters', 'digits']\\n\\n\\ndef test_digits_anywhere_in_string():\\n    assert remove(['a1b2c3', '1abc', 'abc9', '0a1b2']) == ['abc', 'abc', 'abc', 'ab']\\n\\n\\ndef test_all_digits_removed():\\n    assert remove(['0123456789']) == ['']\\n\\n\\ndef test_strings_without_digits_unchanged():\\n    assert remove(['words', 'letters', '']) == ['words', 'letters', '']\\n\\n\\ndef test_empty_list():\\n    assert remove([]) == []\\n\\n\\ndef test_does_not_mutate_input():\\n    original = ['a1', 'b2']\\n    result = remove(original)\\n    assert original == ['a1', 'b2']\\n    assert result == ['a', 'b']\\n    assert result is not original\\n\"}}\n```"
+}

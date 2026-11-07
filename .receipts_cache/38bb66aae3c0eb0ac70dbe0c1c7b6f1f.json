@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented check_tuplex using the `in` operator and added tests covering present, absent, numeric, and empty-tuple cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to check whether an element exists within a tuple.\\\"\\\"\\\"\\n\\n\\ndef check_tuplex(tuplex, tuple1):\\n    \\\"\\\"\\\"Write a function to check whether an element exists within a tuple.\\\"\\\"\\\"\\n    return tuple1 in tuplex\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import check_tuplex\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_check_tuplex_example():\\n    assert check_tuplex((\\\"w\\\", 3, \\\"r\\\", \\\"e\\\", \\\"s\\\", \\\"o\\\", \\\"u\\\", \\\"r\\\", \\\"c\\\", \\\"e\\\"), 'r') == True\\n\\n\\ndef test_check_tuplex_absent_element():\\n    assert check_tuplex((\\\"w\\\", 3, \\\"r\\\", \\\"e\\\", \\\"s\\\"), 'x') is False\\n\\n\\ndef test_check_tuplex_numeric_element():\\n    assert check_tuplex((\\\"w\\\", 3, \\\"r\\\"), 3) is True\\n    assert check_tuplex((\\\"w\\\", 3, \\\"r\\\"), 4) is False\\n\\n\\ndef test_check_tuplex_empty_tuple():\\n    assert check_tuplex((), 'r') is False\\n\\n\\ndef test_check_tuplex_first_and_last():\\n    assert check_tuplex((1, 2, 3), 1) is True\\n    assert check_tuplex((1, 2, 3), 3) is True\\n\"}}\n```"
+}
