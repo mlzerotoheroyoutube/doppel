@@ -535,7 +535,8 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
     @chat.on_message(ChatMessage)
     async def on_chat(ctx: Context, sender: str, msg: ChatMessage):
         await ctx.send(sender, ChatAcknowledgement(timestamp=datetime.now(timezone.utc), acknowledged_msg_id=msg.msg_id))
-        text = msg.text()
+        # ASI:One includes the @mention in the text ("@agent1q… link …"); drop leading mentions.
+        text = re.sub(r"^(\s*@[\w.:-]+[\s,:]*)+", "", msg.text()).strip()
         if text.strip():
             await handle(ctx, sender, text)
 
