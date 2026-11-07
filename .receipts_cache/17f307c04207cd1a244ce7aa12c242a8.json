@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "baseline",
+ "effort": "high",
+ "text": "{\"decision\": \"BLOCK\", \"reason\": \"It floors the percent discount per line instead of taking the percent off the whole subtotal, undercounting by cents due to repeated truncation.\"}"
+}

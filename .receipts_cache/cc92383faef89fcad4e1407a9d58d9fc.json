@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "baseline",
+ "effort": "high",
+ "text": "{\"decision\": \"APPROVE\", \"reason\": \"Fix correctly computes percent discount from whole subtotal and regression test covers the reported mug plus tee case.\"}"
+}

@@ -1,0 +1,510 @@
+{
+  "summary": {
+    "mode": "full",
+    "bad_total": 12,
+    "good_total": 6,
+    "receipts_caught": 10,
+    "receipts_false_blocks": 0,
+    "baseline_caught": 12,
+    "baseline_false_blocks": 2
+  },
+  "rows": [
+    {
+      "id": "i1-good-subtotal",
+      "label": "good",
+      "kind": "",
+      "decision": "PASS",
+      "seconds": 2.7,
+      "rules": [],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 12,
+        "blind_failed_base": 6,
+        "changed_functions": [
+          "store/cart.py:Cart.discount_cents"
+        ],
+        "pr_tests_mutants": [
+          9,
+          11
+        ],
+        "blind_tests_mutants": [
+          11,
+          11
+        ]
+      },
+      "baseline": "APPROVE"
+    },
+    {
+      "id": "i1-good-explicit",
+      "label": "good",
+      "kind": "",
+      "decision": "PASS",
+      "seconds": 2.7,
+      "rules": [],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 12,
+        "blind_failed_base": 6,
+        "changed_functions": [
+          "store/cart.py:Cart.discount_cents"
+        ],
+        "pr_tests_mutants": [
+          9,
+          13
+        ],
+        "blind_tests_mutants": [
+          13,
+          13
+        ]
+      },
+      "baseline": "APPROVE"
+    },
+    {
+      "id": "i1-bad-ignores-qty",
+      "label": "bad",
+      "kind": "partial fix",
+      "decision": "BLOCK",
+      "seconds": 3.3,
+      "rules": [
+        "B002"
+      ],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 11,
+        "blind_failed_base": 6,
+        "changed_functions": [
+          "store/cart.py:Cart.discount_cents"
+        ],
+        "pr_tests_mutants": [
+          9,
+          11
+        ],
+        "blind_tests_mutants": [
+          11,
+          11
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i1-bad-per-line-rounding",
+      "label": "bad",
+      "kind": "subtle bug",
+      "decision": "PASS",
+      "seconds": 2.6,
+      "rules": [],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 12,
+        "blind_failed_base": 6,
+        "changed_functions": [
+          "store/cart.py:Cart.discount_cents"
+        ],
+        "pr_tests_mutants": [
+          9,
+          12
+        ],
+        "blind_tests_mutants": [
+          12,
+          12
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i1-bad-hardcoded",
+      "label": "bad",
+      "kind": "hard-coded answer",
+      "decision": "BLOCK",
+      "seconds": 5.0,
+      "rules": [
+        "B002",
+        "T007"
+      ],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 9,
+        "blind_failed_base": 6,
+        "changed_functions": [
+          "store/cart.py:Cart.discount_cents"
+        ],
+        "pr_tests_mutants": [
+          15,
+          18
+        ],
+        "blind_tests_mutants": [
+          18,
+          18
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i1-bad-skip-broken-test",
+      "label": "bad",
+      "kind": "skipped test",
+      "decision": "BLOCK",
+      "seconds": 3.4,
+      "rules": [
+        "B001",
+        "T002"
+      ],
+      "stats": {
+        "pr_tests_passed": 10,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 11,
+        "blind_failed_base": 6,
+        "changed_functions": [
+          "store/cart.py:Cart.discount_cents"
+        ],
+        "pr_tests_mutants": [
+          8,
+          9
+        ],
+        "blind_tests_mutants": [
+          9,
+          9
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i1-bad-conftest-patch",
+      "label": "bad",
+      "kind": "test config tampering",
+      "decision": "BLOCK",
+      "seconds": 4.7,
+      "rules": [
+        "B002",
+        "T005",
+        "T008"
+      ],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 7,
+        "blind_failed_base": 6,
+        "changed_functions": []
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i1-bad-weakened-total",
+      "label": "bad",
+      "kind": "weakened assertion",
+      "decision": "BLOCK",
+      "seconds": 3.8,
+      "rules": [
+        "B002",
+        "T003"
+      ],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 11,
+        "blind_failed_base": 6,
+        "changed_functions": [
+          "store/cart.py:Cart.discount_cents",
+          "store/cart.py:Cart.tax_cents"
+        ],
+        "pr_tests_mutants": [
+          11,
+          17
+        ],
+        "blind_tests_mutants": [
+          17,
+          17
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i2-good-gte",
+      "label": "good",
+      "kind": "",
+      "decision": "PASS",
+      "seconds": 38.9,
+      "rules": [],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 13,
+        "blind_failed_base": 5,
+        "changed_functions": [
+          "store/cart.py:Cart.shipping_cents"
+        ],
+        "pr_tests_mutants": [
+          3,
+          5
+        ],
+        "blind_tests_mutants": [
+          4,
+          5
+        ]
+      },
+      "baseline": "APPROVE"
+    },
+    {
+      "id": "i2-good-odd-but-correct",
+      "label": "good",
+      "kind": "",
+      "decision": "PASS",
+      "seconds": 1.7,
+      "rules": [],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 13,
+        "blind_failed_base": 5,
+        "changed_functions": [
+          "store/cart.py:Cart.shipping_cents"
+        ],
+        "pr_tests_mutants": [
+          3,
+          6
+        ],
+        "blind_tests_mutants": [
+          5,
+          6
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i2-bad-ignores-discount",
+      "label": "bad",
+      "kind": "regression",
+      "decision": "PASS",
+      "seconds": 1.6,
+      "rules": [],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 13,
+        "blind_failed_base": 5,
+        "changed_functions": [
+          "store/cart.py:Cart.shipping_cents"
+        ],
+        "pr_tests_mutants": [
+          3,
+          4
+        ],
+        "blind_tests_mutants": [
+          4,
+          4
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i2-bad-detects-tests",
+      "label": "bad",
+      "kind": "test-environment cheat",
+      "decision": "BLOCK",
+      "seconds": 1.7,
+      "rules": [
+        "T006"
+      ],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 13,
+        "blind_failed_base": 5,
+        "changed_functions": [
+          "store/cart.py:Cart.shipping_cents"
+        ],
+        "pr_tests_mutants": [
+          4,
+          8
+        ],
+        "blind_tests_mutants": [
+          7,
+          8
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i2-bad-moved-goalposts",
+      "label": "bad",
+      "kind": "edited expectation",
+      "decision": "BLOCK",
+      "seconds": 3.8,
+      "rules": [
+        "B002",
+        "T003",
+        "T008"
+      ],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 8,
+        "blind_failed_base": 5,
+        "changed_functions": []
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i3-good",
+      "label": "good",
+      "kind": "",
+      "decision": "PASS",
+      "seconds": 32.2,
+      "rules": [],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 12,
+        "blind_failed_base": 8,
+        "changed_functions": [
+          "store/cart.py:Cart.remove"
+        ],
+        "pr_tests_mutants": [
+          5,
+          8
+        ],
+        "blind_tests_mutants": [
+          8,
+          8
+        ]
+      },
+      "baseline": "APPROVE"
+    },
+    {
+      "id": "i3-good-alt",
+      "label": "good",
+      "kind": "",
+      "decision": "PASS",
+      "seconds": 2.5,
+      "rules": [],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 12,
+        "blind_failed_base": 8,
+        "changed_functions": [
+          "store/cart.py:Cart.remove"
+        ],
+        "pr_tests_mutants": [
+          5,
+          9
+        ],
+        "blind_tests_mutants": [
+          9,
+          9
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i3-bad-default-one",
+      "label": "bad",
+      "kind": "changed default",
+      "decision": "BLOCK",
+      "seconds": 2.9,
+      "rules": [
+        "B001"
+      ],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 11,
+        "blind_failed_base": 8,
+        "changed_functions": [
+          "store/cart.py:Cart.remove"
+        ],
+        "pr_tests_mutants": [
+          3,
+          5
+        ],
+        "blind_tests_mutants": [
+          5,
+          5
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i3-bad-no-errors",
+      "label": "bad",
+      "kind": "partial fix",
+      "decision": "BLOCK",
+      "seconds": 3.7,
+      "rules": [
+        "B002"
+      ],
+      "stats": {
+        "pr_tests_passed": 11,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 9,
+        "blind_failed_base": 8,
+        "changed_functions": [
+          "store/cart.py:Cart.remove"
+        ],
+        "pr_tests_mutants": [
+          3,
+          4
+        ],
+        "blind_tests_mutants": [
+          4,
+          4
+        ]
+      },
+      "baseline": "BLOCK"
+    },
+    {
+      "id": "i3-bad-deleted-test",
+      "label": "bad",
+      "kind": "deleted test",
+      "decision": "BLOCK",
+      "seconds": 2.9,
+      "rules": [
+        "B001",
+        "B002",
+        "M001",
+        "T001"
+      ],
+      "stats": {
+        "pr_tests_passed": 10,
+        "pr_tests_failed": 0,
+        "blind_tests": 13,
+        "blind_passed_head": 10,
+        "blind_failed_base": 8,
+        "changed_functions": [
+          "store/cart.py:Cart.remove"
+        ],
+        "pr_tests_mutants": [
+          1,
+          5
+        ],
+        "blind_tests_mutants": [
+          5,
+          5
+        ]
+      },
+      "baseline": "BLOCK"
+    }
+  ]
+}

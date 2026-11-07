@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "baseline",
+ "effort": "high",
+ "text": "{\"decision\": \"BLOCK\", \"reason\": \"It changes remove with no qty from a silent no-op for missing SKUs to raising KeyError, breaking backward compatibility.\"}"
+}

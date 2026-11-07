@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "baseline",
+ "effort": "high",
+ "text": "{\"decision\": \"BLOCK\", \"reason\": \"It fails the spec by silently handling unknown SKUs and qty exceeding the line quantity instead of raising KeyError.\"}"
+}

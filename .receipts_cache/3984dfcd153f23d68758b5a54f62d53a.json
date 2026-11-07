@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "baseline",
+ "effort": "high",
+ "text": "{\"decision\": \"BLOCK\", \"reason\": \"The new test enshrines the reported bug by requiring $5.99 shipping on a $50 order instead of fixing it to be free.\"}"
+}

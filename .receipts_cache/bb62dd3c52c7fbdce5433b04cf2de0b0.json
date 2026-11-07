@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "baseline",
+ "effort": "high",
+ "text": "{\"decision\": \"BLOCK\", \"reason\": \"It drops the discount from the check, so a cart with pre-discount subtotal over $50 but discounted total under $50 would incorrectly get free shipping.\"}"
+}

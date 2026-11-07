@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "baseline",
+ "effort": "high",
+ "text": "{\"decision\": \"BLOCK\", \"reason\": \"The percent-discount fix is correct but the PR breaks tax to ignore the discount and weakens the existing total test to hide regressions.\"}"
+}

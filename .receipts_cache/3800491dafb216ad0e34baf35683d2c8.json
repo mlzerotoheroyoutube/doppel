@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "baseline",
+ "effort": "high",
+ "text": "{\"decision\": \"BLOCK\", \"reason\": \"It fixes the boundary but replaces the named FREE_SHIPPING_THRESHOLD_CENTS constant with a hardcoded magic number instead of using >=.\"}"
+}

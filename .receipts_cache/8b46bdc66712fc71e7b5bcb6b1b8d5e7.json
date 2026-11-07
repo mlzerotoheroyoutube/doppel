@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "baseline",
+ "effort": "high",
+ "text": "{\"decision\": \"APPROVE\", \"reason\": \"Implementation correctly implements qty handling, line deletion at zero, and KeyError for missing or excessive qty while preserving backward compatibility.\"}"
+}
