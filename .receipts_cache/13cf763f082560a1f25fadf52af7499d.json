@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented text_match_one using regex ab+ to return Found/Not matched.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function that matches a string that has an a followed by one or more b's.\\\"\\\"\\\"\\nimport re\\n\\ndef text_match_one(text):\\n    \\\"\\\"\\\"Write a function that matches a string that has an a followed by one or more b's.\\\"\\\"\\\"\\n    pattern = 'ab+'\\n    if re.search(pattern, text):\\n        return 'Found a match!'\\n    else:\\n        return 'Not matched!'\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_text_match_one_issue_example():\\n    assert solution.text_match_one(\\\"ac\\\") == 'Not matched!'\\n\\n\\ndef test_text_match_one_single_b():\\n    assert solution.text_match_one(\\\"ab\\\") == 'Found a match!'\\n\\n\\ndef test_text_match_one_multiple_bs():\\n    assert solution.text_match_one(\\\"abb\\\") == 'Found a match!'\\n    assert solution.text_match_one(\\\"abbb\\\") == 'Found a match!'\\n\\n\\ndef test_text_match_one_no_match():\\n    assert solution.text_match_one(\\\"a\\\") == 'Not matched!'\\n    assert solution.text_match_one(\\\"b\\\") == 'Not matched!'\\n    assert solution.text_match_one(\\\"\\\") == 'Not matched!'\\n    assert solution.text_match_one(\\\"ac\\\") == 'Not matched!'\\n\"}}\n```"
+}

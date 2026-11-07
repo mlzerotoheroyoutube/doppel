@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "planner",
+ "effort": "medium",
+ "text": "{\"lessons\": [\"Recalculate exponential factors with full precision rather than approximating intermediate powers early.\", \"Carry unrounded values through all intermediate steps and round only for final presentation.\", \"Cross-check derived totals independently by recomputing from components in reverse order.\"]}"
+}

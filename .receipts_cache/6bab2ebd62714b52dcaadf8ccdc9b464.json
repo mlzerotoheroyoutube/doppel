@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step 1: Check quantity requirement of 1200 units from one supplier\n- Alpha: max 1000 units < 1200 \u2014 fails quantity\n- Bravo: max 1700 units \u2265 1200 \u2014 passes quantity\n- Cobalt: max 2400 units \u2265 1200 \u2014 passes quantity\n\nStep 2: Check delivery deadline of within 25 days\n- Alpha: 24 days \u2264 25 \u2014 passes, but already failed quantity\n- Bravo: 35 days > 25 \u2014 fails deadline\n- Cobalt: 35 days > 25 \u2014 fails deadline\n\nStep 3: Conclusion\nNo supplier meets both the quantity and deadline requirements, so no landed cost qualifies.\n\n{\"choice\": \"none\", \"value\": 0}"
+}

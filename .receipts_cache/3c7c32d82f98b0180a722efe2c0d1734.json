@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Mid-market: 1 EUR = 1.11 USD\nNeed 48,000 EUR.\n\n**bank:**\nrate = 1.11 * (1+0.01) = 1.11 * 1.01 = 1.1211 USD/EUR\nEUR needed = 48,000 + 40 fee = 48,040 EUR\nUSD = 48,040 * 1.1211 = 53,857.644\n\nCheck: 53,857.644 / 48,040 = 1.1211 /1.01 = 1.11\n\n**platform:**\nrate = 1.11 * (1+0.004) = 1.11 * 1.004 = 1.11444 USD/EUR\nUSD base = 48,000 * 1.11444 = 53,493.12\nfee = 0.35% of that USD amount\ntotal = 53,493.12 * (1+0.0035) = 53,493.12 * 1.0035\n= 53,493.12 + 187.22592 = 53,680.34592\n\nCheck: 53,680.34592 /1.0035 = 53,493.12 /48,000 = 1.11444 /1.004 = 1.11\n\n**usd:**\nrate = 1.11 * (1+0.02) = 1.11 * 1.02 = 1.1322 USD/EUR\nUSD = 48,000 * 1.1322 = 54,345.6\ndiscount 0% => 54,345.6\n\nCheck: 54,345.6 /48,000 = 1.1322 /1.02 = 1.11\n\nComparison:\nbank = 53,857.644\nplatform = 53,680.34592\nusd = 54,345.6\n\nCheapest is platform, rounded to cents 53,680.35.\n\n{\"choice\": \"platform\", \"value\": 53680.35}"
+}

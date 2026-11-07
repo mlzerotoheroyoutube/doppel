@@ -1,4 +1,4 @@
-"""Start every Receipts agent in one process.
+"""Start every Doppel agent in one process.
 
     python -m receipts.agents.run
 
@@ -29,7 +29,7 @@ def main() -> None:
     helpers = Bureau(port=int(os.environ.get("RECEIPTS_HELPER_PORT", "8002")))
     for agent in workers.values():
         helpers.add(agent)
-    print(f"Receipts gate address: {gate.address}")
+    print(f"Doppel gate address: {gate.address}")
     print("Inspector: https://agentverse.ai/inspect/?uri=http%3A//127.0.0.1%3A"
           f"{gate._port}&address={gate.address}", flush=True)
 

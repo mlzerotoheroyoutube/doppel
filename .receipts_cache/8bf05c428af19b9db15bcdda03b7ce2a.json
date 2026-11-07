@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement minimum_Length as len minus max frequency with tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to minimize the length of the string by removing occurrence of only one character.\\\"\\\"\\\"\\n\\n\\ndef minimum_Length(s):\\n    \\\"\\\"\\\"Write a python function to minimize the length of the string by removing occurrence of only one character.\\\"\\\"\\\"\\n    if not s:\\n        return 0\\n    counts = {}\\n    for ch in s:\\n        counts[ch] = counts.get(ch, 0) + 1\\n    return len(s) - max(counts.values())\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_mnm():\\n    assert solution.minimum_Length(\\\"mnm\\\") == 1\\n\\n\\ndef test_removes_most_frequent():\\n    assert solution.minimum_Length(\\\"aaabcc\\\") == 3\\n\\n\\ndef test_all_same_character():\\n    assert solution.minimum_Length(\\\"aaa\\\") == 0\\n\\n\\ndef test_empty_string():\\n    assert solution.minimum_Length(\\\"\\\") == 0\\n\\n\\ndef test_single_character():\\n    assert solution.minimum_Length(\\\"x\\\") == 0\\n\\n\\ndef test_all_unique():\\n    assert solution.minimum_Length(\\\"abc\\\") == 2\\n\"}}\n```"
+}

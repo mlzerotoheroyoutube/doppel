@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Analysis from today's forward-looking perspective (sunk cost excluded):\n\nInputs:\n- Sunk spent = $900,000.00 (gone either way, excluded)\n- Cost to finish = $200,000.00\n- P(success) = 70% = 0.70\n- Return if success = $800,000.00\n- P(failure) = 1 - 0.70 = 0.30\n- Return if failure = $0.00\n- Sale value if stop now = $0.00\n\nEV if stop:\nEV_stop = sale value = $0.00 = 0\n\nEV if continue:\nEV_continue = P(success)*Return_success + P(failure)*Return_failure - Cost_to_finish\nEV_continue = 0.70*$800,000.00 + 0.30*$0.00 - $200,000.00\nEV_continue = $560,000.00 + $0.00 - $200,000.00\nEV_continue = $360,000.00\n\nRecomputed comparison:\n$360,000.00 (continue) > $0.00 (stop)\n\nBetter decision is continue with expected value from today $360,000.00.\n\n{\"choice\": \"continue\", \"value\": 360000}\n"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement remove_replica to keep first occurrences and replace repeats with 'MSP'.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove tuple elements that occur more than once and replace the duplicates with some custom value.\\\"\\\"\\\"\\n\\n\\ndef remove_replica(test_tup):\\n    \\\"\\\"\\\"Write a function to remove tuple elements that occur more than once and replace the duplicates with some custom value.\\\"\\\"\\\"\\n    seen = []\\n    result = []\\n    for item in test_tup:\\n        if item in seen:\\n            result.append('MSP')\\n        else:\\n            seen.append(item)\\n            result.append(item)\\n    return tuple(result)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_remove_replica_example():\\n    assert solution.remove_replica((1, 1, 4, 4, 4, 5, 5, 6, 7, 7)) == (1, 'MSP', 4, 'MSP', 'MSP', 5, 'MSP', 6, 7, 'MSP')\\n\\n\\ndef test_remove_replica_no_duplicates():\\n    assert solution.remove_replica((1, 2, 3)) == (1, 2, 3)\\n\\n\\ndef test_remove_replica_empty():\\n    assert solution.remove_replica(()) == ()\\n\\n\\ndef test_remove_replica_non_consecutive():\\n    assert solution.remove_replica((1, 2, 1, 3, 2)) == (1, 2, 'MSP', 3, 'MSP')\\n\\n\\ndef test_remove_replica_all_same():\\n    assert solution.remove_replica((1, 1, 1)) == (1, 'MSP', 'MSP')\\n\"}}\n```"
+}

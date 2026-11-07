@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step-by-step analysis from today forward, sunk cost ignored:\n\n1. Sunk cost: $400,000 already spent. It is gone in both alternatives. Exclude from forward EV.\n\n2. Option STOP:\n   - Additional cost: $0\n   - Proceeds: sell work for $150,000\n   - EV_stop = 150,000 - 0 = $150,000.00\n\n3. Option CONTINUE:\n   - Additional cost to finish: $500,000.00\n   - Uncertain gross return:\n     E[Return] = 0.30 * 500,000.00 + 0.70 * 50,000.00\n     = 150,000.00 + 35,000.00\n     = $185,000.00\n   - Net EV from today:\n     EV_continue = E[Return] - Cost to finish\n     = 185,000.00 - 500,000.00\n     = -$315,000.00\n\n4. Rank:\n   EV_stop = $150,000 > EV_continue = -$315,000\n   Both options feasible. Maximizing forward expected value is STOP.\n\n{\"choice\": \"stop\", \"value\": 150000}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented add_string to prepend or format-insert the string for each list item.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to insert a given string at the beginning of all items in a list.\\\"\\\"\\\"\\n\\n\\ndef add_string(list, string):\\n    \\\"\\\"\\\"Write a function to insert a given string at the beginning of all items in a list.\\\"\\\"\\\"\\n    if \\\"{\\\" in string and \\\"}\\\" in string:\\n        return [string.format(item) for item in list]\\n    return [f\\\"{string}{item}\\\" for item in list]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_add_string_example():\\n    assert solution.add_string([1, 2, 3, 4], 'temp{0}') == ['temp1', 'temp2', 'temp3', 'temp4']\\n\\n\\ndef test_add_string_prepend():\\n    assert solution.add_string(['a', 'b'], 'pre_') == ['pre_a', 'pre_b']\\n\\n\\ndef test_add_string_empty():\\n    assert solution.add_string([], 'temp') == []\\n\"}}\n```"
+}

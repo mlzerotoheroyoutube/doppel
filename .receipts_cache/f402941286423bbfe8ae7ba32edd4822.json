@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement find_Max_Len_Even to return first longest even-length word.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the first maximum length of even word.\\\"\\\"\\\"\\n\\n\\ndef find_Max_Len_Even(str):\\n    \\\"\\\"\\\"Write a python function to find the first maximum length of even word.\\\"\\\"\\\"\\n    max_len = 0\\n    result = \\\"\\\"\\n    for word in str.split():\\n        if len(word) % 2 == 0 and len(word) > max_len:\\n            max_len = len(word)\\n            result = word\\n    return result\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.find_Max_Len_Even(\\\"python language\\\") == \\\"language\\\"\\n\\n\\ndef test_returns_longest_even_word():\\n    assert solution.find_Max_Len_Even(\\\"a bb cccc dd\\\") == \\\"cccc\\\"\\n\\n\\ndef test_tie_returns_first():\\n    assert solution.find_Max_Len_Even(\\\"aa bb cc\\\") == \\\"aa\\\"\\n\\n\\ndef test_no_even_word_returns_empty():\\n    assert solution.find_Max_Len_Even(\\\"a abc abcde\\\") == \\\"\\\"\\n\\n\\ndef test_empty_string():\\n    assert solution.find_Max_Len_Even(\\\"\\\") == \\\"\\\"\\n\"}}\n```"
+}

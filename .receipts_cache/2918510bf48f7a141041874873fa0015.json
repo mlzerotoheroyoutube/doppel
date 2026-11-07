@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = (Price - $12) * Units Sold - $8,000, where Units Sold = min(Demand, 2000).\n\n- $19: margin = 7. Demand 2603 capped to 2000. 2000*7 - 8000 = 14000 - 8000 = 6000\n- $24: margin = 12. Demand 557. 557*12 - 8000 = 6684 - 8000 = -1316\n- $29: margin = 17. Demand 954. 954*17 - 8000 = 16218 - 8000 = 8218\n- $34: margin = 22. Demand 332. 332*22 - 8000 = 7304 - 8000 = -696\n- $39: margin = 27. Demand 88. 88*27 - 8000 = 2376 - 8000 = -5624\n\nHighest profit is at $29 with $8,218.\n\n{\"choice\": \"29\", \"value\": 8218}"
+}

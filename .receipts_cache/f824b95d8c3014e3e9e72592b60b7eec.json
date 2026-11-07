@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement check_value to return True only when all dict values equal n.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to check if all values are same in a dictionary.\\\"\\\"\\\"\\n\\n\\ndef check_value(dict, n):\\n    \\\"\\\"\\\"Write a function to check if all values are same in a dictionary.\\\"\\\"\\\"\\n    return all(v == n for v in dict.values())\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_returns_false():\\n    assert solution.check_value({'Cierra Vega': 12, 'Alden Cantrell': 12, 'Kierra Gentry': 12, 'Pierre Cox': 12}, 10) is False\\n\\n\\ndef test_all_values_equal_n_returns_true():\\n    assert solution.check_value({'Cierra Vega': 12, 'Alden Cantrell': 12, 'Kierra Gentry': 12, 'Pierre Cox': 12}, 12) is True\\n\\n\\ndef test_mixed_values_returns_false():\\n    assert solution.check_value({'a': 12, 'b': 10}, 12) is False\\n\\n\\ndef test_empty_dict_returns_true():\\n    assert solution.check_value({}, 10) is True\\n\\n\\ndef test_single_entry_matching():\\n    assert solution.check_value({'a': 5}, 5) is True\\n\\n\\ndef test_single_entry_not_matching():\\n    assert solution.check_value({'a': 5}, 10) is False\\n\"}}\n```"
+}

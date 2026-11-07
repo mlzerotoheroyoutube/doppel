@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Qualification check for 1200 units within 20 days:\n- Alpha: max 1200 >= 1200, 18 days <= 20 -> qualifies\n- Bravo: max 1700 >= 1200, 18 days <= 20 -> qualifies\n- Cobalt: max 2400 >= 1200, 18 days <= 20 -> qualifies\n\nTotal landed = (goods USD + shipping) * (1+duty):\n\nAlpha:\ngoods = 10.7 * 1200 = 12840 EUR\nin USD = 12840 * 1.08 = 13867.2\n+ shipping = 13867.2 + 2400 = 16267.2\n*1.08 = 16267.2 * 1.08 = 17568.576\n\nBravo:\ngoods = 2072.95 * 1200 = 2487540 JPY\nin USD = 2487540 * 0.0067 = 16666.518\n+ shipping = 16666.518 + 2400 = 19066.518\n*1.12 = 19066.518 * 1.12 = 21354.50016\n\nCobalt:\ngoods = 11.08 * 1200 = 13296 USD\n+ shipping = 13296 + 2400 = 15696\n*1.0 = 15696\n\nReverse check:\n15696-2400=13296/1200=11.08 OK\n17568.576/1.08=16267.2-2400=13867.2/1.08=12840/1200=10.7 OK\n21354.50016/1.12=19066.518-2400=16666.518/0.0067=2487540/1200=2072.95 OK\n\nLowest is Cobalt at 15696.\n{\"choice\": \"Cobalt\", \"value\": 15696}"
+}

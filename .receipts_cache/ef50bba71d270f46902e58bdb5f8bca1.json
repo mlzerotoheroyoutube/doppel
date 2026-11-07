@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement first_Repeated_Char to return first repeated character.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the first repeated character in a given string.\\\"\\\"\\\"\\n\\n\\ndef first_Repeated_Char(str):\\n    \\\"\\\"\\\"Write a python function to find the first repeated character in a given string.\\\"\\\"\\\"\\n    seen = set()\\n    for ch in str:\\n        if ch in seen:\\n            return ch\\n        seen.add(ch)\\n    return None\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_first_repeated_google():\\n    assert solution.first_Repeated_Char(\\\"Google\\\") == \\\"o\\\"\\n\\n\\ndef test_first_repeated_other():\\n    assert solution.first_Repeated_Char(\\\"abcabc\\\") == \\\"a\\\"\\n    assert solution.first_Repeated_Char(\\\"hello\\\") == \\\"l\\\"\\n\\n\\ndef test_first_repeated_no_repeat():\\n    assert solution.first_Repeated_Char(\\\"abcd\\\") is None\\n    assert solution.first_Repeated_Char(\\\"\\\") is None\\n\"}}\n```"
+}

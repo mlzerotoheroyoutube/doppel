@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Sunk $400,000 is gone either way, so ignore it for a forward-looking decision.\n\nStop now:\nExpected value from today = sale value = $60,000 with no further cost.\n\nContinue:\nFuture cost = $350,000\nExpected future gross return = 0.30 * $1,200,000 + 0.70 * $100,000\n= $360,000 + $70,000 = $430,000\nExpected value from today = $430,000 - $350,000 = $80,000\n\n$80,000 > $60,000, so continuing maximizes expected value from today.\n\n{\"choice\": \"continue\", \"value\": 80000}"
+}

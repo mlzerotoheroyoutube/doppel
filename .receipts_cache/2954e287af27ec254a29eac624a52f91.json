@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement highest_Power_of_2 with iterative doubling and add coverage tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the highest power of 2 that is less than or equal to n.\\\"\\\"\\\"\\n\\n\\ndef highest_Power_of_2(n):\\n    \\\"\\\"\\\"Write a python function to find the highest power of 2 that is less than or equal to n.\\\"\\\"\\\"\\n    if n < 1:\\n        return 0\\n    power = 1\\n    while power * 2 <= n:\\n        power *= 2\\n    return power\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import highest_Power_of_2\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert highest_Power_of_2(10) == 8\\n\\n\\ndef test_exact_powers_of_two():\\n    assert highest_Power_of_2(1) == 1\\n    assert highest_Power_of_2(2) == 2\\n    assert highest_Power_of_2(8) == 8\\n    assert highest_Power_of_2(16) == 16\\n    assert highest_Power_of_2(1024) == 1024\\n\\n\\ndef test_just_below_power_of_two():\\n    assert highest_Power_of_2(3) == 2\\n    assert highest_Power_of_2(7) == 4\\n    assert highest_Power_of_2(15) == 8\\n    assert highest_Power_of_2(1025) == 1024\\n\\n\\ndef test_general_values():\\n    assert highest_Power_of_2(100) == 64\\n    assert highest_Power_of_2(17) == 16\\n\\n\\ndef test_less_than_one_returns_zero():\\n    assert highest_Power_of_2(0) == 0\\n\"}}\n```"
+}

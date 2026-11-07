@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement count_X to count occurrences and add tests covering it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count the occcurences of an element in a tuple.\\\"\\\"\\\"\\n\\n\\ndef count_X(tup, x):\\n    \\\"\\\"\\\"Write a python function to count the occcurences of an element in a tuple.\\\"\\\"\\\"\\n    count = 0\\n    for item in tup:\\n        if item == x:\\n            count += 1\\n    return count\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_count_X_example():\\n    assert solution.count_X((10, 8, 5, 2, 10, 15, 10, 8, 5, 8, 8, 2), 4) == 0\\n\\n\\ndef test_count_X_counts_occurrences():\\n    assert solution.count_X((10, 8, 5, 2, 10, 15, 10, 8, 5, 8, 8, 2), 10) == 3\\n    assert solution.count_X((10, 8, 5, 2, 10, 15, 10, 8, 5, 8, 8, 2), 8) == 4\\n    assert solution.count_X((10, 8, 5, 2, 10, 15, 10, 8, 5, 8, 8, 2), 5) == 2\\n    assert solution.count_X((), 10) == 0\\n    assert solution.count_X((1,), 1) == 1\\n    assert solution.count_X((1,), 2) == 0\\n\"}}\n```"
+}

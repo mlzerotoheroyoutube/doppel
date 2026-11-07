@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented lateralsurface_cube as 4*l*l (lateral surface area of a cube) and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the lateral surface area of a cube.\\\"\\\"\\\"\\n\\n\\ndef lateralsurface_cube(l):\\n    \\\"\\\"\\\"Write a function to find the lateral surface area of a cube.\\\"\\\"\\\"\\n    return 4 * l * l\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_lateralsurface_cube_example():\\n    assert solution.lateralsurface_cube(5) == 100\\n\\n\\ndef test_lateralsurface_cube_other_values():\\n    assert solution.lateralsurface_cube(1) == 4\\n    assert solution.lateralsurface_cube(3) == 36\\n    assert solution.lateralsurface_cube(10) == 400\\n    assert solution.lateralsurface_cube(0) == 0\\n    assert solution.lateralsurface_cube(2.5) == 25.0\\n\"}}\n```"
+}

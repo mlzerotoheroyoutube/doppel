@@ -1,11 +1,11 @@
-"""Coding benchmark: how much do Receipts and SubQ add to Meta as a coding agent?
+"""Coding benchmark: how much do Doppel and SubQ add to Meta as a coding agent?
 
 Configurations (same Meta coder in all three):
     meta        Meta Muse Wonder fixes the issue once; whatever it writes ships.
-    receipts    + Receipts evidence (deterministic checks + Meta's hidden exam); rework up to 3
-                rounds; ships when Receipts doesn't block. No SubQ anywhere.
+    receipts    + Doppel evidence (deterministic checks + Meta's hidden exam); rework up to 3
+                rounds; ships when Doppel doesn't block. No SubQ anywhere.
     subq        + SubQ judges the hidden-exam failures and every round; ships only when
-                Receipts doesn't block AND SubQ votes to ship.
+                Doppel doesn't block AND SubQ votes to ship.
 
 Every shipped result is graded by independent acceptance tests (benchmark/graders) that no
 agent ever sees. Tasks are labelled generic (one clear behavior) or complex (several
@@ -82,7 +82,7 @@ def report() -> None:
     for f in sorted(OUT.glob("*.json")):
         rows += json.loads(f.read_text())
     configs = ["meta", "receipts", "subq"]
-    names = {"meta": "Meta alone", "receipts": "Meta + Receipts (no SubQ)", "subq": "Meta + Receipts + SubQ"}
+    names = {"meta": "Meta alone", "receipts": "Meta + Doppel (no SubQ)", "subq": "Meta + Doppel + SubQ"}
     print("| Configuration | Tasks | Correct & shipped | Wrong but shipped | Held back | Avg rounds |")
     print("|---|---|---|---|---|---|")
     for cat in ("generic", "complex", "overall"):

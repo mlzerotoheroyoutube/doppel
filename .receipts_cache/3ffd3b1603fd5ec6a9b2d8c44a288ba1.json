@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step by step:\n\nProfit = (Price \u2212 Unit cost) \u00d7 Units sold \u2212 Fixed costs  \nUnits sold = min(Demand, Capacity of 2,000). All demands are below capacity.\n\n- $19: (19 \u2212 9) \u00d7 498 \u2212 12,000 = 4,980 \u2212 12,000 = -$7,020\n- $24: (24 \u2212 9) \u00d7 1,357 \u2212 12,000 = 20,355 \u2212 12,000 = $8,355\n- $29: (29 \u2212 9) \u00d7 775 \u2212 12,000 = 15,500 \u2212 12,000 = $3,500\n- $34: (34 \u2212 9) \u00d7 149 \u2212 12,000 = 3,725 \u2212 12,000 = -$8,275\n- $39: (39 \u2212 9) \u00d7 118 \u2212 12,000 = 3,540 \u2212 12,000 = -$8,460\n\nThe highest profit is at price $24, with $8,355 monthly profit.\n\n{\"choice\": \"24\", \"value\": 8355}"
+}

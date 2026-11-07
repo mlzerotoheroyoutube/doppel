@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Monthly rate r = 0.059/12 = 0.0049166667\nPayment = 35000 * r*(1+r)^n / ((1+r)^n -1)\nTotal interest = Payment*n - 35000\nTotal cost = interest + fee\n\nLoan A: n=72\n(1+r)^72 ~ 1.42351988\nPayment ~ 35000*0.00699897/0.42351988 ~ $578.40\nTotal paid ~ $41644.83\nInterest ~ $6644.83, fee $0\nCost A ~ $6644.83\n\nLoan B: n=60\n(1+r)^60 ~ 1.34215584\nPayment ~ 35000*0.00659893/0.34215584 ~ $675.02\nTotal paid ~ $40501.31\nInterest ~ $5501.31, fee $0\nCost B ~ $5501.31\n\nLoan C: n=36\n(1+r)^36 ~ 1.19311352\nPayment ~ 35000*0.00586614/0.19311352 ~ $1063.18\nTotal paid ~ $38274.58\nInterest ~ $3274.58, fee = 0.02*35000 = $700\nCost C ~ $3274.58+700 = $3974.58\n\nLowest total cost is Loan C.\n\n{\"choice\": \"C\", \"value\": 3974.58}"
+}

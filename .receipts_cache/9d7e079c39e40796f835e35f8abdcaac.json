@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement Find_Max to return longest sublist and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the sublist having maximum length.\\\"\\\"\\\"\\n\\n\\ndef Find_Max(lst):\\n    \\\"\\\"\\\"Write a python function to find the sublist having maximum length.\\\"\\\"\\\"\\n    return max(lst, key=len) if lst else []\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_max_example():\\n    assert solution.Find_Max([['A'], ['A', 'B'], ['A', 'B', 'C']]) == ['A', 'B', 'C']\\n\\n\\ndef test_find_max_returns_longest():\\n    assert solution.Find_Max([[1], [1, 2, 3], [1, 2]]) == [1, 2, 3]\\n\\n\\ndef test_find_max_first_on_tie():\\n    assert solution.Find_Max([[1, 2], [3, 4], [5]]) == [1, 2]\\n\\n\\ndef test_find_max_empty():\\n    assert solution.Find_Max([]) == []\\n\"}}\n```"
+}

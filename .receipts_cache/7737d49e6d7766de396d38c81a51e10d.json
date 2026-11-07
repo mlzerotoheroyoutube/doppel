@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented check_element using all() to verify every list item equals the given string, and added tests covering matching, non-matching, and single-item cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to check whether all items of a list are equal to a given string.\\\"\\\"\\\"\\n\\n\\ndef check_element(list, element):\\n    \\\"\\\"\\\"Write a function to check whether all items of a list are equal to a given string.\\\"\\\"\\\"\\n    return all(item == element for item in list)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_check_element_example():\\n    assert solution.check_element([\\\"green\\\", \\\"orange\\\", \\\"black\\\", \\\"white\\\"], \\\"blue\\\") == False\\n\\n\\ndef test_check_element_all_equal():\\n    assert solution.check_element([\\\"blue\\\", \\\"blue\\\", \\\"blue\\\"], \\\"blue\\\") is True\\n\\n\\ndef test_check_element_not_all_equal():\\n    assert solution.check_element([\\\"blue\\\", \\\"green\\\", \\\"blue\\\"], \\\"blue\\\") is False\\n\\n\\ndef test_check_element_single_item():\\n    assert solution.check_element([\\\"blue\\\"], \\\"blue\\\") is True\\n    assert solution.check_element([\\\"green\\\"], \\\"blue\\\") is False\\n\\n\\ndef test_check_element_empty_list():\\n    assert solution.check_element([], \\\"blue\\\") is True\\n\"}}\n```"
+}

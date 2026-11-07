@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = Price*Units Sold - $9*Units Sold - $5,000\nUnits Sold = min(Demand, 900 capacity)\n\n- $19: Units = min(1347,900)=900\n  Revenue = 19*900 = 17,100\n  Variable = 9*900 = 8,100\n  Profit = 17,100 - 8,100 - 5,000 = 4,000\n\n- $24: Units = min(1916,900)=900\n  Revenue = 24*900 = 21,600\n  Variable = 9*900 = 8,100\n  Profit = 21,600 - 8,100 - 5,000 = 8,500\n\n- $29: Units = min(1309,900)=900\n  Revenue = 29*900 = 26,100\n  Variable = 9*900 = 8,100\n  Profit = 26,100 - 8,100 - 5,000 = 13,000\n\n- $34: Units = min(209,900)=209\n  Revenue = 34*209 = 7,106\n  Variable = 9*209 = 1,881\n  Profit = 7,106 - 1,881 - 5,000 = 225\n\n- $39: Units = min(94,900)=94\n  Revenue = 39*94 = 3,666\n  Variable = 9*94 = 846\n  Profit = 3,666 - 846 - 5,000 = -2,180\n\nRanking: 13,000 > 8,500 > 4,000 > 225 > -2,180. Max is $29.\n\n{\"choice\": \"29\", \"value\": 13000}"
+}

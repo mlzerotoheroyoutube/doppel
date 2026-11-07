@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented sum_even_and_even_index to sum even values at 0-based even indices within the first n elements, and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the sum of even numbers at even positions.\\\"\\\"\\\"\\n\\n\\ndef sum_even_and_even_index(arr, n):\\n    \\\"\\\"\\\"Write a python function to find the sum of even numbers at even positions.\\\"\\\"\\\"\\n    total = 0\\n    for index, value in enumerate(arr[:n]):\\n        if index % 2 == 0 and value % 2 == 0:\\n            total += value\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import sum_even_and_even_index\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert sum_even_and_even_index([5, 6, 12, 1, 18, 8], 6) == 30\\n\\n\\ndef test_even_numbers_at_odd_indices_are_ignored():\\n    assert sum_even_and_even_index([1, 2, 3, 4, 5, 6], 6) == 0\\n\\n\\ndef test_odd_numbers_at_even_indices_are_ignored():\\n    assert sum_even_and_even_index([2, 3, 4, 5, 6], 5) == 12\\n\\n\\ndef test_empty_array():\\n    assert sum_even_and_even_index([], 0) == 0\\n\\n\\ndef test_zero_and_negative_even_numbers():\\n    assert sum_even_and_even_index([0, 1, -4, 2, -6], 5) == -10\\n\\n\\ndef test_respects_n():\\n    assert sum_even_and_even_index([12, 0, 18, 0, 100], 3) == 30\\n\"}}\n```"
+}

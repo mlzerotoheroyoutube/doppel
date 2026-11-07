@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement is_majority by counting occurrences and checking for strict majority.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to check for majority element in the given sorted array.\\\"\\\"\\\"\\n\\n\\ndef is_majority(arr, n, x):\\n    \\\"\\\"\\\"Write a function to check for majority element in the given sorted array.\\\"\\\"\\\"\\n    return arr.count(x) > n / 2\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_majority():\\n    assert solution.is_majority([1, 2, 3, 3, 3, 3, 10], 7, 3) is True\\n\\n\\ndef test_not_majority():\\n    assert solution.is_majority([1, 2, 3, 4, 5, 6, 7], 7, 3) is False\\n\\n\\ndef test_exactly_half_is_not_majority():\\n    assert solution.is_majority([1, 1, 2, 2], 4, 1) is False\\n\\n\\ndef test_single_element_majority():\\n    assert solution.is_majority([5], 1, 5) is True\\n\\n\\ndef test_absent_element():\\n    assert solution.is_majority([1, 2, 3, 3, 3, 3, 10], 7, 2) is False\\n\\n\\ndef test_all_same_majority():\\n    assert solution.is_majority([2, 2, 2], 3, 2) is True\\n\\n\\ndef test_empty_array():\\n    assert solution.is_majority([], 0, 1) is False\\n\"}}\n```"
+}

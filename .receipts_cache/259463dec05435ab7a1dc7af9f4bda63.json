@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = (price - unit cost) * units sold - fixed cost\nwhere units sold = min(demand, capacity 1300)\n\n- $19: sold = min(1584,1300)=1300\n  Contribution = (19-9)*1300 = 10*1300 = 13000\n  Profit = 13000 - 12000 = 1000\n  Check: 19*1300=24700, 9*1300=11700, diff=13000\n\n- $24: sold = min(1119,1300)=1119\n  Contribution = (24-9)*1119 = 15*1119 = 16785\n  Profit = 16785 - 12000 = 4785\n  Check: 24*1119=26856, 9*1119=10071, diff=16785\n\n- $29: sold = min(830,1300)=830\n  Contribution = (29-9)*830 = 20*830 = 16600\n  Profit = 16600 - 12000 = 4600\n  Check: 29*830=24070, 9*830=7470, diff=16600\n\n- $34: sold = 142\n  Contribution = (34-9)*142 = 25*142 = 3550\n  Profit = 3550 - 12000 = -8450\n\n- $39: sold = 22\n  Contribution = (39-9)*22 = 30*22 = 660\n  Profit = 660 - 12000 = -11340\n\nMaximum is $24 with $4785 profit.\n{\"choice\": \"24\", \"value\": 4785}"
+}

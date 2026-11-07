@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "First-Year Value = After-tax cash + Retirement match + Vested equity\n\nDefinition used for both offers:\nAfter-tax cash = (salary + bonus) * (1 - 0.25)\nRetirement match = min(salary * match%, cap)\nVested equity by month 12 = grant * 1/4\n\nNorth calculations:\nBonus_N = 170000.00 * 0.15 = 25500.00\nTaxable_N = 170000.00 + 25500.00 = 195500.00\nAfter-tax_N = 195500.00 * (1 - 0.25) = 195500.00 * 0.75 = 146625.00\nMatch_N = min(170000.00 * 0.05, 6000.00) = min(8500.00, 6000.00) = 6000.00\nEquity_N = 160000.00 * 0.25 = 40000.00\nTotal_N = 146625.00 + 6000.00 + 40000.00 = 192625.00\n\nSouth calculations:\nBonus_S = 170000.00 * 0.10 = 17000.00\nTaxable_S = 170000.00 + 17000.00 = 187000.00\nAfter-tax_S = 187000.00 * (1 - 0.25) = 187000.00 * 0.75 = 140250.00\nMatch_S = min(170000.00 * 0.03, 9000.00) = min(5100.00, 9000.00) = 5100.00\nEquity_S = 160000.00 * 0.25 = 40000.00\nTotal_S = 140250.00 + 5100.00 + 40000.00 = 185350.00\n\nComparison: 192625.00 > 185350.00, so North is higher.\n{\"choice\": \"North\", \"value\": 192625}"
+}

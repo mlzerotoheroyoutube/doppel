@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Monthly rate $r = APR/12$, $n$ months, loan $L=80000$\n\nPayment $P = L r / (1-(1+r)^{-n})$\nTotal paid $=P n$, Interest $=$ Total $-L$,\nCost $=$ Interest $+$ fee.\n\nCarry full precision, round only at end.\n\nLoan A: $r=0.069/12=0.00575$, $n=72$\n$(1+r)^{72}\\approx 1.511064$\n$(1+r)^{-72}\\approx 0.66178517$\n$P = 80000\\times0.00575/0.33821483 \\approx 1360.08$\nTotal $\\approx 97925.92$, Interest $\\approx 17925.92$\nFee $1\\% =800$\nCost A $\\approx 17925.92+800 = 18725.92$\n\nLoan B: $r=0.059/12=0.0049166667$, $n=48$\n$\\ln(1+r)\\approx 0.00490461933346$\n$48\\ln \\approx 0.23542172801$\n$(1+r)^{48}\\approx 1.26544232868$\n$(1+r)^{-48}\\approx 0.79023751406$\n$P =393.33333/0.20976248594 \\approx 1875.13669$\nTotal $\\approx 90006.56106$, Interest $\\approx 10006.56106$\nFee $3\\% =2400$\nCost B $\\approx 10006.56+2400 = 12406.56$\n\nLoan C: $r=0.079/12=0.0065833333$, $n=36$\n$\\ln(1+r)\\approx 0.00656175783515$\n$36\\ln \\approx 0.23622328207$\n$(1+r)^{36}\\approx 1.26645705574$\n$(1+r)^{-36}\\approx 0.78960434976$\n$P =526.66667/0.21039565024 \\approx 2503.22031880$\nTotal $=P\\times36 \\approx 90115.93147694$\nInterest $=$ Total $-80000 \\approx 10115.93147694$\nFee $2\\% =1600$\nCost C $\\approx 10115.93147694+1600 = 11715.93147694 \\approx 11715.93$\n\nReverse check: Total $=$ Interest $+L$, Cost $=$ Total $-L+$ fee holds.\n\nLowest is C with $\\approx$ \\$11,715.93.\n\n{\"choice\": \"C\", \"value\": 11715.93}"
+}

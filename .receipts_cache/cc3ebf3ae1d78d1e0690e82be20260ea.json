@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented binary_to_integer to convert a binary tuple to its decimal value returned as a string, with tests covering the example and additional cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to convert the given binary tuple to integer.\\\"\\\"\\\"\\n\\n\\ndef binary_to_integer(test_tup):\\n    \\\"\\\"\\\"Write a function to convert the given binary tuple to integer.\\\"\\\"\\\"\\n    value = 0\\n    for bit in test_tup:\\n        value = (value << 1) | int(bit)\\n    return str(value)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.binary_to_integer((1, 1, 0, 1, 0, 0, 1)) == '105'\\n\\n\\ndef test_single_bits():\\n    assert solution.binary_to_integer((0,)) == '0'\\n    assert solution.binary_to_integer((1,)) == '1'\\n\\n\\ndef test_additional_values():\\n    assert solution.binary_to_integer((1, 0)) == '2'\\n    assert solution.binary_to_integer((1, 1, 1, 1)) == '15'\\n    assert solution.binary_to_integer((0, 0, 0)) == '0'\\n    assert solution.binary_to_integer(()) == '0'\\n\"}}\n```"
+}

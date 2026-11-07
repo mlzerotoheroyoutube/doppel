@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Sunk cost $1,500,000.00 is gone either way, so ignore for decision from today.\n\nCompute expected value from today of continue:\nFormula: EV_continue = - Cost_to_finish + P_success * Return_success + P_failure * Return_failure\nP_failure = 1 - 0.30 = 0.70\nSubstituted: EV_continue = -500,000.00 + 0.30 * 1,200,000.00 + 0.70 * 0.00\n= -500,000.00 + 360,000.00 + 0.00\n= -140,000.00\n\nCompute expected value from today of stop:\nFormula: EV_stop = Sale_value\nSubstituted: EV_stop = 60,000.00\n\nRecompute comparison independently from original inputs:\nEV_continue = -500,000.00 + 360,000.00 = -140,000.00\nEV_stop = 60,000.00\nSince 60,000.00 > -140,000.00, stop maximizes expected value from today.\n\nBetter option is stop with value 60,000.00.\n{\"choice\": \"stop\", \"value\": 60000}"
+}

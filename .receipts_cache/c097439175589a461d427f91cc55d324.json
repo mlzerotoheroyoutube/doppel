@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step by step, for a fully amortized loan\n\n$$\\text{PMT}=P\\frac{r(1+r)^n}{(1+r)^n-1},\\qquad \nr=\\frac{\\text{APR}}{12}$$\n\n$$\\text{Total interest}=n\\cdot\\text{PMT}-P$$\n$$\\text{Total cost}= \\text{Total interest}+\\text{origination fee}$$\n\n$P=\\$80{,}000$ for all loans.\n\n**Loan A:** $6.9\\%$ APR, $6$ years  \n$r=0.069/12=0.00575$, $n=72$  \n$\\text{PMT}\\approx \\$1{,}360.08$  \nTotal payments $\\approx \\$97{,}925.93$  \nInterest $\\approx \\$17{,}925.93$  \nFee $=1\\%\\times 80{,}000=\\$800$  \nTotal cost $\\approx \\$18{,}725.93$\n\n**Loan B:** $5.9\\%$ APR, $4$ years  \n$r=0.059/12\\approx0.0049167$, $n=48$  \n$\\text{PMT}\\approx \\$1{,}875.14$  \nTotal payments $\\approx \\$90{,}006.56$  \nInterest $\\approx \\$10{,}006.56$  \nFee $=3\\%\\times 80{,}000=\\$2{,}400$  \nTotal cost $\\approx \\$12{,}406.56$\n\n**Loan C:** $7.9\\%$ APR, $3$ years  \n$r=0.079/12\\approx0.0065833$, $n=36$  \n$\\text{PMT}\\approx \\$2{,}503.22$  \nTotal payments $\\approx \\$90{,}115.93$  \nInterest $\\approx \\$10{,}115.93$  \nFee $=2\\%\\times 80{,}000=\\$1{,}600$  \nTotal cost $\\approx \\$11{,}715.93$\n\nLoan C has the lowest total cost, despite the higher APR, because of the much shorter term and lower fee than Loan B.\n\n{\"choice\": \"C\", \"value\": 11715.93}"
+}

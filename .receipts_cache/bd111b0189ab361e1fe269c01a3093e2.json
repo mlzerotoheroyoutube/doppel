@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented maximum(a, b) to return the larger of two numbers and added tests for it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the maximum of two numbers.\\\"\\\"\\\"\\n\\n\\ndef maximum(a, b):\\n    \\\"\\\"\\\"Write a python function to find the maximum of two numbers.\\\"\\\"\\\"\\n    return a if a >= b else b\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import maximum\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_maximum_second_larger():\\n    assert maximum(5, 10) == 10\\n\\n\\ndef test_maximum_first_larger():\\n    assert maximum(10, 5) == 10\\n\\n\\ndef test_maximum_equal():\\n    assert maximum(7, 7) == 7\\n\\n\\ndef test_maximum_negative_numbers():\\n    assert maximum(-5, -10) == -5\\n    assert maximum(-10, -5) == -5\\n\\n\\ndef test_maximum_with_zero():\\n    assert maximum(0, -1) == 0\\n    assert maximum(-1, 0) == 0\\n\\n\\ndef test_maximum_floats():\\n    assert maximum(1.5, 2.5) == 2.5\\n    assert maximum(2.5, 1.5) == 2.5\\n\"}}\n```"
+}

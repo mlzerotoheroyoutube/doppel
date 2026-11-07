@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented count_Digit to count decimal digits handling zero and negatives and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count the number of digits of a given number.\\\"\\\"\\\"\\n\\n\\ndef count_Digit(n):\\n    \\\"\\\"\\\"Write a python function to count the number of digits of a given number.\\\"\\\"\\\"\\n    n = abs(n)\\n    if n == 0:\\n        return 1\\n    count = 0\\n    while n != 0:\\n        n //= 10\\n        count += 1\\n    return count\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_count_Digit_example():\\n    assert solution.count_Digit(12345) == 5\\n\\n\\ndef test_count_Digit_zero():\\n    assert solution.count_Digit(0) == 1\\n\\n\\ndef test_count_Digit_single_digit():\\n    assert solution.count_Digit(7) == 1\\n\\n\\ndef test_count_Digit_negative():\\n    assert solution.count_Digit(-123) == 3\\n\\n\\ndef test_count_Digit_trailing_zeros():\\n    assert solution.count_Digit(1000) == 4\\n\"}}\n```"
+}

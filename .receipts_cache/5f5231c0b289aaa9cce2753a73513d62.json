@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement breakSum using max(n, breakSum(n//2)+breakSum(n//3)+breakSum(n//4)) with tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the maximum sum we can make by dividing number in three parts recursively and summing them up together for the given number.\\\"\\\"\\\"\\n\\nfrom functools import lru_cache\\n\\n\\n@lru_cache(maxsize=None)\\ndef breakSum(n):\\n    \\\"\\\"\\\"Write a function to find the maximum sum we can make by dividing number in three parts recursively and summing them up together for the given number.\\\"\\\"\\\"\\n    if n <= 1:\\n        return n\\n    divided = breakSum(n // 2) + breakSum(n // 3) + breakSum(n // 4)\\n    return max(n, divided)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_breakSum_12():\\n    assert solution.breakSum(12) == 13\\n\\n\\ndef test_breakSum_base_cases():\\n    assert solution.breakSum(0) == 0\\n    assert solution.breakSum(1) == 1\\n    assert solution.breakSum(2) == 2\\n\\n\\ndef test_breakSum_recursive_case():\\n    assert solution.breakSum(24) == 27\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement words_ae using re.findall for substrings starting with a/e.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find all words starting with 'a' or 'e' in a given string.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef words_ae(text):\\n    \\\"\\\"\\\"Write a function to find all words starting with 'a' or 'e' in a given string.\\\"\\\"\\\"\\n    return re.findall(r\\\"[ae]\\\\w*\\\", text)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_words_ae_example():\\n    assert solution.words_ae(\\\"python programe\\\") == ['ame']\\n\\n\\ndef test_words_ae_empty():\\n    assert solution.words_ae(\\\"\\\") == []\\n\\n\\ndef test_words_ae_no_match():\\n    assert solution.words_ae(\\\"python\\\") == []\\n\\n\\ndef test_words_ae_multiple():\\n    assert solution.words_ae(\\\"apple egg\\\") == [\\\"apple\\\", \\\"egg\\\"]\\n\"}}\n```"
+}

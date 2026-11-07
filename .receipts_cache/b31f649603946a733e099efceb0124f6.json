@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented sumofFactors to sum even divisors and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the sum of even factors of a number.\\\"\\\"\\\"\\n\\n\\ndef sumofFactors(n):\\n    \\\"\\\"\\\"Write a python function to find the sum of even factors of a number.\\\"\\\"\\\"\\n    total = 0\\n    m = abs(n)\\n    for i in range(1, m + 1):\\n        if m % i == 0 and i % 2 == 0:\\n            total += i\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_sumofFactors_example():\\n    assert solution.sumofFactors(18) == 26\\n\\n\\ndef test_sumofFactors_more_cases():\\n    assert solution.sumofFactors(1) == 0\\n    assert solution.sumofFactors(2) == 2\\n    assert solution.sumofFactors(4) == 6\\n    assert solution.sumofFactors(12) == 24\\n    assert solution.sumofFactors(30) == 48\\n    assert solution.sumofFactors(9) == 0\\n\"}}\n```"
+}

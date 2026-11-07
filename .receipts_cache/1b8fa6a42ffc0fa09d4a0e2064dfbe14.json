@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Monthly payment for fully amortized loan:\n\nr = APR/12, n = months\nPMT = P * r*(1+r)^n / ((1+r)^n -1)\nTotal paid = PMT*n\nInterest = Total paid - P\nTotal cost = Interest + fee, fee = % * 50000\n\nLoan A: P=50000, r=0.059/12=0.0049167, n=48\n(1+r)^48 ~ 1.26544233\nPMT ~ 50000*0.02343921 = 1171.96\nTotal paid ~ 56254.10\nInterest ~ 6254.10\nfee = 0\nTotal cost A ~ $6,254.10\n\nLoan B: P=50000, r=0.069/12=0.00575, n=48\n(1+r)^48 ~ 1.31680657\nPMT ~ 50000*0.02389988 = 1194.99\nTotal paid ~ 57359.70\nInterest ~ 7359.70\nfee = 0.03*50000 = 1500\nTotal cost B ~ $8,859.70\n\nLoan C: P=50000, r=0.059/12=0.0049167, n=36\n(1+r)^36 ~ 1.19311352\nPMT ~ 50000*0.03037665 = 1518.83\nTotal paid ~ 54677.97\nInterest ~ 4677.97\nfee = 0.01*50000 = 500\nTotal cost C ~ 4677.97+500 = $5,177.97\n\nC is lowest.\n\n{\"choice\": \"C\", \"value\": 5177.97}"
+}

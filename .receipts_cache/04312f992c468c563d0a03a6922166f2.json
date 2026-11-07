@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step 1: Separate sunk cost.\nSunk cost = $400,000.00 already spent, gone in both options, so exclude from forward-looking expected value from today.\n\nStep 2: Expected value from today if stop.\nValue_stop = sale value now = $60,000.00\nFormula: Value_stop = 60000.00 = 60000.00\n\nStep 3: Expected value from today if continue.\nCost to finish = $350,000.00\nSuccess probability p = 0.30\nReturn if success = $1,200,000.00\nReturn if failure = $100,000.00\n\nExpected gross return:\nE_gross = p * Return_success + (1-p) * Return_failure\nE_gross = 0.30 * 1200000.00 + (1-0.30) * 100000.00\nE_gross = 0.30 * 1200000.00 + 0.70 * 100000.00\nE_gross = 360000.00 + 70000.00 = 430000.00\n\nExpected net from today:\nValue_continue = E_gross - Cost_to_finish\nValue_continue = 430000.00 - 350000.00 = 80000.00\n\nStep 4: Recompute and compare.\nIndependently: 0.30*1200000.00 = 360000.00; 0.70*100000.00 = 70000.00; sum = 430000.00; minus 350000.00 = 80000.00.\nValue_continue = $80,000.00 vs Value_stop = $60,000.00.\n80,000.00 > 60,000.00, so maximize expected value by continue.\n\nchoice = continue; value = 80000\n{\"choice\": \"continue\", \"value\": 80000}"
+}

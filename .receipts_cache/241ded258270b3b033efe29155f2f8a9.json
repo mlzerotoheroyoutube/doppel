@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement extract_min_max via sorted k smallest plus k largest.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to extract maximum and minimum k elements in the given tuple.\\\"\\\"\\\"\\n\\n\\ndef extract_min_max(test_tup, K):\\n    \\\"\\\"\\\"Write a function to extract maximum and minimum k elements in the given tuple.\\\"\\\"\\\"\\n    sorted_tup = sorted(test_tup)\\n    if K <= 0:\\n        return ()\\n    return tuple(sorted_tup[:K] + sorted_tup[-K:])\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import extract_min_max\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_from_issue():\\n    assert extract_min_max((5, 20, 3, 7, 6, 8), 2) == (3, 5, 8, 20)\\n\\n\\ndef test_k_one():\\n    assert extract_min_max((5, 20, 3, 7, 6, 8), 1) == (3, 20)\\n\\n\\ndef test_k_three_full_cover():\\n    assert extract_min_max((5, 20, 3, 7, 6, 8), 3) == (3, 5, 6, 7, 8, 20)\\n\\n\\ndef test_k_zero_returns_empty():\\n    assert extract_min_max((5, 20, 3, 7, 6, 8), 0) == ()\\n\\n\\ndef test_returns_sorted_tuple():\\n    result = extract_min_max((7, 6, 8, 5, 20, 3), 2)\\n    assert isinstance(result, tuple)\\n    assert result == (3, 5, 8, 20)\\n    assert result == tuple(sorted(result))\\n\"}}\n```"
+}

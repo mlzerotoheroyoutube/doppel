@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Monthly rate $r=\\dfrac{0.059}{12}=0.00491667$\n\nPayment: $\\text{PMT}=P\\dfrac{r}{1-(1+r)^{-n}}$, $P=35000$\nTotal cost $=\\text{PMT}\\times n-P+\\text{fee}$\n\n**Loan A:** $n=72$, fee $=0$\n$(1+r)^{72}\\approx1.42352$\n$\\text{PMT}=35000\\frac{0.00491667}{1-1.42352^{-1}}\\approx \\$578.40$\nTotal $=578.40\\times72-35000\\approx \\$6,644.82$\n\n**Loan B:** $n=60$, fee $=0$\n$(1+r)^{60}\\approx1.34216$\n$\\text{PMT}\\approx \\$675.02$\nTotal $=675.02\\times60-35000\\approx \\$5,501.31$\n\n**Loan C:** $n=36$, fee $=0.02\\times35000=\\$700$\n$(1+r)^{36}\\approx1.19311$\n$\\text{PMT}\\approx \\$1,063.18$\nInterest $=1063.18\\times36-35000\\approx \\$3,274.58$\nTotal $=3,274.58+700\\approx \\$3,974.58$\n\nLoan C is cheapest, despite the fee.\n\n{\"choice\": \"C\", \"value\": 3974.58}"
+}

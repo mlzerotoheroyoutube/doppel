@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement max_sum with bottom-up DP and add tests\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the maximum sum in the given right triangle of numbers.\\\"\\\"\\\"\\n\\n\\ndef max_sum(tri, n):\\n    \\\"\\\"\\\"Write a function to find the maximum sum in the given right triangle of numbers.\\\"\\\"\\\"\\n    if n <= 0 or not tri:\\n        return 0\\n    n = min(n, len(tri))\\n    dp = list(tri[n - 1][:n])\\n    for r in range(n - 2, -1, -1):\\n        row = tri[r]\\n        dp = [row[c] + max(dp[c], dp[c + 1]) for c in range(r + 1)]\\n    return dp[0] if dp else 0\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.max_sum([[1], [2, 1], [3, 3, 2]], 3) == 6\\n\\n\\ndef test_single_row():\\n    assert solution.max_sum([[5]], 1) == 5\\n\\n\\ndef test_classic_triangle():\\n    tri = [[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]\\n    assert solution.max_sum(tri, 4) == 23\\n\"}}\n```"
+}

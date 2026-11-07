@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented set_Bit_Number using bit_length to return the most significant set-bit value (0 for 0), and added tests covering the example, powers of two, and other values.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the most significant bit number which is also a set bit.\\\"\\\"\\\"\\n\\n\\ndef set_Bit_Number(n):\\n    \\\"\\\"\\\"Write a python function to find the most significant bit number which is also a set bit.\\\"\\\"\\\"\\n    if n <= 0:\\n        return 0\\n    return 1 << (n.bit_length() - 1)\\n\", \"tests/test_solution.py\": \"import solution\\n\\nfrom solution import set_Bit_Number\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert set_Bit_Number(6) == 4\\n\\n\\ndef test_powers_of_two_are_themselves():\\n    for p in (1, 2, 4, 8, 16, 32, 64, 1024):\\n        assert set_Bit_Number(p) == p\\n\\n\\ndef test_general_values():\\n    cases = {\\n        1: 1,\\n        3: 2,\\n        5: 4,\\n        7: 4,\\n        10: 8,\\n        15: 8,\\n        17: 16,\\n        31: 16,\\n        100: 64,\\n        (1 << 30) + 12345: 1 << 30,\\n    }\\n    for n, expected in cases.items():\\n        assert set_Bit_Number(n) == expected\\n\\n\\ndef test_zero():\\n    assert set_Bit_Number(0) == 0\\n\"}}\n```"
+}

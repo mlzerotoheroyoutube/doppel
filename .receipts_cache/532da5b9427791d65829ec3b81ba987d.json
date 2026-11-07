@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Eligibility requires 2500 units from one supplier in \u226430 days.\n\nAlpha: max 3000 \u2265 2500 OK, but 35 days > 30 days FAIL deadline.\nBravo: 24 days \u2264 30 OK, but max 2300 < 2500 FAIL quantity.\nCobalt: max 2500 \u2265 2500 OK, 18 days \u2264 30 OK PASS.\n\nOnly Cobalt qualifies. Compute landed cost:\n\nCobalt goods = 12.45 USD * 2500 = 31125.00 USD\nShipping = 2400.00 USD\nSubtotal = 31125 + 2400 = 33525.00 USD\nDuty = 0% * 33525 = 0.00 USD\nTotal = 33525 + 0 = 33525.00 USD\n\nFor reference disqualified totals:\nAlpha goods = 12.84 * 2500 * 1.08 = 34668.00, +1500 = 36168.00, duty 4% = 1446.72, total = 37614.72 but fails deadline.\nBravo goods = 1818.82 * 2500 * 0.0067 = 30465.235, +2400 = 32865.235, duty 4% = 1314.6094, total = 34179.8444 but fails quantity.\n\nLowest qualifying is Cobalt.\n{\"choice\": \"Cobalt\", \"value\": 33525}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement sum_gp to compute the geometric series sum iteratively and add tests covering it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the sum of geometric progression series.\\\"\\\"\\\"\\n\\n\\ndef sum_gp(a, n, r):\\n    \\\"\\\"\\\"Write a function to find the sum of geometric progression series.\\\"\\\"\\\"\\n    total = 0\\n    term = a\\n    for _ in range(n):\\n        total += term\\n        term *= r\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_sum_gp_example():\\n    assert solution.sum_gp(1, 5, 2) == 31\\n\\n\\ndef test_sum_gp_ratio_one():\\n    assert solution.sum_gp(3, 4, 1) == 12\\n\\n\\ndef test_sum_gp_zero_terms():\\n    assert solution.sum_gp(5, 0, 2) == 0\\n\"}}\n```"
+}

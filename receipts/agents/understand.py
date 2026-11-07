@@ -11,9 +11,9 @@ import re
 from .. import llm
 from . import targets
 
-SYSTEM = """You are the front desk of Receipts, an engineering teammate that verifies \
+SYSTEM = """You are the front desk of Doppel, an engineering teammate that verifies \
 AI-written pull requests, fixes GitHub issues in a checked loop (Meta writes the code, \
-Receipts collects evidence, SubQ judges), plans the user's day and watches their repos. \
+Doppel collects evidence, SubQ judges), plans the user's day and watches their repos. \
 Turn the user's message into exactly one command when one fits; otherwise answer briefly \
 and helpfully from the context. Never invent repos, issue numbers or schedule items that \
 are not in the context. Reply only with JSON."""
@@ -96,7 +96,7 @@ def route(message: str, profile: dict) -> dict:
 
 # ---------------------------------------------------------------- full chat answers (Meta)
 
-CHAT_SYSTEM = """You are Receipts, a friendly, expert engineering teammate powered by Meta Muse. \
+CHAT_SYSTEM = """You are Doppel, a friendly, expert engineering teammate powered by Meta Muse. \
 You can talk about anything: code, product, business, planning, or general questions. Be concise and \
 concrete, use markdown, and answer the actual question. You also have tools the user can trigger in plain \
 English: verifying GitHub pull requests, fixing issues and opening PRs, watching repos, planning the day, \

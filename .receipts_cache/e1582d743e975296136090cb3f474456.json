@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement extract_freq to count order-insensitive unique tuples\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to extract the frequency of unique tuples in the given list order irrespective.\\\"\\\"\\\"\\n\\n\\ndef extract_freq(test_list):\\n    \\\"\\\"\\\"Write a function to extract the frequency of unique tuples in the given list order irrespective.\\\"\\\"\\\"\\n    return len({tuple(sorted(tup)) for tup in test_list})\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_extract_freq_example():\\n    assert solution.extract_freq([(3, 4), (1, 2), (4, 3), (5, 6)]) == 3\\n\\n\\ndef test_extract_freq_empty():\\n    assert solution.extract_freq([]) == 0\\n\\n\\ndef test_extract_freq_all_unique():\\n    assert solution.extract_freq([(1, 2), (3, 4)]) == 2\\n\\n\\ndef test_extract_freq_order_irrespective():\\n    assert solution.extract_freq([(1, 2), (2, 1), (1, 2)]) == 1\\n\\n\\ndef test_extract_freq_longer_tuples():\\n    assert solution.extract_freq([(1, 2, 3), (3, 2, 1), (1, 2)]) == 2\\n\"}}\n```"
+}

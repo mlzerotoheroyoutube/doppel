@@ -1,7 +1,7 @@
 """The work loop: implement → collect evidence → judge → rework.
 
     implementer (Meta Muse Wonder)  writes or reworks the code
-    evidence    (Receipts)          suite, tamper rules, frozen blind exam, planted bugs
+    evidence    (Doppel)          suite, tamper rules, frozen blind exam, planted bugs
     judge       (SubQ)              reads the whole repo, the issue, every round and the evidence
                                     → APPROVE, or REJECT with feedback
 
@@ -9,7 +9,7 @@ Rules that keep it honest:
 * The exam (blind tests) is written once from the issue, before round 1, and frozen.
 * The implementer never sees the exam. It only gets the judge's feedback, with any
   test code stripped out, so it has to fix the behavior rather than fit the tests.
-* A round ships only if Receipts doesn't BLOCK and the judge APPROVES.
+* A round ships only if Doppel doesn't BLOCK and the judge APPROVES.
 * At most `max_rounds` rounds, then it stops and hands the history to the user.
 """
 
@@ -174,9 +174,9 @@ def implement(issue: str, workdir: Path, feedback: list[str],
 
 def judge(issue: str, base: Path, workdir: Path, verdict, rounds: list[Round]) -> dict:
     """SubQ reads the issue, the whole repo, the diff, the evidence and every earlier round."""
-    history = "\n".join(f"- Round {r.n}: Receipts {r.receipts_decision}; judge {r.judge.get('decision')} "
+    history = "\n".join(f"- Round {r.n}: Doppel {r.receipts_decision}; judge {r.judge.get('decision')} "
                         f"({r.judge.get('problem', '')}); diff:\n{r.diff[:4000]}" for r in rounds) or "none"
-    state = (f"# Issue\n{issue.strip()}\n\n# Evidence from Receipts (deterministic checks and hidden exam)\n"
+    state = (f"# Issue\n{issue.strip()}\n\n# Evidence from Doppel (deterministic checks and hidden exam)\n"
              f"{to_markdown(verdict)}\n# Change (cumulative diff from the original)\n```diff\n"
              f"{cumulative_diff(base, workdir)[:60_000]}\n```\n\n# Earlier rounds\n{history}\n\n"
              f"# Repository after this round\n{repo_snapshot(workdir, 250_000)}")
@@ -197,11 +197,11 @@ def judge(issue: str, base: Path, workdir: Path, verdict, rounds: list[Round]) -
 
 
 def evidence_only_judge(verdict) -> dict:
-    """The 'no SubQ' configuration: ship whenever Receipts doesn't block."""
+    """The 'no SubQ' configuration: ship whenever Doppel doesn't block."""
     blocks = [r.title for r in verdict.receipts if r.severity == "block"]
     ok = verdict.decision != "BLOCK"
     return {"decision": "APPROVE" if ok else "REJECT", "p_ship": 1.0 if ok else 0.0,
-            "problem": "none" if ok else "evidence", "reasons": blocks or ["Receipts did not block"],
+            "problem": "none" if ok else "evidence", "reasons": blocks or ["Doppel did not block"],
             "feedback": sanitize_feedback("Evidence: " + " ".join(blocks)) if blocks else "",
             "regressed_from_earlier_round": False}
 
@@ -235,7 +235,7 @@ def run(issue: str, base: Path, max_rounds: int = 3,
         verdict = verify(base, workdir, issue, blind_src=exam, judge=use_subq, mutants=mutants)
         report = to_markdown(verdict)
         if use_subq:
-            on_event(f"Round {n}: Receipts says {verdict.decision}. {llm.who('judge')} is judging…")
+            on_event(f"Round {n}: Doppel says {verdict.decision}. {llm.who('judge')} is judging…")
             try:
                 j = judge(issue, base, workdir, verdict, result.rounds)
             except Exception as e:  # noqa: BLE001 - SubQ down: decide on the evidence, and say so
@@ -251,7 +251,7 @@ def run(issue: str, base: Path, max_rounds: int = 3,
             result.status = "shipped"
             on_event(f"Round {n}: ✅ approved by {llm.who('judge')} (P(ship) = {j['p_ship']:.2f}).")
             return result
-        fb = j.get("feedback") or "Receipts' evidence still blocks this change."
+        fb = j.get("feedback") or "Doppel's evidence still blocks this change."
         try:  # SubQ stopped this round: queue it as material for the next playbook improvement
             from . import playbook
             playbook.record_rejection("code", {"text": issue[:2000], "attempt": rnd.diff[-3000:],
@@ -271,7 +271,7 @@ def to_markdown_summary(res: LoopResult, label: str) -> str:
              f"coder: {llm.who('implementer')} · judge: {llm.who('judge')}", ""]
     for r in res.rounds:
         j = r.judge
-        lines.append(f"**Round {r.n}**: Receipts {r.receipts_decision} · judge {j.get('decision')}"
+        lines.append(f"**Round {r.n}**: Doppel {r.receipts_decision} · judge {j.get('decision')}"
                      + (" · ⚠️ regressed an earlier fix" if j.get("regressed_from_earlier_round") else ""))
         if r.summary:
             lines.append(f"- Change: {r.summary}")

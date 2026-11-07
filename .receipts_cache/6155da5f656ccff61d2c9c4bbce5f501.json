@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented convert_list_dictionary to zip three lists into nested dicts.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to convert more than one list to nested dictionary.\\\"\\\"\\\"\\n\\n\\ndef convert_list_dictionary(l1, l2, l3):\\n    \\\"\\\"\\\"Write a function to convert more than one list to nested dictionary.\\\"\\\"\\\"\\n    return [{k1: {k2: v}} for k1, k2, v in zip(l1, l2, l3)]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_convert_list_dictionary_example():\\n    assert solution.convert_list_dictionary([\\\"S001\\\", \\\"S002\\\", \\\"S003\\\", \\\"S004\\\"], [\\\"Adina Park\\\", \\\"Leyton Marsh\\\", \\\"Duncan Boyle\\\", \\\"Saim Richards\\\"], [85, 98, 89, 92]) == [{'S001': {'Adina Park': 85}}, {'S002': {'Leyton Marsh': 98}}, {'S003': {'Duncan Boyle': 89}}, {'S004': {'Saim Richards': 92}}]\\n\\n\\ndef test_convert_list_dictionary_empty():\\n    assert solution.convert_list_dictionary([], [], []) == []\\n\\n\\ndef test_convert_list_dictionary_single():\\n    assert solution.convert_list_dictionary([\\\"S001\\\"], [\\\"Adina Park\\\"], [85]) == [{'S001': {'Adina Park': 85}}]\\n\"}}\n```"
+}

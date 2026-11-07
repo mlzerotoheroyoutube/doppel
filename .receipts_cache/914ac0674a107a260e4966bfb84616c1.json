@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented harmonic_sum as the left-to-right sum of reciprocals from 1 through n and added tests for the example and small cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the harmonic sum of n-1.\\\"\\\"\\\"\\n\\n\\ndef harmonic_sum(n):\\n    \\\"\\\"\\\"Write a function to calculate the harmonic sum of n-1.\\\"\\\"\\\"\\n    total = 0.0\\n    for i in range(1, n + 1):\\n        total += 1 / i\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_harmonic_sum_example():\\n    assert solution.harmonic_sum(7) == 2.5928571428571425\\n\\n\\ndef test_harmonic_sum_small_values():\\n    assert solution.harmonic_sum(1) == 1.0\\n    assert solution.harmonic_sum(2) == 1.5\\n    assert abs(solution.harmonic_sum(3) - 1.8333333333333333) < 1e-12\\n    assert abs(solution.harmonic_sum(4) - 2.0833333333333335) < 1e-12\\n    assert abs(solution.harmonic_sum(5) - 2.283333333333333) < 1e-12\\n\\n\\ndef test_harmonic_sum_zero():\\n    assert solution.harmonic_sum(0) == 0.0\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented remove_empty to filter out empty lists and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove empty lists from a given list of lists.\\\"\\\"\\\"\\n\\n\\ndef remove_empty(list1):\\n    \\\"\\\"\\\"Write a function to remove empty lists from a given list of lists.\\\"\\\"\\\"\\n    return [x for x in list1 if x != []]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_remove_empty_example():\\n    assert solution.remove_empty([[], [], [], 'Red', 'Green', [1, 2], 'Blue', [], []]) == ['Red', 'Green', [1, 2], 'Blue']\\n\\n\\ndef test_remove_empty_empty_input():\\n    assert solution.remove_empty([]) == []\\n\\n\\ndef test_remove_empty_all_empty():\\n    assert solution.remove_empty([[], []]) == []\\n\\n\\ndef test_remove_empty_no_empty():\\n    assert solution.remove_empty(['Red', [1, 2]]) == ['Red', [1, 2]]\\n\\n\\ndef test_remove_empty_preserves_other_falsy():\\n    assert solution.remove_empty([[], 0, '', None, False, {}, [1]]) == [0, '', None, False, {}, [1]]\\n\"}}\n```"
+}

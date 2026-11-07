@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented number_of_substrings as n*(n+1)//2 for the string length n and added tests covering the example, empty, single-character, and repeated-character cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count number of non-empty substrings of a given string.\\\"\\\"\\\"\\n\\n\\ndef number_of_substrings(str):\\n    \\\"\\\"\\\"Write a python function to count number of non-empty substrings of a given string.\\\"\\\"\\\"\\n    n = len(str)\\n    return n * (n + 1) // 2\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import number_of_substrings\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert number_of_substrings(\\\"abc\\\") == 6\\n\\n\\ndef test_empty_string():\\n    assert number_of_substrings(\\\"\\\") == 0\\n\\n\\ndef test_single_character():\\n    assert number_of_substrings(\\\"a\\\") == 1\\n\\n\\ndef test_various_lengths():\\n    assert number_of_substrings(\\\"ab\\\") == 3\\n    assert number_of_substrings(\\\"abcd\\\") == 10\\n    assert number_of_substrings(\\\"hello\\\") == 15\\n\\n\\ndef test_repeated_characters_count_by_position():\\n    assert number_of_substrings(\\\"aaa\\\") == 6\\n\\n\\ndef test_returns_int():\\n    assert isinstance(number_of_substrings(\\\"abc\\\"), int)\\n\"}}\n```"
+}

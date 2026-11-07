@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "**Step 1: Monthly payment formula**\n\nFor a fully amortized loan:\n\\[\n\\text{PMT}=P\\frac{r(1+r)^n}{(1+r)^n-1}\n\\]\nTotal cost of borrowing = \\(n \\times \\text{PMT} - P + \\text{fee}\\)\n\n**Loan A**\n- \\(P=20{,}000,\\ r=0.049/12=0.0040833,\\ n=72,\\ \\text{fee}=0\\)\n- \\((1+r)^n \\approx 1.340981\\)\n- \\(\\text{PMT} \\approx 20{,}000 \\times \\frac{0.0040833 \\times 1.340981}{0.340981} \\approx \\$321.17\\)\n- Total interest \\(\\approx 72(321.17)-20{,}000 \\approx \\$3{,}124.37\\)\n- **Total cost \\(\\approx \\$3{,}124.37\\)**\n\n**Loan B**\n- \\(P=20{,}000,\\ r=0.069/12=0.00575,\\ n=72,\\ \\text{fee}=1\\%\\times20{,}000=\\$200\\)\n- \\((1+r)^n \\approx 1.511064\\)\n- \\(\\text{PMT} \\approx \\$340.02\\)\n- Total interest \\(\\approx 72(340.02)-20{,}000 \\approx \\$4{,}481.48\\)\n- **Total cost \\(\\approx \\$4{,}481.48 + 200 = \\$4{,}681.48\\)**\n\n**Loan C**\n- \\(P=20{,}000,\\ r=0.049/12=0.0040833,\\ n=60,\\ \\text{fee}=2\\%\\times20{,}000=\\$400\\)\n- \\((1+r)^n \\approx 1.276984\\)\n- \\(\\text{PMT} \\approx \\$376.51\\)\n- Total interest \\(\\approx 60(376.51)-20{,}000 \\approx \\$2{,}590.55\\)\n- **Total cost \\(\\approx \\$2{,}590.55 + 400 = \\$2{,}990.55\\)**\n\nLoan C has the lowest total cost, despite its upfront fee, because the shorter 5-year term saves more interest than the fee adds.\n\n{\"choice\": \"C\", \"value\": 2990.55}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented remove_whitespaces using regex and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove all whitespaces from the given string using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef remove_whitespaces(text1):\\n    \\\"\\\"\\\"Write a function to remove all whitespaces from the given string using regex.\\\"\\\"\\\"\\n    return re.sub(r'\\\\s+', '', text1)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_remove_whitespaces_example():\\n    assert solution.remove_whitespaces(' Google    Flutter ') == 'GoogleFlutter'\\n\\n\\ndef test_remove_whitespaces_other_whitespaces():\\n    assert solution.remove_whitespaces('a\\\\tb\\\\nc d') == 'abcd'\\n\\n\\ndef test_remove_whitespaces_empty_and_only_spaces():\\n    assert solution.remove_whitespaces('') == ''\\n    assert solution.remove_whitespaces('   ') == ''\\n\"}}\n```"
+}

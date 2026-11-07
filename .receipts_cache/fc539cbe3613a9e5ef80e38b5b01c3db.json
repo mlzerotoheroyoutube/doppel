@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North calculation:\n- Cash gross = 140,000 + 0%*140,000 = 140,000\n- After-tax cash = 140,000 * (1-0.35) = 140,000 * 0.65 = 91,000\n- Retirement match = 5% * 140,000 = 7,000, cap 9,000 => 7,000\n- Equity vested by month 12 = 160,000 * 12/48 = 160,000 * 0.25 = 40,000\n- Total North = 91,000 + 7,000 + 40,000 = 138,000\n\nSouth calculation:\n- Cash gross = 185,000 + 10%*185,000 = 185,000 + 18,500 = 203,500\n- After-tax cash = 203,500 * (1-0.35) = 203,500 * 0.65 = 132,275\n- Retirement match = 6% * 185,000 = 11,100, cap 6,000 => 6,000\n- Equity vested by month 12 = 0 * 12/48 = 0\n- Total South = 132,275 + 6,000 + 0 = 138,275\n\nComparison: 138,275 > 138,000, so South is higher.\n\n{\"choice\": \"South\", \"value\": 138275}"
+}

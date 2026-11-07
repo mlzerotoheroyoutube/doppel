@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented replace_blank by replacing every space character with the given character and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to replace blank spaces with any character in a string.\\\"\\\"\\\"\\n\\n\\ndef replace_blank(str1, char):\\n    \\\"\\\"\\\"Write a function to replace blank spaces with any character in a string.\\\"\\\"\\\"\\n    return str1.replace(\\\" \\\", char)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import replace_blank\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert replace_blank(\\\"hello people\\\", '@') == \\\"hello@people\\\"\\n\\n\\ndef test_multiple_words():\\n    assert replace_blank(\\\"hello brave new world\\\", '-') == \\\"hello-brave-new-world\\\"\\n\\n\\ndef test_no_spaces():\\n    assert replace_blank(\\\"hello\\\", '@') == \\\"hello\\\"\\n\\n\\ndef test_leading_trailing_and_consecutive_spaces():\\n    assert replace_blank(\\\" hello  people \\\", '@') == \\\"@hello@@people@\\\"\\n\\n\\ndef test_empty_string():\\n    assert replace_blank(\\\"\\\", '@') == \\\"\\\"\\n\\n\\ndef test_different_replacement_characters():\\n    assert replace_blank(\\\"a b c\\\", '%') == \\\"a%b%c\\\"\\n    assert replace_blank(\\\"a b c\\\", '_') == \\\"a_b_c\\\"\\n\"}}\n```"
+}

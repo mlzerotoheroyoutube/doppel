@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Inputs: variable cost VC=9, fixed cost FC=12000, capacity Cap=1300.\nFormula: Q(P)=min(Demand(P),Cap), Profit(P)=(P-VC)*Q(P)-FC\n\nP=19, Demand=1584:\nQ=min(1584,1300)=1300\nProfit=(19-9)*1300-12000=10*1300-12000=13000-12000=1000\n\nP=24, Demand=1119:\nQ=min(1119,1300)=1119\nProfit=(24-9)*1119-12000=15*1119-12000=16785-12000=4785\n\nP=29, Demand=830:\nQ=min(830,1300)=830\nProfit=(29-9)*830-12000=20*830-12000=16600-12000=4600\n\nP=34, Demand=142:\nQ=min(142,1300)=142\nProfit=(34-9)*142-12000=25*142-12000=3550-12000=-8450\n\nP=39, Demand=22:\nQ=min(22,1300)=22\nProfit=(39-9)*22-12000=30*22-12000=660-12000=-11340\n\nRecomputed comparison: 1000 vs 4785 vs 4600 vs -8450 vs -11340.\nMaximum is P=24 with 4785.\n\n{\"choice\": \"24\", \"value\": 4785}"
+}

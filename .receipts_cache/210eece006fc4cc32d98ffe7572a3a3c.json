@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement min_val to return minimum numeric value ignoring non-numeric items.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the minimum value in a given heterogeneous list.\\\"\\\"\\\"\\n\\n\\ndef min_val(listval):\\n    \\\"\\\"\\\"Write a function to find the minimum value in a given heterogeneous list.\\\"\\\"\\\"\\n    numeric = [x for x in listval if isinstance(x, (int, float))]\\n    if not numeric:\\n        raise ValueError(\\\"min_val() arg contains no numeric values\\\")\\n    return min(numeric)\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.min_val(['Python', 3, 2, 4, 5, 'version']) == 2\\n\\n\\ndef test_ignores_strings():\\n    assert solution.min_val([10, 'a', 20, 'b', 5]) == 5\\n\\n\\ndef test_negative_and_float():\\n    assert solution.min_val(['x', 3.5, -1, 2, 'y']) == -1\\n    assert solution.min_val(['a', 3.5, 2.1, 'b']) == 2.1\\n\\n\\ndef test_no_numeric_raises():\\n    with pytest.raises(ValueError):\\n        solution.min_val(['a', 'b'])\\n    with pytest.raises(ValueError):\\n        solution.min_val([])\\n\"}}\n```"
+}

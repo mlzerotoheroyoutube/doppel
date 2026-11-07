@@ -42,7 +42,7 @@ def suite_step(head_dir: Path) -> tuple[list[Receipt], dict, bool]:
 def blind_receipts(outcomes: list[blind.BlindOutcome], err: str) -> tuple[list[Receipt], dict]:
     receipts: list[Receipt] = []
     if err:
-        receipts.append(Receipt("blind", "B000", "warn", "Receipts could not run its blind tests.", evidence=err))
+        receipts.append(Receipt("blind", "B000", "warn", "Doppel could not run its blind tests.", evidence=err))
     stats = {"blind_tests": len(outcomes),
              "blind_passed_head": sum(o.head == "passed" for o in outcomes),
              "blind_failed_base": sum(o.base == "failed" for o in outcomes)}
@@ -53,7 +53,7 @@ def blind_receipts(outcomes: list[blind.BlindOutcome], err: str) -> tuple[list[R
         repro = f"python -m pytest -q test_receipts_blind.py::{o.name}"
         if o.judged_valid is False:
             receipts.append(Receipt("blind", "B009", "info",
-                                    f"Discarded one of Receipts' own tests (`{o.name}`): {o.judge_reason}",
+                                    f"Discarded one of Doppel's own tests (`{o.name}`): {o.judge_reason}",
                                     evidence=o.source))
         elif o.base == "passed":
             receipts.append(Receipt("blind", "B001", "block",
@@ -109,7 +109,7 @@ def subq_gate(base_dir: Path, head_dir: Path, issue: str, verdict: Verdict) -> R
     when it votes no."""
     from . import loop
     from .llm import decide
-    state = (f"# Issue\n{issue.strip()}\n\n# Evidence from Receipts\n{to_markdown(verdict)}\n"
+    state = (f"# Issue\n{issue.strip()}\n\n# Evidence from Doppel\n{to_markdown(verdict)}\n"
              f"# Change\n```diff\n{loop.cumulative_diff(base_dir, head_dir)[:60_000]}\n```\n\n"
              f"# Repository after the change\n{loop.repo_snapshot(head_dir, 250_000)}")
     q = {k: v for k, v in loop.JUDGE_QUESTIONS.items() if k in ("ship", "problem")}
@@ -155,18 +155,18 @@ def verify(base_dir: Path, head_dir: Path, issue: str, *, use_model: bool = True
 
 def to_markdown(v: Verdict, title: str = "") -> str:
     icon = {"BLOCK": "🛑", "WARN": "⚠️", "PASS": "✅"}[v.decision]
-    lines = [f"## {icon} Receipts: {v.decision}" + (f" · {title}" if title else ""), ""]
+    lines = [f"## {icon} Doppel: {v.decision}" + (f" · {title}" if title else ""), ""]
     s = v.stats
     facts = [f"The PR's tests: **{s.get('pr_tests_passed', 0)} passing**"
              + (f", {s['pr_tests_failed']} failing" if s.get("pr_tests_failed") else "")]
     if s.get("blind_tests"):
-        facts.append(f"Receipts' blind tests: **{s['blind_passed_head']}/{s['blind_tests']} passing**")
+        facts.append(f"Doppel's blind tests: **{s['blind_passed_head']}/{s['blind_tests']} passing**")
     if "pr_tests_mutants" in s:
         k, n = s["pr_tests_mutants"]
         line = f"Planted bugs caught by the PR's tests: **{k}/{n}**"
         if "blind_tests_mutants" in s:
             bk, bn = s["blind_tests_mutants"]
-            line += f" · by Receipts' tests: **{bk}/{bn}**"
+            line += f" · by Doppel's tests: **{bk}/{bn}**"
         facts.append(line)
     lines += [" · ".join(facts), ""]
     shown = [r for r in v.receipts if r.severity != "info"]

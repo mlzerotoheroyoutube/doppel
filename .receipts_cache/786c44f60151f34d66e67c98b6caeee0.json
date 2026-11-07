@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step 1: Check qualification for 1200 units within 20 days\n- Alpha: max 1200 units, 18 days \u2014 qualifies\n- Bravo: max 1700 units, 18 days \u2014 qualifies\n- Cobalt: max 2400 units, 18 days \u2014 qualifies\n\nStep 2: Calculate total landed cost = goods value + shipping + duty\n\nAlpha:\n- Unit price in USD: 10.7 EUR \u00d7 1.08 = 11.556 USD\n- Goods: 1200 \u00d7 11.556 = 13,867.20 USD\n- + Shipping: 13,867.20 + 2,400 = 16,267.20 USD\n- Duty 8%: 16,267.20 \u00d7 0.08 = 1,301.376 USD\n- Total: 16,267.20 + 1,301.376 = 17,568.576 USD\n\nBravo:\n- Unit price in USD: 2,072.95 JPY \u00d7 0.0067 = 13.888765 USD\n- Goods: 1200 \u00d7 13.888765 = 16,666.518 USD\n- + Shipping: 16,666.518 + 2,400 = 19,066.518 USD\n- Duty 12%: 19,066.518 \u00d7 0.12 = 2,287.98216 USD\n- Total: 19,066.518 + 2,287.98216 = 21,354.50016 USD\n\nCobalt:\n- Goods: 1200 \u00d7 11.08 = 13,296 USD\n- + Shipping: 13,296 + 2,400 = 15,696 USD\n- Duty 0%: 0 USD\n- Total: 15,696 USD\n\nStep 3: Compare totals\nCobalt at $15,696 is lowest, followed by Alpha at $17,568.576 and Bravo at $21,354.50016.\n\n{\"choice\": \"Cobalt\", \"value\": 15696}"
+}

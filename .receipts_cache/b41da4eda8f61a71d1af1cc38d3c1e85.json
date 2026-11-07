@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "**Step 1: North offer**\n\n- Salary: $170,000.00\n- Bonus: 15% \u00d7 $170,000 = $25,500\n- Taxable cash: $170,000 + $25,500 = $195,500\n- After-tax cash at 25%: $195,500 \u00d7 0.75 = $146,625\n- Retirement match: 5% \u00d7 $170,000 = $8,500, capped at $6,000 \u2192 $6,000\n- Equity vested by month 12: $160,000 \u00f7 4 = $40,000\n- First-year value: $146,625 + $6,000 + $40,000 = **$192,625**\n\n**Step 2: South offer**\n\n- Salary: $170,000.00\n- Bonus: 10% \u00d7 $170,000 = $17,000\n- Taxable cash: $170,000 + $17,000 = $187,000\n- After-tax cash at 25%: $187,000 \u00d7 0.75 = $140,250\n- Retirement match: 3% \u00d7 $170,000 = $5,100, under the $9,000 cap \u2192 $5,100\n- Equity vested by month 12: $160,000 \u00f7 4 = $40,000\n- First-year value: $140,250 + $5,100 + $40,000 = **$185,350**\n\n**Step 3: Comparison**\n\nNorth: $192,625 > South: $185,350, so North has the higher first-year value.\n\n{\"choice\": \"North\", \"value\": 192625}"
+}

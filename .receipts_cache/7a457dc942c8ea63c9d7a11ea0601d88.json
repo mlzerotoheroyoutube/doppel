@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented rear_extract to return last element of each tuple.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to perfom the rear element extraction from list of tuples records.\\\"\\\"\\\"\\n\\n\\ndef rear_extract(test_list):\\n    \\\"\\\"\\\"Write a function to perfom the rear element extraction from list of tuples records.\\\"\\\"\\\"\\n    return [tup[-1] for tup in test_list]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_rear_extract_example():\\n    assert solution.rear_extract([(1, 'Rash', 21), (2, 'Varsha', 20), (3, 'Kil', 19)]) == [21, 20, 19]\\n\\n\\ndef test_rear_extract_empty():\\n    assert solution.rear_extract([]) == []\\n\"}}\n```"
+}

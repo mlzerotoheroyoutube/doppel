@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement count_Num as count of n-bit numbers with LSB and MSB set.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count numbers whose oth and nth bits are set.\\\"\\\"\\\"\\n\\n\\ndef count_Num(n):\\n    \\\"\\\"\\\"Write a python function to count numbers whose oth and nth bits are set.\\\"\\\"\\\"\\n    # Count n-bit numbers (0 .. 2**n - 1) whose 0th (LSB) and (n-1)th (MSB)\\n    # bits are set. For n >= 2 this is 2**(n-2); n == 1 gives 1; n <= 0 gives 0.\\n    # This yields count_Num(2) == 1 as documented.\\n    if n <= 0:\\n        return 0\\n    if n == 1:\\n        return 1\\n    return 1 << (n - 2)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_count_Num_example():\\n    assert solution.count_Num(2) == 1\\n\\n\\ndef test_count_Num_n_bit_counts():\\n    assert solution.count_Num(1) == 1\\n    assert solution.count_Num(3) == 2\\n    assert solution.count_Num(4) == 4\\n    assert solution.count_Num(5) == 8\\n\"}\n```"
+}

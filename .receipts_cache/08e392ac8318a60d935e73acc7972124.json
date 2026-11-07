@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement set_Bit_Number to return largest power of two <= n and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the most significant bit number which is also a set bit.\\\"\\\"\\\"\\n\\n\\ndef set_Bit_Number(n):\\n    \\\"\\\"\\\"Write a python function to find the most significant bit number which is also a set bit.\\\"\\\"\\\"\\n    if n <= 0:\\n        return 0\\n    return 1 << (n.bit_length() - 1)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_set_Bit_Number_example():\\n    assert solution.set_Bit_Number(6) == 4\\n\\n\\ndef test_set_Bit_Number_powers_of_two():\\n    assert solution.set_Bit_Number(1) == 1\\n    assert solution.set_Bit_Number(2) == 2\\n    assert solution.set_Bit_Number(8) == 8\\n    assert solution.set_Bit_Number(16) == 16\\n\\n\\ndef test_set_Bit_Number_general():\\n    assert solution.set_Bit_Number(7) == 4\\n    assert solution.set_Bit_Number(10) == 8\\n    assert solution.set_Bit_Number(18) == 16\\n    assert solution.set_Bit_Number(1000) == 512\\n\\n\\ndef test_set_Bit_Number_zero():\\n    assert solution.set_Bit_Number(0) == 0\\n\"}}\n```"
+}

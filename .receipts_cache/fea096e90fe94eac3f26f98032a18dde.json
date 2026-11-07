@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North vs South first-year value calculation:\n\n**North:**\n- Cash taxable = salary + bonus = 170,000 + 10%*170,000\n  = 170,000 + 17,000 = 187,000\n- After-tax cash = 187,000 * (1-0.30) = 187,000 * 0.70 = 130,900\n- Retirement match = 5%*salary = 0.05*170,000 = 8,500\n  Check cap $20,000: 8,500 < 20,000, so eligible = 8,500, not taxed now\n- Equity: $160,000 / 4 years / 12 months = 160,000 / 48 per month\n  Vested by end month 12 = 12 * 160,000/48 = 160,000*0.25 = 40,000\n- Total North = 130,900 + 8,500 + 40,000 = 179,400\n\n**South:**\n- Cash taxable = 140,000 + 0%*140,000 = 140,000\n- After-tax cash = 140,000 * 0.70 = 98,000\n- Retirement match = 0.05*140,000 = 7,000\n  Check cap $9,000: 7,000 < 9,000, so eligible = 7,000, not taxed now\n- Equity: grant $0, so vested value = 0, regardless of 1-year cliff\n- Total South = 98,000 + 7,000 + 0 = 105,000\n\nRanking: 179,400 North > 105,000 South.\n\n{\"choice\": \"North\", \"value\": 179400}"
+}

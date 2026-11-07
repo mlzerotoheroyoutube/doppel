@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented find_max to return the maximum element across all tuple records.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the maximum element of all the given tuple records.\\\"\\\"\\\"\\n\\n\\ndef find_max(test_list):\\n    \\\"\\\"\\\"Write a function to find the maximum element of all the given tuple records.\\\"\\\"\\\"\\n    return max(x for tup in test_list for x in tup)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_max_example():\\n    assert solution.find_max([(2, 4), (6, 7), (5, 1), (6, 10), (8, 7)]) == 10\\n\\n\\ndef test_find_max_single_tuple():\\n    assert solution.find_max([(1, 2)]) == 2\\n\\n\\ndef test_find_max_negative_values():\\n    assert solution.find_max([(-5, -1), (-3, -10)]) == -1\\n\"}}\n```"
+}

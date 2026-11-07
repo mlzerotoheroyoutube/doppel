@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented median_trapezium as average of bases and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the median of a trapezium.\\\"\\\"\\\"\\n\\n\\ndef median_trapezium(base1, base2, height):\\n    \\\"\\\"\\\"Write a function to find the median of a trapezium.\\\"\\\"\\\"\\n    return (base1 + base2) / 2\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_median_trapezium_example():\\n    assert solution.median_trapezium(15, 25, 35) == 20\\n\\n\\ndef test_median_trapezium_average():\\n    assert solution.median_trapezium(10, 20, 5) == 15\\n    assert solution.median_trapezium(10, 10, 5) == 10\\n    assert solution.median_trapezium(0, 10, 7) == 5\\n\"}}\n```"
+}

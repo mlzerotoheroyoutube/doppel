@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented sort_tuple to sort by last element and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to sort a list of tuples in increasing order by the last element in each tuple.\\\"\\\"\\\"\\n\\n\\ndef sort_tuple(tup):\\n    \\\"\\\"\\\"Write a function to sort a list of tuples in increasing order by the last element in each tuple.\\\"\\\"\\\"\\n    return sorted(tup, key=lambda x: x[-1])\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_sort_tuple_example():\\n    assert solution.sort_tuple([(1, 3), (3, 2), (2, 1)]) == [(2, 1), (3, 2), (1, 3)]\\n\\n\\ndef test_sort_tuple_empty():\\n    assert solution.sort_tuple([]) == []\\n\\n\\ndef test_sort_tuple_sorts_by_last_element():\\n    assert solution.sort_tuple([(1, 2, 3), (0, 1, 0), (5, 5, 2)]) == [(0, 1, 0), (5, 5, 2), (1, 2, 3)]\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "First-Year Value = After-tax cash + Retirement match + Vested equity\n\nFormulas used:\nAfter-tax cash = (salary + salary * bonus%) * (1 - 0.35)\nRetirement match = min(salary * match% , cap)\nVested equity by end month 12 = grant * 12 / (4 * 12) = grant * 12 / 48\n\nNorth calculation from original inputs:\nAfter-tax cash_N = (140000.00 + 140000.00 * 0) * (1 - 0.35)\n= 140000.00 * 0.65 = 91000.00\nRetirement_N = min(140000.00 * 0.05 , 9000.00)\n= min(7000.00 , 9000.00) = 7000.00\nVested equity_N = 160000.00 * 12 / 48\n= 160000.00 * 0.25 = 40000.00\nTotal_N = 91000.00 + 7000.00 + 40000.00 = 138000.00\n\nSouth calculation from original inputs:\nAfter-tax cash_S = (185000.00 + 185000.00 * 0.10) * (1 - 0.35)\n= (185000.00 + 18500.00) * 0.65\n= 203500.00 * 0.65 = 132275.00\nRetirement_S = min(185000.00 * 0.06 , 6000.00)\n= min(11100.00 , 6000.00) = 6000.00\nVested equity_S = 0.00 * 12 / 48 = 0.00\nTotal_S = 132275.00 + 6000.00 + 0.00 = 138275.00\n\nRecomputed totals independently:\nNorth = (140000.00)*(0.65) + 7000.00 + 40000.00 = 138000.00\nSouth = (203500.00)*(0.65) + 6000.00 + 0.00 = 138275.00\n\nSouth 138275.00 > North 138000.00, so South has higher first-year value.\n\n{\"choice\": \"South\", \"value\": 138275}"
+}

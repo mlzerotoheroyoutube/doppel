@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North calculation:\n- Cash = $170,000 salary + 15% bonus = $170,000 + $25,500 = $195,500\n- After-tax cash = $195,500 * (1 - 0.25) = $146,625\n- Match = 5% of $170,000 = $8,500 capped at $6,000 = $6,000\n- Vested equity by month 12 = $160,000 / 4 = $40,000\n- Total = $146,625 + $6,000 + $40,000 = $192,625\n\nSouth calculation:\n- Cash = $170,000 salary + 10% bonus = $170,000 + $17,000 = $187,000\n- After-tax cash = $187,000 * (1 - 0.25) = $140,250\n- Match = 3% of $170,000 = $5,100 capped at $9,000 = $5,100\n- Vested equity by month 12 = $160,000 / 4 = $40,000\n- Total = $140,250 + $5,100 + $40,000 = $185,350\n\n$192,625 > $185,350, so North is higher.\n{\"choice\": \"North\", \"value\": 192625}"
+}

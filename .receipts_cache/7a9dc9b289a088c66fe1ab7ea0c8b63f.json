@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented median_numbers to return the median of three numbers as float and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the median of three specific numbers.\\\"\\\"\\\"\\n\\n\\ndef median_numbers(a, b, c):\\n    \\\"\\\"\\\"Write a function to find the median of three specific numbers.\\\"\\\"\\\"\\n    return float(sorted([a, b, c])[1])\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_median_numbers_example():\\n    assert solution.median_numbers(25, 55, 65) == 55.0\\n\\n\\ndef test_median_numbers_orderings():\\n    assert solution.median_numbers(55, 25, 65) == 55.0\\n    assert solution.median_numbers(65, 55, 25) == 55.0\\n    assert solution.median_numbers(25, 65, 55) == 55.0\\n    assert solution.median_numbers(1, 2, 3) == 2.0\\n    assert solution.median_numbers(3, 2, 1) == 2.0\\n    assert solution.median_numbers(5, 5, 10) == 5.0\\n    assert solution.median_numbers(-10, 0, 10) == 0.0\\n\"}\n}\n```"
+}

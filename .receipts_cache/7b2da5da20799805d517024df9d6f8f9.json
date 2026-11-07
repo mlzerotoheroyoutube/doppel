@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Analysis from today forward - the $400,000 already spent is sunk and gone either way, so ignore it:\n\n1. Continue:\n   Cost to finish = $500,000\n   Expected gross return = 0.5 * $1,200,000 + 0.5 * $0 = $600,000\n   Expected net value from today = $600,000 - $500,000 = $100,000\n\n2. Stop:\n   No further cost, sell for $150,000\n   Expected net value from today = $150,000\n\n3. Compare:\n   $150,000 stop > $100,000 continue\n\nThe value-maximizing decision is to stop.\n{\"choice\": \"stop\", \"value\": 150000}"
+}

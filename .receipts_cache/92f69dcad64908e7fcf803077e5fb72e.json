@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement next_Perfect_Square to return the smallest perfect square strictly greater than N.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the next perfect square greater than a given number.\\\"\\\"\\\"\\nimport math\\n\\n\\ndef next_Perfect_Square(N):\\n    \\\"\\\"\\\"Write a python function to find the next perfect square greater than a given number.\\\"\\\"\\\"\\n    if N < 0:\\n        return 0\\n    try:\\n        root = math.isqrt(N)\\n    except TypeError:\\n        root = math.floor(math.sqrt(N))\\n        while (root + 1) * (root + 1) <= N:\\n            root += 1\\n        while root * root > N:\\n            root -= 1\\n    return (root + 1) * (root + 1)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_next_Perfect_Square_example():\\n    assert solution.next_Perfect_Square(35) == 36\\n\\n\\ndef test_next_Perfect_Square_strictly_greater():\\n    assert solution.next_Perfect_Square(36) == 49\\n    assert solution.next_Perfect_Square(0) == 1\\n    assert solution.next_Perfect_Square(1) == 4\\n    assert solution.next_Perfect_Square(8) == 9\\n\\n\\ndef test_next_Perfect_Square_negative():\\n    assert solution.next_Perfect_Square(-5) == 0\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement max_aggregate by summing scores per name and returning the max item.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the maximum aggregate from the list of tuples.\\\"\\\"\\\"\\n\\n\\ndef max_aggregate(stdata):\\n    \\\"\\\"\\\"Write a function to calculate the maximum aggregate from the list of tuples.\\\"\\\"\\\"\\n    aggregates = {}\\n    for name, score in stdata:\\n        aggregates[name] = aggregates.get(name, 0) + score\\n    return max(aggregates.items(), key=lambda item: item[1])\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_max_aggregate_example():\\n    stdata = [('Juan Whelan', 90), ('Sabah Colley', 88), ('Peter Nichols', 7), ('Juan Whelan', 122), ('Sabah Colley', 84)]\\n    assert solution.max_aggregate(stdata) == ('Juan Whelan', 212)\\n\\n\\ndef test_max_aggregate_sums_multiple_entries():\\n    assert solution.max_aggregate([('a', 1), ('b', 2), ('a', 3)]) == ('a', 4)\\n\\n\\ndef test_max_aggregate_single_entry():\\n    assert solution.max_aggregate([('only', 5)]) == ('only', 5)\\n\"}}\n```"
+}

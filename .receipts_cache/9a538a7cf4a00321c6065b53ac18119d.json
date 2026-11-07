@@ -1,0 +1,18 @@
+{
+ "provider": "subq",
+ "model": "subq-snap-1.1",
+ "role": "judge",
+ "answers": {
+  "ship": {
+   "type": "choice",
+   "choice": "A",
+   "probabilities": {
+    "A": 0.6484698057174683,
+    "B": 0.35153016448020935
+   },
+   "confidence": 0.2969396114349365
+  }
+ },
+ "input_tokens": 757,
+ "usd": 3.0279999999999998e-05
+}

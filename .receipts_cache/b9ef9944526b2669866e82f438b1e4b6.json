@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented remove_uppercase using re.sub to strip uppercase letters.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove uppercase substrings from a given string by using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef remove_uppercase(str1):\\n    \\\"\\\"\\\"Write a function to remove uppercase substrings from a given string by using regex.\\\"\\\"\\\"\\n    return re.sub(r'[A-Z]', '', str1)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_remove_uppercase_example():\\n    assert solution.remove_uppercase('cAstyoUrFavoRitETVshoWs') == 'cstyoravoitshos'\\n\\n\\ndef test_remove_uppercase_no_uppercase():\\n    assert solution.remove_uppercase('hello world') == 'hello world'\\n\\n\\ndef test_remove_uppercase_all_uppercase():\\n    assert solution.remove_uppercase('HELLO') == ''\\n\\n\\ndef test_remove_uppercase_empty():\\n    assert solution.remove_uppercase('') == ''\\n\\n\\ndef test_remove_uppercase_with_digits_and_symbols():\\n    assert solution.remove_uppercase('Ab1Cd2!Ef') == 'b1d2!f'\\n\"}}\n```"
+}

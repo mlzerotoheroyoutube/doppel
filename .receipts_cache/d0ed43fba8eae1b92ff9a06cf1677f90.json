@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented min_of_three to return the smallest of three numbers and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find minimum of three numbers.\\\"\\\"\\\"\\n\\n\\ndef min_of_three(a, b, c):\\n    \\\"\\\"\\\"Write a function to find minimum of three numbers.\\\"\\\"\\\"\\n    return min(a, b, c)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import min_of_three\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert min_of_three(10, 20, 0) == 0\\n\\n\\ndef test_min_in_each_position():\\n    assert min_of_three(1, 2, 3) == 1\\n    assert min_of_three(2, 1, 3) == 1\\n    assert min_of_three(2, 3, 1) == 1\\n\\n\\ndef test_negative_and_float_numbers():\\n    assert min_of_three(-1, -5, 0) == -5\\n    assert min_of_three(1.5, 0.5, 2.5) == 0.5\\n    assert min_of_three(-1.5, 0.0, -0.5) == -1.5\\n\\n\\ndef test_equal_numbers():\\n    assert min_of_three(5, 5, 5) == 5\\n    assert min_of_three(2, 2, 3) == 2\\n    assert min_of_three(3, 2, 2) == 2\\n    assert min_of_three(0, 0, 0) == 0\\n\"}}\n```"
+}

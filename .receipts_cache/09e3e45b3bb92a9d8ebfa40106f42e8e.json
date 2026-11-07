@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "low",
+ "text": "{\"command\": \"\", \"answer\": \"I can't run `link sandeep 692190` \u2014 use `link <name>` (e.g. `link sandeep`) or try `help`.\"}"
+}

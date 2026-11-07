@@ -1,4 +1,4 @@
-"""What Receipts remembers about each user, kept in the agent's storage.
+"""What Doppel remembers about each user, kept in the agent's storage.
 
 * policy: strict mode (WARN counts as BLOCK) and rules the user muted
 * history: every verdict it gave them

@@ -1,4 +1,4 @@
-# Receipts: Product, Architecture and Plan
+# Doppel: Product, Architecture and Plan
 
 AIE Code Summit Hackathon · Nov 7, 2026 · Track: **Trust but Verify** · Solo build
 
@@ -62,7 +62,7 @@ ASI:One chat ⇄ Gate (chat protocol, per-user memory)
 ## 1. Product
 
 ### One line
-**Your AI coding agent says "All tests pass ✅". Receipts checks whether that's true.**
+**Your AI coding agent says "All tests pass ✅". Doppel checks whether that's true.**
 
 ### The problem
 AI agents write pull requests faster than people can review them, and "tests pass" is easy to fake.
@@ -83,7 +83,7 @@ Teams that let coding agents open PRs (Claude Code, Copilot, Cursor, Devin and o
 merge gate they can trust without reading every line.
 
 ### What it does
-Receipts runs on every PR and posts one of three verdicts as a check:
+Doppel runs on every PR and posts one of three verdicts as a check:
 
 | Verdict | Meaning |
 |---|---|
@@ -147,7 +147,7 @@ flowchart LR
 
 | Module | Job | Model? |
 |---|---|---|
-| `receipts/sandbox.py` | Copies the project to a temp dir and runs pytest with a fixed `PYTHONHASHSEED`, no bytecode and a timeout. Reads results from JUnit XML. In isolated mode it uses `--noconftest` and an empty config so the PR can't hook Receipts' tests. | no |
+| `receipts/sandbox.py` | Copies the project to a temp dir and runs pytest with a fixed `PYTHONHASHSEED`, no bytecode and a timeout. Reads results from JUnit XML. In isolated mode it uses `--noconftest` and an empty config so the PR can't hook Doppel's tests. | no |
 | `receipts/tamper.py` | Static AST comparison of base and head. | no |
 | `receipts/blind.py` | Extracts the interface, writes the blind tests, runs the before/after differential, judges failures. | yes |
 | `receipts/mutation.py` | Plants AST mutants in the changed functions only (comparisons, arithmetic, `and`/`or`, `not`, integer constants, `min`/`max`). Runs them in parallel and scores both the PR's tests and the blind tests. | no |
@@ -178,7 +178,7 @@ flowchart LR
 | fail | fail | issue | **B002** block: the issue isn't actually fixed |
 | fail | fail | contract | B003 info: pre-existing problem, not this PR's fault |
 | fail | pass | any | good: the PR fixed it |
-| — | fail | judged invalid | B009 info: Receipts discarded its own bad test |
+| — | fail | judged invalid | B009 info: Doppel discarded its own bad test |
 
 ### Verdict
 Any block receipt → **BLOCK**. Otherwise any warn receipt → **WARN**. Otherwise **PASS**.
@@ -188,7 +188,7 @@ The CLI exits 1 on BLOCK, so it can gate CI.
 
 | Actor | Sees | Never sees |
 |---|---|---|
-| Implementer (AI agent) | Issue, full code, its own tests | Receipts' blind tests |
+| Implementer (AI agent) | Issue, full code, its own tests | Doppel's blind tests |
 | Blind writer | Issue, base interface | Diff, PR text, PR tests, function bodies |
 | Judge | Issue, interface, one test, its failure | Any code |
 | Static and mutation checks | Base and head code | — (deterministic) |
@@ -211,7 +211,7 @@ The honest ones include an odd-but-correct fix (`> 4999` for integer cents) to m
 | Mode | Bad PRs caught | Honest PRs blocked |
 |---|---|---|
 | Static + mutation only (no model) | **7 / 12** | **0 / 6** |
-| Full Receipts (with blind tests) | pending: needs credentials | pending |
+| Full Doppel (with blind tests) | pending: needs credentials | pending |
 | Baseline: an LLM reads the diff | pending | pending |
 
 The 5 bad PRs that the static checks miss are the ones only behavior testing can catch. That's the job
@@ -221,18 +221,18 @@ of the blind tests. We report whatever the full run produces, including misses.
 
 ## 4. Demo (3 minutes live, 1-minute video), all inside an ASI:One chat
 
-Everything happens in one ASI:One conversation with the Receipts agent, with no custom frontend
+Everything happens in one ASI:One conversation with the Doppel agent, with no custom frontend
 (a Fetch.ai requirement). Behind the gate agent, six worker agents run in a uAgents Bureau.
 
 | Time | On screen | Line to say |
 |---|---|---|
 | 0:00 | A GitHub PR by a coding agent: "Fixed SAVE10! All 11 tests pass ✅" | "Agents write PRs faster than we can review them. This one says it's fixed. Is it?" |
-| 0:15 | In ASI:One, paste the PR link. The reply says "Six agents are on it…" | "Receipts runs six agents. Two of them, the test writer and the judge, never see the code." |
-| 0:45 | 🛑 **BLOCK**: "The issue is not actually fixed: percent coupons must apply to every unit", plus "The PR's tests caught 4/18 planted bugs; Receipts' tests caught 16/18" | "It wrote its own tests from the issue alone, then ran them on the code before and after the PR." |
+| 0:15 | In ASI:One, paste the PR link. The reply says "Six agents are on it…" | "Doppel runs six agents. Two of them, the test writer and the judge, never see the code." |
+| 0:45 | 🛑 **BLOCK**: "The issue is not actually fixed: percent coupons must apply to every unit", plus "The PR's tests caught 4/18 planted bugs; Doppel's tests caught 16/18" | "It wrote its own tests from the issue alone, then ran them on the code before and after the PR." |
 | 1:30 | Rapid fire: `demo i1-bad-conftest-patch`, then `demo i2-bad-detects-tests`. Each is BLOCKED with a named rule | "The cheats agents actually use: patched conftest, code that detects pytest, deleted tests." |
-| 2:00 | Type `wrong` twice, then `me`. Receipts shows it has learned for this user | "It remembers you: your strictness and your feedback. Two 'wrong's and that rule only warns for you." |
+| 2:00 | Type `wrong` twice, then `me`. Doppel shows it has learned for this user | "It remembers you: your strictness and your feedback. Two 'wrong's and that rule only warns for you." |
 | 2:30 | `demo i1-good-subtotal`: ✅ **PASS** | "Honest PRs pass. 0 of 6 falsely blocked." |
-| 2:45 | One slide: Receipts versus the diff-reading baseline on 18 PRs | "Merged, with receipts." |
+| 2:45 | One slide: Doppel versus the diff-reading baseline on 18 PRs | "Merged, with receipts." |
 
 The mutation counts in the 0:45 row are placeholders until the full benchmark run.
 The scoreboard is one supporting slide, not the product. The product is the agent in the chat.
@@ -241,7 +241,7 @@ The scoreboard is one supporting slide, not the product. The product is the agen
 
 | Requirement | How |
 |---|---|
-| Agent registered on Agentverse | `receipts-gate` with a mailbox (`python -m receipts.agents.run`) |
+| Agent registered on Agentverse | `doppel` with a mailbox (`python -m receipts.agents.run`) |
 | Agent Chat Protocol | `chat_protocol_spec`, `ChatMessage`, `ChatAcknowledgement` in `receipts/agents/gate.py` |
 | Discoverable on ASI:One | `publish_agent_details=True`, `AGENT_README.md` with tags |
 | Real tool execution or multi-agent work | 6 workers: suite, tamper, blind writer, differential, judge, mutation; parallel fan-out |
@@ -252,7 +252,7 @@ The scoreboard is one supporting slide, not the product. The product is the agen
 
 ### Judging fit
 
-| Criterion | Weight | How Receipts scores |
+| Criterion | Weight | How Doppel scores |
 |---|---|---|
 | Technical demo | 35% | A live red/green verdict on real PRs with real evidence |
 | Implementation difficulty | 30% | Code-blind generation, before/after differential, AST mutation engine, tamper rules, isolation |

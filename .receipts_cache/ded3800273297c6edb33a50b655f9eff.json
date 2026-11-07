@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Requirement: Quantity = 1200 units, Deadline = within 20 days, single supplier.\n\nEligibility check - quantity:\n- Alpha: max 2400 >= 1200 => quantity PASS\n- Bravo: max 1200 >= 1200 => quantity PASS\n- Cobalt: max 1700 >= 1200 => quantity PASS\n\nEligibility check - deadline (delivery <= 20):\n- Alpha: 24 <= 20 ? No => FAIL\n- Bravo: 35 <= 20 ? No => FAIL\n- Cobalt: 35 <= 20 ? No => FAIL\n\nNo supplier meets both.\n\nFor verification, recompute total landed cost independently from originals:\nFormula: Total = (GoodsUSD + Shipping) * (1 + DutyRate)\nwhere GoodsUSD = Units * UnitPriceForeign * FX\n\nAlpha:\nGoodsUSD = 1200 * 12.98 * 1.08 = 16822.08\nTotal_Alpha = (16822.08 + 600.00) * (1 + 0.12) = 17422.08 * 1.12 = 19512.7296\n\nBravo:\nGoodsUSD = 1200 * 1374.32 * 0.0067 = 11049.5328\nTotal_Bravo = (11049.5328 + 600.00) * (1 + 0.12) = 11649.5328 * 1.12 = 13047.476736\n\nCobalt:\nGoodsUSD = 1200 * 13.72 * 1 = 16464.00\nTotal_Cobalt = (16464.00 + 600.00) * (1 + 0.00) = 17064.00 * 1.0 = 17064.00\n\nCosts are moot because all fail deadline. Eligible set is empty.\nTherefore choice is none with value 0.\n\n{\"choice\": \"none\", \"value\": 0}"
+}

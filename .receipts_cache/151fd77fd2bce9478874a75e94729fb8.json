@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "low",
+ "text": "{\"command\": \"\", \"answer\": \"E.g. in `mlzerotoheroyoutube/receipts-demo-store#1`: **SAVE10 only discounts the first item** \u2014 fails on multi-item carts.\"}"
+}

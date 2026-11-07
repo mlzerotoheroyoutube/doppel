@@ -2,7 +2,7 @@
 
 Isolation rules:
 * The project is copied to a fresh temp dir; the original is never touched.
-* Receipts' own tests live outside the project and run with --noconftest and
+* Doppel's own tests live outside the project and run with --noconftest and
   an empty config file, so a PR cannot hook them through conftest.py,
   pytest.ini or pyproject settings.
 * Fixed PYTHONHASHSEED, no bytecode, no pytest cache, hard timeout.

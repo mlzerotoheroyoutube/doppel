@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented check_type to return True when all tuple elements share the same type.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to check if all the elements in tuple have same data type or not.\\\"\\\"\\\"\\n\\n\\ndef check_type(test_tuple):\\n    \\\"\\\"\\\"Write a function to check if all the elements in tuple have same data type or not.\\\"\\\"\\\"\\n    if len(test_tuple) == 0:\\n        return True\\n    first_type = type(test_tuple[0])\\n    return all(type(element) is first_type for element in test_tuple)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_all_same_ints():\\n    assert solution.check_type((5, 6, 7, 3, 5, 6)) == True\\n\\n\\ndef test_mixed_types():\\n    assert solution.check_type((5, \\\"6\\\", 7)) == False\\n\\n\\ndef test_all_same_strings():\\n    assert solution.check_type((\\\"a\\\", \\\"b\\\", \\\"c\\\")) == True\\n\\n\\ndef test_empty_tuple():\\n    assert solution.check_type(()) == True\\n\\n\\ndef test_single_element():\\n    assert solution.check_type((42,)) == True\\n\"}}\n```"
+}

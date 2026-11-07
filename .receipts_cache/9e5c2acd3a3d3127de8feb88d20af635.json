@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "For a fully amortized loan, the monthly payment is\n\n\\[\n\\text{PMT}=P\\frac{r(1+r)^n}{(1+r)^n-1},\n\\qquad\n\\text{Total cost}=n(\\text{PMT})-P+\\text{fee}\n\\]\n\nwhere \\(P=\\$50{,}000\\) and \\(r=\\text{APR}/12\\).\n\n**Loan A:** \\(r=0.059/12=0.0049167,\\ n=48\\)\n\n\\[\n\\text{PMT}\\approx \\$1{,}171.96\n\\]\n\\[\n\\text{Interest}=48(1{,}171.96)-50{,}000\\approx \\$6{,}254.10\n\\]\nFee \\(=\\$0\\), so total cost \\(\\approx \\$6{,}254.10\\).\n\n**Loan B:** \\(r=0.069/12=0.00575,\\ n=48\\)\n\n\\[\n\\text{PMT}\\approx \\$1{,}194.99\n\\]\n\\[\n\\text{Interest}=48(1{,}194.99)-50{,}000\\approx \\$7{,}359.70\n\\]\nFee \\(=3\\%\\times 50{,}000=\\$1{,}500\\), so total cost \\(\\approx \\$8{,}859.70\\).\n\n**Loan C:** \\(r=0.059/12=0.0049167,\\ n=36\\)\n\n\\[\n\\text{PMT}\\approx \\$1{,}518.83\n\\]\n\\[\n\\text{Interest}=36(1{,}518.83)-50{,}000\\approx \\$4{,}677.97\n\\]\nFee \\(=1\\%\\times 50{,}000=\\$500\\), so total cost \\(\\approx \\$5{,}177.97\\).\n\nLoan C has the lowest total cost.\n\n{\"choice\": \"C\", \"value\": 5177.97}"
+}

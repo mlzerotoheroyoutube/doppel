@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement recursive permute_string returning all permutations including duplicates and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to print all permutations of a given string including duplicates.\\\"\\\"\\\"\\n\\n\\ndef permute_string(str):\\n    \\\"\\\"\\\"Write a function to print all permutations of a given string including duplicates.\\\"\\\"\\\"\\n    if len(str) <= 1:\\n        return [str]\\n    result = []\\n    for i in range(len(str)):\\n        ch = str[i]\\n        rest = str[:i] + str[i + 1:]\\n        for p in permute_string(rest):\\n            result.append(ch + p)\\n    return result\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_permute_ab():\\n    assert solution.permute_string('ab') == ['ab', 'ba']\\n\\n\\ndef test_permute_single_char():\\n    assert solution.permute_string('a') == ['a']\\n\\n\\ndef test_permute_empty():\\n    assert solution.permute_string('') == ['']\\n\\n\\ndef test_permute_includes_duplicates():\\n    assert solution.permute_string('aa') == ['aa', 'aa']\\n\\n\\ndef test_permute_abc():\\n    assert solution.permute_string('abc') == ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented combinations_list using binary-counting order with tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find all possible combinations of the elements of a given list.\\\"\\\"\\\"\\n\\n\\ndef combinations_list(list1):\\n    \\\"\\\"\\\"Write a function to find all possible combinations of the elements of a given list.\\\"\\\"\\\"\\n    result = [[]]\\n    for item in list1:\\n        result = result + [[item] + combo for combo in result]\\n    return result\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_combinations_list_example():\\n    assert solution.combinations_list(['orange', 'red', 'green', 'blue']) == [[], ['orange'], ['red'], ['red', 'orange'], ['green'], ['green', 'orange'], ['green', 'red'], ['green', 'red', 'orange'], ['blue'], ['blue', 'orange'], ['blue', 'red'], ['blue', 'red', 'orange'], ['blue', 'green'], ['blue', 'green', 'orange'], ['blue', 'green', 'red'], ['blue', 'green', 'red', 'orange']]\\n\\n\\ndef test_combinations_list_empty():\\n    assert solution.combinations_list([]) == [[]]\\n\\n\\ndef test_combinations_list_single():\\n    assert solution.combinations_list(['a']) == [[], ['a']]\\n\\n\\ndef test_combinations_list_two_elements():\\n    assert solution.combinations_list([1, 2]) == [[], [1], [2], [2, 1]]\\n\"}}\n```"
+}

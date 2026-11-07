@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "medium",
+ "text": "**Not sure what `link sandeep 692190` means \u2014 can you clarify?**\n\nDid you mean:\n- watch a repo like `sandeep/<repo-name>`?\n- check PR / issue `692190`?\n- link GitHub user `sandeep`?\n\nI can list repos, watch repos, and verify PRs / fix issues if you tell me the full `owner/repo`."
+}

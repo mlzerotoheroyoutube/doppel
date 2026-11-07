@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Eligibility: need 1200 units from one supplier in <=30 days.\n\n- Alpha: max 1700 >=1200 qualifies quantity. 18 days <=30 qualifies time.\n- Bravo: max 1000 <1200 fails quantity. 10 days qualifies time. Disqualified.\n- Cobalt: max 2400 >=1200 qualifies quantity. 35 days >30 fails time. Disqualified.\n\nOnly Alpha qualifies.\n\nAlpha cost for 1200 units, full precision, unrounded through steps:\nGoods in EUR = 11.91 * 1200 = 14292\nGoods in USD = 14292 * 1.08 = 15435.36\nGoods + shipping = 15435.36 + 600.00 = 16035.36\nDuty = 0.08 * 16035.36 = 1282.8288\nTotal landed = 16035.36 + 1282.8288 = 16035.36 * 1.08 = 17318.1888\n\nCross-check in reverse:\n17318.1888 / 1.08 = 16035.36 goods+shipping\n16035.36 - 600 = 15435.36 goods USD\n15435.36 / 1.08 = 14292 goods EUR\n14292 / 1200 = 11.91 matches unit price.\n\nRounded for final presentation to cents: 17318.19\n\nFor reference disqualified totals:\nBravo 1200 would be (1959.48*1200*0.0067+600)*1.04 = 17008.387968 but fails quantity.\nCobalt 1200 would be 11.98*1200+1500 = 15876 but fails deadline.\n\nLowest qualified is Alpha.\n{\"choice\": \"Alpha\", \"value\": 17318.19}"
+}

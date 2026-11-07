@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Sunk $400,000 is gone and must be ignored for the decision from today.\n\nContinue option from today:\n- Cost to finish: $350,000\n- Expected gross return = 0.30 * $1,200,000 + 0.70 * $100,000\n = $360,000 + $70,000 = $430,000\n- Expected net value from today = $430,000 - $350,000 = $80,000\n\nStop option from today:\n- Sell for $60,000, no further cost\n- Expected net value from today = $60,000\n\n$80,000 > $60,000, so continue maximizes expected value from today.\n\n{\"choice\": \"continue\", \"value\": 80000}"
+}

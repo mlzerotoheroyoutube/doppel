@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "planner",
+ "effort": "medium",
+ "text": "{\"lessons\": [\"Carry full precision through all intermediate calculations and round only the final result.\", \"Recompute every derived total independently from original inputs before choosing an answer.\", \"Write each formula with substituted inputs so every step can be verified without guessing.\"]}"
+}

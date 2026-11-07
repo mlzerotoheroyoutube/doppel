@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement check_monthnum to return True only for February and add tests covering all months.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to check whether the given month name contains 28 days or not.\\\"\\\"\\\"\\n\\n\\ndef check_monthnum(monthname1):\\n    \\\"\\\"\\\"Write a function to check whether the given month name contains 28 days or not.\\\"\\\"\\\"\\n    return monthname1 == \\\"February\\\"\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_check_monthnum_february():\\n    assert solution.check_monthnum(\\\"February\\\") == True\\n\\n\\ndef test_check_monthnum_other_months():\\n    assert solution.check_monthnum(\\\"January\\\") == False\\n    assert solution.check_monthnum(\\\"March\\\") == False\\n    assert solution.check_monthnum(\\\"April\\\") == False\\n    assert solution.check_monthnum(\\\"May\\\") == False\\n    assert solution.check_monthnum(\\\"June\\\") == False\\n    assert solution.check_monthnum(\\\"July\\\") == False\\n    assert solution.check_monthnum(\\\"August\\\") == False\\n    assert solution.check_monthnum(\\\"September\\\") == False\\n    assert solution.check_monthnum(\\\"October\\\") == False\\n    assert solution.check_monthnum(\\\"November\\\") == False\\n    assert solution.check_monthnum(\\\"December\\\") == False\\n\"}}\n```"
+}

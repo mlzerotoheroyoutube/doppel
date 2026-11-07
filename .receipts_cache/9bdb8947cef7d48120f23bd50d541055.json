@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement frequency_Of_Smallest to count occurrences of the minimum value.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the frequency of the smallest value in a given array.\\\"\\\"\\\"\\n\\n\\ndef frequency_Of_Smallest(n, arr):\\n    \\\"\\\"\\\"Write a python function to find the frequency of the smallest value in a given array.\\\"\\\"\\\"\\n    if not arr:\\n        return 0\\n    smallest = min(arr)\\n    return arr.count(smallest)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.frequency_Of_Smallest(5, [1, 2, 3, 4, 3]) == 1\\n\\n\\ndef test_multiple_occurrences():\\n    assert solution.frequency_Of_Smallest(4, [3, 1, 1, 2]) == 2\\n\\n\\ndef test_all_same():\\n    assert solution.frequency_Of_Smallest(3, [5, 5, 5]) == 3\\n\\n\\ndef test_negative_and_single():\\n    assert solution.frequency_Of_Smallest(4, [-2, -1, 0, -2]) == 2\\n    assert solution.frequency_Of_Smallest(1, [42]) == 1\\n\\n\\ndef test_empty():\\n    assert solution.frequency_Of_Smallest(0, []) == 0\\n\"}}\n```"
+}

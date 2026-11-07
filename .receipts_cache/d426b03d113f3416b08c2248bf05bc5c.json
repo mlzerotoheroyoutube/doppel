@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement start_withp to return first two p-words across phrases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to match two words from a list of words starting with letter 'p'.\\\"\\\"\\\"\\n\\n\\ndef start_withp(words):\\n    \\\"\\\"\\\"Write a function to match two words from a list of words starting with letter 'p'.\\\"\\\"\\\"\\n    if isinstance(words, str):\\n        words = [words]\\n    found = []\\n    for item in words:\\n        if not isinstance(item, str):\\n            continue\\n        for token in item.split():\\n            if token[:1].lower() == \\\"p\\\":\\n                found.append(token)\\n                if len(found) == 2:\\n                    return tuple(found)\\n    return tuple(found)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import start_withp\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert start_withp([\\\"Python PHP\\\", \\\"Java JavaScript\\\", \\\"c c++\\\"]) == ('Python', 'PHP')\\n\\n\\ndef test_case_insensitive_and_later_position():\\n    assert start_withp([\\\"Java JavaScript\\\", \\\"python php\\\", \\\"c c++\\\"]) == ('python', 'php')\\n\\n\\ndef test_flat_word_list():\\n    assert start_withp([\\\"Java\\\", \\\"Python\\\", \\\"PHP\\\"]) == ('Python', 'PHP')\\n\"}}\n```"
+}

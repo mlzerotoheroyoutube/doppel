@@ -1,4 +1,0 @@
-pytest>=8
-anthropic>=2
-openai>=1
-uagents>=0.26

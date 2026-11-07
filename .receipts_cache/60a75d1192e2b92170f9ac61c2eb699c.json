@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement find_adverb_position with ly regex returning first match tuple.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find all adverbs and their positions in a given sentence.\\\"\\\"\\\"\\n\\nimport re\\n\\n_ADVERB_RE = re.compile(r\\\"\\\\b\\\\w+ly\\\\b\\\", re.IGNORECASE)\\n\\n\\ndef find_adverb_position(text):\\n    \\\"\\\"\\\"Write a function to find all adverbs and their positions in a given sentence.\\\"\\\"\\\"\\n    if not isinstance(text, str):\\n        return None\\n    m = _ADVERB_RE.search(text)\\n    if not m:\\n        return None\\n    return (m.start(), m.end(), m.group())\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.find_adverb_position(\\\"clearly!! we can see the sky\\\") == (0, 7, 'clearly')\\n\\n\\ndef test_finds_adverb_in_middle():\\n    assert solution.find_adverb_position(\\\"She quickly ran to the store\\\") == (4, 11, 'quickly')\\n\\n\\ndef test_punctuation_after_adverb():\\n    assert solution.find_adverb_position(\\\"He ran quickly, and left.\\\") == (7, 14, 'quickly')\\n\\n\\ndef test_no_adverb_returns_none():\\n    assert solution.find_adverb_position(\\\"we can see the sky\\\") is None\\n\"}}\n```"
+}

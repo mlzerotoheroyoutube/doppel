@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented replace_blank to replace spaces with the given character and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to replace blank spaces with any character in a string.\\\"\\\"\\\"\\n\\n\\ndef replace_blank(str1, char):\\n    \\\"\\\"\\\"Write a function to replace blank spaces with any character in a string.\\\"\\\"\\\"\\n    return str1.replace(\\\" \\\", char)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_replace_blank_example():\\n    assert solution.replace_blank(\\\"hello people\\\", \\\"@\\\") == \\\"hello@people\\\"\\n\\n\\ndef test_replace_blank_multiple_spaces():\\n    assert solution.replace_blank(\\\"a b c\\\", \\\"-\\\") == \\\"a-b-c\\\"\\n\\n\\ndef test_replace_blank_no_spaces():\\n    assert solution.replace_blank(\\\"hello\\\", \\\"@\\\") == \\\"hello\\\"\\n\\n\\ndef test_replace_blank_empty_string():\\n    assert solution.replace_blank(\\\"\\\", \\\"@\\\") == \\\"\\\"\\n\"}}\n```"
+}

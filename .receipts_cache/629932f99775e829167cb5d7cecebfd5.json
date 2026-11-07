@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "low",
+ "text": "{\"command\": \"\", \"answer\": \"I don't have any recent verdicts or watched repos on file, so I can't confirm that report. Share a PR link to verify, or try `help`.\"}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement max_volume for integer-sided cuboids as equal-as-possible distribution.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the maximum volume of a cuboid with given sum of sides.\\\"\\\"\\\"\\n\\nimport math\\n\\n\\ndef max_volume(s):\\n    \\\"\\\"\\\"Return maximum volume of a cuboid with integer sides summing to s.\\n\\n    The sum `s` is length + width + height. Sides are positive integers;\\n    the product is maximized when sides are as equal as possible.\\n    \\\"\\\"\\\"\\n    if s < 0:\\n        return 0\\n    n = math.floor(s)\\n    if n < 3:\\n        return 0\\n    q, r = divmod(n, 3)\\n    if r == 0:\\n        return q * q * q\\n    if r == 1:\\n        return q * q * (q + 1)\\n    return q * (q + 1) * (q + 1)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import max_volume\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_max_volume_example():\\n    assert max_volume(8) == 18\\n\\n\\ndef test_max_volume_equal_sides():\\n    assert max_volume(3) == 1\\n    assert max_volume(6) == 8\\n    assert max_volume(9) == 27\\n\\n\\ndef test_max_volume_unequal_sides():\\n    assert max_volume(7) == 12\\n    assert max_volume(10) == 36\\n\\n\\ndef test_max_volume_small_or_negative():\\n    assert max_volume(0) == 0\\n    assert max_volume(1) == 0\\n    assert max_volume(2) == 0\\n    assert max_volume(-5) == 0\\n\"}}\n```"
+}

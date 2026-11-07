@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step-by-step first-year value = after-tax cash + retirement match + vested equity:\n\n**North:**\n- Cash = salary + bonus = 170,000.00 + 10%*170,000.00 = 170,000.00 + 17,000.00 = 187,000.00\n- After-tax cash = 187,000.00 * (1 - 0.30) = 187,000.00 * 0.70 = 130,900.00\n- Retirement match = min(5%*170,000.00, 20,000.00) = min(8,500.00, 20,000.00) = 8,500.00, not taxed now\n- Equity vested by month 12 = 160,000.00 * 12 / 48 = 160,000.00 * 0.25 = 40,000.00\n- Total North = 130,900.00 + 8,500.00 + 40,000.00 = 179,400.00\n\nCross-check reverse: 179,400.00 - 40,000.00 = 139,400.00; - 8,500.00 = 130,900.00; /0.70 = 187,000.00; -170,000.00 = 17,000.00 = 10% salary. OK.\n\n**South:**\n- Cash = 140,000.00 + 0% = 140,000.00\n- After-tax cash = 140,000.00 * 0.70 = 98,000.00\n- Retirement match = min(5%*140,000.00, 9,000.00) = min(7,000.00, 9,000.00) = 7,000.00\n- Equity vested = 0.00 * 12/48 with 1-year cliff = 0.00\n- Total South = 98,000.00 + 7,000.00 + 0.00 = 105,000.00\n\nCross-check reverse: 105,000.00 - 0.00 = 105,000.00; -7,000.00 = 98,000.00; /0.70 = 140,000.00. OK.\n\n179,400.00 > 105,000.00, so North is higher.\n\n{\"choice\": \"North\", \"value\": 179400}"
+}

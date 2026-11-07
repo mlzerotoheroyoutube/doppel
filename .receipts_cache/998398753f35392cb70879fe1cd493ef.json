@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement add_consecutive_nums to return pairwise sums of consecutive elements.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to add consecutive numbers of a given list.\\\"\\\"\\\"\\n\\n\\ndef add_consecutive_nums(nums):\\n    \\\"\\\"\\\"Write a function to add consecutive numbers of a given list.\\\"\\\"\\\"\\n    return [nums[i] + nums[i + 1] for i in range(len(nums) - 1)]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_from_issue():\\n    assert solution.add_consecutive_nums([1, 1, 3, 4, 4, 5, 6, 7]) == [2, 4, 7, 8, 9, 11, 13]\\n\\n\\ndef test_empty_list():\\n    assert solution.add_consecutive_nums([]) == []\\n\\n\\ndef test_single_element():\\n    assert solution.add_consecutive_nums([5]) == []\\n\\n\\ndef test_two_elements():\\n    assert solution.add_consecutive_nums([2, 3]) == [5]\\n\\n\\ndef test_does_not_mutate_input():\\n    nums = [1, 2, 3]\\n    result = solution.add_consecutive_nums(nums)\\n    assert result == [3, 5]\\n    assert nums == [1, 2, 3]\\n\"}}\n```"
+}

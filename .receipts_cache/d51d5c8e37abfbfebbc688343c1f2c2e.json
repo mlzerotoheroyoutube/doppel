@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement loss_amount to return cost difference on loss else None\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function that gives loss amount if the given amount has loss else return none.\\\"\\\"\\\"\\n\\n\\ndef loss_amount(actual_cost, sale_amount):\\n    \\\"\\\"\\\"Write a function that gives loss amount if the given amount has loss else return none.\\\"\\\"\\\"\\n    if actual_cost > sale_amount:\\n        return actual_cost - sale_amount\\n    return None\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_loss_returns_amount():\\n    assert solution.loss_amount(1500, 1200) == 300\\n\\n\\ndef test_no_loss_returns_none():\\n    assert solution.loss_amount(1200, 1500) is None\\n\\n\\ndef test_equal_amounts_returns_none():\\n    assert solution.loss_amount(1500, 1500) is None\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement sum_of_digits to sum all digits and add covering tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to compute the sum of digits of each number of a given list.\\\"\\\"\\\"\\n\\n\\ndef sum_of_digits(nums):\\n    \\\"\\\"\\\"Write a function to compute the sum of digits of each number of a given list.\\\"\\\"\\\"\\n    total = 0\\n    for num in nums:\\n        for ch in str(abs(num)):\\n            if ch.isdigit():\\n                total += int(ch)\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.sum_of_digits([10, 2, 56]) == 14\\n\\n\\ndef test_empty_list():\\n    assert solution.sum_of_digits([]) == 0\\n\\n\\ndef test_single_digit_numbers():\\n    assert solution.sum_of_digits([1, 2, 3]) == 6\\n\\n\\ndef test_zeros_and_multiples_of_ten():\\n    assert solution.sum_of_digits([0, 100, 20]) == 3\\n\\n\\ndef test_negative_numbers():\\n    assert solution.sum_of_digits([-12, 34]) == 10\\n\"}}\n```"
+}

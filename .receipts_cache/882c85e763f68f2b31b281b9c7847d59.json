@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = (price - unit cost) * units sold - fixed cost\nUnits sold = min(demand, capacity 900) since margin >0 for all prices.\n\n- $19: sold = min(1347,900)=900. Profit = (19-9)*900 - 5000 = 10*900-5000 = 4000\n- $24: sold = min(1916,900)=900. Profit = (24-9)*900 - 5000 = 15*900-5000 = 8500\n- $29: sold = min(1309,900)=900. Profit = (29-9)*900 - 5000 = 20*900-5000 = 13000\n- $34: sold = min(209,900)=209. Profit = (34-9)*209 - 5000 = 25*209-5000 = 225\n- $39: sold = min(94,900)=94. Profit = (39-9)*94 - 5000 = 30*94-5000 = -2180\n\nMaximum is $29 with $13,000 profit.\n{\"choice\": \"29\", \"value\": 13000}"
+}

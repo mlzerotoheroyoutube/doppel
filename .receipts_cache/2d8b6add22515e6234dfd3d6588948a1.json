@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step 1: Requirement is 1,200 units from one supplier, delivered in \u226420 days.\n\nStep 2: Check each supplier against quantity and deadline:\n- Alpha: Capacity 2,400 \u2265 1,200, but delivery 24 days > 20 days \u2014 does not qualify.\n- Bravo: Capacity 1,200 \u2265 1,200, but delivery 35 days > 20 days \u2014 does not qualify.\n- Cobalt: Capacity 1,700 \u2265 1,200, but delivery 35 days > 20 days \u2014 does not qualify.\n\nStep 3: No supplier meets both the quantity and deadline requirements, so no landed cost qualifies.\n\n{\"choice\": \"none\", \"value\": 0}"
+}

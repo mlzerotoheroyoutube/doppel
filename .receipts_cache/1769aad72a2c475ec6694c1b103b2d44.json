@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Monthly payment for fully amortized loan:\n\nP = 50000, r = APR/12, n = months\nPMT = P * r / (1 - (1+r)^-n)\nTotal paid = n*PMT\nInterest = n*PMT - P\nTotal cost = Interest + upfront fee\n\nLoan A: 7.9% APR, 5yr\nr = 0.079/12 = 0.00658333, n=60\n(1+r)^60 \u2248 1.48246385\n(1+r)^-60 \u2248 0.67455270\nPMT = 50000*0.00658333 / (1-0.67455270)\n\u2248 329.16667 / 0.32544730 \u2248 1011.43\nTotal paid \u2248 60*1011.4285 = 60685.71\nInterest \u2248 10685.71\nFee = 2%*50000 = 1000 paid upfront\nTotal cost A \u2248 10685.71 + 1000 = 11685.71\n\nLoan B: 6.9% APR, 5yr\nr = 0.069/12 = 0.00575, n=60\n(1+r)^60 \u2248 1.41059546\n(1+r)^-60 \u2248 0.70892047\nPMT = 50000*0.00575 / (1-0.70892047)\n\u2248 287.5 / 0.29107953 \u2248 987.70\nTotal paid \u2248 60*987.7026 = 59262.15\nInterest \u2248 9262.15\nFee = 0\nTotal cost B \u2248 9262.15\n\nLoan C: 5.9% APR, 4yr\nr = 0.059/12 = 0.00491667, n=48\n(1+r)^48 \u2248 1.26544233\n(1+r)^-48 \u2248 0.79023751\nPMT = 50000*0.00491667 / (1-0.79023751)\n\u2248 245.83333 / 0.20976249 \u2248 1171.96\nTotal paid \u2248 48*1171.9604 = 56254.10\nInterest \u2248 6254.10\nFee = 0\nTotal cost C \u2248 6254.10\n\n11685.71 > 9262.15 > 6254.10, so Loan C has lowest total interest + fee.\n\n{\"choice\": \"C\", \"value\": 6254.10}\n"
+}

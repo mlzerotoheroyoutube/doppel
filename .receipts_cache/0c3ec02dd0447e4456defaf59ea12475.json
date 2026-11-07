@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented recursive get_perrin with base cases and added sequence tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the n'th perrin number using recursion.\\\"\\\"\\\"\\n\\n\\ndef get_perrin(n):\\n    \\\"\\\"\\\"Write a function to find the n'th perrin number using recursion.\\\"\\\"\\\"\\n    if n == 0:\\n        return 3\\n    if n == 1:\\n        return 0\\n    if n == 2:\\n        return 2\\n    return get_perrin(n - 2) + get_perrin(n - 3)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_get_perrin_example():\\n    assert solution.get_perrin(9) == 12\\n\\n\\ndef test_get_perrin_base_cases():\\n    assert solution.get_perrin(0) == 3\\n    assert solution.get_perrin(1) == 0\\n    assert solution.get_perrin(2) == 2\\n\\n\\ndef test_get_perrin_sequence():\\n    expected = [3, 0, 2, 3, 2, 5, 5, 7, 10, 12, 17, 22]\\n    for i, value in enumerate(expected):\\n        assert solution.get_perrin(i) == value\\n\"}}\n```"
+}

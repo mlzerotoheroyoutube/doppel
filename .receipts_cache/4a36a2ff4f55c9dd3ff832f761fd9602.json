@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented average_Odd by averaging all positive odd numbers up to n and added tests covering the example and other cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the average of odd numbers till a given odd number.\\\"\\\"\\\"\\n\\n\\ndef average_Odd(n):\\n    \\\"\\\"\\\"Write a python function to find the average of odd numbers till a given odd number.\\\"\\\"\\\"\\n    if n < 1:\\n        raise ValueError(\\\"n must be at least 1\\\")\\n    total = 0\\n    count = 0\\n    for number in range(1, n + 1, 2):\\n        total += number\\n        count += 1\\n    return total / count\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_average_odd_example():\\n    assert solution.average_Odd(9) == 5\\n\\n\\ndef test_average_odd_various():\\n    assert solution.average_Odd(1) == 1\\n    assert solution.average_Odd(5) == 3\\n    assert solution.average_Odd(15) == 8\\n    assert solution.average_Odd(21) == 11\\n\\n\\ndef test_average_odd_even_upper_bound():\\n    assert solution.average_Odd(10) == 5\\n\\n\\ndef test_average_odd_rejects_non_positive():\\n    with pytest.raises(ValueError):\\n        solution.average_Odd(0)\\n\"}}\n```"
+}

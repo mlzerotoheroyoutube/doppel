@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Requirement: 1200 units from one supplier, delivery <=20 days.\n\nStep 1 - Quantity check (need max >=1200):\n- Alpha: max 2400 >=1200 -> pass\n- Bravo: max 1200 >=1200 -> pass\n- Cobalt: max 1700 >=1200 -> pass\n\nStep 2 - Deadline check (need delivery <=20 days):\n- Alpha: 24 days >20 -> fail\n- Bravo: 35 days >20 -> fail\n- Cobalt: 35 days >20 -> fail\n\nNo supplier meets both filters.\n\nStep 3 - Landed cost check for completeness, carrying unrounded values:\n- Alpha: 12.98*1200=15576 EUR *1.08=16822.08 USD +600=17422.08 *1.12=19512.7296\n- Bravo: 1374.32*1200=1649184 JPY *0.0067=11049.5328 USD +600=11649.5328 *1.12=13047.476736\n- Cobalt: 13.72*1200=16464 USD +600=17064 *1.00=17064\n\nStep 4 - Reverse cross-check e.g. Alpha: 19512.7296/1.12-600=16822.08 /1.08/1200=12.98 matches.\n\nSince deadline filter eliminates all, no qualifying supplier.\n{\"choice\": \"none\", \"value\": 0}"
+}

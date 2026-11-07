@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "medium",
+ "text": "**Example:** Your team spent 4 months building a custom auth system, so you keep patching it instead of switching to Auth0.\nThe 4 months are gone \u2014 the rational choice is to compare only *future* maintenance cost vs. *future* migration cost."
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Sunk $900,000 is gone either way, so ignore it for the forward decision.\n\nEvaluate from today, carrying full values:\n\nStop now:\nEV(stop) = $60,000 sale, no further cost = 60,000\n\nContinue, spend $200,000 more:\nExpected gross return = 0.70 * 1,200,000 + 0.30 * 50,000\n= 840,000 + 15,000\n= 855,000\nEV(continue) = 855,000 - 200,000 = 655,000\n\nCross-check in reverse: 655,000 + 200,000 = 855,000; 855,000 - 0.30*50,000 = 840,000; 840,000 / 0.70 = 1,200,000, matches.\n\n655,000 > 60,000, so continue maximizes expected value from today.\n\n{\"choice\": \"continue\", \"value\": 655000}"
+}

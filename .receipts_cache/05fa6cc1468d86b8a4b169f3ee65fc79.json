@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement count_unset_bits by counting zeros in binary representation\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count unset bits of a given number.\\\"\\\"\\\"\\n\\n\\ndef count_unset_bits(n):\\n    \\\"\\\"\\\"Write a python function to count unset bits of a given number.\\\"\\\"\\\"\\n    return bin(abs(n))[2:].count(\\\"0\\\")\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_count_unset_bits_example():\\n    assert solution.count_unset_bits(2) == 1\\n\\n\\ndef test_count_unset_bits_additional():\\n    assert solution.count_unset_bits(5) == 1  # 101\\n    assert solution.count_unset_bits(7) == 0  # 111\\n    assert solution.count_unset_bits(8) == 3  # 1000\\n    assert solution.count_unset_bits(1) == 0  # 1\\n    assert solution.count_unset_bits(0) == 1  # 0\\n    assert solution.count_unset_bits(10) == 2  # 1010\\n\"}}\n```"
+}

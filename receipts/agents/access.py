@@ -46,7 +46,7 @@ def guest_allowed(storage, channel: str) -> bool:
     return True
 
 
-GUEST_HELP = """I'm **Receipts**: I check whether AI-written pull requests really do what they claim.
+GUEST_HELP = """I'm **Doppel**: I check whether AI-written pull requests really do what they claim.
 
 As a guest you can:
 - `demo list`, then `demo i1-bad-hardcoded`: watch me catch a cheating PR

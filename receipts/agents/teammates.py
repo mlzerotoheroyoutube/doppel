@@ -2,7 +2,7 @@
 
 * receipts-planner: drafts the day with Meta Muse Spark from what the personal
   layer remembers; SubQ judges the plan; one revision if rejected.
-* receipts-coder: runs the work loop (Meta Muse Wonder writes, Receipts gathers
+* receipts-coder: runs the work loop (Meta Muse Wonder writes, Doppel gathers
   evidence, SubQ judges, rework up to 3 rounds) and streams progress back.
 """
 
@@ -23,7 +23,7 @@ def make_teammates() -> dict[str, Agent]:
     plan_a = Agent(name="receipts-planner", seed=_seed("planner"), handle_messages_concurrently=True,
                    description="Plans the user's day with Meta Muse Spark; SubQ reviews every plan.")
     coder = Agent(name="receipts-coder", seed=_seed("coder"), handle_messages_concurrently=True,
-                  description="Fixes issues in a loop: Meta writes, Receipts checks, SubQ judges.")
+                  description="Fixes issues in a loop: Meta writes, Doppel checks, SubQ judges.")
 
     @plan_a.on_message(PlanRequest, replies=PlanResult)
     async def on_plan(ctx: Context, sender: str, msg: PlanRequest):
@@ -50,8 +50,8 @@ def make_teammates() -> dict[str, Agent]:
                 event("Approved. Opening a pull request on GitHub…")
                 try:
                     title = f"Fix #{info['number']}: {res.rounds[-1].summary or info.get('title', '')}"[:120]
-                    body = (f"Fixes #{info['number']}\n\n{summary}\n\n---\n_Opened by the Receipts work loop. "
-                            "It was approved only after Receipts' checks passed and SubQ voted to ship. "
+                    body = (f"Fixes #{info['number']}\n\n{summary}\n\n---\n_Opened by the Doppel work loop. "
+                            "It was approved only after Doppel's checks passed and SubQ voted to ship. "
                             "Nothing was merged; a human decides._")
                     pr_url = await asyncio.to_thread(publish.open_pr, info["owner"], info["repo"], info["number"],
                                                      Path(msg.base), Path(res.workdir), info.get("subdir", ""),

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement ap_sum with arithmetic progression formula and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the sum of arithmetic progression.\\\"\\\"\\\"\\n\\n\\ndef ap_sum(a, n, d):\\n    \\\"\\\"\\\"Write a function to find the sum of arithmetic progression.\\\"\\\"\\\"\\n    return n * (2 * a + (n - 1) * d) / 2\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_ap_sum_example():\\n    assert solution.ap_sum(1, 5, 2) == 25\\n\\n\\ndef test_ap_sum_single_term():\\n    assert solution.ap_sum(10, 1, 5) == 10\\n\\n\\ndef test_ap_sum_zero_terms():\\n    assert solution.ap_sum(1, 0, 2) == 0\\n\\n\\ndef test_ap_sum_constant_progression():\\n    assert solution.ap_sum(3, 4, 0) == 12\\n\\n\\ndef test_ap_sum_negative_difference():\\n    assert solution.ap_sum(10, 4, -2) == 28\\n\\n\\ndef test_ap_sum_float():\\n    assert solution.ap_sum(1.5, 3, 0.5) == 6.0\\n\"}}\n```"
+}

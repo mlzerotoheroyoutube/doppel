@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented count_first_elements to count elements before the first nested tuple, returning the full length when no nested tuple is present.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the element count that occurs before the record in the given tuple.\\\"\\\"\\\"\\n\\n\\ndef count_first_elements(test_tup):\\n    \\\"\\\"\\\"Write a function to find the element count that occurs before the record in the given tuple.\\\"\\\"\\\"\\n    for index, element in enumerate(test_tup):\\n        if isinstance(element, tuple):\\n            return index\\n    return len(test_tup)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import count_first_elements\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert count_first_elements((1, 5, 7, (4, 6), 10)) == 3\\n\\n\\ndef test_first_element_is_tuple():\\n    assert count_first_elements(((4, 6), 10)) == 0\\n\\n\\ndef test_no_nested_tuple_returns_length():\\n    assert count_first_elements((1, 2, 3)) == 3\\n\\n\\ndef test_empty_tuple():\\n    assert count_first_elements(()) == 0\\n\\n\\ndef test_stops_at_first_nested_tuple():\\n    assert count_first_elements((1, (2, 3), (4, 5), 6)) == 1\\n\\n\\ndef test_non_tuple_elements_are_counted():\\n    assert count_first_elements((\\\"a\\\", 1, 2.5, [1, 2], (3,), 4)) == 4\\n\"}}\n```"
+}

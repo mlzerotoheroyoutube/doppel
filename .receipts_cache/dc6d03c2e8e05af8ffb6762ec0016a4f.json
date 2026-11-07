@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented first_Element with single-pass first-to-reach-k logic and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the first element occurring k times in a given array.\\\"\\\"\\\"\\n\\n\\ndef first_Element(arr, n, k):\\n    \\\"\\\"\\\"Write a python function to find the first element occurring k times in a given array.\\\"\\\"\\\"\\n    if k <= 0:\\n        return -1\\n    counts = {}\\n    for i in range(min(n, len(arr))):\\n        counts[arr[i]] = counts.get(arr[i], 0) + 1\\n        if counts[arr[i]] == k:\\n            return arr[i]\\n    return -1\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_from_issue():\\n    assert solution.first_Element([0, 1, 2, 3, 4, 5], 6, 1) == 0\\n\\n\\ndef test_first_to_reach_k():\\n    # 4 reaches 2 occurrences before 7 does\\n    assert solution.first_Element([1, 7, 4, 3, 4, 8, 7], 7, 2) == 4\\n\\n\\ndef test_no_element_returns_minus_one():\\n    assert solution.first_Element([1, 2, 3], 3, 2) == -1\\n\\n\\ndef test_k_one_returns_first():\\n    assert solution.first_Element([5, 4, 3], 3, 1) == 5\\n\"}}\n```"
+}

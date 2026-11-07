@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement concatenate_elements to match the documented example exactly.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to concatenate all elements of the given list into a string.\\\"\\\"\\\"\\n\\n\\ndef concatenate_elements(list):\\n    \\\"\\\"\\\"Write a function to concatenate all elements of the given list into a string.\\\"\\\"\\\"\\n    return \\\"  \\\" + \\\" \\\".join(map(str, list))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_concatenate_elements_example():\\n    assert solution.concatenate_elements(['hello', 'there', 'have', 'a', 'rocky', 'day']) == '  hello there have a rocky day'\\n\\n\\ndef test_concatenate_elements_joins_with_spaces():\\n    assert solution.concatenate_elements(['a', 'b', 'c']) == '  a b c'\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement check_Consecutive to verify sorted list has step 1.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to check whether the given list contains consecutive numbers or not.\\\"\\\"\\\"\\n\\n\\ndef check_Consecutive(l):\\n    \\\"\\\"\\\"Write a python function to check whether the given list contains consecutive numbers or not.\\\"\\\"\\\"\\n    if len(l) <= 1:\\n        return True\\n    s = sorted(l)\\n    for i in range(1, len(s)):\\n        if s[i] != s[i - 1] + 1:\\n            return False\\n    return True\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import check_Consecutive\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_ordered_consecutive():\\n    assert check_Consecutive([1, 2, 3, 4, 5]) == True\\n\\n\\ndef test_non_consecutive():\\n    assert check_Consecutive([1, 2, 4, 5]) == False\\n\\n\\ndef test_unsorted_consecutive():\\n    assert check_Consecutive([5, 3, 4, 1, 2]) == True\\n\\n\\ndef test_single_and_empty():\\n    assert check_Consecutive([7]) == True\\n    assert check_Consecutive([]) == True\\n\\n\\ndef test_duplicates_not_consecutive():\\n    assert check_Consecutive([1, 2, 2, 3]) == False\\n\"}}\n```"
+}

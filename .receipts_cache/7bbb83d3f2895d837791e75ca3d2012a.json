@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step 1: Ignore the sunk cost\nThe $400,000 already spent is gone either way, so it does not affect the decision from today.\n\nStep 2: Expected value of continuing\n- Additional cost: $350,000\n- Expected return: $0.30 \\times 1,200,000 + 0.70 \\times 100,000 = 360,000 + 70,000 = 430,000$\n- Net EV: $430,000 - 350,000 = 80,000$\n\nStep 3: Expected value of stopping\n- Sale proceeds: $60,000\n- Net EV: $60,000$\n\nStep 4: Compare\n$80,000 > $60,000$, so continuing maximizes expected value.\n\n{\"choice\": \"continue\", \"value\": 80000}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented add_pairwise to return adjacent pairwise sums and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the pairwise addition of the elements of the given tuples.\\\"\\\"\\\"\\n\\n\\ndef add_pairwise(test_tup):\\n    \\\"\\\"\\\"Write a function to find the pairwise addition of the elements of the given tuples.\\\"\\\"\\\"\\n    return tuple(test_tup[i] + test_tup[i + 1] for i in range(len(test_tup) - 1))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_add_pairwise_example():\\n    assert solution.add_pairwise((1, 5, 7, 8, 10)) == (6, 12, 15, 18)\\n\\n\\ndef test_add_pairwise_two_elements():\\n    assert solution.add_pairwise((3, 4)) == (7,)\\n\\n\\ndef test_add_pairwise_single_element():\\n    assert solution.add_pairwise((5,)) == ()\\n\\n\\ndef test_add_pairwise_empty():\\n    assert solution.add_pairwise(()) == ()\\n\"}}\n```"
+}

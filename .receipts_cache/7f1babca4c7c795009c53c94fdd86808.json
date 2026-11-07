@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "low",
+ "text": "{\"command\": \"prs mlzerotoheroyoutube/receipts-demo-store\", \"answer\": \"I'll check open PRs in receipts-demo-store.\"}"
+}

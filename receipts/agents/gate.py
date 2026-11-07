@@ -1,4 +1,4 @@
-"""The Receipts gate: the agent users talk to on ASI:One.
+"""The Doppel gate: the agent users talk to on ASI:One.
 
 It speaks the Agent Chat Protocol, remembers each user, and coordinates the
 worker agents. Calls to different workers run in parallel.
@@ -31,7 +31,7 @@ TIMEOUT = 600
 WATCH_SECONDS = float(os.environ.get("RECEIPTS_WATCH_SECONDS", "120"))
 README = Path(__file__).with_name("AGENT_README.md")
 
-HELP = """**Receipts** is a teammate that only ships work it can prove.
+HELP = """**Doppel** is a teammate that only ships work it can prove.
 
 **Your day**
 - `today: ship the coupon fixes, demo at 5pm, meetings 1-3pm`: I plan your day (Meta drafts, SubQ reviews)
@@ -47,7 +47,7 @@ HELP = """**Receipts** is a teammate that only ships work it can prove.
 - `new project <name>: <idea>`: Meta scaffolds a tested starter project, I create the repo and its first issues (asks you first)
 
 **Work**
-- `fix demo issue 1` or `fix issue 3 in owner/repo`: Meta writes the fix, Receipts collects evidence,
+- `fix demo issue 1` or `fix issue 3 in owner/repo`: Meta writes the fix, Doppel collects evidence,
   SubQ judges each round, and it reworks until approved (max 3 rounds)
 - paste a GitHub PR link, or `demo list` then `demo i1-bad-ignores-qty`, to verify one PR
 
@@ -57,9 +57,9 @@ HELP = """**Receipts** is a teammate that only ships work it can prove.
 **Teach me**
 - `strict on` / `strict off`: treat warnings as blocks
 - `mute T004` / `unmute T004`: turn a rule down to a note for you
-- `wrong` or `right` after a verdict: teach Receipts what you think
+- `wrong` or `right` after a verdict: teach Doppel what you think
 - `history`: your past verdicts
-- `me`: what Receipts remembers about you"""
+- `me`: what Doppel remembers about you"""
 
 
 class WorkerError(RuntimeError):
@@ -96,7 +96,7 @@ HANDLE = re.compile(r"^[A-Za-z0-9_.-]{1,40}$")
 
 def make_gate(workers: dict[str, Agent]) -> Agent:
     kwargs = dict(
-        name="receipts-gate",
+        name="doppel",
         seed=os.environ.get("RECEIPTS_GATE_SEED", "receipts-local-dev/gate"),
         handle_messages_concurrently=True,
         description="Independent verifier for AI-written pull requests. Paste a PR link; "
@@ -165,7 +165,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             err = err or done["diff"].error
 
         # Round 3: the judge reviews each failing blind test (still code-blind),
-        # while the mutation agent scores Receipts' own tests.
+        # while the mutation agent scores Doppel's own tests.
         async def judge_all():
             for o in outcomes:
                 if blind.needs_judging(o):
@@ -223,7 +223,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             try:
                 await asyncio.to_thread(publish.report_pr, target.gh["owner"], target.gh["repo"],
                                         target.gh["number"], target.gh["sha"], verdict.decision, top, md)
-                md += "\n\n📌 Posted to GitHub: a **Receipts** status check and this report as a PR comment."
+                md += "\n\n📌 Posted to GitHub: a **Doppel** status check and this report as a PR comment."
             except Exception as e:  # noqa: BLE001
                 ctx.logger.warning(f"couldn't post to GitHub: {e}")
                 md += f"\n\n(Couldn't post to GitHub: {e})"
@@ -399,13 +399,13 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 items = await asyncio.to_thread(github_ops.list_issues, full)
                 rows = [f"- [#{i['number']}]({i['url']}) {i['title']}"
                         + (f" · `{', '.join(l['name'] for l in i['labels'])}`" if i["labels"] else "") for i in items]
-                tail = f"\n\nSay `fix issue <n> in {full}`, or add the label `receipts-fix` on GitHub."
+                tail = f"\n\nSay `fix issue <n> in {full}`, or add the label `doppel-fix` on GitHub."
             else:
                 items = await asyncio.to_thread(github_ops.list_prs, full)
                 def mark(pr):
                     for c in pr.get("statusCheckRollup") or []:
-                        if c.get("context") == "Receipts":
-                            return {"FAILURE": " · 🛑 Receipts BLOCK", "SUCCESS": " · ✅ Receipts"}.get(c.get("state"), "")
+                        if c.get("context") in ("Doppel", "Receipts"):
+                            return {"FAILURE": " · 🛑 Doppel BLOCK", "SUCCESS": " · ✅ Doppel"}.get(c.get("state"), "")
                     return " · not checked yet"
                 rows = [f"- [#{p['number']}]({p['url']}) {p['title']}{mark(p)}" for p in items]
                 tail = f"\n\nSay `check prs in {full}` to verify the unchecked ones."
@@ -414,9 +414,9 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
         if (m := re.match(r"check (?:all )?(?:the )?(?:prs|pull requests) (?:in|for|on) ([\w.-]+/[\w.-]+)$", low)):
             full = m.group(1)
             prs = await asyncio.to_thread(github_ops.list_prs, full)
-            todo = [p for p in prs if not any(c.get("context") == "Receipts" for c in p.get("statusCheckRollup") or [])][:3]
+            todo = [p for p in prs if not any(c.get("context") in ("Doppel", "Receipts") for c in p.get("statusCheckRollup") or [])][:3]
             if not todo:
-                await reply(ctx, sender, f"Every open PR in {full} already has a Receipts check.")
+                await reply(ctx, sender, f"Every open PR in {full} already has a Doppel check.")
                 return
             await reply(ctx, sender, f"Checking {len(todo)} PR(s) in {full}…")
             for p in todo:
@@ -482,7 +482,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 await reply(ctx, sender, str(e))
                 return
             await reply(ctx, sender, f"Working on **{label}**.\n\n1. {llm.who('exam')} writes a hidden exam from the "
-                                     f"issue\n2. {llm.who('implementer')} writes the fix\n3. Receipts collects evidence\n"
+                                     f"issue\n2. {llm.who('implementer')} writes the fix\n3. Doppel collects evidence\n"
                                      f"4. {llm.who('judge')} judges, and I rework until it approves (max 3 rounds)")
             await ctx.send(addr["coder"], FixRequest(user=sender, label=label, issue=issue, base=str(base),
                                                      repo_info=repo_info))
@@ -586,8 +586,8 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
         text = msg.summary_md
         info = (msg.result or {}).get("repo_info") or {}
         if info.get("owner"):
-            note = (f"🚀 Receipts opened {msg.pr_url} for this issue." if msg.pr_url else
-                    "✋ Receipts couldn't get a fix approved within 3 rounds; a human should take this one.")
+            note = (f"🚀 Doppel opened {msg.pr_url} for this issue." if msg.pr_url else
+                    "✋ Doppel couldn't get a fix approved within 3 rounds; a human should take this one.")
             try:
                 await asyncio.to_thread(publish.comment_issue, info["owner"], info["repo"], info["number"],
                                         note + "\n\n" + msg.summary_md)
@@ -623,7 +623,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 await broadcast(ctx, user, f"**Digest** (held while you were busy)\n{rows}")
             for repo, state in list(profile["repos"].items()):
                 owner, name = repo.split("/")
-                try:  # issues labelled receipts-fix: work started from GitHub
+                try:  # issues labelled doppel-fix: work started from GitHub
                     for iss in await asyncio.to_thread(publish.labeled_issues, owner, name):
                         started = state.setdefault("fixing", {})
                         if str(iss["number"]) in started:
@@ -633,9 +633,9 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                         label, base, issue, info = await asyncio.to_thread(
                             targets.issue_target, f"fix issue {iss['number']} in {repo}")
                         await asyncio.to_thread(publish.comment_issue, owner, name, iss["number"],
-                                                "👋 Receipts picked this up: Meta writes a hidden exam and the fix, "
-                                                "Receipts collects evidence, SubQ judges. I'll link the PR here.")
-                        await broadcast(ctx, user, f"🏷️ **{repo}#{iss['number']}** was labelled `receipts-fix`. "
+                                                "👋 Doppel picked this up: Meta writes a hidden exam and the fix, "
+                                                "Doppel collects evidence, SubQ judges. I'll link the PR here.")
+                        await broadcast(ctx, user, f"🏷️ **{repo}#{iss['number']}** was labelled `doppel-fix`. "
                                                    f"Working on it: {iss['title']}")
                         channel = (profile.get("channels") or [user])[0]
                         await ctx.send(addr["coder"], FixRequest(user=channel, label=label, issue=issue,

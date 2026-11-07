@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented text_match_word using regex to match a word at end with optional punctuation.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function that matches a word at the end of a string, with optional punctuation.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef text_match_word(text):\\n    \\\"\\\"\\\"Write a function that matches a word at the end of a string, with optional punctuation.\\\"\\\"\\\"\\n    patterns = r'\\\\w+\\\\S*$'\\n    if re.search(patterns, text):\\n        return 'Found a match!'\\n    else:\\n        return 'Not matched!'\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_match_word_with_punctuation():\\n    assert solution.text_match_word(\\\"python.\\\") == \\\"Found a match!\\\"\\n\\n\\ndef test_match_word_without_punctuation():\\n    assert solution.text_match_word(\\\"python\\\") == \\\"Found a match!\\\"\\n\\n\\ndef test_match_word_sentence():\\n    assert solution.text_match_word(\\\"The quick brown fox jumps over the lazy dog.\\\") == \\\"Found a match!\\\"\\n\\n\\ndef test_no_match_trailing_space():\\n    assert solution.text_match_word(\\\"The quick brown fox jumps over the lazy dog. \\\") == \\\"Not matched!\\\"\\n\\n\\ndef test_no_match_empty():\\n    assert solution.text_match_word(\\\"\\\") == \\\"Not matched!\\\"\\n\"}}\n```"
+}

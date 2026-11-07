@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement find_char with regex word-length filter and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find all three, four, five characters long words in the given string by using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef find_char(text):\\n    \\\"\\\"\\\"Write a function to find all three, four, five characters long words in the given string by using regex.\\\"\\\"\\\"\\n    return re.findall(r'\\\\b\\\\w{3,5}\\\\b', text)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_char_example():\\n    assert solution.find_char('For the four consumer complaints contact manager AKR reddy') == ['For', 'the', 'four', 'AKR', 'reddy']\\n\\n\\ndef test_find_char_lengths():\\n    assert solution.find_char('a ab abc abcd abcde abcdef abcdefg') == ['abc', 'abcd', 'abcde']\\n\\n\\ndef test_find_char_empty_and_punctuation():\\n    assert solution.find_char('') == []\\n    assert solution.find_char('Hello, world!') == ['Hello', 'world']\\n\"}}\n```"
+}

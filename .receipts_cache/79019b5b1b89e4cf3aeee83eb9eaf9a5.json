@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "**North**\n- Taxable cash: $140,000 + 0% bonus = $140,000\n- After-tax cash: $140,000 \u00d7 (1 - 0.35) = $91,000\n- Retirement match: 5% \u00d7 $140,000 = $7,000, under the $9,000 cap\n- Vested equity by month 12: $160,000 \u00d7 12/48 = $40,000\n- **First-year value: $91,000 + $7,000 + $40,000 = $138,000**\n\n**South**\n- Taxable cash: $185,000 + 10% bonus ($18,500) = $203,500\n- After-tax cash: $203,500 \u00d7 (1 - 0.35) = $132,275\n- Retirement match: 6% \u00d7 $185,000 = $11,100, capped at $6,000\n- Vested equity by month 12: $0\n- **First-year value: $132,275 + $6,000 + $0 = $138,275**\n\nSouth is higher, by $275.\n\n{\"choice\": \"South\", \"value\": 138275}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Monthly payment is:\n\n\\[\nPMT=P\\frac{i}{1-(1+i)^{-n}},\\qquad \n\\text{Total cost}=n(PMT)-P+\\text{fee}\n\\]\n\n- **Loan A:** \\(i=0.089/12=0.0074167,\\ n=60\\)  \n  \\(PMT=\\$1,656.79\\); total payments \\(=\\$99,407.31\\)  \n  Interest \\(=\\$19,407.31\\); fee \\(=2\\%\\times \\$80,000=\\$1,600\\)  \n  **Total cost \\(=\\$21,007.31\\)**\n\n- **Loan B:** \\(i=0.059/12=0.0049167,\\ n=48\\)  \n  \\(PMT=\\$1,875.14\\); total payments \\(=\\$90,006.57\\)  \n  Interest \\(=\\$10,006.57\\); fee \\(=\\$0\\)  \n  **Total cost \\(=\\$10,006.57\\)**\n\n- **Loan C:** \\(i=0.049/12=0.0040833,\\ n=48\\)  \n  \\(PMT=\\$1,838.72\\); total payments \\(=\\$88,258.65\\)  \n  Interest \\(=\\$8,258.65\\); fee \\(=3\\%\\times \\$80,000=\\$2,400\\)  \n  **Total cost \\(=\\$10,658.65\\)**\n\nLoan B has the lowest total cost of borrowing.\n\n{\"choice\": \"B\", \"value\": 10006.57}"
+}

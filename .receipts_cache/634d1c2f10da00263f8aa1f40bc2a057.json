@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = (Price - $12) * min(Demand, 2000) - $8,000\n\n- $19: sellable = min(2603,2000)=2000. Margin = 19-12=7. 7*2000=14000. 14000-8000=6000\n- $24: sellable = min(557,2000)=557. Margin = 24-12=12. 12*557=6684. 6684-8000=-1316\n- $29: sellable = min(954,2000)=954. Margin = 29-12=17. 17*954=16218. 16218-8000=8218\n- $34: sellable = min(332,2000)=332. Margin = 34-12=22. 22*332=7304. 7304-8000=-696\n- $39: sellable = min(88,2000)=88. Margin = 39-12=27. 27*88=2376. 2376-8000=-5624\n\nHighest profit is at price $29 with $8218.\n{\"choice\": \"29\", \"value\": 8218}"
+}

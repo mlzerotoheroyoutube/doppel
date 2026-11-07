@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented sum_even_and_even_index to sum even values at even indices.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the sum of even numbers at even positions.\\\"\\\"\\\"\\n\\n\\ndef sum_even_and_even_index(arr, n):\\n    \\\"\\\"\\\"Write a python function to find the sum of even numbers at even positions.\\\"\\\"\\\"\\n    total = 0\\n    for i in range(0, min(n, len(arr)), 2):\\n        if arr[i] % 2 == 0:\\n            total += arr[i]\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.sum_even_and_even_index([5, 6, 12, 1, 18, 8], 6) == 30\\n\\n\\ndef test_empty():\\n    assert solution.sum_even_and_even_index([], 0) == 0\\n\\n\\ndef test_only_even_index_counted():\\n    assert solution.sum_even_and_even_index([2, 2, 2, 2], 4) == 4\\n\\n\\ndef test_all_odd_at_even_index():\\n    assert solution.sum_even_and_even_index([1, 2, 3, 4], 4) == 0\\n\\n\\ndef test_respects_n():\\n    assert solution.sum_even_and_even_index([2, 100, 4, 100, 6, 100], 3) == 6\\n\"}\n}\n```"
+}

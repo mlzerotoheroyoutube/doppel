@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Monthly payment formula:\n\\[\nPMT=\\frac{P(r)}{1-(1+r)^{-n}},\\quad r=\\frac{APR}{12}\n\\]\nTotal cost = \\(PMT \\times n - \\$50{,}000 +\\) fee.\n\n**Loan A:** \\(r=0.079/12=0.0065833,\\ n=60\\)  \n\\(PMT\\approx \\$1{,}011.43\\); total paid \\(\\approx \\$60{,}685.71\\)  \nInterest \\(\\approx \\$10{,}685.71\\); fee \\(=2\\%\\times \\$50{,}000=\\$1{,}000\\)  \nTotal cost \\(\\approx \\$11{,}685.71\\)\n\n**Loan B:** \\(r=0.069/12=0.00575,\\ n=60\\)  \n\\(PMT\\approx \\$987.70\\); total paid \\(\\approx \\$59{,}262.16\\)  \nInterest \\(\\approx \\$9{,}262.16\\); fee \\(=\\$0\\)  \nTotal cost \\(\\approx \\$9{,}262.16\\)\n\n**Loan C:** \\(r=0.059/12=0.0049167,\\ n=48\\)  \n\\(PMT\\approx \\$1{,}171.96\\); total paid \\(\\approx \\$56{,}254.10\\)  \nInterest \\(\\approx \\$6{,}254.10\\); fee \\(=\\$0\\)  \nTotal cost \\(\\approx \\$6{,}254.10\\)\n\nLoan C has the lowest total cost.\n\n{\"choice\": \"C\", \"value\": 6254.10}"
+}

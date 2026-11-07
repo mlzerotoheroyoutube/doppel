@@ -7,3 +7,5 @@ agent*_data.json
 *_data.json
 .env
 logs/
+build/
+*.egg-info/

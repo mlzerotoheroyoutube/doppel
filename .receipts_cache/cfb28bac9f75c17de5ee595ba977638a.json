@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step-by-step qualification and cost:\n\nRequirement: 1200 units from one supplier, delivery <=25 days.\n\nAlpha: max 1700 >=1200 passes quantity, but 35 days >25 fails deadline. Disqualified.\n  Check cost: 13.53*1200=16236 EUR *1.08=17532.48 USD +900=18432.48 *1.12=20644.3776\n\nBravo: 24 days <=25 passes deadline, but max 1000 <1200 fails quantity. Disqualified.\n  Check cost: 1922.3*1200=2306760 JPY *0.0067=15455.292 USD +1500=16955.292 *1.04=17633.50368\n\nCobalt: max 1200 >=1200 passes quantity, 24 days <=25 passes deadline. Qualified.\n  Goods value = 15.6 * 1200 = 18720 unrounded\n  + shipping 600 = 19320\n  + duty 0% *19320 = 0\n  Total = 19320\n\nReverse check: 19320 -0 =19320 -600=18720 /1200=15.6 matches unit price.\n\nOnly Cobalt qualifies, so it is the lowest qualified.\n{\"choice\": \"Cobalt\", \"value\": 19320}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented element-wise maximization of two tuples (handling nested tuples recursively) and added tests for the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to maximize the given two tuples.\\\"\\\"\\\"\\n\\n\\ndef maximize_elements(test_tup1, test_tup2):\\n    \\\"\\\"\\\"Write a function to maximize the given two tuples.\\\"\\\"\\\"\\n    maximized = []\\n    for elem1, elem2 in zip(test_tup1, test_tup2):\\n        if isinstance(elem1, (tuple, list)) and isinstance(elem2, (tuple, list)):\\n            maximized.append(maximize_elements(elem1, elem2))\\n        else:\\n            maximized.append(max(elem1, elem2))\\n    return tuple(maximized)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_maximize_elements_example():\\n    assert solution.maximize_elements(((1, 3), (4, 5), (2, 9), (1, 10)), ((6, 7), (3, 9), (1, 1), (7, 3))) == ((6, 7), (4, 9), (2, 9), (7, 10))\\n\\n\\ndef test_maximize_elements_elementwise():\\n    assert solution.maximize_elements(((0, 10), (-5, 2)), ((3, 1), (-1, 2))) == ((3, 10), (-1, 2))\\n\\n\\ndef test_maximize_elements_empty_and_flat():\\n    assert solution.maximize_elements((), ()) == ()\\n    assert solution.maximize_elements((1, 5, 3), (4, 2, 3)) == (4, 5, 3)\\n\"}}\n```"
+}

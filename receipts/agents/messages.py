@@ -1,4 +1,4 @@
-"""Messages between Receipts agents.
+"""Messages between Doppel agents.
 
 The message schemas are the independence guarantee. WriteTests carries only
 the issue and the interface text, and Judge carries only the spec, one test

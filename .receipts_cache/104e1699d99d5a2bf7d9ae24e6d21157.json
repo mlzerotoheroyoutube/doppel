@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented binary-search find_Min for rotated sorted arrays and added coverage tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the minimum element in a sorted and rotated array.\\\"\\\"\\\"\\n\\n\\ndef find_Min(arr, low, high):\\n    \\\"\\\"\\\"Write a python function to find the minimum element in a sorted and rotated array.\\\"\\\"\\\"\\n    while low < high:\\n        if arr[low] < arr[high]:\\n            return arr[low]\\n        mid = (low + high) // 2\\n        if arr[mid] > arr[high]:\\n            low = mid + 1\\n        elif arr[mid] < arr[high]:\\n            high = mid\\n        else:\\n            high -= 1\\n    return arr[low]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_sorted():\\n    assert solution.find_Min([1, 2, 3, 4, 5], 0, 4) == 1\\n\\n\\ndef test_rotated():\\n    assert solution.find_Min([3, 4, 5, 1, 2], 0, 4) == 1\\n    assert solution.find_Min([4, 5, 1, 2, 3], 0, 4) == 1\\n    assert solution.find_Min([2, 1], 0, 1) == 1\\n\\n\\ndef test_single_element():\\n    assert solution.find_Min([1], 0, 0) == 1\\n\\n\\ndef test_sorted_two_elements():\\n    assert solution.find_Min([1, 2], 0, 1) == 1\\n\\n\\ndef test_subrange():\\n    assert solution.find_Min([3, 4, 5, 1, 2], 0, 2) == 3\\n    assert solution.find_Min([3, 4, 5, 1, 2], 3, 4) == 1\\n\"}}\n```"
+}

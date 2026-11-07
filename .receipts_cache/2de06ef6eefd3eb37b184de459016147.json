@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step by step:\n\nProfit = (Price - $9) \u00d7 Units Sold - $5,000\nUnits Sold = min(Demand, 900 capacity)\n\n- **$19:** Sold = min(1347, 900) = 900  \n  Profit = (19-9)\u00d7900 - 5000 = 10\u00d7900 - 5000 = $4,000\n\n- **$24:** Sold = min(1916, 900) = 900  \n  Profit = (24-9)\u00d7900 - 5000 = 15\u00d7900 - 5000 = $8,500\n\n- **$29:** Sold = min(1309, 900) = 900  \n  Profit = (29-9)\u00d7900 - 5000 = 20\u00d7900 - 5000 = $13,000\n\n- **$34:** Sold = min(209, 900) = 209  \n  Profit = (34-9)\u00d7209 - 5000 = 25\u00d7209 - 5000 = $225\n\n- **$39:** Sold = min(94, 900) = 94  \n  Profit = (39-9)\u00d794 - 5000 = 30\u00d794 - 5000 = -$2,180\n\nThe highest profit is at $29, with $13,000 monthly profit.\n\n{\"choice\": \"29\", \"value\": 13000}"
+}

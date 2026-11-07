@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement snake_to_camel with regex and add tests\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to convert the given snake case string to camel case string by using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef snake_to_camel(word):\\n    \\\"\\\"\\\"Write a function to convert the given snake case string to camel case string by using regex.\\\"\\\"\\\"\\n    s = re.sub(r'_+([A-Za-z0-9])', lambda m: m.group(1).upper(), word)\\n    s = re.sub(r'_', '', s)\\n    if not s:\\n        return s\\n    return s[0].upper() + s[1:]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_snake_to_camel():\\n    assert solution.snake_to_camel('android_tv') == 'AndroidTv'\\n\\n\\ndef test_snake_to_camel_multiple_words():\\n    assert solution.snake_to_camel('hello_world_test') == 'HelloWorldTest'\\n\\n\\ndef test_snake_to_camel_single_word():\\n    assert solution.snake_to_camel('hello') == 'Hello'\\n\\n\\ndef test_snake_to_camel_empty():\\n    assert solution.snake_to_camel('') == ''\\n\"}}\n```"
+}

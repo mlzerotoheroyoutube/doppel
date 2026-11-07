@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement dig_let to return (letters, digits) counts matching the documented example.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the number of digits and letters in a string.\\\"\\\"\\\"\\n\\n\\ndef dig_let(s):\\n    \\\"\\\"\\\"Write a function to calculate the number of digits and letters in a string.\\\"\\\"\\\"\\n    letters = sum(1 for c in s if c.isalpha())\\n    digits = sum(1 for c in s if c.isdigit())\\n    return (letters, digits)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_dig_let_example():\\n    assert solution.dig_let(\\\"python\\\") == (6, 0)\\n\\n\\ndef test_dig_let_counts_letters_and_digits():\\n    assert solution.dig_let(\\\"\\\") == (0, 0)\\n    assert solution.dig_let(\\\"123\\\") == (0, 3)\\n    assert solution.dig_let(\\\"abc123\\\") == (3, 3)\\n    assert solution.dig_let(\\\"a1! \\\") == (1, 1)\\n\"}}\n```"
+}

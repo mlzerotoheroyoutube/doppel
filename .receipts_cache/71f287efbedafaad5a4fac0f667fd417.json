@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Requirement: 1200 units from ONE supplier, delivery <=25 days.\n\nEligibility check:\n- Alpha: quantity 1700 >= 1200 PASS; delivery 35 <= 25 FAIL => disqualified\n- Bravo: quantity 1000 >= 1200 FAIL; delivery 24 <= 25 PASS => disqualified\n- Cobalt: quantity 1200 >= 1200 PASS; delivery 24 <= 25 PASS => qualified\n\nTotal landed cost formula:\nTotal = (Goods_USD + Shipping_USD) * (1 + duty_rate)\nGoods_USD = Units * UnitPrice_Foreign * FX_to_USD\n\nAlpha - 1200 units hypothetical:\nGoods_Alpha_USD = 1200 * 13.53 * 1.08 = 16236 * 1.08 = 17534.88\nTotal_Alpha = (17534.88 + 900.00) * (1 + 0.12) = 18434.88 * 1.12 = 20647.0656\nDisqualified on deadline.\n\nBravo - 1200 units hypothetical:\nGoods_Bravo_USD = 1200 * 1922.3 * 0.0067 = 2306760 * 0.0067 = 15455.292\nTotal_Bravo = (15455.292 + 1500.00) * (1 + 0.04) = 16955.292 * 1.04 = 17633.50368\nDisqualified on quantity: max 1000 < 1200 required.\n\nCobalt - 1200 units:\nGoods_Cobalt_USD = 1200 * 15.6 = 18720.00\nTotal_Cobalt = (18720.00 + 600.00) * (1 + 0.00) = 19320.00 * 1.00 = 19320\nQualified on quantity and deadline.\n\nOnly Cobalt meets both quantity and deadline, so lowest qualified cost is Cobalt 19320.\n\n{\"choice\": \"Cobalt\", \"value\": 19320}"
+}

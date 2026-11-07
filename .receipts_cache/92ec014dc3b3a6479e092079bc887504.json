@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Mid-market: 1 EUR = 1.09 USD\nAmount owed: 95,000 EUR\n\n**bank:**\nrate = mid * (1+0.015) = 1.09 * 1.015 = 1.10635 USD/EUR\ntotal EUR bought = 95,000 + 15 = 95,015 EUR\ntotal USD = 95,015 * 1.10635 = 105,119.84525\nrounded = 105,119.85 USD\n\n**platform:**\nrate = mid * (1+0.002) = 1.09 * 1.002 = 1.09218 USD/EUR\nbase USD = 95,000 * 1.09218 = 103,757.10 USD\ntotal USD = base * (1+0.0035) = 103,757.10 * 1.0035 = 104,120.24985\nrounded = 104,120.25 USD\n\n**usd:**\nrate = mid * (1+0.02) = 1.09 * 1.02 = 1.1118 USD/EUR\ngross USD = 95,000 * 1.1118 = 105,621.00 USD\nnet USD = gross * (1-0.01) = 105,621.00 * 0.99 = 104,564.79 USD\n\nComparison: 104,120.25 platform < 104,564.79 usd < 105,119.85 bank.\nCheapest is platform.\n\n{\"choice\": \"platform\", \"value\": 104120.25}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step 1: Ignore the $900,000 already spent \u2014 it is a sunk cost and is gone either way.\n\nStep 2: Evaluate continuing from today:\n- Additional cost: -$200,000\n- Expected return: 0.70 \u00d7 $800,000 = $560,000\n- Net expected value: $560,000 - $200,000 = $360,000\n\nStep 3: Evaluate stopping from today:\n- Sale proceeds: $0\n- Net expected value: $0\n\nStep 4: Compare: $360,000 (continue) > $0 (stop), so continue.\n\n{\"choice\": \"continue\", \"value\": 360000}"
+}

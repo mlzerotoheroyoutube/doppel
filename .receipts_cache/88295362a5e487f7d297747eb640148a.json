@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step 1: Check quantity and deadline\n- Need 2,500 units within 25 days from one supplier.\n- Alpha: max 3,000, 24 days \u2014 qualifies\n- Bravo: max 3,000, 10 days \u2014 qualifies\n- Cobalt: max 3,000, 10 days \u2014 qualifies\n\nStep 2: Calculate total landed cost in USD\n\nAlpha:\n- Unit price: 9.97 EUR \u00d7 1.08 = $10.7676\n- Goods: $10.7676 \u00d7 2,500 = $26,919.00\n- + Shipping: $26,919.00 + $2,400.00 = $29,319.00\n- Duty 12%: $29,319.00 \u00d7 0.12 = $3,518.28\n- Total: $29,319.00 + $3,518.28 = $32,837.28\n\nBravo:\n- Unit price: 2,023.51 JPY \u00d7 0.0067 = $13.557517\n- Goods: $13.557517 \u00d7 2,500 = $33,893.79\n- + Shipping: $33,893.79 + $2,400.00 = $36,293.79\n- Duty 8%: $36,293.79 \u00d7 0.08 = $2,903.50\n- Total: $39,197.30\n\nCobalt:\n- Goods: $15.46 \u00d7 2,500 = $38,650.00\n- + Shipping: $38,650.00 + $900.00 = $39,550.00\n- Duty 0%: $0\n- Total: $39,550.00\n\nStep 3: Compare\nAlpha $32,837.28 is the lowest qualifying cost.\n\n{\"choice\": \"Alpha\", \"value\": 32837.28}"
+}

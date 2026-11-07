@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented otherside_rightangle using math.hypot and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the third side of a right angled triangle.\\\"\\\"\\\"\\n\\nimport math\\n\\n\\ndef otherside_rightangle(w, h):\\n    \\\"\\\"\\\"Write a function to find the third side of a right angled triangle.\\\"\\\"\\\"\\n    return math.hypot(w, h)\\n\", \"tests/test_solution.py\": \"import math\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.otherside_rightangle(7, 8) == 10.63014581273465\\n\\n\\ndef test_pythagorean_triples():\\n    assert solution.otherside_rightangle(3, 4) == 5.0\\n    assert solution.otherside_rightangle(5, 12) == 13.0\\n    assert solution.otherside_rightangle(8, 15) == 17.0\\n\\n\\ndef test_zero_and_float():\\n    assert solution.otherside_rightangle(0, 0) == 0.0\\n    assert solution.otherside_rightangle(0, 5) == 5.0\\n    assert math.isclose(solution.otherside_rightangle(1, 1), math.sqrt(2))\\n\"}}\n```"
+}

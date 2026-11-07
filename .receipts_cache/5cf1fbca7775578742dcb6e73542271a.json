@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement find_long_word using regex word boundaries to match exactly five-character words.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find all five characters long word in the given string by using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef find_long_word(text):\\n    \\\"\\\"\\\"Write a function to find all five characters long word in the given string by using regex.\\\"\\\"\\\"\\n    return re.findall(r'\\\\b\\\\w{5}\\\\b', text)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_long_word_example():\\n    assert solution.find_long_word('Please move back to strem') == ['strem']\\n\\n\\ndef test_find_long_word_multiple():\\n    assert solution.find_long_word('hello world') == ['hello', 'world']\\n\\n\\ndef test_find_long_word_no_match():\\n    assert solution.find_long_word('a bb ccc dddd ffffff') == []\\n\\n\\ndef test_find_long_word_does_not_match_substring():\\n    assert solution.find_long_word('Please') == []\\n\\n\\ndef test_find_long_word_with_punctuation():\\n    assert solution.find_long_word('Hello, world!') == ['Hello', 'world']\\n\"}}\n```"
+}

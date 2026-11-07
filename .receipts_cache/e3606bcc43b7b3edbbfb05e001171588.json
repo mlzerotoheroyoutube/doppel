@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North first-year value:\n- Taxable cash = 155,000 + 0% bonus = 155,000\n- After-tax cash = 155,000 * (1 - 0.30) = 155,000 * 0.70 = 108,500\n- Retirement match = min(3% * 155,000, 6,000) = min(4,650, 6,000) = 4,650\n- Vested equity by month 12 = 0 grant = 0\n- Total North = 108,500 + 4,650 + 0 = 113,150\n\nSouth first-year value:\n- Taxable cash = 155,000 + 0% bonus = 155,000\n- After-tax cash = 155,000 * (1 - 0.30) = 108,500\n- Retirement match = min(5% * 155,000, 9,000) = min(7,750, 9,000) = 7,750\n- Vested equity by month 12 = 80,000 * 12/48 monthly, no cliff = 80,000 * 0.25 = 20,000\n- Total South = 108,500 + 7,750 + 20,000 = 136,250\n\n136,250 > 113,150, so South is higher.\n{\"choice\": \"South\", \"value\": 136250}"
+}

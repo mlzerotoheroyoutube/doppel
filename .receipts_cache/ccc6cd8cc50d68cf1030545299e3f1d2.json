@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "low",
+ "text": "{\"command\": \"\", \"answer\": \"Got it \u2014 I don't show any watched repos or logged verdicts yet, so I can't walk through that PR from context. Share the GitHub PR link if you want me to verify it.\"}"
+}

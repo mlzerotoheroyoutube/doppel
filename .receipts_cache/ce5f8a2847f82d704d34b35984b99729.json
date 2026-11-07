@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented match() using regex search for one uppercase followed by lowercase letters.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find sequences of one upper case letter followed by lower case letters in the given string by using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef match(text):\\n    \\\"\\\"\\\"Write a function to find sequences of one upper case letter followed by lower case letters in the given string by using regex.\\\"\\\"\\\"\\n    if re.search(r'[A-Z][a-z]+', text):\\n        return 'Yes'\\n    return 'No'\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_match_example():\\n    assert solution.match(\\\"Geeks\\\") == 'Yes'\\n\\n\\ndef test_match_lowercase_only():\\n    assert solution.match(\\\"geeks\\\") == 'No'\\n\\n\\ndef test_match_uppercase_only():\\n    assert solution.match(\\\"GEEKS\\\") == 'No'\\n\\n\\ndef test_match_single_word():\\n    assert solution.match(\\\"Hello\\\") == 'Yes'\\n\\n\\ndef test_match_empty():\\n    assert solution.match(\\\"\\\") == 'No'\\n\"}}\n```"
+}

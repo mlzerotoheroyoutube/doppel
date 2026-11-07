@@ -113,7 +113,7 @@ def create_project(name: str, idea: str) -> dict:
     _run(["git", "init", "-q", "-b", "main"], cwd=work)
     _run(["git", "add", "-A"], cwd=work)
     _run(["git", "commit", "-q", "-m", f"Start {name}: {data.get('description', idea)[:60]}\n\n"
-                                        "Scaffolded by the Receipts agent (Meta), tests passing."], cwd=work)
+                                        "Scaffolded by the Doppel agent (Meta), tests passing."], cwd=work)
     _run(["gh", "repo", "create", f"{owner}/{name}", "--public", "--description",
           (data.get("description") or idea)[:300]])
     _run(["git", "remote", "add", "origin", f"https://github.com/{owner}/{name}.git"], cwd=work)

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement binary_to_integer to return integer value.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to convert the given binary tuple to integer.\\\"\\\"\\\"\\n\\n\\ndef binary_to_integer(test_tup):\\n    \\\"\\\"\\\"Write a function to convert the given binary tuple to integer.\\\"\\\"\\\"\\n    result = 0\\n    for bit in test_tup:\\n        result = result * 2 + int(bit)\\n    return result\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_binary_to_integer_example():\\n    assert solution.binary_to_integer((1, 1, 0, 1, 0, 0, 1)) == 105\\n\\n\\ndef test_binary_to_integer_edge_cases():\\n    assert solution.binary_to_integer((0,)) == 0\\n    assert solution.binary_to_integer((1,)) == 1\\n    assert solution.binary_to_integer((1, 0)) == 2\\n    assert solution.binary_to_integer((0, 0, 0)) == 0\\n    assert solution.binary_to_integer(()) == 0\\n    assert isinstance(solution.binary_to_integer((1, 1, 0, 1, 0, 0, 1)), int)\\n\"}}\n```"
+}

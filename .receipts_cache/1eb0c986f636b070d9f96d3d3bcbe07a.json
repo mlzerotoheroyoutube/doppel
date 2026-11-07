@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented merge_dict to return a new merged dictionary.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to merge two dictionaries.\\\"\\\"\\\"\\n\\n\\ndef merge_dict(d1, d2):\\n    \\\"\\\"\\\"Write a function to merge two dictionaries.\\\"\\\"\\\"\\n    return {**d1, **d2}\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_merge_dict_example():\\n    assert solution.merge_dict({'a': 100, 'b': 200}, {'x': 300, 'y': 200}) == {'x': 300, 'y': 200, 'a': 100, 'b': 200}\\n\\n\\ndef test_merge_dict_overlap():\\n    assert solution.merge_dict({'a': 1, 'b': 2}, {'b': 3, 'c': 4}) == {'a': 1, 'b': 3, 'c': 4}\\n\\n\\ndef test_merge_dict_empty():\\n    assert solution.merge_dict({}, {}) == {}\\n    assert solution.merge_dict({'a': 1}, {}) == {'a': 1}\\n    assert solution.merge_dict({}, {'a': 1}) == {'a': 1}\\n\\n\\ndef test_merge_dict_does_not_mutate():\\n    d1 = {'a': 1}\\n    d2 = {'b': 2}\\n    result = solution.merge_dict(d1, d2)\\n    assert result == {'a': 1, 'b': 2}\\n    assert d1 == {'a': 1}\\n    assert d2 == {'b': 2}\\n\"}}\n```"
+}

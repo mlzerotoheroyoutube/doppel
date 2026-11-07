@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "**Step 1: Payment formula**\n\nFor a principal $P=\\$50{,}000$, monthly rate $r=\\text{APR}/12$, and $n$ monthly payments:\n\n$$\\text{PMT}=P\\frac{r(1+r)^n}{(1+r)^n-1}$$\n\n$$\\text{Total cost of borrowing}=n(\\text{PMT})-P+\\text{fee}$$\n\nThe upfront fee for Loans A and B is $0.03(\\$50{,}000)=\\$1{,}500$.\n\n**Step 2: Calculate each loan**\n\n- **Loan A:** $r=0.059/12=0.0049167$, $n=72$  \n  $\\text{PMT}\\approx \\$826.29$  \n  Total payments $\\approx \\$59{,}492.61$; interest $\\approx \\$9{,}492.61$  \n  Total cost $= \\$9{,}492.61+\\$1{,}500.00 = \\$10{,}992.61$\n\n- **Loan B:** $r=0.059/12=0.0049167$, $n=60$  \n  $\\text{PMT}\\approx \\$964.32$  \n  Total payments $\\approx \\$57{,}859.01$; interest $\\approx \\$7{,}859.01$  \n  Total cost $= \\$7{,}859.01+\\$1{,}500.00 = \\$9{,}359.01$\n\n- **Loan C:** $r=0.089/12=0.0074167$, $n=72$  \n  $\\text{PMT}\\approx \\$898.80$  \n  Total payments $\\approx \\$64{,}713.40$; interest $\\approx \\$14{,}713.40$  \n  Total cost $= \\$14{,}713.40+\\$0 = \\$14{,}713.40$\n\n**Step 3: Compare**\n\n$\\$9{,}359.01 \\;(\\text{B}) < \\$10{,}992.61 \\;(\\text{A}) < \\$14{,}713.40 \\;(\\text{C})$\n\nLoan **B** has the lowest total cost of borrowing.\n\n{\"choice\": \"B\", \"value\": 9359.01}"
+}

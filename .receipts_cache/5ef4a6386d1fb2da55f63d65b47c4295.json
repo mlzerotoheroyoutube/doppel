@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented sum_Of_Series using the formula (n(n+1)/2)^2 and added tests covering known values.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the cube sum of first n natural numbers.\\\"\\\"\\\"\\n\\n\\ndef sum_Of_Series(n):\\n    \\\"\\\"\\\"Write a python function to find the cube sum of first n natural numbers.\\\"\\\"\\\"\\n    if n < 0:\\n        raise ValueError(\\\"n must be non-negative\\\")\\n    total = n * (n + 1) // 2\\n    return total * total\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\nfrom solution import sum_Of_Series\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_sum_of_series_example():\\n    assert sum_Of_Series(5) == 225\\n\\n\\ndef test_sum_of_series_known_values():\\n    expected = {\\n        0: 0,\\n        1: 1,\\n        2: 9,\\n        3: 36,\\n        4: 100,\\n        5: 225,\\n        6: 441,\\n        10: 3025,\\n        100: 25502500,\\n    }\\n    for n, value in expected.items():\\n        assert sum_Of_Series(n) == value\\n\\n\\ndef test_sum_of_series_negative():\\n    with pytest.raises(ValueError):\\n        sum_Of_Series(-1)\\n\"}}\n```"
+}

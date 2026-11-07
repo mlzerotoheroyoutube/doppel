@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "router",
+ "effort": "medium",
+ "text": "**Recent repo activity: none**\n\n- Watched repos: none\n- Watcher inbox: empty\n\nSay `list my repos` and then `watch owner/repo` to start tracking activity.\n"
+}

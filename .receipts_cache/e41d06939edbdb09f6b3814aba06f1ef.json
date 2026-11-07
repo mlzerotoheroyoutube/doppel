@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented remove_lowercase to filter out lowercase characters and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove lowercase substrings from a given string.\\\"\\\"\\\"\\n\\n\\ndef remove_lowercase(str1):\\n    \\\"\\\"\\\"Write a function to remove lowercase substrings from a given string.\\\"\\\"\\\"\\n    return \\\"\\\".join(c for c in str1 if not c.islower())\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_remove_lowercase_example():\\n    assert solution.remove_lowercase(\\\"PYTHon\\\") == \\\"PYTH\\\"\\n\\n\\ndef test_remove_lowercase_no_lowercase():\\n    assert solution.remove_lowercase(\\\"PYTHON\\\") == \\\"PYTHON\\\"\\n\\n\\ndef test_remove_lowercase_all_lowercase():\\n    assert solution.remove_lowercase(\\\"python\\\") == \\\"\\\"\\n\\n\\ndef test_remove_lowercase_empty():\\n    assert solution.remove_lowercase(\\\"\\\") == \\\"\\\"\\n\\n\\ndef test_remove_lowercase_mixed_with_other_chars():\\n    assert solution.remove_lowercase(\\\"PyTH123oN! xY\\\") == \\\"PTH123N! Y\\\"\\n\"}}\n```"
+}

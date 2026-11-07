@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North:\n- Taxable cash: $170,000 salary + 10% bonus ($17,000) = $187,000\n- After-tax cash at 30%: $187,000 \u00d7 0.70 = $130,900\n- Retirement match: 5% \u00d7 $170,000 = $8,500, under $20,000 cap = $8,500\n- Equity vested by month 12: $160,000 / 4 years = $40,000\n- First-year value: $130,900 + $8,500 + $40,000 = $179,400\n\nSouth:\n- Taxable cash: $140,000 salary + 0% bonus = $140,000\n- After-tax cash at 30%: $140,000 \u00d7 0.70 = $98,000\n- Retirement match: 5% \u00d7 $140,000 = $7,000, under $9,000 cap = $7,000\n- Equity vested by month 12: $0\n- First-year value: $98,000 + $7,000 + $0 = $105,000\n\nNorth has the higher first-year value.\n\n{\"choice\": \"North\", \"value\": 179400}"
+}

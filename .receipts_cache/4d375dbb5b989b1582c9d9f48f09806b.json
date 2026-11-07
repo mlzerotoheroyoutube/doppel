@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Requirement: 1200 units from ONE supplier, delivery <= 25 days.\n\nStep 1 - Quantity check (need >=1200):\n- Alpha: max 1000 < 1200 => FAIL\n- Bravo: max 1700 >= 1200 => PASS\n- Cobalt: max 2400 >= 1200 => PASS\n\nStep 2 - Deadline check (need <=25 days):\n- Alpha: 24 days <=25 => PASS\n- Bravo: 35 days >25 => FAIL\n- Cobalt: 35 days >25 => FAIL\n\nStep 3 - Combined qualification:\n- Alpha: FAIL quantity, PASS deadline => DISQUALIFIED\n- Bravo: PASS quantity, FAIL deadline => DISQUALIFIED\n- Cobalt: PASS quantity, FAIL deadline => DISQUALIFIED\n\nNo supplier meets BOTH constraints. Per instructions, costs are not to be approximated early and are carried unrounded, but they are moot since no supplier qualifies. Reverse check confirms no supplier passes both filters.\n\nTherefore choice is none with value 0.\n\n{\"choice\": \"none\", \"value\": 0}"
+}

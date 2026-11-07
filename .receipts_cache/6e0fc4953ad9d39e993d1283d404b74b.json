@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement min_product_tuple to return the minimum tuple-element product and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the minimum product from the pairs of tuples within a given list.\\\"\\\"\\\"\\n\\n\\ndef min_product_tuple(list1):\\n    \\\"\\\"\\\"Write a function to find the minimum product from the pairs of tuples within a given list.\\\"\\\"\\\"\\n    min_product = None\\n    for tup in list1:\\n        product = 1\\n        for value in tup:\\n            product *= value\\n        if min_product is None or product < min_product:\\n            min_product = product\\n    if min_product is None:\\n        raise ValueError(\\\"min_product_tuple() arg is an empty sequence\\\")\\n    return min_product\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.min_product_tuple([(2, 7), (2, 6), (1, 8), (4, 9)]) == 8\\n\\n\\ndef test_single_tuple():\\n    assert solution.min_product_tuple([(5, 5)]) == 25\\n\\n\\ndef test_negative_product():\\n    assert solution.min_product_tuple([(2, -3), (1, 4)]) == -6\\n\"}}\n```"
+}

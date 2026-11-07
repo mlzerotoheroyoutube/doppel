@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement find_lucas iteratively and add coverage tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the n'th lucas number.\\\"\\\"\\\"\\n\\n\\ndef find_lucas(n):\\n    \\\"\\\"\\\"Write a function to find the n'th lucas number.\\\"\\\"\\\"\\n    if n < 0:\\n        raise ValueError(\\\"n must be non-negative\\\")\\n    if n == 0:\\n        return 2\\n    if n == 1:\\n        return 1\\n    a, b = 2, 1\\n    for _ in range(2, n + 1):\\n        a, b = b, a + b\\n    return b\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_lucas_example():\\n    assert solution.find_lucas(9) == 76\\n\\n\\ndef test_find_lucas_first_ten():\\n    expected = [2, 1, 3, 4, 7, 11, 18, 29, 47, 76]\\n    for n, value in enumerate(expected):\\n        assert solution.find_lucas(n) == value\\n\\n\\ndef test_find_lucas_larger():\\n    assert solution.find_lucas(10) == 123\\n    assert solution.find_lucas(11) == 199\\n\"}}\n```"
+}

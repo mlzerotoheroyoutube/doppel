@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step-by-step calculation at a 30% tax rate (after-tax cash = 70% of pre-tax cash):\n\n**North**\n- Cash: $155,000 salary + 0% bonus = $155,000\n- After-tax cash: $155,000 \u00d7 0.70 = $108,500\n- Retirement match: 3% \u00d7 $155,000 = $4,650, below $6,000 cap = $4,650\n- Vested equity by month 12: $0 grant \u00d7 25% = $0\n- First-year value: $108,500 + $4,650 + $0 = $113,150\n\n**South**\n- Cash: $155,000 salary + 0% bonus = $155,000\n- After-tax cash: $155,000 \u00d7 0.70 = $108,500\n- Retirement match: 5% \u00d7 $155,000 = $7,750, below $9,000 cap = $7,750\n- Vested equity by month 12: $80,000 \u00d7 12/48 = $80,000 \u00d7 25% = $20,000\n- First-year value: $108,500 + $7,750 + $20,000 = $136,250\n\nSouth is higher at $136,250.\n\n{\"choice\": \"South\", \"value\": 136250}"
+}

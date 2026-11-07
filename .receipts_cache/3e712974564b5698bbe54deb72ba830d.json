@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented sub_list using map with a lambda to subtract elements pairwise and added tests covering the example and general cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to substaract two lists using map and lambda function.\\\"\\\"\\\"\\n\\n\\ndef sub_list(nums1, nums2):\\n    \\\"\\\"\\\"Write a function to substaract two lists using map and lambda function.\\\"\\\"\\\"\\n    return list(map(lambda x, y: x - y, nums1, nums2))\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import sub_list\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_sub_list_example():\\n    assert sub_list([1, 2, 3], [4, 5, 6]) == [-3, -3, -3]\\n\\n\\ndef test_sub_list_general():\\n    assert sub_list([5, 10, 15], [1, 2, 3]) == [4, 8, 12]\\n    assert sub_list([0, 0, 0], [0, 0, 0]) == [0, 0, 0]\\n    assert sub_list([-1, -2], [1, 2]) == [-2, -4]\\n    assert sub_list([1.5, 2.5], [0.5, 0.5]) == [1.0, 2.0]\\n\\n\\ndef test_sub_list_empty():\\n    assert sub_list([], []) == []\\n\\n\\ndef test_sub_list_returns_list():\\n    result = sub_list([10], [3])\\n    assert isinstance(result, list)\\n    assert result == [7]\\n\"}}\n```"
+}

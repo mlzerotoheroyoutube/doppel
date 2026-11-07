@@ -1,6 +1,6 @@
 """Deliver an approved fix: push a branch and open a pull request.
 
-Only runs after SubQ approved the final round and Receipts did not block it.
+Only runs after SubQ approved the final round and Doppel did not block it.
 It never merges. Uses the signed-in `gh` CLI for credentials.
 """
 
@@ -42,7 +42,7 @@ def open_pr(owner: str, repo: str, issue_number: int, base: Path, workdir: Path,
         raise PublishError("the approved change has no file differences to publish")
     info = json.loads(_run(["gh", "api", f"repos/{owner}/{repo}"]))
     default = info["default_branch"]
-    branch = f"receipts/fix-issue-{issue_number}-{int(time.time()) % 100000}"
+    branch = f"doppel/fix-issue-{issue_number}-{int(time.time()) % 100000}"
 
     clone = Path(tempfile.mkdtemp(prefix="receipts-pr-")) / repo
     _run(["git", *GIT_AUTH, "clone", "--quiet", "--depth", "1", "--branch", default,
@@ -54,8 +54,8 @@ def open_pr(owner: str, repo: str, issue_number: int, base: Path, workdir: Path,
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(workdir / rel, dest)
     _run(["git", "add", "-A"], cwd=clone)
-    _run(["git", "commit", "-q", "-m", f"{title}\n\nFixes #{issue_number}. Written by the Receipts work loop; "
-                                         "approved by SubQ after Receipts' checks passed."], cwd=clone)
+    _run(["git", "commit", "-q", "-m", f"{title}\n\nFixes #{issue_number}. Written by the Doppel work loop; "
+                                         "approved by SubQ after Doppel's checks passed."], cwd=clone)
     _run(["git", *GIT_AUTH, "push", "-q", "-u", "origin", branch], cwd=clone)
     if len(body) > 60_000:
         body = body[:60_000] + "\n\n…(truncated)"
@@ -69,14 +69,14 @@ STATE = {"BLOCK": "failure", "WARN": "success", "PASS": "success"}
 
 
 def report_pr(owner: str, repo: str, number: int, sha: str, decision: str, summary: str, report_md: str) -> None:
-    """Set the official 'Receipts' commit status on the PR's head and post the report card."""
+    """Set the official 'Doppel's commit status on the PR's head and post the report card."""
     desc = f"{decision}: {summary}"[:139]
     _run(["gh", "api", "-X", "POST", f"repos/{owner}/{repo}/statuses/{sha}",
-          "-f", f"state={STATE.get(decision, 'error')}", "-f", "context=Receipts",
+          "-f", f"state={STATE.get(decision, 'error')}", "-f", "context=Doppel",
           "-f", f"description={desc}",
           "-f", f"target_url=https://github.com/{owner}/{repo}/pull/{number}"])
     body = report_md if len(report_md) < 60_000 else report_md[:60_000] + "\n\n…(truncated)"
-    body += f"\n\n<sub>Checked commit `{sha[:7]}` by Receipts · Meta + SubQ · nothing was merged.</sub>"
+    body += f"\n\n<sub>Checked commit `{sha[:7]}` by Doppel · Meta + SubQ · nothing was merged.</sub>"
     proc = subprocess.run(["gh", "pr", "comment", str(number), "-R", f"{owner}/{repo}", "--body-file", "-"],
                           input=body, capture_output=True, text=True, timeout=60)
     if proc.returncode != 0:
@@ -90,6 +90,12 @@ def comment_issue(owner: str, repo: str, number: int, body: str) -> None:
         raise PublishError(f"gh issue comment failed: {proc.stderr.strip()[:300]}")
 
 
-def labeled_issues(owner: str, repo: str, label: str = "receipts-fix") -> list[dict]:
-    data = json.loads(_run(["gh", "api", f"repos/{owner}/{repo}/issues?state=open&labels={label}&per_page=20"]))
-    return [{"number": i["number"], "title": i["title"]} for i in data if "pull_request" not in i]
+def labeled_issues(owner: str, repo: str, labels: tuple = ("doppel-fix", "receipts-fix")) -> list[dict]:
+    seen, out = set(), []
+    for label in labels:  # the old label keeps working
+        data = json.loads(_run(["gh", "api", f"repos/{owner}/{repo}/issues?state=open&labels={label}&per_page=20"]))
+        for i in data:
+            if "pull_request" not in i and i["number"] not in seen:
+                seen.add(i["number"])
+                out.append({"number": i["number"], "title": i["title"]})
+    return out

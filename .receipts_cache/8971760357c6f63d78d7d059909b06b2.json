@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = Revenue - Variable Cost - Fixed Cost, with units sold = min(demand, capacity 2000). Margin must be >0 to produce full amount.\n\n- Price $19: demand 2327 -> capped at 2000 units\n  Revenue = 19*2000 = 38000\n  Variable = 9*2000 = 18000, Fixed = 8000, Total cost = 26000\n  Profit = 38000 - 26000 = 12000\n\n- Price $24: demand 1507 -> 1507 units\n  Revenue = 24*1507 = 36168\n  Variable = 9*1507 = 13563, Fixed = 8000, Total cost = 21563\n  Profit = 36168 - 21563 = 14605\n\n- Price $29: demand 815 -> 815 units\n  Revenue = 29*815 = 23635\n  Variable = 9*815 = 7335, Fixed = 8000, Total cost = 15335\n  Profit = 23635 - 15335 = 8300\n\n- Price $34: demand 706 -> 706 units\n  Revenue = 34*706 = 24004\n  Variable = 9*706 = 6354, Fixed = 8000, Total cost = 14354\n  Profit = 24004 - 14354 = 9650\n\n- Price $39: demand 112 -> 112 units\n  Revenue = 39*112 = 4368\n  Variable = 9*112 = 1008, Fixed = 8000, Total cost = 9008\n  Profit = 4368 - 9008 = -4640\n\nRanking: 24 (14605) > 19 (12000) > 34 (9650) > 29 (8300) > 39 (-4640). Maximum is price 24.\n{\"choice\": \"24\", \"value\": 14605}"
+}

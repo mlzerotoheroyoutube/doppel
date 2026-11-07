@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement set_to_tuple to return a sorted tuple and add covering tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to convert the given set into ordered tuples.\\\"\\\"\\\"\\n\\n\\ndef set_to_tuple(s):\\n    \\\"\\\"\\\"Write a function to convert the given set into ordered tuples.\\\"\\\"\\\"\\n    return tuple(sorted(s))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_set_to_tuple_example():\\n    assert solution.set_to_tuple({1, 2, 3, 4, 5}) == (1, 2, 3, 4, 5)\\n\\n\\ndef test_set_to_tuple_sorted_order():\\n    assert solution.set_to_tuple({5, 3, 1, 4, 2}) == (1, 2, 3, 4, 5)\\n\\n\\ndef test_set_to_tuple_empty():\\n    assert solution.set_to_tuple(set()) == ()\\n\\n\\ndef test_set_to_tuple_strings():\\n    assert solution.set_to_tuple({\\\"b\\\", \\\"a\\\", \\\"c\\\"}) == (\\\"a\\\", \\\"b\\\", \\\"c\\\")\\n\"}}\n```"
+}

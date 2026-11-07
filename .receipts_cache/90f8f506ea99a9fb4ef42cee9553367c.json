@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement sum_three_smallest_nums to sum the three smallest positive numbers.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the sum of the three lowest positive numbers from a given list of numbers.\\\"\\\"\\\"\\n\\n\\ndef sum_three_smallest_nums(lst):\\n    \\\"\\\"\\\"Write a python function to find the sum of the three lowest positive numbers from a given list of numbers.\\\"\\\"\\\"\\n    positives = [x for x in lst if x > 0]\\n    positives.sort()\\n    return sum(positives[:3])\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.sum_three_smallest_nums([10, 20, 30, 40, 50, 60, 7]) == 37\\n\\n\\ndef test_filters_negative_and_zero():\\n    assert solution.sum_three_smallest_nums([-5, 0, 10, 2, -1, 3, 1]) == 6\\n\\n\\ndef test_unsorted_with_duplicates():\\n    assert solution.sum_three_smallest_nums([5, 5, 5, 5]) == 15\\n\\n\\ndef test_floats():\\n    assert solution.sum_three_smallest_nums([1.5, 2.5, 0.5, 10]) == 4.5\\n\"}}\n```"
+}

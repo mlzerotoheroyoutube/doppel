@@ -1,4 +1,4 @@
-"""The playbook: what Receipts has learned, versioned.
+"""The playbook: what Doppel has learned, versioned.
 
 Per domain ("code", "decisions") it holds a list of short lessons Meta reads before working
 and an optional Meta model choice. A change is only adopted after it beats the current

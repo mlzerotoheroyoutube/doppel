@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented remove_lowercase to filter out lowercase characters and added tests covering the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove lowercase substrings from a given string.\\\"\\\"\\\"\\n\\n\\ndef remove_lowercase(str1):\\n    \\\"\\\"\\\"Write a function to remove lowercase substrings from a given string.\\\"\\\"\\\"\\n    return \\\"\\\".join(char for char in str1 if not char.islower())\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_remove_lowercase_example():\\n    assert solution.remove_lowercase(\\\"PYTHon\\\") == \\\"PYTH\\\"\\n\\n\\ndef test_remove_lowercase_all_lowercase():\\n    assert solution.remove_lowercase(\\\"python\\\") == \\\"\\\"\\n\\n\\ndef test_remove_lowercase_no_lowercase():\\n    assert solution.remove_lowercase(\\\"PYTHON\\\") == \\\"PYTHON\\\"\\n\\n\\ndef test_remove_lowercase_empty_string():\\n    assert solution.remove_lowercase(\\\"\\\") == \\\"\\\"\\n\\n\\ndef test_remove_lowercase_mixed_and_non_letters():\\n    assert solution.remove_lowercase(\\\"PyThOn123! \\\") == \\\"PTO123! \\\"\\n    assert solution.remove_lowercase(\\\"Hello World\\\") == \\\"H W\\\"\\n\"}}\n```"
+}

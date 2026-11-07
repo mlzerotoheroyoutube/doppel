@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement pos_nos to return positive numbers.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to print positive numbers in a list.\\\"\\\"\\\"\\n\\n\\ndef pos_nos(list1):\\n    \\\"\\\"\\\"Write a python function to print positive numbers in a list.\\\"\\\"\\\"\\n    return [x for x in list1 if x > 0]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_pos_nos_example():\\n    assert solution.pos_nos([-1, -2, 1, 2]) == [1, 2]\\n\\n\\ndef test_pos_nos_all_negative():\\n    assert solution.pos_nos([-1, -2, -3]) == []\\n\\n\\ndef test_pos_nos_empty():\\n    assert solution.pos_nos([]) == []\\n\\n\\ndef test_pos_nos_zero_excluded():\\n    assert solution.pos_nos([0, 1, -1, 2]) == [1, 2]\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit per price = (Price - $12) * min(Demand, 2000) - $8,000:\n\n- $19: units = min(2603,2000)=2000. Contribution 7*2000=14,000. Profit = 14,000-8,000=6,000. Check: 38,000-24,000-8,000=6,000.\n- $24: units = 557. Contribution 12*557=6,684. Profit = 6,684-8,000=-1,316. Check: 13,368-6,684-8,000=-1,316.\n- $29: units = 954. Contribution 17*954=16,218. Profit = 16,218-8,000=8,218. Check: 27,666-11,448-8,000=8,218.\n- $34: units = 332. Contribution 22*332=7,304. Profit = 7,304-8,000=-696. Check: 11,288-3,984-8,000=-696.\n- $39: units = 88. Contribution 27*88=2,376. Profit = 2,376-8,000=-5,624. Check: 3,432-1,056-8,000=-5,624.\n\nMaximum is $29 with $8,218 profit.\n\n{\"choice\": \"29\", \"value\": 8218}"
+}

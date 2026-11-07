@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented remove_whitespaces using re.sub to strip all whitespace and added tests covering spaces, tabs, newlines, and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove all whitespaces from the given string using regex.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef remove_whitespaces(text1):\\n    \\\"\\\"\\\"Write a function to remove all whitespaces from the given string using regex.\\\"\\\"\\\"\\n    return re.sub(r\\\"\\\\s+\\\", \\\"\\\", text1)\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import remove_whitespaces\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_remove_whitespaces_example():\\n    assert remove_whitespaces(' Google    Flutter ') == 'GoogleFlutter'\\n\\n\\ndef test_remove_whitespaces_all_whitespace_types():\\n    assert remove_whitespaces(' a\\\\tb\\\\nc\\\\rd\\\\fe\\\\vf g ') == 'abcdefg'\\n\\n\\ndef test_remove_whitespaces_no_whitespace():\\n    assert remove_whitespaces('GoogleFlutter') == 'GoogleFlutter'\\n\\n\\ndef test_remove_whitespaces_empty_and_only_whitespace():\\n    assert remove_whitespaces('') == ''\\n    assert remove_whitespaces('   \\\\t\\\\n  ') == ''\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Requirement: Quantity >= 1200 units AND Delivery <= 25 days from one supplier.\nFormula for verification: Total Landed Cost = (Qty * UnitPrice_foreign * FX_to_USD + Shipping_USD) * (1 + duty_rate)\n\nQualification check:\n- Alpha: Max 1000 < 1200 => FAIL quantity; 24 days <= 25 => PASS deadline => FAIL overall\n- Bravo: Max 1700 >= 1200 => PASS quantity; 35 days <= 25? No => FAIL deadline => FAIL overall\n- Cobalt: Max 2400 >= 1200 => PASS quantity; 35 days <= 25? No => FAIL deadline => FAIL overall\n\nLanded cost recomputed independently from originals for 1200 units:\n- Alpha: (1200 * 9.39 * 1.08 + 2400.00) * (1 + 0.04) = (11268 * 1.08 + 2400) * 1.04 = (12169.44 + 2400) * 1.04 = 14569.44 * 1.04 = 15152.2176\n- Bravo: (1200 * 2079.63 * 0.0067 + 1500.00) * (1 + 0.12) = (2495556 * 0.0067 + 1500) * 1.12 = (16720.2252 + 1500) * 1.12 = 18220.2252 * 1.12 = 20406.652224\n- Cobalt: (1200 * 11.25 + 2400.00) * (1 + 0.00) = (13500 + 2400) * 1.0 = 15900.0\n\nNo supplier meets BOTH quantity and deadline, so none qualifies despite hypothetical costs.\n{\"choice\": \"none\", \"value\": 0}"
+}

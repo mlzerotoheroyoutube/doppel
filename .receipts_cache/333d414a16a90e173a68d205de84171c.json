@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement harmonic_sum as sum of reciprocals matching example\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate the harmonic sum of n-1.\\\"\\\"\\\"\\n\\n\\ndef harmonic_sum(n):\\n    \\\"\\\"\\\"Write a function to calculate the harmonic sum of n-1.\\\"\\\"\\\"\\n    total = 0.0\\n    for i in range(1, n + 1):\\n        total += 1 / i\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_harmonic_sum_example():\\n    assert solution.harmonic_sum(7) == 2.5928571428571425\\n\\n\\ndef test_harmonic_sum_small_values():\\n    assert solution.harmonic_sum(1) == 1.0\\n    assert solution.harmonic_sum(2) == 1.5\\n\"}}\n```"
+}

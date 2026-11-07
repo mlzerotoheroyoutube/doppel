@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented merge_dict to return a new merged dictionary (second dict wins on key conflicts) and added tests covering the example, overlap, empty dicts, and non-mutation.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to merge two dictionaries.\\\"\\\"\\\"\\n\\n\\ndef merge_dict(d1, d2):\\n    \\\"\\\"\\\"Write a function to merge two dictionaries.\\\"\\\"\\\"\\n    merged = dict(d1)\\n    merged.update(d2)\\n    return merged\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_merge_dict_example():\\n    assert solution.merge_dict({'a': 100, 'b': 200}, {'x': 300, 'y': 200}) == {'x': 300, 'y': 200, 'a': 100, 'b': 200}\\n\\n\\ndef test_merge_dict_overlapping_keys():\\n    assert solution.merge_dict({'a': 1, 'b': 2}, {'b': 20, 'c': 3}) == {'a': 1, 'b': 20, 'c': 3}\\n\\n\\ndef test_merge_dict_empty():\\n    assert solution.merge_dict({}, {}) == {}\\n    assert solution.merge_dict({'a': 1}, {}) == {'a': 1}\\n    assert solution.merge_dict({}, {'a': 1}) == {'a': 1}\\n\\n\\ndef test_merge_dict_does_not_mutate_inputs():\\n    d1 = {'a': 100, 'b': 200}\\n    d2 = {'x': 300, 'y': 200}\\n    result = solution.merge_dict(d1, d2)\\n    assert d1 == {'a': 100, 'b': 200}\\n    assert d2 == {'x': 300, 'y': 200}\\n    assert result is not d1\\n    assert result is not d2\\n\"}}\n```"
+}

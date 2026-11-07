@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented maximum(a, b) to return the larger value and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the maximum of two numbers.\\\"\\\"\\\"\\n\\n\\ndef maximum(a, b):\\n    \\\"\\\"\\\"Write a python function to find the maximum of two numbers.\\\"\\\"\\\"\\n    return a if a > b else b\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_maximum_first_larger():\\n    assert solution.maximum(10, 5) == 10\\n\\n\\ndef test_maximum_second_larger():\\n    assert solution.maximum(5, 10) == 10\\n\\n\\ndef test_maximum_equal():\\n    assert solution.maximum(7, 7) == 7\\n\\n\\ndef test_maximum_negative():\\n    assert solution.maximum(-3, -10) == -3\\n\"}}\n```"
+}

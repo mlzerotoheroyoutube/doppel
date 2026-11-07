@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement decode_list with run-length expansion and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to decode a run-length encoded given list.\\\"\\\"\\\"\\n\\n\\ndef decode_list(alist):\\n    \\\"\\\"\\\"Write a function to decode a run-length encoded given list.\\\"\\\"\\\"\\n    result = []\\n    for item in alist:\\n        if isinstance(item, (list, tuple)):\\n            count, value = item\\n            result.extend([value] * count)\\n        else:\\n            result.append(item)\\n    return result\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.decode_list([[2, 1], 2, 3, [2, 4], 5, 1]) == [1, 1, 2, 3, 4, 4, 5, 1]\\n\\n\\ndef test_empty():\\n    assert solution.decode_list([]) == []\\n\\n\\ndef test_no_encoding():\\n    assert solution.decode_list([1, 2, 3]) == [1, 2, 3]\\n\\n\\ndef test_all_encoded():\\n    assert solution.decode_list([[3, \\\"a\\\"], [2, \\\"b\\\"]]) == [\\\"a\\\", \\\"a\\\", \\\"a\\\", \\\"b\\\", \\\"b\\\"]\\n\\n\\ndef test_zero_count():\\n    assert solution.decode_list([[0, 1], 2]) == [2]\\n\"}}\n```"
+}

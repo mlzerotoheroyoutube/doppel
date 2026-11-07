@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Quantity required: 2500 units, deadline <=25 days.\n\nCheck qualification:\n- Alpha: max 3000 >=2500, 24 days <=25 \u2192 qualifies\n- Bravo: max 3000 >=2500, 10 days <=25 \u2192 qualifies\n- Cobalt: max 3000 >=2500, 10 days <=25 \u2192 qualifies\n\nTotal landed cost = (goods value USD + shipping USD) * (1 + duty rate)\n\nAlpha:\nGoods = 9.97 EUR * 2500 = 24,925 EUR\nUSD = 24,925 * 1.08 = $26,919.00\n+ shipping $2,400 = $29,319.00\nDuty 12%: $29,319 * 1.12 = $32,837.28\n\nBravo:\nGoods = 2,023.51 JPY * 2500 = 5,058,775 JPY\nUSD = 5,058,775 * 0.0067 = $33,893.7925\n+ shipping $2,400 = $36,293.7925\nDuty 8%: $36,293.7925 * 1.08 = $39,197.2959 \u2248 $39,197.30\n\nCobalt:\nGoods = 15.46 USD * 2500 = $38,650.00\n+ shipping $900 = $39,550.00\nDuty 0%: $39,550.00\n\nComparison: Alpha $32,837.28 < Bravo ~$39,197.30 < Cobalt $39,550.00\nLowest is Alpha.\n\n{\"choice\": \"Alpha\", \"value\": 32837.28}"
+}

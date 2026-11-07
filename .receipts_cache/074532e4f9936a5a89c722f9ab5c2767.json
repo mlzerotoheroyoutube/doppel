@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented even_Power_Sum as sum of (2*i)**5 for i=1..n and added tests covering the example and additional cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the sum of fifth power of first n even natural numbers.\\\"\\\"\\\"\\n\\n\\ndef even_Power_Sum(n):\\n    \\\"\\\"\\\"Write a python function to find the sum of fifth power of first n even natural numbers.\\\"\\\"\\\"\\n    return sum((2 * i) ** 5 for i in range(1, n + 1))\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import even_Power_Sum\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert even_Power_Sum(2) == 1056\\n\\n\\ndef test_first_even_number():\\n    assert even_Power_Sum(1) == 32\\n\\n\\ndef test_zero():\\n    assert even_Power_Sum(0) == 0\\n\\n\\ndef test_additional_values():\\n    assert even_Power_Sum(3) == 8832\\n    assert even_Power_Sum(5) == 141600\\n\"}}\n```"
+}

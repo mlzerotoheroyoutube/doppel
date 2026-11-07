@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step-by-step analysis from today forward (sunk $400,000 is gone and ignored):\n\n1. Option STOP:\n- No further cost.\n- Sell work for $60,000.\n- Expected value from today = $60,000.00\n\n2. Option CONTINUE:\n- Further cost = $350,000.00\n- Expected gross return = 0.30 * $1,200,000.00 + 0.70 * $100,000.00\n- = $360,000.00 + $70,000.00 = $430,000.00\n- Expected value from today = -$350,000.00 + $430,000.00 = $80,000.00\n\n3. Cross-check in reverse order (net payoffs):\n- Net if succeed = $1,200,000 - $350,000 = $850,000\n- Net if fail = $100,000 - $350,000 = -$250,000\n- Expected = 0.30*$850,000 + 0.70*(-$250,000) = $255,000 - $175,000 = $80,000\n- Matches. No exponential rounding issues; carried full precision.\n\n4. Decision: $80,000 (continue) > $60,000 (stop), so maximize by continuing.\n\n{\"choice\": \"continue\", \"value\": 80000}"
+}

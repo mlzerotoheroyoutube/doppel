@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Requirement: 2500 units from a single supplier, delivered in <=30 days.\n\nCheck qualification:\n\n- Alpha: max 3000 >= 2500 passes quantity, but 35 days > 30 days fails deadline. Disqualified.\n- Bravo: 24 days <= 30 days passes deadline, but max 2300 < 2500 fails quantity. Disqualified.\n- Cobalt: max 2500 >= 2500 passes quantity, 18 days <= 30 days passes deadline. Qualified.\n\nOnly Cobalt qualifies.\n\nTotal landed cost for Cobalt for 2500 units:\nGoods value = 2500 * 12.45 USD = 31,125 USD\nShipping = 2,400 USD\nSubtotal = 31,125 + 2,400 = 33,525 USD\nDuty = 0% * 33,525 = 0 USD\nTotal = 33,525 + 0 = 33,525 USD\n\nLowest qualifying cost is Cobalt at $33,525.\n\n{\"choice\": \"Cobalt\", \"value\": 33525}"
+}

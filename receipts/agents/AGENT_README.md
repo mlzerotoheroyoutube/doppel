@@ -1,12 +1,14 @@
-# Receipts: verifier for AI-written pull requests
+# Doppel: your double for engineering work
 
 ![tag:verification](https://img.shields.io/badge/verification-3D8BD3)
 ![tag:code-review](https://img.shields.io/badge/code--review-3D8BD3)
 ![tag:innovationlab](https://img.shields.io/badge/innovationlab-3D8BD3)
 
-**Your AI coding agent says "All tests pass ✅". Receipts checks whether that's true.**
+**Your double. It knows your work, does it behind the scenes, double-checks itself, and only asks you when it must.**
 
-Paste a public GitHub pull request link. Receipts gives a **BLOCK / WARN / PASS**
+Meta Muse does the work, SubQ independently decides what ships, and Doppel remembers your repos, your day and your rules.
+
+Paste a public GitHub pull request link. Doppel gives a **BLOCK / WARN / PASS**
 verdict, and every finding comes with evidence and a command to reproduce it.
 
 ## What it checks

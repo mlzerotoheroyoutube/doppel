@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Analysis from today (sunk cost excluded):\n- Sunk $400,000 is gone in both options, ignore for forward decision.\n\nContinue option:\n- Expected gross return = 0.5 * $1,200,000 + 0.5 * $0 = $600,000\n- Additional cost to finish = $500,000\n- Expected net from today = $600,000 - $500,000 = $100,000\n\nStop option:\n- Sale value = $150,000\n- Additional cost = $0\n- Expected net from today = $150,000\n\nComparison: $150,000 (stop) > $100,000 (continue), so stop maximizes expected value.\n{\"choice\": \"stop\", \"value\": 150000}"
+}

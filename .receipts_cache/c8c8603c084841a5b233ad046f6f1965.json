@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Mid-market: 1 EUR = 1.09 USD\nAmount owed: 95,000 EUR\nMid-market USD value = 95,000 * 1.09 = 103,550\n\n1. bank:\nRate = 1.09 * (1 + 0.015) = 1.09 * 1.015 = 1.10635 USD/EUR\nEUR needed = 95,000 + 15 wire fee = 95,015 EUR\nTotal USD = 95,015 * 1.10635\n= 95,000*1.10635 + 15*1.10635\n= 105,103.25 + 16.59525\n= 105,119.85 USD\n\n2. platform:\nRate = 1.09 * (1 + 0.002) = 1.09 * 1.002 = 1.09218 USD/EUR\nBase USD = 95,000 * 1.09218 = 103,757.10\nFee = 0.60% of USD amount\nTotal USD = 103,757.10 * 1.006\n= 103,757.10 + 622.5426\n= 104,379.64 USD\n\n3. usd:\nSupplier rate = 1.09 * (1 + 0.02) = 1.09 * 1.02 = 1.1118 USD/EUR\nBase USD = 95,000 * 1.1118 = 105,621.00\nLess 2% early-pay discount:\nTotal USD = 105,621.00 * 0.98 = 103,508.58 USD\n\nComparison:\nbank ~105,119.85 > platform ~104,379.64 > usd ~103,508.58\n\nCheapest is usd.\n{\"choice\": \"usd\", \"value\": 103508.58}"
+}

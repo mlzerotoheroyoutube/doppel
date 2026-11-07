@@ -98,7 +98,7 @@ def from_github(url: str) -> Target:
     _export(clone, head_sha, work / "head")
     base, head = _project_root(work / "base"), _project_root(work / "head")
     if not any(base.rglob("*.py")):
-        raise TargetError("that repository has no Python code; Receipts checks Python projects tested with pytest")
+        raise TargetError("that repository has no Python code; Doppel checks Python projects tested with pytest")
     head = work / "head" / base.relative_to(work / "base")
     return Target(f"{owner}/{repo}#{num} · {pr['title']}", base, head, spec, source,
                   {"owner": owner, "repo": repo, "number": int(num), "sha": head_sha})

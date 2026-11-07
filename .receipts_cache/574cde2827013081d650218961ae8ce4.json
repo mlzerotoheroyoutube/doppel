@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented diameter_circle as 2*r and added tests covering the example, zero, and float radii.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the diameter of a circle.\\\"\\\"\\\"\\n\\n\\ndef diameter_circle(r):\\n    \\\"\\\"\\\"Write a function to find the diameter of a circle.\\\"\\\"\\\"\\n    return 2 * r\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_diameter_circle_example():\\n    assert solution.diameter_circle(10) == 20\\n\\n\\ndef test_diameter_circle_zero():\\n    assert solution.diameter_circle(0) == 0\\n\\n\\ndef test_diameter_circle_float():\\n    assert solution.diameter_circle(2.5) == 5.0\\n\\n\\ndef test_diameter_circle_one():\\n    assert solution.diameter_circle(1) == 2\\n\"}}\n```"
+}

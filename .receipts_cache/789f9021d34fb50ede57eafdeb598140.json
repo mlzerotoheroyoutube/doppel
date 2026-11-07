@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented find(n, m) to return the remainder using Python's modulo operator and added tests covering the documented behavior.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find remainder of two numbers.\\\"\\\"\\\"\\n\\n\\ndef find(n, m):\\n    \\\"\\\"\\\"Write a python function to find remainder of two numbers.\\\"\\\"\\\"\\n    return n % m\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\n@pytest.mark.parametrize(\\n    \\\"n, m, expected\\\",\\n    [\\n        (3, 3, 0),\\n        (10, 3, 1),\\n        (10, 2, 0),\\n        (7, 3, 1),\\n        (3, 5, 3),\\n        (0, 5, 0),\\n        (-10, 3, 2),\\n        (10, -3, -2),\\n        (5.5, 2, 1.5),\\n    ],\\n)\\ndef test_find_remainder(n, m, expected):\\n    assert solution.find(n, m) == expected\\n\\n\\ndef test_find_zero_divisor():\\n    with pytest.raises(ZeroDivisionError):\\n        solution.find(1, 0)\\n\"}}\n```"
+}

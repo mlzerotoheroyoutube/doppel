@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step by step:\n\nProfit = (Price - Unit Cost) \u00d7 Units Sold - Fixed Costs\nUnits Sold = min(Demand, 2000 capacity), Unit Cost = $12, Fixed Costs = $8,000\n\n- $19: Units Sold = min(2603, 2000) = 2000\n  Profit = ($19-$12) \u00d7 2000 - $8,000 = $14,000 - $8,000 = $6,000\n\n- $24: Units Sold = 557\n  Profit = ($24-$12) \u00d7 557 - $8,000 = $6,684 - $8,000 = -$1,316\n\n- $29: Units Sold = 954\n  Profit = ($29-$12) \u00d7 954 - $8,000 = $16,218 - $8,000 = $8,218\n\n- $34: Units Sold = 332\n  Profit = ($34-$12) \u00d7 332 - $8,000 = $7,304 - $8,000 = -$696\n\n- $39: Units Sold = 88\n  Profit = ($39-$12) \u00d7 88 - $8,000 = $2,376 - $8,000 = -$5,624\n\nThe highest profit is $8,218 at a price of $29.\n\n{\"choice\": \"29\", \"value\": 8218}"
+}

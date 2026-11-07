@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement text_match_two_three with regex ab{2,3} returning Found/Not matched strings.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function that matches a string that has an a followed by two to three 'b'.\\\"\\\"\\\"\\n\\nimport re\\n\\n\\ndef text_match_two_three(text):\\n    \\\"\\\"\\\"Write a function that matches a string that has an a followed by two to three 'b'.\\\"\\\"\\\"\\n    if re.search(r'ab{2,3}', text):\\n        return 'Found a match!'\\n    return 'Not matched!'\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example_ac_not_matched():\\n    assert solution.text_match_two_three(\\\"ac\\\") == \\\"Not matched!\\\"\\n\\n\\ndef test_two_bs_found():\\n    assert solution.text_match_two_three(\\\"abb\\\") == \\\"Found a match!\\\"\\n\\n\\ndef test_three_bs_found():\\n    assert solution.text_match_two_three(\\\"abbb\\\") == \\\"Found a match!\\\"\\n\\n\\ndef test_one_b_not_matched():\\n    assert solution.text_match_two_three(\\\"ab\\\") == \\\"Not matched!\\\"\\n\\n\\ndef test_no_b_not_matched():\\n    assert solution.text_match_two_three(\\\"a\\\") == \\\"Not matched!\\\"\\n\"}}\n```"
+}

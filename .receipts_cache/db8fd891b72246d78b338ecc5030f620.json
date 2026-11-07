@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented list_split using strided slicing to partition elements into step groups, and added tests covering the example and related cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to split a list for every nth element.\\\"\\\"\\\"\\n\\n\\ndef list_split(S, step):\\n    \\\"\\\"\\\"Write a function to split a list for every nth element.\\\"\\\"\\\"\\n    return [S[i::step] for i in range(step)]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.list_split(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'], 3) == [['a', 'd', 'g', 'j', 'm'], ['b', 'e', 'h', 'k', 'n'], ['c', 'f', 'i', 'l']]\\n\\n\\ndef test_step_one():\\n    assert solution.list_split([1, 2, 3], 1) == [[1, 2, 3]]\\n\\n\\ndef test_step_two_uneven_length():\\n    assert solution.list_split([1, 2, 3, 4, 5], 2) == [[1, 3, 5], [2, 4]]\\n\\n\\ndef test_empty_list():\\n    assert solution.list_split([], 3) == [[], [], []]\\n\\n\\ndef test_step_larger_than_list():\\n    assert solution.list_split([1, 2], 3) == [[1], [2], []]\\n\\n\\ndef test_does_not_mutate_input():\\n    original = ['a', 'b', 'c', 'd']\\n    solution.list_split(original, 2)\\n    assert original == ['a', 'b', 'c', 'd']\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement most_occurrences by counting whitespace-separated words across all strings.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to get the word with most number of occurrences in the given strings list.\\\"\\\"\\\"\\n\\nfrom collections import Counter\\n\\n\\ndef most_occurrences(test_list):\\n    \\\"\\\"\\\"Write a function to get the word with most number of occurrences in the given strings list.\\\"\\\"\\\"\\n    words = []\\n    for s in test_list:\\n        words.extend(s.split())\\n    if not words:\\n        return None\\n    return Counter(words).most_common(1)[0][0]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_most_occurrences_example():\\n    assert solution.most_occurrences([\\\"UTS is best for RTF\\\", \\\"RTF love UTS\\\", \\\"UTS is best\\\"]) == \\\"UTS\\\"\\n\\n\\ndef test_most_occurrences_single_string():\\n    assert solution.most_occurrences([\\\"hello world hello\\\"]) == \\\"hello\\\"\\n\\n\\ndef test_most_occurrences_counts_across_strings():\\n    assert solution.most_occurrences([\\\"a b\\\", \\\"b c\\\", \\\"b b\\\"]) == \\\"b\\\"\\n\"}}\n```"
+}

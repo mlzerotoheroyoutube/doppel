@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement cube_Sum as sum of cubes of first n even numbers.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the cube sum of first n even natural numbers.\\\"\\\"\\\"\\n\\n\\ndef cube_Sum(n):\\n    \\\"\\\"\\\"Write a python function to find the cube sum of first n even natural numbers.\\\"\\\"\\\"\\n    total = 0\\n    for i in range(1, n + 1):\\n        total += (2 * i) ** 3\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_cube_Sum_example():\\n    assert solution.cube_Sum(2) == 72\\n\\n\\ndef test_cube_Sum_first_values():\\n    assert solution.cube_Sum(1) == 8\\n    assert solution.cube_Sum(3) == 288\\n    assert solution.cube_Sum(5) == 1800\\n\\n\\ndef test_cube_Sum_zero():\\n    assert solution.cube_Sum(0) == 0\\n\"}}\n```"
+}

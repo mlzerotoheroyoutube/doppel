@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement last_Digit using abs(n) % 10 so negative numbers yield their final digit, and add tests for the example, zero, single/multiple digits, and negatives.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the last digit of a given number.\\\"\\\"\\\"\\n\\n\\ndef last_Digit(n):\\n    \\\"\\\"\\\"Write a python function to find the last digit of a given number.\\\"\\\"\\\"\\n    return abs(n) % 10\\n\", \"tests/test_solution.py\": \"import solution\\nfrom solution import last_Digit\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert last_Digit(123) == 3\\n\\n\\ndef test_zero_single_and_multiple_digits():\\n    assert last_Digit(0) == 0\\n    assert last_Digit(7) == 7\\n    assert last_Digit(9) == 9\\n    assert last_Digit(10) == 0\\n    assert last_Digit(100) == 0\\n    assert last_Digit(987654321) == 1\\n\\n\\ndef test_negative_numbers():\\n    assert last_Digit(-123) == 3\\n    assert last_Digit(-7) == 7\\n    assert last_Digit(-10) == 0\\n\"}}\n```"
+}

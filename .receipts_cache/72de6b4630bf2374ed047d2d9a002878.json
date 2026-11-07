@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Requirement: 2500 units from one supplier, delivery <= 30 days.\n\nEligibility check:\n\n- Alpha: quantity 3000 >= 2500 = pass; deadline 35 <= 30 = fail => disqualified\n- Bravo: quantity 2300 >= 2500 = fail; deadline 24 <= 30 = pass => disqualified\n- Cobalt: quantity 2500 >= 2500 = pass; deadline 18 <= 30 = pass => qualified\n\nOnly Cobalt qualifies.\n\nTotal landed cost = goods value in USD + shipping + duty\nwhere duty = rate * (goods value in USD + shipping)\n\nCobalt calculation from original inputs:\n- goods value = 2500 * 12.45 = 31125.00 USD\n- goods + shipping = 31125.00 + 2400.00 = 33525.00 USD\n- duty = 0.00 * 33525.00 = 0.00 USD\n- total = 33525.00 + 0.00 = 33525.00 USD\n\nFor reference, disqualified totals:\n- Alpha total = (2500*12.84*1.08 + 1500.00)*1.04 = (34668.00 + 1500.00)*1.04 = 36168.00*1.04 = 37614.72 USD, disqualified on deadline\n- Bravo hypothetical 2500 total = (2500*1818.82*0.0067 + 2400.00)*1.04 = (30465.235 + 2400.00)*1.04 = 32865.235*1.04 = 34179.8444 USD, disqualified on quantity\n\nLowest qualified is Cobalt at 33525.00 USD.\n\n{\"choice\": \"Cobalt\", \"value\": 33525}\n"
+}

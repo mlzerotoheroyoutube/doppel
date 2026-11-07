@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented neg_count to count negative numbers and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count negative numbers in a list.\\\"\\\"\\\"\\n\\n\\ndef neg_count(list):\\n    \\\"\\\"\\\"Write a python function to count negative numbers in a list.\\\"\\\"\\\"\\n    return sum(1 for x in list if x < 0)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_neg_count_example():\\n    assert solution.neg_count([-1, -2, 3, -4, -5]) == 4\\n\\n\\ndef test_neg_count_empty():\\n    assert solution.neg_count([]) == 0\\n\\n\\ndef test_neg_count_no_negatives():\\n    assert solution.neg_count([1, 2, 3, 0]) == 0\\n\\n\\ndef test_neg_count_all_negative():\\n    assert solution.neg_count([-1, -2, -3]) == 3\\n\"}}\n```"
+}

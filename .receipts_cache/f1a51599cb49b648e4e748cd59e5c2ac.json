@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = Revenue - Variable Cost - Fixed Cost\nUnits sold = min(Demand, Capacity 1300) since margin >0.\n\n- $19: sold = min(1584,1300)=1300\n Revenue = 19*1300 = 24700\n Variable = 9*1300 = 11700\n Profit = 24700 - 11700 - 12000 = 1000\n\n- $24: sold = min(1119,1300)=1119\n Revenue = 24*1119 = 26856\n Variable = 9*1119 = 10071\n Profit = 26856 - 10071 - 12000 = 4785\n\n- $29: sold = min(830,1300)=830\n Revenue = 29*830 = 24070\n Variable = 9*830 = 7470\n Profit = 24070 - 7470 - 12000 = 4600\n\n- $34: sold = min(142,1300)=142\n Revenue = 34*142 = 4828\n Variable = 9*142 = 1278\n Profit = 4828 - 1278 - 12000 = -8450\n\n- $39: sold = min(22,1300)=22\n Revenue = 39*22 = 858\n Variable = 9*22 = 198\n Profit = 858 - 198 - 12000 = -11340\n\nRanking: 24 (4785) > 29 (4600) > 19 (1000) > 34 (-8450) > 39 (-11340).\nMax is $24.\n\n{\"choice\": \"24\", \"value\": 4785}"
+}

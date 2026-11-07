@@ -1,4 +1,4 @@
-"""Talk to the Receipts gate over HTTP from any device that can make a POST request.
+"""Talk to the Doppel gate over HTTP from any device that can make a POST request.
 
     python -m receipts.client --user sandeep "today: ship the calendar fixes, demo at 5pm"
     python -m receipts.client --user sandeep --wait 300 "fix issue 2 in owner/repo"
@@ -52,7 +52,7 @@ def main() -> int:
         time.sleep(3)
         for m in post(args.url, "/api/messages", {"token": token, "user": args.user}).get("messages", []):
             print(m, "\n")
-            if any(k in m for k in ("Receipts:", "Shipped", "Stopped after", "Today's plan", "failed")):
+            if any(k in m for k in ("Doppel:", "Shipped", "Stopped after", "Today's plan", "failed")):
                 deadline = min(deadline, time.time() + 5)
     return 0
 

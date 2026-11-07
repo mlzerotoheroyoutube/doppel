@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented dict_filter to keep entries with values greater than or equal to n, with tests covering the example, boundary, and empty cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to filter a dictionary based on values.\\\"\\\"\\\"\\n\\n\\ndef dict_filter(dict, n):\\n    \\\"\\\"\\\"Write a function to filter a dictionary based on values.\\\"\\\"\\\"\\n    return {key: value for key, value in dict.items() if value >= n}\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_dict_filter_example():\\n    assert solution.dict_filter(\\n        {'Cierra Vega': 175, 'Alden Cantrell': 180, 'Kierra Gentry': 165, 'Pierre Cox': 190},\\n        170,\\n    ) == {'Cierra Vega': 175, 'Alden Cantrell': 180, 'Pierre Cox': 190}\\n\\n\\ndef test_dict_filter_includes_threshold_value():\\n    assert solution.dict_filter({'a': 170, 'b': 169, 'c': 171}, 170) == {'a': 170, 'c': 171}\\n\\n\\ndef test_dict_filter_empty_and_no_matches():\\n    assert solution.dict_filter({}, 170) == {}\\n    assert solution.dict_filter({'a': 1, 'b': 2}, 10) == {}\\n    assert solution.dict_filter({'a': 10, 'b': 20}, 5) == {'a': 10, 'b': 20}\\n\\n\\ndef test_dict_filter_does_not_mutate_input():\\n    original = {'a': 10, 'b': 1}\\n    solution.dict_filter(original, 5)\\n    assert original == {'a': 10, 'b': 1}\\n\"}}\n```"
+}

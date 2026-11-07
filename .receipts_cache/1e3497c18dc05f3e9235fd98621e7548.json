@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step by step:\n\n**Mid-market value**\n- 95,000 EUR \u00d7 1.09 USD/EUR = 103,550 USD\n\n**Bank**\n- Rate = 1.09 \u00d7 1.015 = 1.10635 USD/EUR\n- EUR bought = 95,000 + 15 wire fee = 95,015 EUR\n- Cost = 95,015 \u00d7 1.10635 = 105,119.85 USD\n\n**Platform**\n- Rate = 1.09 \u00d7 1.002 = 1.09218 USD/EUR\n- Converted amount = 95,000 \u00d7 1.09218 = 103,757.10 USD\n- Fee = 0.60%, so total = 103,757.10 \u00d7 1.006 = 104,379.64 USD\n\n**USD via supplier**\n- Rate = 1.09 \u00d7 1.02 = 1.1118 USD/EUR\n- Amount = 95,000 \u00d7 1.1118 = 105,621.00 USD\n- 2% discount: 105,621.00 \u00d7 0.98 = 103,508.58 USD\n\nThe USD option is cheapest.\n\n{\"choice\": \"usd\", \"value\": 103508.58}"
+}

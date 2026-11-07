@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North vs South first-year value calculation:\n\n**North:**\n- Salary: 170,000.00\n- Bonus 15%: 0.15 * 170,000 = 25,500.00\n- Taxable cash: 170,000 + 25,500 = 195,500.00\n- After-tax cash at 25%: 195,500 * 0.75 = 146,625.00\n- Retirement match: 5% of salary = 0.05 * 170,000 = 8,500 capped at 6,000 = 6,000.00\n- Vested equity by month 12: 160,000 / 4 = 40,000.00\n- Total: 146,625 + 6,000 + 40,000 = 192,625.00\n\nCross-check reverse: 192,625 - 40,000 - 6,000 = 146,625 / 0.75 = 195,500 - 170,000 = 25,500 = 15% of salary.\n\n**South:**\n- Salary: 170,000.00\n- Bonus 10%: 0.10 * 170,000 = 17,000.00\n- Taxable cash: 170,000 + 17,000 = 187,000.00\n- After-tax cash at 25%: 187,000 * 0.75 = 140,250.00\n- Retirement match: 3% of salary = 0.03 * 170,000 = 5,100 under 9,000 cap = 5,100.00\n- Vested equity by month 12: 160,000 / 4 = 40,000.00\n- Total: 140,250 + 5,100 + 40,000 = 185,350.00\n\nCross-check reverse: 185,350 - 40,000 - 5,100 = 140,250 / 0.75 = 187,000 - 170,000 = 17,000 = 10% of salary.\n\nNorth 192,625 > South 185,350, difference 7,275.\n\n{\"choice\": \"North\", \"value\": 192625}\n"
+}

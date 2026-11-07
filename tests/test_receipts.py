@@ -1,4 +1,4 @@
-"""Tests for Receipts itself: the safety rules the product depends on."""
+"""Tests for Doppel itself: the safety rules the product depends on."""
 
 from pathlib import Path
 

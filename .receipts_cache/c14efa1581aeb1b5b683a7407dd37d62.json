@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented add_K_element to add K to each tuple element and added test for example behavior.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to add the k elements to each element in the tuple.\\\"\\\"\\\"\\n\\n\\ndef add_K_element(test_list, K):\\n    \\\"\\\"\\\"Write a function to add the k elements to each element in the tuple.\\\"\\\"\\\"\\n    return [tuple(ele + K for ele in tup) for tup in test_list]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_add_K_element_example():\\n    assert solution.add_K_element([(1, 3, 4), (2, 4, 6), (3, 8, 1)], 4) == [(5, 7, 8), (6, 8, 10), (7, 12, 5)]\\n\\n\\ndef test_add_K_element_empty():\\n    assert solution.add_K_element([], 4) == []\\n\\n\\ndef test_add_K_element_negative_and_zero():\\n    assert solution.add_K_element([(1, 2), (3, 4)], 0) == [(1, 2), (3, 4)]\\n    assert solution.add_K_element([(1, 2), (3, 4)], -1) == [(0, 1), (2, 3)]\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented Josephus 0-indexed survivor logic for get_Position.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the position of the last removed element from the given array.\\\"\\\"\\\"\\n\\n\\ndef get_Position(a, n, m):\\n    \\\"\\\"\\\"Write a python function to find the position of the last removed element from the given array.\\\"\\\"\\\"\\n    if n <= 0:\\n        return 0\\n    result = 0\\n    for i in range(1, n + 1):\\n        result = (result + m) % i\\n    return result\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.get_Position([2, 5, 4], 3, 2) == 2\\n\\n\\ndef test_single_element():\\n    assert solution.get_Position([10], 1, 5) == 0\\n\\n\\ndef test_josephus_n5_m2():\\n    assert solution.get_Position([1, 2, 3, 4, 5], 5, 2) == 2\\n\\n\\ndef test_josephus_n7_m3():\\n    assert solution.get_Position([1, 2, 3, 4, 5, 6, 7], 7, 3) == 3\\n\"}}\n```"
+}

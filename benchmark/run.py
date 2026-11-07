@@ -1,6 +1,6 @@
-"""Run Receipts (and optionally a baseline reviewer) over every benchmark PR.
+"""Run Doppel (and optionally a baseline reviewer) over every benchmark PR.
 
-    python -m benchmark.run              # full Receipts, uses the model
+    python -m benchmark.run              # full Doppel, uses the model
     python -m benchmark.run --no-model   # static + mutation checks only
     python -m benchmark.run --baseline   # also score a plain "LLM reads the diff" reviewer
     python -m benchmark.run --only i1-bad-hardcoded

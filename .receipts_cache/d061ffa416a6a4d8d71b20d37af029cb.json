@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = (price - $9) * units sold - $12,000, where units sold = min(demand, 1300).\n\n- $19: sold = min(1584,1300)=1300. Margin 10. 10*1300-12000 = 13000-12000 = 1000\n- $24: sold = min(1119,1300)=1119. Margin 15. 15*1119-12000 = 16785-12000 = 4785\n- $29: sold = min(830,1300)=830. Margin 20. 20*830-12000 = 16600-12000 = 4600\n- $34: sold = min(142,1300)=142. Margin 25. 25*142-12000 = 3550-12000 = -8450\n- $39: sold = min(22,1300)=22. Margin 30. 30*22-12000 = 660-12000 = -11340\n\nMaximum is $24 with $4,785 profit.\n{\"choice\": \"24\", \"value\": 4785}"
+}

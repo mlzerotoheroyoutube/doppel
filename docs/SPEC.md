@@ -1,10 +1,11 @@
-# Receipts: Product Spec
+# Doppel: Product Spec
 
-**One line:** an AI engineering teammate that only ships work it can prove. Meta Muse does the work, SubQ
-decides what ships, deterministic checks supply the facts, and it all lives in one chat on ASI:One.
+**One line:** your double for engineering work. A personal agent that knows your repos, your day and your
+rules, works behind the scenes, double-verifies everything (Meta Muse does the work, SubQ decides what ships,
+deterministic checks supply the facts), and only asks you when it must. It all lives in one chat on ASI:One.
 
-Status: live (Nov 7, 2026). Repo: https://github.com/mlzerotoheroyoutube/receipts ·
-Agent: [receipts-gate on ASI:One](https://asi1.ai/ai/agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg)
+Status: live (Nov 7, 2026). Repo: https://github.com/mlzerotoheroyoutube/doppel ·
+Agent: [doppel on ASI:One](https://asi1.ai/ai/agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg)
 · Hackathon tracks: **Trust but Verify** (primary), **The System That Gets Better** (secondary).
 
 ---
@@ -32,29 +33,29 @@ Agent: [receipts-gate on ASI:One](https://asi1.ai/ai/agent1q0qv0zfjg8vwzdx9dle5y
 | Area | Feature | Status |
 |---|---|---|
 | Verify | Verify a GitHub PR: BLOCK / WARN / PASS with evidence and repro commands | ✅ live |
-| Verify | Official **Receipts** commit status + report comment on the PR (watched repos only) | ✅ live |
+| Verify | Official **Doppel** commit status + report comment on the PR (watched repos only) | ✅ live |
 | Verify | Static-only review for repos the owner doesn't own (their code is never run) | ✅ live |
 | Watch | Watch repos; check every new PR / push on its own; alert or hold for a digest in quiet hours | ✅ live |
 | Fix | "Fix issue N": hidden exam, Meta writes the fix, evidence, SubQ judges, rework ≤3, opens a real PR | ✅ live |
-| Fix | Start a fix from GitHub by labelling an issue `receipts-fix`; progress posted on the issue | ✅ live |
+| Fix | Start a fix from GitHub by labelling an issue `doppel-fix`; progress posted on the issue | ✅ live |
 | Build | "New project <name>: <idea>": repo + Meta-written starter with passing tests + 3 starter issues (asks first) | ✅ live |
-| GitHub | List repos, open PRs (with Receipts status), open issues; open issues from chat | ✅ live |
+| GitHub | List repos, open PRs (with Doppel status), open issues; open issues from chat | ✅ live |
 | Plan | "today: …": Meta drafts a day plan, SubQ reviews it, one revision; quiet hours drive alerts | ✅ live |
 | Chat | Plain English for everything; full Meta answers with conversation memory for anything else | ✅ live |
 | Memory | Per-person memory (plan, repos, strictness, muted rules, feedback) across devices | ✅ live |
 | Teach | `wrong` / `right` after a verdict; a rule marked wrong twice warns instead of blocking for that person | ✅ live |
 | Learn | Self-improving playbook: SubQ stops bad work, Meta writes lessons, held-out validation adopts or rolls back | ✅ built, benchmarked |
 | Select | Meta proposes (Wonder + Spark), evidence + SubQ pick what ships | ✅ built, benchmarking |
-| CI | GitHub Actions workflow that runs Receipts on every PR in GitHub's cloud | ✅ template (`docs/receipts-workflow.yml`) |
+| CI | GitHub Actions workflow that runs Doppel on every PR in GitHub's cloud | ✅ template (`docs/receipts-workflow.yml`) |
 
 ## 4. Interfaces
 
 | Interface | How | Notes |
 |---|---|---|
-| **ASI:One** (web, iOS, Android) | Chat addressed to `receipts-gate` (Agent Chat Protocol via Agentverse mailbox) | Primary. Messages to `@receipts-gate` are answered by Meta; unaddressed messages go to ASI:One's own assistant |
+| **ASI:One** (web, iOS, Android) | Chat addressed to `doppel` (Agent Chat Protocol via Agentverse mailbox) | Primary. Messages to `@doppel` are answered by Meta; unaddressed messages go to ASI:One's own assistant |
 | **HTTP API** | `POST /api/chat`, `POST /api/messages`, `GET /api/health` on the gate (port 8001) | Token-protected; any device, Shortcut or bot |
 | **CLI** | `python -m receipts verify --github-pr <url> --gate` | One-off checks, CI |
-| **GitHub** | Status checks, PR comments, issue comments, `receipts-fix` label, PRs opened by the agent | Writes only to the owner's repos |
+| **GitHub** | Status checks, PR comments, issue comments, `doppel-fix` label, PRs opened by the agent | Writes only to the owner's repos |
 
 ### Chat commands (plain English also works)
 
@@ -67,7 +68,7 @@ Agent: [receipts-gate on ASI:One](https://asi1.ai/ai/agent1q0qv0zfjg8vwzdx9dle5y
 ## 5. Architecture
 
 ```
-ASI:One (web / phone) ──mailbox──▶ receipts-gate (uAgents, port 8001)  ◀── HTTP API (any device)
+ASI:One (web / phone) ──mailbox──▶ doppel (uAgents, port 8001)  ◀── HTTP API (any device)
                                       │ chat protocol · memory · access control · watcher · router
         ┌──────────────┬──────────────┼──────────────┬───────────────┬──────────────┐
         ▼              ▼              ▼              ▼               ▼              ▼
@@ -117,7 +118,7 @@ muted rules, learned downgrades) is applied before the verdict.
 
 1. Meta writes a hidden exam from the issue, then freezes it.
 2. Meta proposes the fix (and, in selection mode, Wonder and Spark both propose; the exam scores each, SubQ picks on a tie).
-3. Receipts collects evidence; **SubQ judges**. Approved and not blocked → a branch is pushed and a PR opened.
+3. Doppel collects evidence; **SubQ judges**. Approved and not blocked → a branch is pushed and a PR opened.
 4. Rejected → **stop**: nothing ships; SubQ's diagnosis (never the exam) goes back to Meta; up to 3 rounds,
    then it hands back to the person.
 5. Every rejection is queued in `playbook/inbox.jsonl` for the improvement loop.
@@ -152,7 +153,7 @@ muted rules, learned downgrades) is applied before the verdict.
 | Benchmark | Result |
 |---|---|
 | 18 PRs (12 bad, 6 honest) | Deterministic only 7/12 · + Meta exam 10/12 · **+ SubQ gate 11/12 caught, 0/6 honest blocked** · plain AI reviewer 12/12 but **2/6 honest blocked** |
-| MBPP, 500 tasks | Meta alone 459 correct, 40 wrong shipped · Meta + Receipts + SubQ 451 correct, **36 wrong shipped**, 11 held back; shipped code correct 92.7% vs 92.0% |
+| MBPP, 500 tasks | Meta alone 459 correct, 40 wrong shipped · Meta + Doppel + SubQ 451 correct, **36 wrong shipped**, 11 held back; shipped code correct 92.7% vs 92.0% |
 | Repo issues (6 × 3), long horizon (6 dependent issues × 2), long vertical (receipts feature × 3) | Meta alone and Meta + SubQ both perfect; 0 regressions |
 | Cross-domain decisions (60 × 3 configurations) | All 60/60; SubQ raised 8 false alarms (loan arithmetic), none changed a final answer |
 | Selector, 200 held-out MBPP tasks | running |

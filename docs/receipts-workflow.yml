@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install Receipts
-        run: pip install "git+https://github.com/mlzerotoheroyoutube/receipts@main"
+        run: pip install "git+https://github.com/mlzerotoheroyoutube/doppel@main"
       - name: Verify this pull request
         env:
           MODEL_API_KEY: ${{ secrets.MODEL_API_KEY }}

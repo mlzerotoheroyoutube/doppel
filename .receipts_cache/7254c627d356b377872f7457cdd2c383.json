@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented move_first to rotate last element to first with empty-list guard.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to shift last element to first position in the given list.\\\"\\\"\\\"\\n\\n\\ndef move_first(test_list):\\n    \\\"\\\"\\\"Write a python function to shift last element to first position in the given list.\\\"\\\"\\\"\\n    if not test_list:\\n        return test_list\\n    test_list.insert(0, test_list.pop())\\n    return test_list\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_move_first_example():\\n    assert solution.move_first([1, 2, 3, 4]) == [4, 1, 2, 3]\\n\\n\\ndef test_move_first_two_elements():\\n    assert solution.move_first([1, 2]) == [2, 1]\\n\\n\\ndef test_move_first_single_element():\\n    assert solution.move_first([1]) == [1]\\n\\n\\ndef test_move_first_empty():\\n    assert solution.move_first([]) == []\\n\\n\\ndef test_move_first_strings():\\n    assert solution.move_first([\\\"a\\\", \\\"b\\\", \\\"c\\\"]) == [\\\"c\\\", \\\"a\\\", \\\"b\\\"]\\n\"}}\n```"
+}

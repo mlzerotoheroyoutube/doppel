@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement gcd using Euclidean algorithm and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find gcd of two positive integers.\\\"\\\"\\\"\\n\\n\\ndef gcd(x, y):\\n    \\\"\\\"\\\"Write a python function to find gcd of two positive integers.\\\"\\\"\\\"\\n    while y:\\n        x, y = y, x % y\\n    return x\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_gcd_example():\\n    assert solution.gcd(12, 17) == 1\\n\\n\\ndef test_gcd_common_divisor():\\n    assert solution.gcd(12, 18) == 6\\n\\n\\ndef test_gcd_same_number():\\n    assert solution.gcd(7, 7) == 7\\n\\n\\ndef test_gcd_one_divides_other():\\n    assert solution.gcd(8, 24) == 8\\n\"}}\n```"
+}

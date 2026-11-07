@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented dict_depth with recursive depth counting where empty dict is depth 1 and non-dicts are depth 0.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the depth of a dictionary.\\\"\\\"\\\"\\n\\n\\ndef dict_depth(d):\\n    \\\"\\\"\\\"Write a function to find the depth of a dictionary.\\\"\\\"\\\"\\n    if not isinstance(d, dict):\\n        return 0\\n    if not d:\\n        return 1\\n    return 1 + max(dict_depth(v) for v in d.values())\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.dict_depth({'a': 1, 'b': {'c': {'d': {}}}}) == 4\\n\\n\\ndef test_empty_dict():\\n    assert solution.dict_depth({}) == 1\\n\\n\\ndef test_flat_dict():\\n    assert solution.dict_depth({'a': 1, 'b': 2}) == 1\\n\\n\\ndef test_nested_dict():\\n    assert solution.dict_depth({'a': {'b': 1}}) == 2\\n    assert solution.dict_depth({'a': {'b': {'c': 1}}}) == 3\\n\\n\\ndef test_non_dict_returns_zero():\\n    assert solution.dict_depth(1) == 0\\n    assert solution.dict_depth(None) == 0\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement remove_lowercase using regex and add tests for it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to remove lowercase substrings from a given string by using regex.\\\"\\\"\\\"\\nimport re\\n\\n\\ndef remove_lowercase(str1):\\n    \\\"\\\"\\\"Write a function to remove lowercase substrings from a given string by using regex.\\\"\\\"\\\"\\n    return re.sub(r'[a-z]', '', str1)\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_remove_lowercase_example():\\n    assert solution.remove_lowercase('KDeoALOklOOHserfLoAJSIskdsf') == 'KDALOOOHLAJSI'\\n\\n\\ndef test_remove_lowercase_edge_cases():\\n    assert solution.remove_lowercase('') == ''\\n    assert solution.remove_lowercase('ABC') == 'ABC'\\n    assert solution.remove_lowercase('abc') == ''\\n    assert solution.remove_lowercase('AbC123xYz') == 'AC123YZ'\\n\"}}\n```"
+}

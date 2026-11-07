@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement insert_element to prepend element before each item.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to insert an element before each element of a list.\\\"\\\"\\\"\\n\\n\\ndef insert_element(list, element):\\n    \\\"\\\"\\\"Write a function to insert an element before each element of a list.\\\"\\\"\\\"\\n    result = []\\n    for item in list:\\n        result.append(element)\\n        result.append(item)\\n    return result\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.insert_element(['Red', 'Green', 'Black'], 'c') == ['c', 'Red', 'c', 'Green', 'c', 'Black']\\n\\n\\ndef test_empty_list():\\n    assert solution.insert_element([], 'c') == []\\n\\n\\ndef test_single_element():\\n    assert solution.insert_element([1], 0) == [0, 1]\\n\\n\\ndef test_does_not_mutate_input():\\n    data = [1, 2, 3]\\n    copy = data[:]\\n    result = solution.insert_element(data, 0)\\n    assert result == [0, 1, 0, 2, 0, 3]\\n    assert data == copy\\n\"}}\n```"
+}

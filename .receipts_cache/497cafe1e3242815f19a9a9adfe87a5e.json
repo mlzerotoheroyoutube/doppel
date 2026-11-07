@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement minimum(a, b) and add tests for it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the minimum of two numbers.\\\"\\\"\\\"\\n\\n\\ndef minimum(a, b):\\n    \\\"\\\"\\\"Write a python function to find the minimum of two numbers.\\\"\\\"\\\"\\n    return a if a < b else b\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_minimum():\\n    assert solution.minimum(1, 2) == 1\\n    assert solution.minimum(2, 1) == 1\\n    assert solution.minimum(-1, -2) == -2\\n    assert solution.minimum(5, 5) == 5\\n\"}}\n```"
+}

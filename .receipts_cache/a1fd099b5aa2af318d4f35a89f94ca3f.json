@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Requirement: 2500 units from one supplier, delivery <=25 days, capacity >=2500.\n\nEligibility:\n- Alpha: 3000 >=2500, 24 <=25 -> qualifies\n- Bravo: 3000 >=2500, 10 <=25 -> qualifies\n- Cobalt: 3000 >=2500, 10 <=25 -> qualifies\n\nCompute goods value in USD, carry unrounded:\n\nAlpha: 9.97 EUR * 2500 = 24,925 EUR\n24,925 * 1.08 = 26,919 USD goods\n+ shipping 2,400 = 29,319\nduty 12% = 29,319 * 0.12 = 3,518.28\ntotal = 29,319 * 1.12 = 32,837.28\nReverse check: 32,837.28 / 1.12 - 2,400 = 26,919; /1.08 /2500 = 9.97 OK\n\nBravo: 2,023.51 JPY * 2500 = 5,058,775 JPY\n5,058,775 * 0.0067 = 33,893.7925 USD goods\n+ shipping 2,400 = 36,293.7925\nduty 8% = 36,293.7925 * 0.08 = 2,903.5034\ntotal = 36,293.7925 * 1.08 = 39,197.2959 ~ 39,197.30\nReverse check: 39,197.2959 / 1.08 - 2,400 = 33,893.7925; /0.0067 /2500 = 2,023.51 OK\n\nCobalt: 15.46 USD * 2500 = 38,650 USD goods\n+ shipping 900 = 39,550\nduty 0% = 0\ntotal = 39,550.00\nReverse check: 39,550 - 900 = 38,650; /2500 = 15.46 OK\n\nLowest qualified total is Alpha at $32,837.28.\n{\"choice\": \"Alpha\", \"value\": 32837.28}"
+}

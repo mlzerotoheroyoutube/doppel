@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement sum_div as sum of proper divisors and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to return the sum of all divisors of a number.\\\"\\\"\\\"\\n\\n\\ndef sum_div(number):\\n    \\\"\\\"\\\"Write a function to return the sum of all divisors of a number.\\\"\\\"\\\"\\n    if number <= 1:\\n        return 0\\n    total = 1\\n    i = 2\\n    while i * i <= number:\\n        if number % i == 0:\\n            total += i\\n            other = number // i\\n            if other != i:\\n                total += other\\n        i += 1\\n    return total\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_sum_div_example():\\n    assert solution.sum_div(8) == 7\\n\\n\\ndef test_sum_div_proper_divisors():\\n    assert solution.sum_div(6) == 6\\n    assert solution.sum_div(12) == 16\\n    assert solution.sum_div(9) == 4\\n    assert solution.sum_div(13) == 1\\n    assert solution.sum_div(1) == 0\\n\"}}\n```"
+}

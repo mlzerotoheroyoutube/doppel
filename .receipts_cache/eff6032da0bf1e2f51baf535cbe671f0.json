@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement check to return Yes for non-empty 0/1 strings else No.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to check whether the given string is a binary string or not.\\\"\\\"\\\"\\n\\n\\ndef check(string):\\n    \\\"\\\"\\\"Write a python function to check whether the given string is a binary string or not.\\\"\\\"\\\"\\n    if not string:\\n        return \\\"No\\\"\\n    for ch in string:\\n        if ch not in \\\"01\\\":\\n            return \\\"No\\\"\\n    return \\\"Yes\\\"\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_check_binary_strings_yes():\\n    assert solution.check(\\\"01010101010\\\") == \\\"Yes\\\"\\n    assert solution.check(\\\"0\\\") == \\\"Yes\\\"\\n    assert solution.check(\\\"1\\\") == \\\"Yes\\\"\\n    assert solution.check(\\\"01\\\") == \\\"Yes\\\"\\n    assert solution.check(\\\"000111\\\") == \\\"Yes\\\"\\n\\n\\ndef test_check_non_binary_strings_no():\\n    assert solution.check(\\\"012\\\") == \\\"No\\\"\\n    assert solution.check(\\\"hello\\\") == \\\"No\\\"\\n    assert solution.check(\\\"0101a010\\\") == \\\"No\\\"\\n    assert solution.check(\\\"\\\") == \\\"No\\\"\\n    assert solution.check(\\\"01 01\\\") == \\\"No\\\"\\n\"}}\n```"
+}

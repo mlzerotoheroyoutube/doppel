@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step-by-step profit = (Price - $9) \u00d7 units sold - $12,000, where units sold = min(demand, 1300):\n\n- $19: units = 1300; (19-9)\u00d71300 - 12000 = $1,000\n- $24: units = 1119; (24-9)\u00d71119 - 12000 = $4,785\n- $29: units = 830; (29-9)\u00d7830 - 12000 = $4,600\n- $34: units = 142; (34-9)\u00d7142 - 12000 = -$8,450\n- $39: units = 22; (39-9)\u00d722 - 12000 = -$11,340\n\nThe highest profit is at $24.\n\n{\"choice\": \"24\", \"value\": 4785}"
+}

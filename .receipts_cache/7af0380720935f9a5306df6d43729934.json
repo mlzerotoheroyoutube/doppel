@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step 1: Calculate after-tax cash (30% tax)\n\n- North: Salary $155,000, bonus 0% = $0\n  Taxable = $155,000\n  After-tax = $155,000 \u00d7 0.70 = $108,500\n\n- South: Salary $155,000, bonus 15% = 0.15 \u00d7 $155,000 = $23,250\n  Taxable = $155,000 + $23,250 = $178,250\n  After-tax = $178,250 \u00d7 0.70 = $124,775\n\nStep 2: Calculate retirement match (not taxed)\n\n- North: 5% \u00d7 $155,000 = $7,750, capped at $6,000 \u2192 $6,000\n- South: 3% \u00d7 $155,000 = $4,650, capped at $20,000 \u2192 $4,650\n\nStep 3: Calculate equity vested by end of month 12\n\n- North: $80,000 over 4 years with 1-year cliff. First 25% vests at month 12: $80,000 / 4 = $20,000\n- South: $80,000 over 4 years monthly. By month 12: 12/48 \u00d7 $80,000 = $20,000\n\nStep 4: Total first-year value\n\n- North: $108,500 + $6,000 + $20,000 = $134,500\n- South: $124,775 + $4,650 + $20,000 = $149,425\n\nSouth has the higher first-year value.\n\n{\"choice\": \"South\", \"value\": 149425}"
+}

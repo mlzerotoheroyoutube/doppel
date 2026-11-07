@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement decimal_to_Octal to convert decimal to octal digits and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to convert decimal number to octal number.\\\"\\\"\\\"\\n\\n\\ndef decimal_to_Octal(deciNum):\\n    \\\"\\\"\\\"Write a python function to convert decimal number to octal number.\\\"\\\"\\\"\\n    if deciNum == 0:\\n        return 0\\n    negative = deciNum < 0\\n    deciNum = abs(deciNum)\\n    octal = 0\\n    place = 1\\n    while deciNum > 0:\\n        octal += (deciNum % 8) * place\\n        deciNum //= 8\\n        place *= 10\\n    return -octal if negative else octal\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_decimal_to_Octal():\\n    assert solution.decimal_to_Octal(10) == 12\\n    assert solution.decimal_to_Octal(0) == 0\\n    assert solution.decimal_to_Octal(7) == 7\\n    assert solution.decimal_to_Octal(8) == 10\\n    assert solution.decimal_to_Octal(64) == 100\\n\"}}\n```"
+}

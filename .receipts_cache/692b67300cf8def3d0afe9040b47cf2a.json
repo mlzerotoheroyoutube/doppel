@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Profit = units_sold * (price - 9) - 8000, where units_sold = min(demand, 2000):\n\n- $19: sold 2000. Revenue 19*2000=38000. Variable 9*2000=18000. Profit 38000-18000-8000=12000.\n- $24: sold 1440. Revenue 24*1440=34560. Variable 9*1440=12960. Profit 34560-12960-8000=13600.\n- $29: sold 971. Revenue 29*971=28159. Variable 9*971=8739. Profit 28159-8739-8000=11420.\n- $34: sold 566. Revenue 34*566=19244. Variable 9*566=5094. Profit 19244-5094-8000=6150.\n- $39: sold 86. Revenue 39*86=3354. Variable 9*86=774. Profit 3354-774-8000=-5420.\n\nMaximum is $24 with $13,600 profit.\n{\"choice\": \"24\", \"value\": 13600}"
+}

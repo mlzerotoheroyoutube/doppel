@@ -1,4 +1,4 @@
-"""Long-horizon and long-vertical benchmarks: Meta alone vs Meta + Receipts + SubQ.
+"""Long-horizon and long-vertical benchmarks: Meta alone vs Meta + Doppel + SubQ.
 
 horizon   one project, six dependent issues in a row (benchmark/fixtures/calendar_horizon).
           Each step starts from whatever the previous step left. After every step the code is
@@ -87,7 +87,7 @@ def run(suite: str, config: str) -> dict:
 
 def report() -> None:
     runs = [json.loads(f.read_text()) for f in sorted(OUT.glob("*.json"))]
-    names = {"meta": "Meta alone", "subq": "Meta + Receipts + SubQ"}
+    names = {"meta": "Meta alone", "subq": "Meta + Doppel + SubQ"}
     print("### Long horizon (6 dependent issues, graded on all issues so far after every step)\n")
     print("| Configuration | Runs | Steps fully correct | Final repo: issues correct | Regressions | Wrong code shipped | Held back |")
     print("|---|---|---|---|---|---|---|")

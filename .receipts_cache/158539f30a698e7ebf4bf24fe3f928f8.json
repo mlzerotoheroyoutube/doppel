@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement newman_prime via NSW recurrence S(n)=2*S(n-1)+S(n-2).\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the nth newman\\u2013shanks\\u2013williams prime number.\\\"\\\"\\\"\\n\\n\\ndef newman_prime(n):\\n    \\\"\\\"\\\"Return the nth Newman-Shanks-Williams number.\\n\\n    Sequence (0-indexed): 1, 1, 3, 7, 17, 41, 99, ...\\n    with S(0)=1, S(1)=1 and S(n)=2*S(n-1)+S(n-2).\\n    \\\"\\\"\\\"\\n    if n < 0:\\n        raise ValueError(\\\"n must be non-negative\\\")\\n    if n == 0 or n == 1:\\n        return 1\\n    a, b = 1, 1\\n    for _ in range(2, n + 1):\\n        a, b = b, 2 * b + a\\n    return b\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_newman_prime_example():\\n    assert solution.newman_prime(3) == 7\\n\\n\\ndef test_newman_prime_sequence():\\n    assert [solution.newman_prime(i) for i in range(7)] == [1, 1, 3, 7, 17, 41, 99]\\n\"}}\n```"
+}

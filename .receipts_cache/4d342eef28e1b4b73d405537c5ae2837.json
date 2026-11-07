@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Contribution per unit = price - $9 variable cost.\nUnits sold = min(demand, capacity 2000). All demands < 2000, so sell = demand.\nMonthly profit = contribution * demand - $12,000 fixed:\n\n- $19: margin $10 x 498 = $4,980 - $12,000 = -$7,020\n- $24: margin $15 x 1357 = $20,355 - $12,000 = $8,355\n- $29: margin $20 x 775 = $15,500 - $12,000 = $3,500\n- $34: margin $25 x 149 = $3,725 - $12,000 = -$8,275\n- $39: margin $30 x 118 = $3,540 - $12,000 = -$8,460\n\nMaximum is at $24 with $8,355 profit.\n{\"choice\": \"24\", \"value\": 8355}"
+}

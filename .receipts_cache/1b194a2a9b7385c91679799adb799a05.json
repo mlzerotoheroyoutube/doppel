@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement tuple_intersection via sorted-tuple normalization and add tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the tuple intersection of elements in the given tuple list irrespective of their order.\\\"\\\"\\\"\\n\\n\\ndef tuple_intersection(test_list1, test_list2):\\n    \\\"\\\"\\\"Write a function to find the tuple intersection of elements in the given tuple list irrespective of their order.\\\"\\\"\\\"\\n    set1 = set(tuple(sorted(t)) for t in test_list1)\\n    set2 = set(tuple(sorted(t)) for t in test_list2)\\n    return set1 & set2\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_tuple_intersection_example():\\n    assert solution.tuple_intersection([(3, 4), (5, 6), (9, 10), (4, 5)], [(5, 4), (3, 4), (6, 5), (9, 11)]) == {(4, 5), (3, 4), (5, 6)}\\n\\n\\ndef test_tuple_intersection_empty():\\n    assert solution.tuple_intersection([], [(3, 4)]) == set()\\n    assert solution.tuple_intersection([(3, 4)], []) == set()\\n    assert solution.tuple_intersection([], []) == set()\\n\\n\\ndef test_tuple_intersection_no_overlap():\\n    assert solution.tuple_intersection([(1, 2)], [(3, 4)]) == set()\\n\\n\\ndef test_tuple_intersection_order_insensitive():\\n    assert solution.tuple_intersection([(1, 2), (3, 4)], [(2, 1), (5, 6)]) == {(1, 2)}\\n\"}}\n```"
+}

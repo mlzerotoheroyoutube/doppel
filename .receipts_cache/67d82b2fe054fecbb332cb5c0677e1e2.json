@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement find(n, m) using integer division and add tests for quotient behavior.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find quotient of two numbers.\\\"\\\"\\\"\\n\\n\\ndef find(n, m):\\n    \\\"\\\"\\\"Write a python function to find quotient of two numbers.\\\"\\\"\\\"\\n    return n // m\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_find_quotient():\\n    assert solution.find(10, 3) == 3\\n    assert solution.find(9, 3) == 3\\n    assert solution.find(0, 5) == 0\\n    assert solution.find(5, 10) == 0\\n\"}}\n```"
+}

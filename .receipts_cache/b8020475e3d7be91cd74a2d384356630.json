@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement check_greater to compare number against all array elements.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to check whether the entered number is greater than the elements of the given array.\\\"\\\"\\\"\\n\\n\\ndef check_greater(arr, number):\\n    \\\"\\\"\\\"Write a function to check whether the entered number is greater than the elements of the given array.\\\"\\\"\\\"\\n    if all(number > x for x in arr):\\n        return 'Yes, entered number is greater than those in the array'\\n    return 'No, entered number is less than those in the array'\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_check_greater_no():\\n    assert solution.check_greater([1, 2, 3, 4, 5], 4) == 'No, entered number is less than those in the array'\\n\\n\\ndef test_check_greater_yes():\\n    assert solution.check_greater([1, 2, 3], 10) == 'Yes, entered number is greater than those in the array'\\n\"}}\n```"
+}

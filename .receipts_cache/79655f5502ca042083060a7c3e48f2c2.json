@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented count_Occurrence to count tuple elements present in list and added tests for the example and edge cases.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to count the occurence of all elements of list in a tuple.\\\"\\\"\\\"\\n\\n\\ndef count_Occurrence(tup, lst):\\n    \\\"\\\"\\\"Write a python function to count the occurence of all elements of list in a tuple.\\\"\\\"\\\"\\n    count = 0\\n    for item in tup:\\n        if item in lst:\\n            count += 1\\n    return count\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_example():\\n    assert solution.count_Occurrence(('a', 'a', 'c', 'b', 'd'), ['a', 'b']) == 3\\n\\n\\ndef test_no_matches():\\n    assert solution.count_Occurrence(('a', 'b', 'c'), ['x', 'y']) == 0\\n\\n\\ndef test_empty_tuple():\\n    assert solution.count_Occurrence((), ['a', 'b']) == 0\\n\\n\\ndef test_empty_list():\\n    assert solution.count_Occurrence(('a', 'b'), []) == 0\\n\\n\\ndef test_all_match():\\n    assert solution.count_Occurrence((1, 2, 2, 3), [1, 2, 3]) == 4\\n\"}}\n```"
+}

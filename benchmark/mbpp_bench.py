@@ -1,4 +1,4 @@
-"""500-task benchmark on the MBPP test split (task ids 11-510): Meta alone vs Meta + Receipts + SubQ.
+"""500-task benchmark on the MBPP test split (task ids 11-510): Meta alone vs Meta + Doppel + SubQ.
 
 MBPP: "Mostly Basic Python Problems", Google Research, CC-BY 4.0
 (https://github.com/google-research/google-research/tree/master/mbpp). Not ours; used with attribution.
@@ -104,7 +104,7 @@ def report() -> None:
         for line in f.read_text().splitlines():
             r = json.loads(line)
             rows[(r["config"], r["task_id"])] = r
-    names = {"meta": "Meta alone", "subq": "Meta + Receipts + SubQ"}
+    names = {"meta": "Meta alone", "subq": "Meta + Doppel + SubQ"}
     print("| Configuration | Tasks done | Correct & shipped | Wrong but shipped | Held back | Infra errors | Avg rounds |")
     print("|---|---|---|---|---|---|---|")
     for c in ("meta", "subq"):

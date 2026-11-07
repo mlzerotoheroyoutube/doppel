@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "North calculation:\n- Cash: $170,000 salary + 10% bonus = $187,000. After-tax at 30%: $187,000 * 0.7 = $130,900\n- Retirement match: 5% of $170,000 = $8,500, under $20,000 cap = $8,500\n- Equity vested by month 12: $160,000 / 48 months * 12 months = $40,000\n- Total North = 130,900 + 8,500 + 40,000 = $179,400\n\nSouth calculation:\n- Cash: $140,000 salary + 0 bonus = $140,000. After-tax at 30%: $140,000 * 0.7 = $98,000\n- Retirement match: 5% of $140,000 = $7,000, under $9,000 cap = $7,000\n- Equity vested by month 12: $0 grant = $0\n- Total South = 98,000 + 7,000 + 0 = $105,000\n\n$179,400 > $105,000, so North is higher.\n{\"choice\": \"North\", \"value\": 179400}"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step by step:\n\n1. **Requirement:** 1200 units, from one supplier, delivered within 25 days.\n\n2. **Alpha:** Capacity 1700 units meets quantity, but delivery is 35 days > 25 days. Does not qualify.\n\n3. **Bravo:** Delivery is 24 days, but capacity is at most 1000 units < 1200 units. Does not qualify.\n\n4. **Cobalt:** Capacity 1200 units meets quantity exactly, delivery is 24 days \u2264 25 days. Qualifies.\n\n5. **Cobalt total landed cost:**\n   - Goods: 1200 \u00d7 $15.6 = $18,720\n   - Shipping: $600\n   - Subtotal: $18,720 + $600 = $19,320\n   - Duty: 0% \u00d7 $19,320 = $0\n   - Total: $19,320\n\nTherefore Cobalt is the only qualifying supplier, with the lowest qualifying total.\n\n{\"choice\": \"Cobalt\", \"value\": 19320}"
+}

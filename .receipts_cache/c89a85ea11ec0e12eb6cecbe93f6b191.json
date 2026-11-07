@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement text_match_wordz with regex to detect words containing z.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function that matches a word containing 'z'.\\\"\\\"\\\"\\nimport re\\n\\n\\ndef text_match_wordz(text):\\n    \\\"\\\"\\\"Write a function that matches a word containing 'z'.\\\"\\\"\\\"\\n    patterns = r\\\"\\\\b\\\\w*z\\\\w*\\\\b\\\"\\n    if re.search(patterns, text):\\n        return \\\"Found a match!\\\"\\n    else:\\n        return \\\"Not matched!\\\"\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_text_match_wordz_example():\\n    assert solution.text_match_wordz(\\\"pythonz.\\\") == (\\\"Found a match!\\\")\\n\\n\\ndef test_text_match_wordz_found():\\n    assert solution.text_match_wordz(\\\"The quick brown fox jumps over the lazy dog.\\\") == \\\"Found a match!\\\"\\n\\n\\ndef test_text_match_wordz_not_found():\\n    assert solution.text_match_wordz(\\\"Python Exercises.\\\") == \\\"Not matched!\\\"\\n\"}}\n```"
+}

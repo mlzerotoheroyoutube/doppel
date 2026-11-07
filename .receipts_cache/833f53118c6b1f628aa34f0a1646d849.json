@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement swap_numbers to return swapped tuple.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to swap two numbers.\\\"\\\"\\\"\\n\\n\\ndef swap_numbers(a, b):\\n    \\\"\\\"\\\"Write a function to swap two numbers.\\\"\\\"\\\"\\n    return b, a\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_swap_numbers():\\n    assert solution.swap_numbers(10, 20) == (20, 10)\\n    assert solution.swap_numbers(0, 0) == (0, 0)\\n    assert solution.swap_numbers(-5, 3) == (3, -5)\\n    assert solution.swap_numbers(1.5, 2.5) == (2.5, 1.5)\\n\"}}\n```"
+}

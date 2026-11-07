@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Keep spherical law-of-cosines implementation that matches documented example value.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to calculate distance between two points using latitude and longitude.\\\"\\\"\\\"\\n\\nimport math\\n\\n\\ndef distance_lat_long(slat, slon, elat, elon):\\n    \\\"\\\"\\\"Write a function to calculate distance between two points using latitude and longitude.\\\"\\\"\\\"\\n    # Spherical law of cosines with the mean radius of the Earth (6371.01 km).\\n    # This is the calculation that produces the documented example value.\\n    cos_central_angle = (\\n        math.sin(slat) * math.sin(elat)\\n        + math.cos(slat) * math.cos(elat) * math.cos(slon - elon)\\n    )\\n    # Guard against floating-point rounding pushing the value outside [-1, 1].\\n    cos_central_angle = max(-1.0, min(1.0, cos_central_angle))\\n    return 6371.01 * math.acos(cos_central_angle)\\n\"}}\n```"
+}

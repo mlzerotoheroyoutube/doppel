@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement list_split with strided slicing and add tests for it.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to split a list for every nth element.\\\"\\\"\\\"\\n\\n\\ndef list_split(S, step):\\n    \\\"\\\"\\\"Write a function to split a list for every nth element.\\\"\\\"\\\"\\n    if step <= 0:\\n        raise ValueError(\\\"step must be a positive integer\\\")\\n    return [S[i::step] for i in range(step)]\\n\", \"tests/test_solution.py\": \"import pytest\\n\\nimport solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_list_split_example():\\n    assert solution.list_split(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'], 3) == [['a', 'd', 'g', 'j', 'm'], ['b', 'e', 'h', 'k', 'n'], ['c', 'f', 'i', 'l']]\\n\\n\\ndef test_list_split_step_one():\\n    assert solution.list_split([1, 2, 3], 1) == [[1, 2, 3]]\\n\\n\\ndef test_list_split_step_two():\\n    assert solution.list_split([1, 2, 3, 4, 5], 2) == [[1, 3, 5], [2, 4]]\\n\\n\\ndef test_list_split_empty():\\n    assert solution.list_split([], 3) == [[], [], []]\\n\\n\\ndef test_list_split_invalid_step():\\n    with pytest.raises(ValueError):\\n        solution.list_split([1, 2, 3], 0)\\n\"}}\n```"
+}

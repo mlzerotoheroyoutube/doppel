@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Requirement: 1200 units from a single supplier, delivery <= 20 days.\n\nQualification check:\n- Alpha: max 1200 >= 1200, 18 days <= 20 days -> qualifies\n- Bravo: max 1700 >= 1200, 18 days <= 20 days -> qualifies\n- Cobalt: max 2400 >= 1200, 18 days <= 20 days -> qualifies\n\nLanded cost = goods USD + shipping + duty, duty = rate * (goods USD + shipping)\n\nAlpha:\nGoods = 10.7 EUR * 1200 = 12,840 EUR\nIn USD: 12,840 * 1.08 = 13,867.20\n+ shipping 2,400 = 16,267.20\nDuty 8%: 0.08 * 16,267.20 = 1,301.376\nTotal = 16,267.20 + 1,301.376 = 17,568.576\n\nBravo:\nGoods = 2,072.95 JPY * 1200 = 2,487,540 JPY\nIn USD: 2,487,540 * 0.0067 = 16,666.518\n+ shipping 2,400 = 19,066.518\nDuty 12%: 0.12 * 19,066.518 = 2,287.98216\nTotal = 19,066.518 + 2,287.98216 = 21,354.50016\n\nCobalt:\nGoods = 11.08 USD * 1200 = 13,296.00\n+ shipping 2,400 = 15,696.00\nDuty 0%: 0\nTotal = 15,696.00\n\nLowest qualifying is Cobalt at $15,696.\n\n{\"choice\": \"Cobalt\", \"value\": 15696}\n"
+}

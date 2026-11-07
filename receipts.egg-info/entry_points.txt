@@ -1,2 +1,0 @@
-[console_scripts]
-receipts = receipts.__main__:main

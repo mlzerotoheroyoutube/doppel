@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented moddiv_list using map and lambda and added example test.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find modulo division of two lists using map and lambda function.\\\"\\\"\\\"\\n\\n\\ndef moddiv_list(nums1, nums2):\\n    \\\"\\\"\\\"Write a function to find modulo division of two lists using map and lambda function.\\\"\\\"\\\"\\n    return list(map(lambda x, y: x % y, nums1, nums2))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_moddiv_list_example():\\n    assert solution.moddiv_list([4, 5, 6], [1, 2, 3]) == [0, 1, 0]\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implement Extract to return first element of each sublist and add test coverage.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to get the first element of each sublist.\\\"\\\"\\\"\\n\\n\\ndef Extract(lst):\\n    \\\"\\\"\\\"Write a python function to get the first element of each sublist.\\\"\\\"\\\"\\n    return [x[0] for x in lst]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_extract_example():\\n    assert solution.Extract([[1, 2], [3, 4, 5], [6, 7, 8, 9]]) == [1, 3, 6]\\n\\n\\ndef test_extract_empty():\\n    assert solution.Extract([]) == []\\n\\n\\ndef test_extract_single_and_varying_lengths():\\n    assert solution.Extract([[5]]) == [5]\\n    assert solution.Extract([['a', 'b'], ['c']]) == ['a', 'c']\\n\"}}\n```"
+}

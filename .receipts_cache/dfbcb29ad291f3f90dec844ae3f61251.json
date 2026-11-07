@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented square_Sum as sum of squares of first n even numbers with tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a python function to find the sum of squares of first n even natural numbers.\\\"\\\"\\\"\\n\\n\\ndef square_Sum(n):\\n    \\\"\\\"\\\"Write a python function to find the sum of squares of first n even natural numbers.\\\"\\\"\\\"\\n    return sum((2 * i) ** 2 for i in range(1, n + 1))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_square_Sum_example():\\n    assert solution.square_Sum(2) == 20\\n\\n\\ndef test_square_Sum_first_values():\\n    assert solution.square_Sum(1) == 4\\n    assert solution.square_Sum(2) == 20\\n    assert solution.square_Sum(3) == 56\\n    assert solution.square_Sum(4) == 120\\n\\n\\ndef test_square_Sum_zero():\\n    assert solution.square_Sum(0) == 0\\n\"}}\n```"
+}

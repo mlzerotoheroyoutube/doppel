@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "Step-by-step analysis from today forward. Sunk $1,500,000 is gone either way, so ignore for decision.\n\n1. Option Continue:\n   Cost to finish from today = -$500,000.00\n   Expected gross return = 0.30 * $1,200,000.00 + 0.70 * $0.00\n   = $360,000.00\n   Carried full precision, no rounding of intermediates.\n   Expected value continue = -$500,000.00 + $360,000.00 = -$140,000.00\n\n2. Option Stop:\n   Sell work now = +$60,000.00, no further cost.\n   Expected value stop = $60,000.00\n\n3. Comparison:\n   Stop $60,000.00 > Continue -$140,000.00\n   Better is stop.\n\n4. Cross-check in reverse:\n   Continue: -$140,000.00 + $500,000.00 = $360,000.00; $360,000.00 / $1,200,000.00 = 0.30, matches success probability.\n   No exponential factors to approximate in this case.\n\nDecision maximizes expected value from today is stop at $60,000.00.\n{\"choice\": \"stop\", \"value\": 60000}"
+}

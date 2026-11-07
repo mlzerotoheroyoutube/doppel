@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-wonder-1.0",
+ "role": "analyst",
+ "effort": "medium",
+ "text": "**Step-by-step calculation**\n\nDefinition: First-year value = after-tax (salary + bonus) + retirement match + equity vested by end of month 12\n\n**North**\n- Salary: $170,000.00\n- Bonus: 0% \u00d7 $170,000 = $0\n- Taxable cash: $170,000\n- After-tax cash: $170,000 \u00d7 (1 - 0.35) = $170,000 \u00d7 0.65 = $110,500.00\n- Retirement match: 3% \u00d7 $170,000 = $5,100, under $6,000 cap = $5,100.00\n- Equity vested: $0 grant = $0\n- **Total: $110,500 + $5,100 + $0 = $115,600.00**\n\n**South**\n- Salary: $185,000.00\n- Bonus: 15% \u00d7 $185,000 = $27,750.00\n- Taxable cash: $185,000 + $27,750 = $212,750.00\n- After-tax cash: $212,750 \u00d7 0.65 = $138,287.50\n- Retirement match: 5% \u00d7 $185,000 = $9,250, under $20,000 cap = $9,250.00\n- Equity vested: $80,000 over 4 years, 12/48 vested = 25% \u00d7 $80,000 = $20,000.00\n- **Total: $138,287.50 + $9,250 + $20,000 = $167,537.50**\n\nSouth ($167,537.50) > North ($115,600.00), so South has the higher first-year value.\n\n{\"choice\": \"South\", \"value\": 167537.5}"
+}

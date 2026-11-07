@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented diff_consecutivenums to return consecutive differences.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to find the difference between two consecutive numbers in a given list.\\\"\\\"\\\"\\n\\n\\ndef diff_consecutivenums(nums):\\n    \\\"\\\"\\\"Write a function to find the difference between two consecutive numbers in a given list.\\\"\\\"\\\"\\n    return [b - a for a, b in zip(nums, nums[1:])]\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_diff_consecutivenums_example():\\n    assert solution.diff_consecutivenums([1, 1, 3, 4, 4, 5, 6, 7]) == [0, 2, 1, 0, 1, 1, 1]\\n\\n\\ndef test_diff_consecutivenums_empty_and_single():\\n    assert solution.diff_consecutivenums([]) == []\\n    assert solution.diff_consecutivenums([5]) == []\\n\\n\\ndef test_diff_consecutivenums_general():\\n    assert solution.diff_consecutivenums([1, 2, 4, 7]) == [1, 2, 3]\\n    assert solution.diff_consecutivenums([5, 3, 1]) == [-2, -2]\\n\"}}\n```"
+}

@@ -1,0 +1,7 @@
+{
+ "provider": "meta",
+ "model": "muse-spark-1.3",
+ "role": "implementer",
+ "effort": "high",
+ "text": "```json\n{\"summary\": \"Implemented combinations_colors using itertools.combinations_with_replacement and added tests.\", \"files\": {\"solution.py\": \"\\\"\\\"\\\"Write a function to choose specified number of colours from three different colours and generate all the combinations with repetitions.\\\"\\\"\\\"\\n\\n\\nimport itertools\\n\\n\\ndef combinations_colors(l, n):\\n    \\\"\\\"\\\"Write a function to choose specified number of colours from three different colours and generate all the combinations with repetitions.\\\"\\\"\\\"\\n    return list(itertools.combinations_with_replacement(l, n))\\n\", \"tests/test_solution.py\": \"import solution\\n\\n\\ndef test_module_imports():\\n    assert solution is not None\\n\\n\\ndef test_combinations_colors_n1():\\n    assert solution.combinations_colors([\\\"Red\\\", \\\"Green\\\", \\\"Blue\\\"], 1) == [(\\\"Red\\\",), (\\\"Green\\\",), (\\\"Blue\\\",)]\\n\\n\\ndef test_combinations_colors_n2():\\n    assert solution.combinations_colors([\\\"Red\\\", \\\"Green\\\", \\\"Blue\\\"], 2) == [(\\\"Red\\\", \\\"Red\\\"), (\\\"Red\\\", \\\"Green\\\"), (\\\"Red\\\", \\\"Blue\\\"), (\\\"Green\\\", \\\"Green\\\"), (\\\"Green\\\", \\\"Blue\\\"), (\\\"Blue\\\", \\\"Blue\\\")]\\n\"}}\n```"
+}

@@ -1,12 +1,13 @@
-# Receipts
+# Doppel
 
-**Your AI coding agent says "All tests pass ✅". Receipts checks whether that's true.**
+**Your double. It knows your work, does it behind the scenes, double-checks itself, and only asks you when it must.**
 
-Receipts is an independent verifier and a self-checking coding teammate for AI-written code, built for the
-*Trust but Verify* track of the AIE Code Summit Hackathon (Nov 7, 2026). It blocks any change it can't back
-with evidence (receipts), and it only ships its own fixes after an independent judge agrees.
+Doppel is a personal engineering agent with double verification. Meta Muse does the work, SubQ independently
+decides what ships, deterministic checks supply the evidence, and a personal layer remembers your repos, your day
+and your rules. It works quietly in the background (checking PRs, fixing issues, planning) and only interrupts you
+when something needs you. Built for the *Trust but Verify* track of the AIE Code Summit Hackathon (Nov 7, 2026).
 
-**Talk to it in ASI:One:** [receipts-gate](https://asi1.ai/ai/agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg)
+**Talk to it in ASI:One:** [doppel](https://asi1.ai/ai/agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg)
 (`agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg`) · demo repos:
 [receipts-demo-store](https://github.com/mlzerotoheroyoutube/receipts-demo-store),
 [receipts-demo-calendar](https://github.com/mlzerotoheroyoutube/receipts-demo-calendar)
@@ -15,12 +16,12 @@ with evidence (receipts), and it only ships its own fixes after an independent j
 
 From one chat in ASI:One (web or the ASI:One phone app), in plain English:
 
-| You say | Receipts does |
+| You say | Doppel does |
 |---|---|
-| "is https://github.com/…/pull/4 safe to merge?" | Verifies the PR: 🛑 BLOCK / ⚠️ WARN / ✅ PASS with evidence, posts an official **Receipts** status check and a report comment on GitHub |
+| "is https://github.com/…/pull/4 safe to merge?" | Verifies the PR: 🛑 BLOCK / ⚠️ WARN / ✅ PASS with evidence, posts an official **Doppel** status check and a report comment on GitHub |
 | "keep an eye on owner/repo" | Watches the repo and checks every new PR or push on its own; interrupts you on a BLOCK, otherwise holds results for a digest during quiet hours |
-| "fix the 12-hour time bug in my calendar repo" | Finds the issue, Meta writes a hidden exam and the fix, Receipts collects evidence, SubQ judges, it reworks until approved, then **opens a real PR** |
-| Label an issue `receipts-fix` on GitHub | Same fix loop, started from GitHub; progress and the PR link are posted on the issue |
+| "fix the 12-hour time bug in my calendar repo" | Finds the issue, Meta writes a hidden exam and the fix, Doppel collects evidence, SubQ judges, it reworks until approved, then **opens a real PR** |
+| Label an issue `doppel-fix` on GitHub | Same fix loop, started from GitHub; progress and the PR link are posted on the issue |
 | "new project habit-tracker: a CLI for habits and streaks" | After you confirm: creates the repo, a Meta-written starter project whose tests pass, and three starter issues |
 | "today: ship the fixes, demo at 5pm, meetings 1-3pm" / "what's my schedule" | Meta plans the day, SubQ reviews the plan |
 | "my repos", "what PRs are open in …", "open an issue in …" | Runs your GitHub |
@@ -38,7 +39,7 @@ and the same name over the HTTP API.
 | Ground truth | Test suite, tamper rules T001–T008, planted bugs (mutation), before/after differential | Deterministic, no model |
 
 ```
-ASI:One / phone / HTTP ──▶ receipts-gate ──┬─ suite · tamper · differential · mutation   (deterministic)
+ASI:One / phone / HTTP ──▶ doppel ──┬─ suite · tamper · differential · mutation   (deterministic)
                                            ├─ blind-writer (Meta, sees only the issue)  ─┐
                                            ├─ judge (SubQ, sees evidence, never code)    ├─ evidence
                                            ├─ coder: Meta writes ▶ evidence ▶ SubQ judges ▶ rework ≤3 ▶ PR
@@ -62,9 +63,9 @@ cached by a hash of its inputs, so any verdict can be replayed exactly.
 | **+ SubQ ship/don't-ship gate** | **11/12** | **0/6** |
 | Plain AI reviewer (Meta reads the diff) | 12/12 | 2/6 |
 
-**2. Coding, Meta alone vs Meta + Receipts + SubQ** — graded by hidden acceptance tests no agent sees.
+**2. Coding, Meta alone vs Meta + Doppel + SubQ** — graded by hidden acceptance tests no agent sees.
 
-| Suite | Meta alone | Meta + Receipts + SubQ |
+| Suite | Meta alone | Meta + Doppel + SubQ |
 |---|---|---|
 | 6 repo issues × 3 trials (generic + complex) | 18/18 | 18/18 |
 | Long horizon: 6 dependent issues, re-graded on all issues after every step (×2) | 12/12, 0 regressions | 12/12, 0 regressions |
@@ -81,7 +82,7 @@ Meta alone, Meta + self-check and Meta + SubQ judge all scored **60/60**. The Su
 evidence**: with deterministic checks supplying the facts, it caught the one bad PR nothing else caught and
 never blocked honest work, at a fraction of a cent per decision (our first 88 SubQ calls read 179K tokens in
 total, about $0.007 at the listed $0.04 per million input tokens). As a stand-alone arithmetic
-checker it raises false alarms, which is why Receipts never asks it to recompute, only to decide.
+checker it raises false alarms, which is why Doppel never asks it to recompute, only to decide.
 
 ## Run it
 
@@ -97,7 +98,7 @@ python -m benchmark.decisions --report                # benchmark 3
 ```
 
 GitHub Actions: copy [docs/receipts-workflow.yml](docs/receipts-workflow.yml) to `.github/workflows/` and add
-`MODEL_API_KEY` and `SUBQ_API_KEY` as repo secrets; every PR then gets a Receipts check in GitHub's cloud.
+`MODEL_API_KEY` and `SUBQ_API_KEY` as repo secrets; every PR then gets a Doppel check in GitHub's cloud.
 
 ## Built at the hackathon
 
