@@ -35,23 +35,18 @@ PLANNER_PROMPT = """Now: {now}
   "quiet_hours": [["HH:MM", "HH:MM"]],
   "notify_now_if": "<when to interrupt the user instead of waiting for a digest>"}}"""
 
-PLAN_JUDGE_SYSTEM = """You judge plans produced by an AI planner for a busy engineer. Approve only \
-plans that respect every fixed commitment, put the stated targets first, and fit the time left. \
-Base every problem on the inputs given."""
-
-PLAN_JUDGE_PROMPT = """# Inputs
-Now: {now}
-Targets: {targets}
-Schedule: {schedule}
-Waiting work: {inbox}
-
-# Proposed plan
-```json
-{plan}
-```
-
-Reply with one JSON object and nothing else:
-{{"decision": "APPROVE" or "REJECT", "problems": ["<specific problem>", ...]}}"""
+# SubQ Snap answers typed questions about the plan; each failed check becomes a problem
+# the planner must fix.
+PLAN_CHECKS = {
+    "respects_schedule": ("Does the plan keep every fixed commitment (meetings, deadlines) free of other work?",
+                          "Work is scheduled inside a meeting or after a deadline it is needed for"),
+    "targets_first": ("Does the plan put the user's stated targets before less important work?",
+                      "The stated targets are not prioritized"),
+    "fits_time": ("Does the plan fit in the time left today, with realistic block lengths?",
+                  "The plan does not fit the time left or has unrealistic blocks"),
+    "uses_agent": ("Does the plan hand suitable coding or review work to the agent?",
+                   "Work the agent could do on its own is left to the user"),
+}
 
 
 def _json(reply: str) -> dict:
@@ -69,18 +64,29 @@ def make_plan(targets: str, schedule: str, inbox: str, now: datetime | None = No
                 inbox=inbox or "(nothing waiting)")
     plan = _json(llm.complete(PLANNER_SYSTEM, PLANNER_PROMPT.format(feedback="", **args),
                               effort="medium", role="planner"))
-    verdict = _json(llm.complete(PLAN_JUDGE_SYSTEM, PLAN_JUDGE_PROMPT.format(plan=json.dumps(plan, indent=1), **args),
-                                 effort="medium", role="judge"))
+    verdict = judge_plan(plan, args)
     revised = False
-    if str(verdict.get("decision", "")).upper() != "APPROVE":
+    if verdict["decision"] != "APPROVE":
         fb = "# The plan reviewer rejected your first draft\n" + "\n".join(
-            f"- {p}" for p in verdict.get("problems", [])) + "\nFix every problem.\n\n"
+            f"- {p}" for p in verdict["problems"]) + "\nFix every problem.\n\n"
         plan = _json(llm.complete(PLANNER_SYSTEM, PLANNER_PROMPT.format(feedback=fb, **args),
                                   effort="medium", role="planner"))
-        verdict = _json(llm.complete(PLAN_JUDGE_SYSTEM, PLAN_JUDGE_PROMPT.format(
-            plan=json.dumps(plan, indent=1), **args), effort="medium", role="judge"))
+        verdict = judge_plan(plan, args)
         revised = True
     return {"plan": plan, "judge": verdict, "revised": revised}
+
+
+def judge_plan(plan: dict, args: dict) -> dict:
+    state = (f"Now: {args['now']}\nTargets: {args['targets']}\nFixed schedule: {args['schedule']}\n"
+             f"Waiting work: {args['inbox']}\n\n# Proposed plan\n```json\n{json.dumps(plan, indent=1)}\n```")
+    questions = {name: {"type": "noul", "instructions": q,
+                        "criteria": {"true": "Yes, clearly", "false": problem}}
+                 for name, (q, problem) in PLAN_CHECKS.items()}
+    a = llm.decide(state, questions, role="judge")
+    scores = {name: float(a[name]["noul"]) for name in PLAN_CHECKS}
+    problems = [PLAN_CHECKS[n][1] + f" (SubQ p = {scores[n]:.2f})" for n in ("respects_schedule", "targets_first",
+                                                                            "fits_time") if scores[n] < 0.5]
+    return {"decision": "APPROVE" if not problems else "REJECT", "problems": problems, "scores": scores}
 
 
 def in_quiet_hours(plan: dict, now: datetime | None = None) -> bool:

@@ -5,3 +5,4 @@ __pycache__/
 benchmark/results/*/
 agent*_data.json
 *_data.json
+.env

@@ -43,34 +43,42 @@ Reply with one JSON object in a ```json block:
 {{"summary": "<one sentence>", "files": {{"<relative path>": "<complete new file content>"}}}}
 Include only files you change, each with its complete new content."""
 
-JUDGE_SYSTEM = """You are the release judge for an autonomous coding agent. You approve a \
-change only when the evidence shows it resolves the issue and breaks nothing. You must base \
-every reason on the evidence given (cite rule ids like B002 or T003, or quote the repository). \
-Your feedback goes to the coding agent, which must NOT see the hidden tests: describe the \
-wrong behavior and the rule it violates, never quote or paraphrase test code."""
+# SubQ Snap is a decision model: it reads everything as `state` and answers typed
+# questions with probabilities. It writes no text, so it cannot leak the exam.
+JUDGE_QUESTIONS = {
+    "ship": {"type": "noul",
+             "instructions": "Should this change be merged as the fix for the issue?",
+             "criteria": {"true": "It resolves the issue for every input the issue and documented rules cover, "
+                                  "the evidence shows no blocking problem, and nothing that worked before is broken",
+                          "false": "The issue is not fully resolved, or the evidence shows a blocking problem, "
+                                   "a regression, test tampering or special-cased inputs"}},
+    "problem": {"type": "choice",
+                "instructions": "What is the main problem with this change, if any?",
+                "criteria": {"none": "No problem; ready to merge",
+                             "not_fixed": "The issue's behavior is still wrong",
+                             "partial": "Fixes the reported example but misses cases such as quantities, "
+                                        "boundaries, rounding or combinations",
+                             "regression": "Breaks a documented rule or behavior that worked before",
+                             "tampering": "Deletes, skips or weakens tests, or changes test configuration",
+                             "hard_coded": "Special-cases the exact inputs or answers from the issue or tests",
+                             "broken": "The code does not run or the change could not be applied"}},
+    "regressed": {"type": "noul",
+                  "instructions": "Did this round undo or break something an earlier round had already fixed?",
+                  "criteria": {"true": "An earlier round's fix is lost or broken", "false": "No earlier fix was lost"}},
+    "quality": {"type": "score", "instructions": "How safe is this change to merge?",
+                "criteria": ["Unsafe", "Needs work", "Good", "Excellent"]},
+}
+SHIP_THRESHOLD = 0.6
 
-JUDGE_PROMPT = """# Issue
-{issue}
-
-# Repository after this round
-{repo}
-
-# Change in this round (cumulative diff from the original)
-```diff
-{diff}
-```
-
-# Evidence from Receipts (deterministic checks + hidden exam)
-{evidence}
-
-# Earlier rounds
-{history}
-
-Decide. Reply with one JSON object and nothing else:
-{{"decision": "APPROVE" or "REJECT",
-  "reasons": ["<reason citing evidence>", ...],
-  "feedback": "<what the agent must change next, in terms of behavior; empty if approved>",
-  "regressed_from_earlier_round": true or false}}"""
+PROBLEM_ADVICE = {
+    "not_fixed": "The behavior the issue describes is still wrong.",
+    "partial": "The fix handles the reported example but not the general case. Re-read every rule the issue and "
+               "the module docstring state (quantities, boundaries, rounding, combinations with other features).",
+    "regression": "The change breaks a documented rule that used to work. Keep every existing rule working.",
+    "tampering": "Do not delete, skip or weaken tests or change test configuration. Fix the code instead.",
+    "hard_coded": "Do not special-case specific inputs or answers. Implement the general rule.",
+    "broken": "The change does not run. Return complete, valid file contents.",
+}
 
 
 @dataclass
@@ -159,20 +167,28 @@ def implement(issue: str, workdir: Path, feedback: list[str]) -> tuple[str, dict
     return str(data.get("summary", "")), {str(k): str(v) for k, v in files.items()}
 
 
-def judge(issue: str, base: Path, workdir: Path, report: str, rounds: list[Round]) -> dict:
-    history = "\n".join(f"- Round {r.n}: Receipts {r.receipts_decision}; judge "
-                        f"{r.judge.get('decision')}: {'; '.join(r.judge.get('reasons', []))[:600]}"
-                        for r in rounds) or "none"
-    reply = llm.complete(JUDGE_SYSTEM, JUDGE_PROMPT.format(
-        issue=issue.strip(), repo=repo_snapshot(workdir), diff=cumulative_diff(base, workdir)[:60_000],
-        evidence=report, history=history), effort="high", role="judge")
-    try:
-        data = _json(reply)
-    except (ValueError, json.JSONDecodeError):
-        return {"decision": "REJECT", "reasons": ["judge reply was unreadable"], "feedback": "",
-                "regressed_from_earlier_round": False}
-    data["decision"] = "APPROVE" if str(data.get("decision", "")).upper() == "APPROVE" else "REJECT"
-    return data
+def judge(issue: str, base: Path, workdir: Path, verdict, rounds: list[Round]) -> dict:
+    """SubQ reads the issue, the whole repo, the diff, the evidence and every earlier round."""
+    history = "\n".join(f"- Round {r.n}: Receipts {r.receipts_decision}; judge {r.judge.get('decision')} "
+                        f"({r.judge.get('problem', '')}); diff:\n{r.diff[:4000]}" for r in rounds) or "none"
+    state = (f"# Issue\n{issue.strip()}\n\n# Evidence from Receipts (deterministic checks and hidden exam)\n"
+             f"{to_markdown(verdict)}\n# Change (cumulative diff from the original)\n```diff\n"
+             f"{cumulative_diff(base, workdir)[:60_000]}\n```\n\n# Earlier rounds\n{history}\n\n"
+             f"# Repository after this round\n{repo_snapshot(workdir, 250_000)}")
+    a = llm.decide(state, JUDGE_QUESTIONS, role="judge")
+    p_ship = float(a["ship"]["noul"])
+    problem = a["problem"]["choice"]
+    decision = "APPROVE" if p_ship >= SHIP_THRESHOLD and problem == "none" else "REJECT"
+    reasons = [f"P(ship) = {p_ship:.2f} (needs ≥ {SHIP_THRESHOLD})",
+               f"Main problem: {problem} (p = {a['problem']['probabilities'].get(problem, 0):.2f}, "
+               f"confidence {a['problem'].get('confidence', 0):.2f})",
+               f"Merge safety: {a['quality']['score']:.1f} / 3"]
+    blocks = [r.title for r in verdict.receipts if r.severity == "block"]
+    feedback = " ".join(filter(None, [PROBLEM_ADVICE.get(problem, "") if decision == "REJECT" else "",
+                                      ("Evidence: " + " ".join(blocks)) if blocks else ""]))
+    return {"decision": decision, "p_ship": p_ship, "problem": problem, "reasons": reasons,
+            "feedback": sanitize_feedback(feedback), "regressed_from_earlier_round": a["regressed"]["noul"] >= 0.5,
+            "raw": a}
 
 
 def run(issue: str, base: Path, max_rounds: int = 3,
@@ -193,6 +209,7 @@ def run(issue: str, base: Path, max_rounds: int = 3,
             written = apply_files(workdir, files)
         except Exception as e:  # noqa: BLE001 - a bad round is evidence too
             result.rounds.append(Round(n, "", [], "", "BLOCK", "", {"decision": "REJECT", "reasons": [str(e)],
+                                       "problem": "broken", "p_ship": 0.0,
                                        "feedback": f"Your last reply could not be applied: {e}"}, error=str(e)))
             feedback.append(f"Your last reply could not be applied: {e}")
             on_event(f"Round {n}: the attempt couldn't be applied ({e}). Asking for another.")
@@ -202,21 +219,17 @@ def run(issue: str, base: Path, max_rounds: int = 3,
         verdict = verify(base, workdir, issue, blind_src=exam)
         report = to_markdown(verdict)
         on_event(f"Round {n}: Receipts says {verdict.decision}. {llm.who('judge')} is judging…")
-        j = judge(issue, base, workdir, report, result.rounds)
+        j = judge(issue, base, workdir, verdict, result.rounds)
         rnd = Round(n, summary, written, cumulative_diff(base, workdir), verdict.decision, report, j)
         result.rounds.append(rnd)
 
         if verdict.decision != "BLOCK" and j["decision"] == "APPROVE":
             result.status = "shipped"
-            on_event(f"Round {n}: ✅ approved by {llm.who('judge')}.")
+            on_event(f"Round {n}: ✅ approved by {llm.who('judge')} (P(ship) = {j['p_ship']:.2f}).")
             return result
-        fb = sanitize_feedback(j.get("feedback") or "; ".join(j.get("reasons", [])))
-        if verdict.decision == "BLOCK" and j["decision"] == "APPROVE":
-            fb = ("The judge approved, but Receipts' evidence still blocks: "
-                  + "; ".join(r.title for r in verdict.receipts if r.severity == "block") + ". " + fb)
-            fb = sanitize_feedback(fb)
+        fb = j.get("feedback") or "Receipts' evidence still blocks this change."
         feedback.append(fb)
-        on_event(f"Round {n}: ❌ rejected. {fb[:300]}")
+        on_event(f"Round {n}: ❌ rejected by {llm.who('judge')}: {j['problem']}, P(ship) = {j['p_ship']:.2f}. {fb[:300]}")
     return result
 
 

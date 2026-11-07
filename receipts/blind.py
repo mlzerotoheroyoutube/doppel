@@ -173,15 +173,17 @@ def materialize(test_src: str) -> Path:
 
 
 def judge_one(issue: str, iface: str, test_src: str, message: str) -> tuple[bool, str]:
-    """Code-blind check that a failing test's expectation follows from the spec."""
-    reply = llm.complete(JUDGE_SYSTEM, JUDGE_PROMPT.format(
-        issue=issue.strip(), interface=iface, test_src=test_src, message=message[:1500]),
-        effort="medium", role="judge")
-    try:
-        verdict = json.loads(reply[reply.index("{"): reply.rindex("}") + 1])
-        return bool(verdict.get("valid")), str(verdict.get("reason", ""))
-    except ValueError:
-        return True, "judge reply unreadable; kept the test"
+    """Code-blind check, by SubQ, that a failing test's expectation follows from the spec."""
+    state = (f"# Specification (issue and documented rules)\n{issue.strip()}\n\n{iface}\n\n"
+             f"# Test\n```python\n{test_src}\n```\n\n# Observed failure\n{message[:1500]}")
+    a = llm.decide(state, {"valid": {
+        "type": "noul",
+        "instructions": "Is this test's expected outcome clearly required by the specification?",
+        "criteria": {"true": "The specification clearly implies exactly this expected outcome",
+                     "false": "The test guesses at behavior the specification does not state, or computes "
+                              "the expected value wrongly"}}}, role="judge")
+    p = float(a["valid"]["noul"])
+    return p >= 0.5, f"SubQ P(test matches the spec) = {p:.2f}"
 
 
 def needs_judging(o: BlindOutcome) -> bool:

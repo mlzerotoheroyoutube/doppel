@@ -1,0 +1,24 @@
+{
+ "provider": "subq",
+ "model": "subq-snap-1.1",
+ "role": "judge",
+ "answers": {
+  "approve": {
+   "type": "noul",
+   "noul": 0.0003872990782838315
+  },
+  "problem": {
+   "type": "choice",
+   "choice": "hard_coded",
+   "probabilities": {
+    "hard_coded": 0.9699888229370117,
+    "none": 0.0004201413248665631,
+    "not_fixed": 0.023253580555319786,
+    "regression": 0.006337565369904041
+   },
+   "confidence": 0.959985097249349
+  }
+ },
+ "input_tokens": 201,
+ "usd": 8.040000000000001e-06
+}
