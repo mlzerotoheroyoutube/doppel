@@ -182,6 +182,24 @@ def _compare_constants(fn: ast.AST) -> set:
     return vals
 
 
+def _branch_returned_constants(fn: ast.AST) -> set:
+    """Constants returned directly inside an if-branch: `if x == 'A': return 370`."""
+    vals = set()
+    for node in ast.walk(fn):
+        if isinstance(node, ast.If):
+            for stmt in node.body:
+                if isinstance(stmt, ast.Return) and isinstance(stmt.value, ast.Constant):
+                    vals.add(stmt.value.value)
+    return vals
+
+
+def _named_in(value, spec: str) -> bool:
+    if not spec:
+        return False
+    import re
+    return re.search(r"(?<![\w])" + re.escape(str(value)) + r"(?![\w])", spec, re.I) is not None
+
+
 def _test_literals(files: dict[str, str]) -> set:
     vals = set()
     for rel, src in files.items():
@@ -194,7 +212,8 @@ def _test_literals(files: dict[str, str]) -> set:
 
 # ---------------------------------------------------------------- the check
 
-def check(base_dir: Path, head_dir: Path) -> list[Receipt]:
+def check(base_dir: Path, head_dir: Path, spec: str = "") -> list[Receipt]:
+    """spec: the issue text. Literals the issue itself names are fair to branch on."""
     base, head = py_files(base_dir), py_files(head_dir)
     receipts: list[Receipt] = []
 
@@ -277,7 +296,12 @@ def check(base_dir: Path, head_dir: Path) -> list[Receipt]:
                                         evidence=src[:1200], file=rel, line=hfn.lineno))
                 break
         new_consts = _compare_constants(hfn) - (_compare_constants(bfn) if bfn else set())
-        suspicious = sorted((c for c in new_consts if c in literals and c not in BORING_CONSTANTS), key=repr)
+        copied = [c for c in new_consts if c in literals and c not in BORING_CONSTANTS]
+        # A literal the issue itself names (e.g. "pm" for a 12-hour parser) is part of the spec, not a copy
+        # of the tests, unless a new branch also returns one of the tests' exact answers.
+        answers = _branch_returned_constants(hfn) - (_branch_returned_constants(bfn) if bfn else set())
+        returns_answer = any(a in literals and a not in BORING_CONSTANTS for a in answers)
+        suspicious = sorted((c for c in copied if returns_answer or not _named_in(c, spec)), key=repr)
         if suspicious:
             receipts.append(Receipt("tamper", "T007", "block",
                                     f"`{name}` now branches on values copied from the tests: "

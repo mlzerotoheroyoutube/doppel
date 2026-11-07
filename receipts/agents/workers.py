@@ -50,7 +50,7 @@ def make_workers() -> dict[str, Agent]:
 
     @tamper_a.on_message(TamperRequest, replies=TamperResult)
     async def on_tamper(ctx: Context, sender: str, msg: TamperRequest):
-        receipts = await asyncio.to_thread(tamper.check, Path(msg.base), Path(msg.head))
+        receipts = await asyncio.to_thread(tamper.check, Path(msg.base), Path(msg.head), msg.spec)
         await ctx.send(sender, TamperResult(receipts=[r.to_dict() for r in receipts]))
 
     @writer.on_message(WriteTestsRequest, replies=WriteTestsResult)

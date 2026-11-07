@@ -7,6 +7,7 @@ can run them on different agents in parallel. `verify()` runs them in order.
 from __future__ import annotations
 
 import ast
+import json
 from pathlib import Path
 
 from . import blind, mutation, sandbox, tamper
@@ -103,14 +104,34 @@ def decide(receipts: list[Receipt], stats: dict) -> Verdict:
 
 # ------------------------------------------------------------------ all in one
 
+def subq_gate(base_dir: Path, head_dir: Path, issue: str, verdict: Verdict) -> Receipt | None:
+    """SubQ reads the issue, the diff and all evidence, and votes on shipping. Returns a block receipt
+    when it votes no."""
+    from . import loop
+    from .llm import decide
+    state = (f"# Issue\n{issue.strip()}\n\n# Evidence from Receipts\n{to_markdown(verdict)}\n"
+             f"# Change\n```diff\n{loop.cumulative_diff(base_dir, head_dir)[:60_000]}\n```\n\n"
+             f"# Repository after the change\n{loop.repo_snapshot(head_dir, 250_000)}")
+    q = {k: v for k, v in loop.JUDGE_QUESTIONS.items() if k in ("ship", "problem")}
+    a = decide(state, q, role="judge")
+    p, problem = float(a["ship"]["noul"]), a["problem"]["choice"]
+    if p >= loop.SHIP_THRESHOLD and problem == "none":
+        return None
+    return Receipt("judge", "J001", "block",
+                   f"SubQ votes not to ship: {problem.replace('_', ' ')} (P(ship) = {p:.2f}).",
+                   loop.PROBLEM_ADVICE.get(problem, ""),
+                   evidence=json.dumps(a, indent=1)[:1500])
+
+
 def verify(base_dir: Path, head_dir: Path, issue: str, *, use_model: bool = True,
-           blind_src: str | None = None, mutants: int = 40, out_dir: Path | None = None) -> Verdict:
+           blind_src: str | None = None, mutants: int = 40, out_dir: Path | None = None,
+           judge: bool = True, gate: bool = False) -> Verdict:
     receipts, stats, green = suite_step(head_dir)
-    receipts += tamper.check(base_dir, head_dir)
+    receipts += tamper.check(base_dir, head_dir, issue)
 
     blind_dir = None
     if use_model or blind_src:
-        src, outcomes, err = blind.run(issue, base_dir, head_dir, test_src=blind_src, judge=use_model)
+        src, outcomes, err = blind.run(issue, base_dir, head_dir, test_src=blind_src, judge=use_model and judge)
         if out_dir:
             out_dir.mkdir(parents=True, exist_ok=True)
             (out_dir / "test_receipts_blind.py").write_text(src)
@@ -126,6 +147,9 @@ def verify(base_dir: Path, head_dir: Path, issue: str, *, use_model: bool = True
     r, s = mutation_receipts(pr_m, b_m)
     receipts += r
     stats.update(s)
+    if gate and use_model:
+        if (j := subq_gate(base_dir, head_dir, issue, decide(list(receipts), dict(stats)))) is not None:
+            receipts.append(j)
     return decide(receipts, stats)
 
 

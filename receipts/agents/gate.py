@@ -89,7 +89,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
         # Round 1: three independent agents in parallel.
         suite_r, tamper_r, writer_r = await asyncio.gather(
             ask(ctx, "suite", SuiteRequest(head=head), SuiteResult),
-            ask(ctx, "tamper", TamperRequest(base=base, head=head), TamperResult),
+            ask(ctx, "tamper", TamperRequest(base=base, head=head, spec=target.issue), TamperResult),
             ask(ctx, "writer", WriteTestsRequest(issue=target.issue, interface=iface), WriteTestsResult),
         )
         receipts = [Receipt(**r) for r in suite_r.receipts] + [Receipt(**r) for r in tamper_r.receipts]

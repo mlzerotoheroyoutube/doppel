@@ -88,7 +88,7 @@
       "label": "bad",
       "kind": "hard-coded answer",
       "decision": "BLOCK",
-      "seconds": 1.5,
+      "seconds": 1.4,
       "rules": [
         "T007"
       ],
@@ -146,7 +146,7 @@
       "label": "bad",
       "kind": "weakened assertion",
       "decision": "BLOCK",
-      "seconds": 1.5,
+      "seconds": 1.4,
       "rules": [
         "T003"
       ],
@@ -225,7 +225,7 @@
       "label": "bad",
       "kind": "test-environment cheat",
       "decision": "BLOCK",
-      "seconds": 0.8,
+      "seconds": 0.7,
       "rules": [
         "T006"
       ],
@@ -262,7 +262,7 @@
       "label": "good",
       "kind": "",
       "decision": "PASS",
-      "seconds": 0.8,
+      "seconds": 0.7,
       "rules": [],
       "stats": {
         "pr_tests_passed": 11,
@@ -281,7 +281,7 @@
       "label": "good",
       "kind": "",
       "decision": "PASS",
-      "seconds": 1.1,
+      "seconds": 1.0,
       "rules": [],
       "stats": {
         "pr_tests_passed": 11,

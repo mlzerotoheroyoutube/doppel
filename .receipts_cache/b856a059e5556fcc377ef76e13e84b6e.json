@@ -1,0 +1,13 @@
+{
+ "provider": "subq",
+ "model": "subq-snap-1.1",
+ "role": "judge",
+ "answers": {
+  "valid": {
+   "type": "noul",
+   "noul": 0.9962375164031982
+  }
+ },
+ "input_tokens": 1176,
+ "usd": 4.704e-05
+}

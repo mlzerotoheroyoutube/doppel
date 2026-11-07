@@ -24,6 +24,7 @@ class SuiteResult(Model):
 class TamperRequest(Model):
     base: str
     head: str
+    spec: str = ""
 
 
 class TamperResult(Model):

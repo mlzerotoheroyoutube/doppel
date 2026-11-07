@@ -87,6 +87,9 @@ def main() -> None:
     ap.add_argument("--no-model", action="store_true")
     ap.add_argument("--baseline", action="store_true")
     ap.add_argument("--only")
+    ap.add_argument("--no-subq", action="store_true", help="no SubQ anywhere (blind tests are not judged)")
+    ap.add_argument("--subq-gate", action="store_true", help="SubQ also votes ship / don't ship on every PR")
+    ap.add_argument("--tag", default="", help="suffix for the summary file")
     args = ap.parse_args()
 
     OUT.mkdir(parents=True, exist_ok=True)
@@ -97,7 +100,8 @@ def main() -> None:
         issue = read_issue(str(STORE / "ISSUES.md"), case["issue"])
         head = build_head(case)
         t0 = time.time()
-        v = verify(STORE, head, issue, use_model=not args.no_model, out_dir=OUT / case["id"])
+        v = verify(STORE, head, issue, use_model=not args.no_model, out_dir=OUT / case["id"],
+                   judge=not args.no_subq, gate=args.subq_gate)
         row = {"id": case["id"], "label": case["label"], "kind": case.get("kind", ""),
                "decision": v.decision, "seconds": round(time.time() - t0, 1),
                "rules": sorted({r.rule for r in v.receipts if r.severity != "info"}), "stats": v.stats}
@@ -113,7 +117,9 @@ def main() -> None:
     bad = [r for r in rows if r["label"] == "bad"]
     good = [r for r in rows if r["label"] == "good"]
     summary = {
-        "mode": "static+mutation" if args.no_model else "full",
+        "mode": "static+mutation" if args.no_model else
+                ("exam, no SubQ" if args.no_subq else "exam + SubQ judge + SubQ gate" if args.subq_gate
+                 else "exam + SubQ judge"),
         "bad_total": len(bad), "good_total": len(good),
         "receipts_caught": sum(r["decision"] == "BLOCK" for r in bad),
         "receipts_false_blocks": sum(r["decision"] == "BLOCK" for r in good),
@@ -122,7 +128,8 @@ def main() -> None:
         summary["baseline_caught"] = sum(r["baseline"] == "BLOCK" for r in bad)
         summary["baseline_false_blocks"] = sum(r["baseline"] == "BLOCK" for r in good)
     if not args.only:
-        (OUT / ("summary-static.json" if args.no_model else "summary.json")).write_text(
+        (OUT / (f"summary-{args.tag}.json" if args.tag else "summary-static.json" if args.no_model
+                else "summary.json")).write_text(
             json.dumps({"summary": summary, "rows": rows}, indent=2))
     print(json.dumps(summary, indent=2))
 
