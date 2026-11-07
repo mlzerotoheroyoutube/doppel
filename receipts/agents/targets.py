@@ -138,8 +138,9 @@ def gh_headers() -> dict:
     return h
 
 
-def issue_target(text: str) -> tuple[str, Path, str]:
-    """(label, base project dir, issue text) for 'fix issue 3 in owner/repo' or 'fix demo issue 1'."""
+def issue_target(text: str) -> tuple[str, Path, str, dict]:
+    """(label, base project dir, issue text, repo info) for 'fix issue 3 in owner/repo' or
+    'fix demo issue 1'. Repo info is {} for the demo, else owner/repo/number/subdir."""
     m = ISSUE_REF.search(text)
     if not m:
         raise TargetError("say which issue, e.g. `fix demo issue 1` or `fix issue 3 in owner/repo`")
@@ -148,7 +149,7 @@ def issue_target(text: str) -> tuple[str, Path, str]:
         from benchmark.run import STORE
         from receipts.__main__ import read_issue
         try:
-            return f"demo issue #{num}", STORE, read_issue(str(STORE / "ISSUES.md"), num)
+            return f"demo issue #{num}", STORE, read_issue(str(STORE / "ISSUES.md"), num), {}
         except SystemExit as e:
             raise TargetError(str(e)) from e
     owner, repo = m.group(2), m.group(3)
@@ -158,7 +159,10 @@ def issue_target(text: str) -> tuple[str, Path, str]:
     tree = work / "tree"
     _export(work / "repo", "HEAD", tree)
     spec = f"## #{issue['number']} {issue['title']}\n\n{issue.get('body') or ''}"
-    return f"{owner}/{repo} issue #{num}", _project_root(tree), spec
+    base = _project_root(tree)
+    subdir = "" if base == tree else base.relative_to(tree).as_posix()
+    info = {"owner": owner, "repo": repo, "number": num, "subdir": subdir, "title": issue["title"]}
+    return f"{owner}/{repo} issue #{num}", base, spec, info
 
 
 def open_prs(owner: str, repo: str) -> list[dict]:

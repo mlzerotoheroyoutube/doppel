@@ -13,7 +13,7 @@ from pathlib import Path
 
 from uagents import Agent, Context
 
-from .. import loop, planner
+from .. import loop, planner, publish
 from .messages import FixDone, FixProgress, FixRequest, PlanRequest, PlanResult
 from .workers import _seed, ensure_loop
 
@@ -43,8 +43,23 @@ def make_teammates() -> dict[str, Agent]:
 
         try:
             res = await asyncio.to_thread(loop.run, msg.issue, Path(msg.base), msg.max_rounds, event)
+            summary = loop.to_markdown_summary(res, msg.label)
+            pr_url = ""
+            info = msg.repo_info
+            if res.status == "shipped" and info.get("owner"):
+                event("Approved. Opening a pull request on GitHub…")
+                try:
+                    title = f"Fix #{info['number']}: {res.rounds[-1].summary or info.get('title', '')}"[:120]
+                    body = (f"Fixes #{info['number']}\n\n{summary}\n\n---\n_Opened by the Receipts work loop. "
+                            "It was approved only after Receipts' checks passed and SubQ voted to ship. "
+                            "Nothing was merged; a human decides._")
+                    pr_url = await asyncio.to_thread(publish.open_pr, info["owner"], info["repo"], info["number"],
+                                                     Path(msg.base), Path(res.workdir), info.get("subdir", ""),
+                                                     title, body)
+                except Exception as e:  # noqa: BLE001 - the fix still exists locally
+                    event(f"Couldn't open the PR: {e}. The approved fix is at {res.workdir}.")
             await ctx.send(sender, FixDone(user=msg.user, label=msg.label, result=res.to_dict(),
-                                           summary_md=loop.to_markdown_summary(res, msg.label)))
+                                           summary_md=summary, pr_url=pr_url))
         except Exception as e:  # noqa: BLE001
             ctx.logger.error(f"fix loop failed: {e}")
             await ctx.send(sender, FixDone(user=msg.user, label=msg.label, result={}, summary_md="",

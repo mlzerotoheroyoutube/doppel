@@ -95,6 +95,7 @@ class FixRequest(Model):
     issue: str
     base: str
     max_rounds: int = 3
+    repo_info: dict = {}  # owner/repo/number/subdir/title when the issue lives on GitHub
 
 
 class FixProgress(Model):
@@ -108,3 +109,4 @@ class FixDone(Model):
     result: dict
     summary_md: str
     error: str = ""
+    pr_url: str = ""

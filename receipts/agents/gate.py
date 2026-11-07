@@ -239,14 +239,15 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             return
         if low.startswith("fix "):
             try:
-                label, base, issue = await asyncio.to_thread(targets.issue_target, t)
+                label, base, issue, repo_info = await asyncio.to_thread(targets.issue_target, t)
             except targets.TargetError as e:
                 await reply(ctx, sender, str(e))
                 return
             await reply(ctx, sender, f"Working on **{label}**.\n\n1. {llm.who('exam')} writes a hidden exam from the "
                                      f"issue\n2. {llm.who('implementer')} writes the fix\n3. Receipts collects evidence\n"
                                      f"4. {llm.who('judge')} judges, and I rework until it approves (max 3 rounds)")
-            await ctx.send(addr["coder"], FixRequest(user=sender, label=label, issue=issue, base=str(base)))
+            await ctx.send(addr["coder"], FixRequest(user=sender, label=label, issue=issue, base=str(base),
+                                                     repo_info=repo_info))
             return
 
         if "demo list" in low or low in ("demo", "demos"):
@@ -321,7 +322,10 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
         status = msg.result.get("status", "failed")
         memory.record(profile, msg.label, {"shipped": "PASS"}.get(status, "BLOCK"), [])
         memory.save(ctx.storage, msg.user, profile)
-        await reply(ctx, msg.user, msg.summary_md)
+        text = msg.summary_md
+        if msg.pr_url:
+            text = f"🚀 **Pull request opened:** {msg.pr_url}\n\n" + text
+        await reply(ctx, msg.user, text)
 
     @gate.on_interval(period=WATCH_SECONDS)
     async def watch(ctx: Context):
