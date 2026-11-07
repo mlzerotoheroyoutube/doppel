@@ -61,3 +61,35 @@ def open_pr(owner: str, repo: str, issue_number: int, base: Path, workdir: Path,
         body = body[:60_000] + "\n\n…(truncated)"
     return _run(["gh", "pr", "create", "-R", f"{owner}/{repo}", "--base", default, "--head", branch,
                  "--title", title, "--body", body])
+
+
+# ---------------------------------------------------------------- reporting back to GitHub
+
+STATE = {"BLOCK": "failure", "WARN": "success", "PASS": "success"}
+
+
+def report_pr(owner: str, repo: str, number: int, sha: str, decision: str, summary: str, report_md: str) -> None:
+    """Set the official 'Receipts' commit status on the PR's head and post the report card."""
+    desc = f"{decision}: {summary}"[:139]
+    _run(["gh", "api", "-X", "POST", f"repos/{owner}/{repo}/statuses/{sha}",
+          "-f", f"state={STATE.get(decision, 'error')}", "-f", "context=Receipts",
+          "-f", f"description={desc}",
+          "-f", f"target_url=https://github.com/{owner}/{repo}/pull/{number}"])
+    body = report_md if len(report_md) < 60_000 else report_md[:60_000] + "\n\n…(truncated)"
+    body += f"\n\n<sub>Checked commit `{sha[:7]}` by Receipts · Meta + SubQ · nothing was merged.</sub>"
+    proc = subprocess.run(["gh", "pr", "comment", str(number), "-R", f"{owner}/{repo}", "--body-file", "-"],
+                          input=body, capture_output=True, text=True, timeout=60)
+    if proc.returncode != 0:
+        raise PublishError(f"gh pr comment failed: {proc.stderr.strip()[:300]}")
+
+
+def comment_issue(owner: str, repo: str, number: int, body: str) -> None:
+    proc = subprocess.run(["gh", "issue", "comment", str(number), "-R", f"{owner}/{repo}", "--body-file", "-"],
+                          input=body[:60_000], capture_output=True, text=True, timeout=60)
+    if proc.returncode != 0:
+        raise PublishError(f"gh issue comment failed: {proc.stderr.strip()[:300]}")
+
+
+def labeled_issues(owner: str, repo: str, label: str = "receipts-fix") -> list[dict]:
+    data = json.loads(_run(["gh", "api", f"repos/{owner}/{repo}/issues?state=open&labels={label}&per_page=20"]))
+    return [{"number": i["number"], "title": i["title"]} for i in data if "pull_request" not in i]

@@ -24,6 +24,7 @@ class Target:
     head: Path
     issue: str
     spec_source: str  # where the spec came from, shown to the user
+    gh: dict | None = None  # owner, repo, number, sha when the target is a GitHub PR
 
 
 class TargetError(Exception):
@@ -87,7 +88,8 @@ def from_github(url: str) -> Target:
     _export(clone, head_sha, work / "head")
     base, head = _project_root(work / "base"), _project_root(work / "head")
     head = work / "head" / base.relative_to(work / "base")
-    return Target(f"{owner}/{repo}#{num} · {pr['title']}", base, head, spec, source)
+    return Target(f"{owner}/{repo}#{num} · {pr['title']}", base, head, spec, source,
+                  {"owner": owner, "repo": repo, "number": int(num), "sha": head_sha})
 
 
 def from_demo(case_id: str) -> Target:

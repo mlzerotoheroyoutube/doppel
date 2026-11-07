@@ -58,7 +58,8 @@ def make_teammates() -> dict[str, Agent]:
                                                      title, body)
                 except Exception as e:  # noqa: BLE001 - the fix still exists locally
                     event(f"Couldn't open the PR: {e}. The approved fix is at {res.workdir}.")
-            await ctx.send(sender, FixDone(user=msg.user, label=msg.label, result=res.to_dict(),
+            await ctx.send(sender, FixDone(user=msg.user, label=msg.label,
+                                           result={**res.to_dict(), "repo_info": info},
                                            summary_md=summary, pr_url=pr_url))
         except Exception as e:  # noqa: BLE001
             ctx.logger.error(f"fix loop failed: {e}")

@@ -19,7 +19,7 @@ from uagents import Agent, Context, Model, Protocol
 from uagents_core.contrib.protocols.chat import (ChatAcknowledgement, ChatMessage, TextContent,
                                                  chat_protocol_spec)
 
-from .. import blind, llm, mutation, planner, tamper
+from .. import blind, llm, mutation, planner, publish, tamper
 from ..models import Receipt
 from ..verify import blind_receipts, decide, mutation_receipts, to_markdown
 from . import memory, targets, understand
@@ -201,6 +201,17 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             md += "\n**Your settings:** " + " ".join(notes) + "\n"
         md += "\nReply `wrong` or `right` to teach me, or `history` to see past verdicts."
         run_pipeline.last_decision = verdict.decision
+        top = next((r.title for r in verdict.receipts if r.severity in ("block", "warn")), "every claim checked out")
+        if target.gh and f"{target.gh['owner']}/{target.gh['repo']}".lower() in {
+                r.lower() for r in memory.load(ctx.storage, user)["repos"]}:
+            # Only repos this person asked us to watch get a status and a comment.
+            try:
+                await asyncio.to_thread(publish.report_pr, target.gh["owner"], target.gh["repo"],
+                                        target.gh["number"], target.gh["sha"], verdict.decision, top, md)
+                md += "\n\n📌 Posted to GitHub: a **Receipts** status check and this report as a PR comment."
+            except Exception as e:  # noqa: BLE001
+                ctx.logger.warning(f"couldn't post to GitHub: {e}")
+                md += f"\n\n(Couldn't post to GitHub: {e})"
         return md
 
     def describe(profile: dict) -> str:
@@ -396,6 +407,15 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
         memory.record(profile, msg.label, {"shipped": "PASS"}.get(status, "BLOCK"), [])
         memory.save(ctx.storage, msg.user, profile)
         text = msg.summary_md
+        info = (msg.result or {}).get("repo_info") or {}
+        if info.get("owner"):
+            note = (f"🚀 Receipts opened {msg.pr_url} for this issue." if msg.pr_url else
+                    "✋ Receipts couldn't get a fix approved within 3 rounds; a human should take this one.")
+            try:
+                await asyncio.to_thread(publish.comment_issue, info["owner"], info["repo"], info["number"],
+                                        note + "\n\n" + msg.summary_md)
+            except Exception as e:  # noqa: BLE001
+                ctx.logger.warning(f"couldn't comment on the issue: {e}")
         if msg.pr_url:
             text = f"🚀 **Pull request opened:** {msg.pr_url}\n\n" + text
         await reply(ctx, msg.user, text)
@@ -414,6 +434,26 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 memory.save(ctx.storage, user, profile)
                 await broadcast(ctx, user, f"**Digest** (held while you were busy)\n{rows}")
             for repo, state in list(profile["repos"].items()):
+                owner, name = repo.split("/")
+                try:  # issues labelled receipts-fix: work started from GitHub
+                    for iss in await asyncio.to_thread(publish.labeled_issues, owner, name):
+                        started = state.setdefault("fixing", {})
+                        if str(iss["number"]) in started:
+                            continue
+                        started[str(iss["number"])] = int(time.time())
+                        memory.save(ctx.storage, user, profile)
+                        label, base, issue, info = await asyncio.to_thread(
+                            targets.issue_target, f"fix issue {iss['number']} in {repo}")
+                        await asyncio.to_thread(publish.comment_issue, owner, name, iss["number"],
+                                                "👋 Receipts picked this up: Meta writes a hidden exam and the fix, "
+                                                "Receipts collects evidence, SubQ judges. I'll link the PR here.")
+                        await broadcast(ctx, user, f"🏷️ **{repo}#{iss['number']}** was labelled `receipts-fix`. "
+                                                   f"Working on it: {iss['title']}")
+                        channel = (profile.get("channels") or [user])[0]
+                        await ctx.send(addr["coder"], FixRequest(user=channel, label=label, issue=issue,
+                                                                 base=str(base), repo_info=info))
+                except Exception as e:  # noqa: BLE001
+                    ctx.logger.warning(f"label watch {repo}: {e}")
                 try:
                     prs = await asyncio.to_thread(targets.open_prs, *repo.split("/"))
                 except Exception as e:  # noqa: BLE001 - try again next tick

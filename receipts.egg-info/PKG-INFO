@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: receipts
+Version: 0.1.0
+Summary: Independent verifier for AI-written pull requests
+License-Expression: MIT
+Requires-Python: >=3.11
+License-File: LICENSE
+Requires-Dist: pytest>=8
+Requires-Dist: anthropic>=2
+Requires-Dist: openai>=1
+Requires-Dist: uagents>=0.26
+Dynamic: license-file
