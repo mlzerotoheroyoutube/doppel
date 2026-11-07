@@ -34,7 +34,7 @@ from .teammates import make_teammates  # noqa: E402
 from .workers import make_workers  # noqa: E402
 
 PROMPTS = sys.argv[1:] or ["help", "demo i1-bad-hardcoded", "history"]
-VERDICT_MARKERS = ("Receipts:", "Today's plan", "Shipped", "Stopped after", "loop failed", "Planning failed",
+VERDICT_MARKERS = ("New PR in", "Digest", "Receipts:", "Today's plan", "Shipped", "Stopped after", "loop failed", "Planning failed",
                    "Watching", "Nothing new", "Watcher inbox", "Noted", "Strict", "muted", "back to normal", "What I remember",
                    "Your last", "No verdicts", "Demo PRs", "couldn't", "Something failed", "**Receipts** checks")
 
@@ -51,6 +51,9 @@ def main() -> None:
             print("\n=== done ===", flush=True)
             os._exit(0)
         text = queue.pop(0)
+        if text == "@wait":  # send nothing; wait for the agent to speak on its own
+            print("\n... waiting for the agent", flush=True)
+            return
         print(f"\n>>> {text}", flush=True)
         await ctx.send(gate.address, ChatMessage(content=[TextContent(text=text)], msg_id=uuid4(),
                                                  timestamp=datetime.now(timezone.utc)))
