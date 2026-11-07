@@ -34,7 +34,7 @@ from .teammates import make_teammates  # noqa: E402
 from .workers import make_workers  # noqa: E402
 
 PROMPTS = sys.argv[1:] or ["help", "demo i1-bad-hardcoded", "history"]
-VERDICT_MARKERS = ("New PR in", "Digest", "Receipts:", "Today's plan", "Shipped", "Stopped after", "loop failed", "Planning failed",
+VERDICT_MARKERS = ("Linked", "already using", "New PR in", "Digest", "Receipts:", "Today's plan", "Shipped", "Stopped after", "loop failed", "Planning failed",
                    "Watching", "Nothing new", "Watcher inbox", "Noted", "Strict", "muted", "back to normal", "What I remember",
                    "Your last", "No verdicts", "Demo PRs", "couldn't", "Something failed", "**Receipts** checks")
 

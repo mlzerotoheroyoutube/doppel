@@ -25,11 +25,28 @@ def _blank() -> dict:
             "targets": "", "schedule": "", "plan": {},
             "repos": {},     # "owner/repo" -> {"seen": {"<pr number>": "<head sha>"}}
             "inbox": [],     # verdicts the watcher produced
-            "digest": []}    # verdicts held back during quiet hours
+            "digest": [],    # verdicts held back during quiet hours
+            "channels": []}  # every device/channel this person has used
+
+
+# ---------------------------------------------------------------- one person, many devices
+#
+# A "channel" is where a message came from: an ASI:One / Agentverse sender address, or
+# "rest:<handle>" for the HTTP API. Channels linked to the same handle share one profile,
+# so a plan made on the phone is there on the laptop.
+
+def canonical(storage, channel: str) -> str:
+    if channel.startswith("rest:"):
+        return channel[5:]
+    return storage.get(f"alias:{channel}") or channel
+
+
+def link(storage, channel: str, handle: str) -> None:
+    storage.set(f"alias:{channel}", handle)
 
 
 def load(storage, user: str) -> dict:
-    profile = storage.get(f"user:{user}")
+    profile = storage.get(f"user:{canonical(storage, user)}")
     blank = _blank()
     if not isinstance(profile, dict):
         return blank
@@ -39,10 +56,14 @@ def load(storage, user: str) -> dict:
 
 
 def save(storage, user: str, profile: dict) -> None:
-    storage.set(f"user:{user}", profile)
+    uid = canonical(storage, user)
+    channels = profile.setdefault("channels", [])
+    if user not in channels:
+        channels.append(user)
+    storage.set(f"user:{uid}", profile)
     users = storage.get("users") or []
-    if user not in users:
-        storage.set("users", users + [user])
+    if uid not in users:
+        storage.set("users", users + [uid])
 
 
 def all_users(storage) -> list[str]:

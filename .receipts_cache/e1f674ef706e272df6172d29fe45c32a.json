@@ -1,0 +1,25 @@
+{
+ "provider": "subq",
+ "model": "subq-snap-1.1",
+ "role": "judge",
+ "answers": {
+  "fits_time": {
+   "type": "noul",
+   "noul": 0.9264523386955261
+  },
+  "respects_schedule": {
+   "type": "noul",
+   "noul": 0.9171969294548035
+  },
+  "targets_first": {
+   "type": "noul",
+   "noul": 0.9942595958709717
+  },
+  "uses_agent": {
+   "type": "noul",
+   "noul": 0.15044698119163513
+  }
+ },
+ "input_tokens": 890,
+ "usd": 3.56e-05
+}

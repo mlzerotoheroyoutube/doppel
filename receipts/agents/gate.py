@@ -7,13 +7,15 @@ worker agents. Calls to different workers run in parallel.
 from __future__ import annotations
 
 import asyncio
+import hmac
 import os
 import re
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
 
-from uagents import Agent, Context, Protocol
+from uagents import Agent, Context, Model, Protocol
 from uagents_core.contrib.protocols.chat import (ChatAcknowledgement, ChatMessage, TextContent,
                                                  chat_protocol_spec)
 
@@ -44,6 +46,9 @@ HELP = """**Receipts** is a teammate that only ships work it can prove.
   SubQ judges each round, and it reworks until approved (max 3 rounds)
 - paste a GitHub PR link, or `demo list` then `demo i1-bad-ignores-qty`, to verify one PR
 
+**Any device**
+- `link <name>` here, and use the same name from the HTTP API on any other device: one memory, everywhere
+
 **Teach me**
 - `strict on` / `strict off`: treat warnings as blocks
 - `mute T004` / `unmute T004`: turn a rule down to a note for you
@@ -54,6 +59,34 @@ HELP = """**Receipts** is a teammate that only ships work it can prove.
 
 class WorkerError(RuntimeError):
     pass
+
+
+# ---------------------------------------------------------------- HTTP API (any device)
+
+class ApiChat(Model):
+    token: str
+    user: str
+    text: str
+
+
+class ApiPoll(Model):
+    token: str
+    user: str
+
+
+class ApiReply(Model):
+    ok: bool
+    messages: list[str] = []
+    error: str = ""
+
+
+class ApiHealth(Model):
+    ok: bool
+    agent: str
+    roles: dict
+
+
+HANDLE = re.compile(r"^[A-Za-z0-9_.-]{1,40}$")
 
 
 def make_gate(workers: dict[str, Agent]) -> Agent:
@@ -73,8 +106,20 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
     chat = Protocol(spec=chat_protocol_spec)
 
     async def reply(ctx: Context, to: str, text: str) -> None:
+        """Deliver to the channel the person used: chat protocol, or the HTTP outbox."""
+        if to.startswith("rest:"):
+            key = f"outbox:{to[5:]}"
+            box = ctx.storage.get(key) or []
+            ctx.storage.set(key, (box + [{"at": time.time(), "text": text}])[-200:])
+            return
         await ctx.send(to, ChatMessage(content=[TextContent(text=text)],
                                        msg_id=uuid4(), timestamp=datetime.now(timezone.utc)))
+
+    async def broadcast(ctx: Context, uid: str, text: str) -> None:
+        """Proactive messages (watcher, digest) go to every device this person has used."""
+        profile = memory.load(ctx.storage, uid)
+        for channel in profile.get("channels") or [uid]:
+            await reply(ctx, channel, text)
 
     async def ask(ctx: Context, worker: str, msg, result_type):
         res, status = await ctx.send_and_receive(addr[worker], msg, result_type, timeout=TIMEOUT)
@@ -194,6 +239,19 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                 await reply(ctx, sender, f"Something failed while checking: {e}\n\nNo verdict was recorded. Try again.")
             return
 
+        if (m := re.fullmatch(r"(?:link|i am|i'm)\s+([a-z0-9_.-]{1,40})", low)):
+            if sender.startswith("rest:"):
+                await reply(ctx, sender, "You're already using your name on this device.")
+                return
+            old = memory.load(ctx.storage, sender)
+            memory.link(ctx.storage, sender, m.group(1))
+            merged = memory.load(ctx.storage, sender)
+            if not merged.get("channels") and old.get("history"):
+                merged = old  # first link: bring this device's memory along
+            memory.save(ctx.storage, sender, merged)
+            await reply(ctx, sender, f"Linked. This chat and every device that uses the name **{m.group(1)}** "
+                                     "now share one memory: plan, watched repos, settings and history.")
+            return
         if low.startswith(("today:", "today ", "my day:", "plan my day")) or low.startswith(("targets:", "schedule:")):
             body = t.split(":", 1)[1].strip() if ":" in t else ""
             if low.startswith("schedule:"):
@@ -339,7 +397,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                                   for d in profile["digest"])
                 profile["digest"] = []
                 memory.save(ctx.storage, user, profile)
-                await reply(ctx, user, f"**Digest** (held while you were busy)\n{rows}")
+                await broadcast(ctx, user, f"**Digest** (held while you were busy)\n{rows}")
             for repo, state in list(profile["repos"].items()):
                 try:
                     prs = await asyncio.to_thread(targets.open_prs, *repo.split("/"))
@@ -366,8 +424,49 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                         memory.save(ctx.storage, user, profile)
                     else:
                         memory.save(ctx.storage, user, profile)
-                        await reply(ctx, user, f"👀 New PR in **{repo}**, checked on my own:\n\n{md}")
+                        await broadcast(ctx, user, f"👀 New PR in **{repo}**, checked on my own:\n\n{md}")
                     state = profile["repos"].get(repo, state)
+
+    api_token = os.environ.get("RECEIPTS_API_TOKEN", "")
+
+    def authorized(token: str) -> bool:
+        return bool(api_token) and hmac.compare_digest(token.encode(), api_token.encode())
+
+    def drain(ctx: Context, handle: str) -> list[str]:
+        box = ctx.storage.get(f"outbox:{handle}") or []
+        ctx.storage.set(f"outbox:{handle}", [])
+        return [m["text"] for m in box]
+
+    @gate.on_rest_get("/api/health", ApiHealth)
+    async def api_health(ctx: Context) -> ApiHealth:
+        return ApiHealth(ok=True, agent=gate.address, roles={r: llm.who(r) for r in llm.DEFAULT_ROLES})
+
+    @gate.on_rest_post("/api/chat", ApiChat, ApiReply)
+    async def api_chat(ctx: Context, req: ApiChat) -> ApiReply:
+        """Send a message from any device. Quick answers come back at once; long work
+        (verifying, fixing, planning) arrives later via /api/messages."""
+        if not authorized(req.token):
+            return ApiReply(ok=False, error="bad or missing token")
+        if not HANDLE.match(req.user):
+            return ApiReply(ok=False, error="user must be 1-40 letters, digits, . _ or -")
+        channel = f"rest:{req.user}"
+        task = asyncio.create_task(handle(ctx, channel, req.text))
+        try:
+            await asyncio.wait_for(asyncio.shield(task), timeout=4)
+        except asyncio.TimeoutError:
+            pass
+        except Exception as e:  # noqa: BLE001
+            return ApiReply(ok=False, messages=drain(ctx, req.user), error=str(e)[:300])
+        return ApiReply(ok=True, messages=drain(ctx, req.user))
+
+    @gate.on_rest_post("/api/messages", ApiPoll, ApiReply)
+    async def api_messages(ctx: Context, req: ApiPoll) -> ApiReply:
+        """Collect everything the agent has said to this person on the HTTP channel since last time."""
+        if not authorized(req.token):
+            return ApiReply(ok=False, error="bad or missing token")
+        if not HANDLE.match(req.user):
+            return ApiReply(ok=False, error="bad user")
+        return ApiReply(ok=True, messages=drain(ctx, req.user))
 
     gate.include(chat, publish_manifest=True)
     return gate
