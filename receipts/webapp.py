@@ -18,7 +18,8 @@ import secrets
 import urllib.request
 from pathlib import Path
 
-from . import connections, llm  # noqa: F401  (llm loads .env)
+from . import connections, google_oauth, llm  # noqa: F401  (llm loads .env)
+import urllib.parse
 
 PAGE = Path(__file__).with_name("web") / "index.html"
 GATE = os.environ.get("RECEIPTS_URL", "http://127.0.0.1:8001")
@@ -73,6 +74,23 @@ class Handler(http.server.BaseHTTPRequestHandler):
                     self._json(200, {"ok": True, **connections.public_status()})
             except Exception as e:  # noqa: BLE001
                 self._json(200, {"ok": False, "error": str(e)[:120]})
+        elif self.path == "/oauth/start":
+            if not self._authed():
+                return self._json(401, {"ok": False})
+            try:
+                self._send(302, b"", "text/plain", {"Location": google_oauth.auth_url()})
+            except google_oauth.GoogleError as e:
+                self._send(302, b"", "text/plain", {"Location": "/#connections?error=" + urllib.parse.quote(str(e))})
+        elif self.path.startswith("/oauth/callback"):
+            q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+            if "error" in q:
+                return self._send(302, b"", "text/plain", {"Location": "/#connections?error=" + urllib.parse.quote(q["error"][0])})
+            try:
+                email = google_oauth.finish(q.get("code", [""])[0], q.get("state", [""])[0])
+                connections.save({"calendar_mode": "google", "gmail_mode": "google"})
+                self._send(302, b"", "text/plain", {"Location": "/#connections?google=" + urllib.parse.quote(email)})
+            except google_oauth.GoogleError as e:
+                self._send(302, b"", "text/plain", {"Location": "/#connections?error=" + urllib.parse.quote(str(e))})
         elif self.path == "/health":
             try:
                 h = gate("/api/health", timeout=5)
@@ -106,10 +124,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
             elif self.path == "/connections":
                 allowed = {"calendar_mode", "calendar_ics_url", "gmail_mode", "gmail_address", "gmail_app_password"}
                 update = {k: v for k, v in body.items() if k in allowed}
-                if update.get("calendar_mode") not in (None, "simulated", "real", "off") or \
-                        update.get("gmail_mode") not in (None, "simulated", "real", "off"):
+                if update.get("calendar_mode") not in (None, "simulated", "real", "off", "google") or \
+                        update.get("gmail_mode") not in (None, "simulated", "real", "off", "google"):
                     return self._json(400, {"ok": False, "error": "bad mode"})
                 connections.save(update)
+                out = {"ok": True, **connections.public_status()}
+            elif self.path == "/connections/google/signout":
+                google_oauth.sign_out()
+                connections.save({"calendar_mode": "simulated", "gmail_mode": "simulated"})
                 out = {"ok": True, **connections.public_status()}
             elif self.path == "/connections/test":
                 out = connections.test(str(body.get("which", "")))

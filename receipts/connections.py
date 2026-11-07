@@ -45,10 +45,13 @@ def save(update: dict) -> dict:
 
 def mode(which: str) -> str:
     """'simulated' (the default, for demos), 'real' when credentials are set, or 'off'."""
+    from . import google_oauth
     c = load()
     m = c.get(f"{which}_mode")
-    if m in ("simulated", "real", "off"):
+    if m in ("simulated", "real", "off", "google"):
         return m
+    if google_oauth.status()["signed_in"]:
+        return "google"
     if which == "calendar" and c.get("calendar_ics_url"):
         return "real"
     if which == "gmail" and c.get("gmail_address") and c.get("gmail_app_password"):
@@ -62,7 +65,7 @@ def public_status() -> dict:
     return {"calendar": {"mode": mode("calendar"), "has_real": bool(c.get("calendar_ics_url"))},
             "gmail": {"mode": mode("gmail"), "has_real": bool(c.get("gmail_address") and c.get("gmail_app_password")),
                       "address": c.get("gmail_address", "")},
-            "github": github_status()}
+            "github": github_status(), "google": __import__("receipts.google_oauth", fromlist=["x"]).status()}
 
 
 # ---------------------------------------------------------------- simulated data (clearly labelled)
@@ -103,22 +106,61 @@ def github_status() -> dict:
 
 # ---------------------------------------------------------------- Google Calendar (iCal)
 
-def _ics_time(value: str) -> datetime | None:
+def _ics_time(value: str, key: str = "") -> datetime | None:
+    """Parse an iCal time into local time. Honors TZID=…; floating times are taken as local."""
+    from zoneinfo import ZoneInfo
     value = value.strip()
+    tz = None
+    if (m := re.search(r"TZID=([^;:]+)", key)):
+        try:
+            tz = ZoneInfo(m.group(1).strip('"'))
+        except Exception:  # noqa: BLE001 - unknown zone name: treat as local
+            tz = None
     try:
         if value.endswith("Z"):
             return datetime.strptime(value, "%Y%m%dT%H%M%SZ").replace(tzinfo=timezone.utc).astimezone()
         if "T" in value:
-            return datetime.strptime(value[:15], "%Y%m%dT%H%M%S").astimezone()
+            naive = datetime.strptime(value[:15], "%Y%m%dT%H%M%S")
+            return naive.replace(tzinfo=tz).astimezone() if tz else naive.astimezone()
         return datetime.strptime(value[:8], "%Y%m%d").astimezone()
     except ValueError:
         return None
+
+
+DAYS = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"]
+
+
+def _occurs_on(start: datetime, rrule: str, day: date, exdates: set) -> bool:
+    """Daily / weekly (with BYDAY) / monthly / yearly repeats with INTERVAL and UNTIL; EXDATEs skipped."""
+    rule = dict(p.split("=", 1) for p in rrule.strip().split(";") if "=" in p)
+    first = start.date()
+    if day < first or day in exdates:
+        return False
+    if (until := rule.get("UNTIL")) and (u := _ics_time(until)) and day > u.date():
+        return False
+    interval = max(1, int(rule.get("INTERVAL", "1") or 1))
+    freq = rule.get("FREQ", "")
+    if freq == "DAILY":
+        return (day - first).days % interval == 0
+    if freq == "WEEKLY":
+        bydays = [d[-2:] for d in rule.get("BYDAY", DAYS[first.weekday()]).split(",")]
+        weeks = ((day - timedelta(days=day.weekday())) - (first - timedelta(days=first.weekday()))).days // 7
+        return DAYS[day.weekday()] in bydays and weeks % interval == 0
+    if freq == "MONTHLY":
+        months = (day.year - first.year) * 12 + day.month - first.month
+        return day.day == first.day and months % interval == 0
+    if freq == "YEARLY":
+        return (day.month, day.day) == (first.month, first.day) and (day.year - first.year) % interval == 0
+    return False
 
 
 def calendar_events(day: date | None = None) -> list[dict]:
     """Today's events: simulated, or from the private iCal link. [{start, end, title, all_day}], local time."""
     if mode("calendar") == "simulated":
         return simulated_events()
+    if mode("calendar") == "google":
+        from . import google_oauth
+        return google_oauth.calendar_today()
     if mode("calendar") == "off":
         raise RuntimeError("Calendar is turned off")
     url = load().get("calendar_ics_url")
@@ -130,19 +172,31 @@ def calendar_events(day: date | None = None) -> list[dict]:
     day = day or date.today()
     out = []
     for block in text.split("BEGIN:VEVENT")[1:]:
-        fields = {}
+        fields, exdates = {}, set()
         for line in block.split("END:VEVENT")[0].splitlines():
             if ":" in line:
                 k, v = line.split(":", 1)
+                if k.split(";")[0] == "EXDATE":
+                    for x in v.split(","):
+                        if (t := _ics_time(x, k)):
+                            exdates.add(t.date())
                 fields.setdefault(k.split(";")[0], (k, v))
-        if "DTSTART" not in fields:
+        if "DTSTART" not in fields or fields.get("STATUS", ("", ""))[1].strip().upper() == "CANCELLED":
             continue
-        start = _ics_time(fields["DTSTART"][1])
-        end = _ics_time(fields.get("DTEND", fields["DTSTART"])[1])
+        start = _ics_time(fields["DTSTART"][1], fields["DTSTART"][0])
+        end = _ics_time(fields.get("DTEND", fields["DTSTART"])[1], fields.get("DTEND", fields["DTSTART"])[0])
         if not start:
             continue
         all_day = "VALUE=DATE" in fields["DTSTART"][0]
-        if start.date() <= day <= ((end or start) - timedelta(seconds=1)).date() or start.date() == day:
+        if "RRULE" in fields:  # recurring: does an occurrence fall on `day`?
+            if not _occurs_on(start, fields["RRULE"][1], day, exdates):
+                continue
+            length = (end - start) if end else timedelta(0)
+            start = datetime.combine(day, start.timetz())
+            end = start + length
+        elif not (start.date() <= day <= ((end or start) - timedelta(seconds=1)).date() or start.date() == day):
+            continue
+        if True:
             title = fields.get("SUMMARY", ("", "(busy)"))[1].replace("\\,", ",").strip() or "(busy)"
             out.append({"start": "all day" if all_day else start.strftime("%H:%M"),
                         "end": "" if all_day else (end or start).strftime("%H:%M"), "title": title,
@@ -169,6 +223,9 @@ def _decode(h: str | None) -> str:
 def unread_emails(limit: int = 15) -> list[dict]:
     if mode("gmail") == "simulated":
         return simulated_emails()[:limit]
+    if mode("gmail") == "google":
+        from . import google_oauth
+        return google_oauth.gmail_unread(limit)
     if mode("gmail") == "off":
         raise RuntimeError("Gmail is turned off")
     c = load()

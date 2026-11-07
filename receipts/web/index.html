@@ -270,6 +270,7 @@ async function act(cmd) {
 }
 
 const CONN = {
+  google: { name: "Google account", emoji: "🔐", about: "Sign in once to give Doppel read-only access to your Google Calendar and Gmail." },
   github: { name: "GitHub", emoji: "🐙", about: "Repos, PRs, issues, status checks and fixes. Uses the signed-in gh login on this laptop." },
   calendar: { name: "Google Calendar", emoji: "📅", about: "Today's meetings feed your plan and quiet hours. Read-only." },
   gmail: { name: "Gmail", emoji: "✉️", about: "Unread mail, triaged by Meta (`emails` in Chat). Read-only; never marks mail as read." },
@@ -277,19 +278,27 @@ const CONN = {
 async function loadConnections() {
   let st; try { st = await api("/connections"); } catch (e) { return; }
   const g = $("conngrid");
-  const pill = (c, k) => k === "github" ? (c.connected ? `<span class="pill ok">Connected · ${esc(c.account)}</span>` : `<span class="pill bad">Not signed in</span>`)
+  const pill = (c, k) => k === "google" ? (c.signed_in ? `<span class="pill ok">Signed in</span>` : `<span class="pill">Not signed in</span>`)
+    : c.mode === "google" ? `<span class="pill ok">Google</span>` : k === "github" ? (c.connected ? `<span class="pill ok">Connected · ${esc(c.account)}</span>` : `<span class="pill bad">Not signed in</span>`)
     : c.mode === "real" ? `<span class="pill ok">Connected</span>` : c.mode === "simulated" ? `<span class="pill sim">Simulated</span>` : `<span class="pill">Off</span>`;
   g.innerHTML = Object.entries(CONN).map(([k, meta]) => {
     const c = st[k] || {};
     let body = "";
     if (k === "github") body = `<div class="small">To switch account: <code>gh auth switch</code> in a terminal on this laptop.</div>`;
+    if (k === "google") body = c.signed_in
+      ? `<div class="row"><span>Signed in as <b>${esc(c.email)}</b></span><button class="btn" onclick="googleOut()">Sign out</button></div>`
+      : c.configured
+        ? `<div class="row"><button class="btn primary" onclick="location.href='/oauth/start'">Sign in with Google</button></div>
+           <div class="small">Read-only: calendar.readonly and gmail.readonly. You can revoke it any time.</div>`
+        : `<div class="small">One-time setup: create an OAuth client (Web application) in Google Cloud with redirect URI
+           <code>http://127.0.0.1:8080/oauth/callback</code> and save its JSON as <code>.doppel/google_client.json</code>.</div>`;
     if (k === "calendar") body = `
-      <div class="row"><div class="seg">${["simulated", "real", "off"].map(m => `<button class="${c.mode === m ? "on" : ""}" onclick="setMode('calendar','${m}')">${m[0].toUpperCase() + m.slice(1)}</button>`).join("")}</div></div>
+      <div class="row"><div class="seg">${["google", "simulated", "real", "off"].map(m => `<button class="${c.mode === m ? "on" : ""}" onclick="setMode('calendar','${m}')">${m === "real" ? "iCal" : m[0].toUpperCase() + m.slice(1)}</button>`).join("")}</div></div>
       <input class="field" id="ics" type="password" placeholder="${c.has_real ? "iCal link saved (paste to replace)" : "Paste your private iCal link"}">
       <div class="small">Google Calendar → Settings → your calendar → Integrate calendar → <b>Secret address in iCal format</b>. Stored only on this laptop.</div>
       <div class="row"><button class="btn primary" onclick="saveCal()">Save</button><button class="btn" onclick="testConn('calendar')">Test</button><span class="small" id="t-calendar"></span></div>`;
     if (k === "gmail") body = `
-      <div class="row"><div class="seg">${["simulated", "real", "off"].map(m => `<button class="${c.mode === m ? "on" : ""}" onclick="setMode('gmail','${m}')">${m[0].toUpperCase() + m.slice(1)}</button>`).join("")}</div></div>
+      <div class="row"><div class="seg">${["google", "simulated", "real", "off"].map(m => `<button class="${c.mode === m ? "on" : ""}" onclick="setMode('gmail','${m}')">${m === "real" ? "App password" : m[0].toUpperCase() + m.slice(1)}</button>`).join("")}</div></div>
       <input class="field" id="gaddr" type="email" placeholder="you@gmail.com" value="${esc(c.address || "")}">
       <input class="field" id="gpass" type="password" placeholder="${c.has_real ? "App password saved (type to replace)" : "16-character Google app password"}">
       <div class="small">Google Account → Security → 2-Step Verification → <b>App passwords</b>. Stored only on this laptop; read-only IMAP.</div>
@@ -297,6 +306,11 @@ async function loadConnections() {
     return `<div class="card"><h3>${meta.emoji} ${meta.name} ${pill(c, k)}</h3><div class="muted">${meta.about}</div>${body}
       ${k === "github" ? `<div class="row"><button class="btn" onclick="testConn('github')">Test</button><span class="small" id="t-github"></span></div>` : ""}</div>`;
   }).join("");
+}
+async function googleOut() { await api("/connections/google/signout", {}); loadConnections(); }
+if (location.hash.startsWith("#connections")) {
+  const msg = decodeURIComponent((location.hash.split("google=")[1] || location.hash.split("error=")[1] || ""));
+  setTimeout(() => { show("connections"); if (msg) add("them", location.hash.includes("google=") ? `✅ Signed in with Google as **${msg}**. Calendar and Gmail now use your real account.` : `⚠️ Google sign-in: ${msg}`); }, 300);
 }
 async function setMode(which, mode) { await api("/connections", { [which + "_mode"]: mode }); loadConnections(); }
 async function saveCal() {
