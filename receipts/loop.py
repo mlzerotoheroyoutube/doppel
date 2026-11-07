@@ -153,13 +153,18 @@ def apply_files(workdir: Path, files: dict[str, str]) -> list[str]:
     return written
 
 
-def implement(issue: str, workdir: Path, feedback: list[str]) -> tuple[str, dict[str, str]]:
-    fb = ""
+def implement(issue: str, workdir: Path, feedback: list[str],
+              dom: dict | None = None) -> tuple[str, dict[str, str]]:
+    """dom: the playbook's 'code' domain (lessons + model). None means the adopted playbook."""
+    from . import playbook
+    dom = playbook.domain("code") if dom is None else dom
+    fb = playbook.lessons_text(dom)
     if feedback:
-        fb = "# Feedback from the release judge on your earlier attempts\n" + "\n".join(
+        fb += "# Feedback from the release judge on your earlier attempts\n" + "\n".join(
             f"- Round {i}: {f}" for i, f in enumerate(feedback, 1)) + "\n\n"
     reply = llm.complete(IMPLEMENTER_SYSTEM, IMPLEMENTER_PROMPT.format(
-        issue=issue.strip(), repo=repo_snapshot(workdir), feedback=fb), effort="high", role="implementer")
+        issue=issue.strip(), repo=repo_snapshot(workdir), feedback=fb), effort="high", role="implementer",
+        models=playbook.models(dom))
     data = _json(reply)
     files = data.get("files") or {}
     if not isinstance(files, dict) or not files:
@@ -247,6 +252,12 @@ def run(issue: str, base: Path, max_rounds: int = 3,
             on_event(f"Round {n}: ✅ approved by {llm.who('judge')} (P(ship) = {j['p_ship']:.2f}).")
             return result
         fb = j.get("feedback") or "Receipts' evidence still blocks this change."
+        try:  # SubQ stopped this round: queue it as material for the next playbook improvement
+            from . import playbook
+            playbook.record_rejection("code", {"text": issue[:2000], "attempt": rnd.diff[-3000:],
+                                               "subq_error": j.get("problem", ""), "check": fb[:500]})
+        except OSError:
+            pass
         feedback.append(fb)
         on_event(f"Round {n}: ❌ rejected by {llm.who('judge')}: {j['problem']}, P(ship) = {j['p_ship']:.2f}. {fb[:300]}")
     return result

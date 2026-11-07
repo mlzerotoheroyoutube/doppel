@@ -170,10 +170,12 @@ def _call(provider: str, model: str, system: str, prompt: str, effort: str) -> s
 
 # ---------------------------------------------------------------- public
 
-def complete(system: str, prompt: str, effort: str = "high", role: str = "implementer") -> str:
-    """Return the text answer for `role`, replaying from cache when possible."""
+def complete(system: str, prompt: str, effort: str = "high", role: str = "implementer",
+             models: list[str] | None = None) -> str:
+    """Return the text answer for `role`, replaying from cache when possible.
+    `models` overrides the role's model list (the playbook can choose a Meta model)."""
     provider = provider_for(role)
-    models = models_for(role)
+    models = models or models_for(role)
     path = CACHE_DIR / f"{_key(provider, models[0], system, prompt, effort)}.json"
     if path.exists():
         return json.loads(path.read_text())["text"]

@@ -220,12 +220,12 @@ def correct(task: dict, ans: dict) -> bool:
     return ok_choice and abs(ans["value"] - task["value"]) <= tol
 
 
-def ask(task: dict, history: list[str]) -> tuple[str, dict]:
-    from receipts import llm
-    prompt = f"{task['text']}\n\nAnswer format: {task['format']}."
+def ask(task: dict, history: list[str], dom: dict | None = None) -> tuple[str, dict]:
+    from receipts import llm, playbook
+    prompt = playbook.lessons_text(dom) + f"{task['text']}\n\nAnswer format: {task['format']}."
     if history:
         prompt += "\n\n" + "\n\n".join(history)
-    reply = llm.complete(ANALYST, prompt, effort="medium", role="analyst")
+    reply = llm.complete(ANALYST, prompt, effort="medium", role="analyst", models=playbook.models(dom))
     return reply, parse(reply)
 
 
