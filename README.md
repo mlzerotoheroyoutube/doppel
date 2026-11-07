@@ -69,7 +69,9 @@ cached by a hash of its inputs, so any verdict can be replayed exactly.
 | 6 repo issues × 3 trials (generic + complex) | 18/18 | 18/18 |
 | Long horizon: 6 dependent issues, re-graded on all issues after every step (×2) | 12/12, 0 regressions | 12/12, 0 regressions |
 | Long vertical: itemized receipts, 46 exact + property tests (×3) | 138/138 | 138/138 |
-| MBPP test split, 500 tasks | MBPP_META | MBPP_SUBQ |
+| MBPP test split, 500 tasks (official hidden tests) | 459 correct, **40 wrong shipped** | 451 correct, **36 wrong shipped**, 11 held back |
+
+On MBPP the SubQ loop fixed 2 of Meta's wrong answers, stopped 3 from shipping, and held back 10 that Meta had right: what ships is slightly more often correct (92.7% vs 92.0%), at about 2.6x the time.
 
 **3. Cross-domain business decisions** — 60 tasks mixing finance, trade, tax, operations and behavioral traps.
 Meta alone, Meta + self-check and Meta + SubQ judge all scored **60/60**. The SubQ judge raised 8 false alarms

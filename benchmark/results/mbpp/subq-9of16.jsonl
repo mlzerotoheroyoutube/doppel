@@ -1,0 +1,31 @@
+{"task_id": 20, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 77.4}
+{"task_id": 36, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 80.2}
+{"task_id": 52, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 39.7}
+{"task_id": 68, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 44.9}
+{"task_id": 84, "config": "subq", "shipped": true, "rounds": 2, "judge": ["none", "none"], "correct": true, "seconds": 93.8}
+{"task_id": 100, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 47.1}
+{"task_id": 116, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 56.0}
+{"task_id": 132, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 37.2}
+{"task_id": 148, "config": "subq", "shipped": true, "rounds": 2, "judge": ["hard_coded", "none"], "correct": true, "seconds": 197.3}
+{"task_id": 164, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": false, "seconds": 66.0}
+{"task_id": 180, "config": "subq", "shipped": false, "rounds": 3, "judge": ["not_fixed", "broken", "not_fixed"], "correct": false, "seconds": 1711.0}
+{"task_id": 196, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 33.8}
+{"task_id": 212, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 24.3}
+{"task_id": 228, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 41.9}
+{"task_id": 244, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 35.4}
+{"task_id": 260, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 67.0}
+{"task_id": 276, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 40.0}
+{"task_id": 292, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 32.0}
+{"task_id": 308, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 42.4}
+{"task_id": 324, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 36.3}
+{"task_id": 340, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 29.6}
+{"task_id": 356, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 20.3}
+{"task_id": 372, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 42.0}
+{"task_id": 388, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 30.7}
+{"task_id": 404, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 28.9}
+{"task_id": 420, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 26.4}
+{"task_id": 436, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": false, "seconds": 70.1}
+{"task_id": 452, "config": "subq", "shipped": true, "rounds": 2, "judge": ["not_fixed", "none"], "correct": false, "seconds": 74.5}
+{"task_id": 468, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 52.3}
+{"task_id": 484, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 23.3}
+{"task_id": 500, "config": "subq", "shipped": true, "rounds": 1, "judge": ["none"], "correct": true, "seconds": 65.0}
