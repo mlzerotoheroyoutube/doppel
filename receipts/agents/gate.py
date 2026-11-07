@@ -460,6 +460,22 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                                      + f"\n\nI'm watching it now. Say `fix issue 1 in {full}` to have me build the first feature.")
             return
         if low.startswith("fix "):
+            # Fill in shorthand: no repo, a bare repo name, or the "owner/repo" placeholder.
+            if "demo issue" not in low:
+                me_login = await asyncio.to_thread(github_ops.me)
+                watched = list(profile["repos"])
+                m2 = re.search(r"\b(?:in|on|of)\s+([\w.-]+)(?:/([\w.-]+))?\s*$", t, re.I)
+                if m2 and (m2.group(1).lower() == "owner" or m2.group(2) is None):
+                    name = m2.group(2) if m2.group(1).lower() != "owner" else None
+                    name = name or (m2.group(1) if m2.group(2) is None and m2.group(1).lower() != "owner" else None)
+                    full = f"{me_login}/{name}" if name and name.lower() != "repo" else (watched[0] if len(watched) == 1 else "")
+                    if not full:
+                        await reply(ctx, sender, "Which repo? Say `fix issue 3 in receipts-demo-store`, for example."
+                                    + (f" You watch: {', '.join(watched)}." if watched else ""))
+                        return
+                    t = t[:m2.start()] + f" in {full}"
+                elif not m2 and len(watched) == 1:
+                    t = f"{t} in {watched[0]}"
             try:
                 label, base, issue, repo_info = await asyncio.to_thread(targets.issue_target, t)
             except targets.TargetError as e:

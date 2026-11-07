@@ -39,7 +39,11 @@ def _gh_api(path: str) -> dict:
         with urllib.request.urlopen(req, timeout=20) as r:
             return json.load(r)
     except Exception as e:  # noqa: BLE001
-        raise TargetError(f"GitHub API call {path} failed: {e}") from e
+        if getattr(e, "code", None) == 404:
+            what = path.split("/")[2:4]
+            raise TargetError(f"I couldn't find that on GitHub ({'/'.join(what)}). Check the repo name and number; "
+                              "say `my repos` to list yours.") from e
+        raise TargetError(f"GitHub didn't answer ({e}). Try again in a moment.") from e
 
 
 def _git(*args: str, cwd: Path | None = None) -> str:
