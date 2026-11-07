@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.receipts/
+benchmark/results/*/
+agent*_data.json
+*_data.json

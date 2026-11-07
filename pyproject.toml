@@ -1,0 +1,10 @@
+[project]
+name = "receipts"
+version = "0.1.0"
+description = "Independent verifier for AI-written pull requests"
+requires-python = ">=3.11"
+dependencies = ["pytest>=8", "anthropic>=2", "openai>=1", "uagents>=0.26"]
+license = "MIT"
+
+[project.scripts]
+receipts = "receipts.__main__:main"
