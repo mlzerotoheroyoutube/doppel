@@ -19,7 +19,7 @@ from uagents import Agent, Context, Model, Protocol
 from uagents_core.contrib.protocols.chat import (ChatAcknowledgement, ChatMessage, TextContent,
                                                  chat_protocol_spec)
 
-from .. import blind, llm, mutation, planner, publish, tamper
+from .. import blind, github_ops, llm, mutation, planner, publish, tamper
 from ..models import Receipt
 from ..verify import blind_receipts, decide, mutation_receipts, to_markdown
 from . import memory, targets, understand
@@ -40,6 +40,11 @@ HELP = """**Receipts** is a teammate that only ships work it can prove.
 **Your repos**
 - `watch owner/repo`: I check every new PR on my own and tell you (or hold it for your digest during quiet hours)
 - `inbox`: what the watcher found · `unwatch owner/repo`
+
+**GitHub**
+- `my repos` · `prs owner/repo` · `issues owner/repo` · `check prs in owner/repo`
+- `new issue in owner/repo: title -- details`
+- `new project <name>: <idea>`: Meta scaffolds a tested starter project, I create the repo and its first issues (asks you first)
 
 **Work**
 - `fix demo issue 1` or `fix issue 3 in owner/repo`: Meta writes the fix, Receipts collects evidence,
@@ -305,6 +310,78 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             await reply(ctx, sender, ("**Watcher inbox**\n" + "\n".join(
                 f"- {icon.get(i['decision'], '•')} {i['decision']} · {i['target']}" for i in reversed(items)))
                 if items else "Nothing new yet." + ("" if profile["repos"] else " Try `watch owner/repo`."))
+            return
+        if low in ("my repos", "repos", "list repos", "my projects"):
+            repos = await asyncio.to_thread(github_ops.list_repos)
+            await reply(ctx, sender, "**Your repos**\n" + "\n".join(
+                f"- [{r['nameWithOwner']}](https://github.com/{r['nameWithOwner']})"
+                + (f" · {r['description']}" if r.get("description") else "") for r in repos))
+            return
+        if (m := re.match(r"(prs|pull requests|issues)\s+(?:in\s+|for\s+)?([\w.-]+/[\w.-]+)$", low)):
+            full = m.group(2)
+            if m.group(1) == "issues":
+                items = await asyncio.to_thread(github_ops.list_issues, full)
+                rows = [f"- [#{i['number']}]({i['url']}) {i['title']}"
+                        + (f" · `{', '.join(l['name'] for l in i['labels'])}`" if i["labels"] else "") for i in items]
+                tail = f"\n\nSay `fix issue <n> in {full}`, or add the label `receipts-fix` on GitHub."
+            else:
+                items = await asyncio.to_thread(github_ops.list_prs, full)
+                def mark(pr):
+                    for c in pr.get("statusCheckRollup") or []:
+                        if c.get("context") == "Receipts":
+                            return {"FAILURE": " · 🛑 Receipts BLOCK", "SUCCESS": " · ✅ Receipts"}.get(c.get("state"), "")
+                    return " · not checked yet"
+                rows = [f"- [#{p['number']}]({p['url']}) {p['title']}{mark(p)}" for p in items]
+                tail = f"\n\nSay `check prs in {full}` to verify the unchecked ones."
+            await reply(ctx, sender, f"**Open {m.group(1)} in {full}**\n" + ("\n".join(rows) or "none") + tail)
+            return
+        if (m := re.match(r"check (?:all )?(?:the )?(?:prs|pull requests) (?:in|for|on) ([\w.-]+/[\w.-]+)$", low)):
+            full = m.group(1)
+            prs = await asyncio.to_thread(github_ops.list_prs, full)
+            todo = [p for p in prs if not any(c.get("context") == "Receipts" for c in p.get("statusCheckRollup") or [])][:3]
+            if not todo:
+                await reply(ctx, sender, f"Every open PR in {full} already has a Receipts check.")
+                return
+            await reply(ctx, sender, f"Checking {len(todo)} PR(s) in {full}…")
+            for p in todo:
+                await handle(ctx, sender, p["url"], depth + 1)
+            return
+        if (m := re.match(r"(?:new|open|create) (?:an )?issue (?:in|on) ([\w.-]+/[\w.-]+)\s*:\s*(.+)", t, re.I | re.S)):
+            title, _, body = m.group(2).partition("--")
+            try:
+                url = await asyncio.to_thread(github_ops.new_issue, m.group(1), title.strip(), body.strip())
+                await reply(ctx, sender, f"Opened {url}\n\nSay `fix issue {url.rsplit('/', 1)[-1]} in {m.group(1)}` "
+                                         "and I'll work on it.")
+            except Exception as e:  # noqa: BLE001
+                await reply(ctx, sender, f"Couldn't open the issue: {e}")
+            return
+        if (m := re.match(r"(?:new|start|create) (?:a )?(?:project|repo)\s+([\w.-]+)\s*:\s*(.+)", t, re.I | re.S)):
+            profile["pending"] = {"action": "new_project", "name": m.group(1), "idea": m.group(2).strip()}
+            memory.save(ctx.storage, sender, profile)
+            await reply(ctx, sender, f"I'll create the **public** repo `{m.group(1)}` on your GitHub account, have "
+                                     f"{llm.who('implementer')} write a tested starter project for:\n> {m.group(2).strip()}\n\n"
+                                     "and file its first 3 issues. Reply `yes` to go ahead, or `no`.")
+            return
+        if low in ("yes", "go ahead", "confirm", "no", "cancel") and profile.get("pending"):
+            pending = profile.pop("pending")
+            memory.save(ctx.storage, sender, profile)
+            if low in ("no", "cancel"):
+                await reply(ctx, sender, "Cancelled; nothing was created.")
+                return
+            await reply(ctx, sender, f"Creating `{pending['name']}`: Meta is writing the starter project and its tests…")
+            try:
+                res = await asyncio.to_thread(github_ops.create_project, pending["name"], pending["idea"])
+            except Exception as e:  # noqa: BLE001
+                await reply(ctx, sender, f"Couldn't create the project: {e}")
+                return
+            profile = memory.load(ctx.storage, sender)
+            full = res["url"].split("github.com/")[1]
+            profile["repos"][full] = {"seen": {}}
+            memory.save(ctx.storage, sender, profile)
+            await reply(ctx, sender, f"🎉 **{res['url']}**\n\n{res['description']}\n\n"
+                                     f"- Starter code with **{res['tests_passed']} passing tests**\n"
+                                     + "\n".join(f"- Issue: {u}" for u in res["issues"])
+                                     + f"\n\nI'm watching it now. Say `fix issue 1 in {full}` to have me build the first feature.")
             return
         if low.startswith("fix "):
             try:

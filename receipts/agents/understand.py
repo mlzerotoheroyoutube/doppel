@@ -27,6 +27,10 @@ PROMPT = """# Commands you can run (use the exact syntax)
 - `fix demo issue <n>`                      fix a demo store issue (1, 2 or 3)
 - `<GitHub PR link>`                        verify a pull request
 - `demo list` / `demo <name>`               built-in demo PRs
+- `my repos`                                list the user's GitHub repos
+- `prs <owner>/<repo>` / `issues <owner>/<repo>` / `check prs in <owner>/<repo>`
+- `new issue in <owner>/<repo>: <title> -- <details>`
+- `new project <repo-name>: <project idea>`   start a new repo with a tested starter project
 - `history`, `me`, `strict on|off`, `mute T00x`, `unmute T00x`, `wrong`, `right`, `link <name>`, `help`
 
 # What you know about this user
