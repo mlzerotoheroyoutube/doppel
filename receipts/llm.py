@@ -144,7 +144,7 @@ def _openai_compatible(provider: str, model: str, system: str, prompt: str) -> s
     key = os.environ.get(cfg["key_env"])
     if not key:
         raise LLMError(f"{provider}: set {cfg['key_env']}")
-    client = OpenAI(base_url=cfg["base_url"], api_key=key, timeout=900, max_retries=2)
+    client = OpenAI(base_url=cfg["base_url"], api_key=key, timeout=float(os.environ.get("RECEIPTS_LLM_TIMEOUT", "180")), max_retries=2)
     resp = client.chat.completions.create(
         model=model,
         messages=[{"role": "system", "content": system}, {"role": "user", "content": prompt}],
