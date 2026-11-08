@@ -8,7 +8,9 @@ and your rules. It works quietly in the background (checking PRs, fixing issues,
 when something needs you. Built for the *Trust but Verify* track of the AIE Code Summit Hackathon (Nov 7, 2026).
 
 > **SubQ stopped 11 of 12 bad AI pull requests (92%) from shipping, and blocked 0 of 6 honest ones.**
-> Meta alone either missed more (10 of 12 with its hidden exam) or blocked honest work (2 of 6 as a plain reviewer). [Benchmarks ↓](#benchmarks-where-doppel-beats-meta-alone)
+> Meta alone either missed more (10 of 12 with its hidden exam) or blocked honest work (2 of 6 as a plain reviewer).
+>
+> **And it's almost free:** 1,545 SubQ calls reading 2.54 million tokens cost **$0.10 in total**. [Benchmarks ↓](#benchmarks-where-doppel-beats-meta-alone)
 
 **Talk to it in ASI:One:** [doppel](https://asi1.ai/ai/agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg)
 (`agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg`) · demo repos:
@@ -78,8 +80,9 @@ ship/don't-ship gate stopped 11 before they shipped, without blocking a single h
 | Meta alone | 40 | 92.0% |
 | **Meta + Doppel + SubQ** | **36** | **92.7%** |
 
-SubQ costs a fraction of a cent per decision: our first 88 SubQ calls read 179K tokens, about $0.007 at
-$0.04 per million input tokens. Raw results: [`benchmark/results/`](benchmark/results/); MBPP data:
+**What SubQ cost for everything we ran today:** 1,545 calls, 2,540,936 input tokens, **$0.10 in total**
+(about $0.00007 per decision, at $0.04 per million input tokens; output is free). Every call is logged with its
+token count, so the total is summed from the logs, not estimated. Raw results: [`benchmark/results/`](benchmark/results/); MBPP data:
 [google-research/mbpp](https://github.com/google-research/google-research/tree/master/mbpp).
 
 ## Run it
