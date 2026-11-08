@@ -31,6 +31,10 @@ and the same name over the HTTP API.
 
 ## How it's built
 
+![Doppel architecture](docs/architecture.png)
+
+([SVG version](docs/architecture.svg))
+
 | Layer | Job | Who |
 |---|---|---|
 | Agents and publishing | Gate (chat protocol, memory, watcher, HTTP API), planner, coder and six verifier workers | **Fetch.ai** uAgents, published on **Agentverse**, used from **ASI:One** |

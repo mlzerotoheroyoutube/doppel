@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1060" width="1600" height="1060" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8A93A3"/>
+    </marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#FF9F0A"/>
+    </marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4DA3FF"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="1060" fill="#0B0D12"/>
+
+  <text x="40" y="58" fill="#F5F5F7" font-size="34" font-weight="700">Doppel · architecture</text>
+  <text x="40" y="90" fill="#8A93A3" font-size="18">Meta Muse is the brain · Fetch.ai is the interface · SubQ judges every step · nothing merges without the owner</text>
+
+  <!-- ===== Row 1: where you talk to it ===== -->
+  <text x="40" y="140" fill="#B98CFF" font-size="15" font-weight="700" letter-spacing="2">1 · USE IT ANYWHERE</text>
+  <g font-size="17">
+    <rect x="40" y="155" width="300" height="74" rx="14" fill="#161A23" stroke="#B98CFF" stroke-width="1.5"/>
+    <text x="60" y="185" fill="#F5F5F7" font-weight="600">ASI:One</text>
+    <text x="60" y="211" fill="#C9CED8" font-size="15">web or phone, Chat Protocol</text>
+
+    <rect x="360" y="155" width="300" height="74" rx="14" fill="#161A23" stroke="#B98CFF" stroke-width="1.5"/>
+    <text x="380" y="185" fill="#F5F5F7" font-weight="600">Doppel web app</text>
+    <text x="380" y="211" fill="#C9CED8" font-size="15">Chat · Demo · Memory · Connections</text>
+
+    <rect x="680" y="155" width="300" height="74" rx="14" fill="#161A23" stroke="#B98CFF" stroke-width="1.5"/>
+    <text x="700" y="185" fill="#F5F5F7" font-weight="600">GitHub</text>
+    <text x="700" y="211" fill="#C9CED8" font-size="15">new PRs, issues labelled doppel-fix</text>
+  </g>
+
+  <!-- Agentverse mailbox -->
+  <rect x="40" y="262" width="940" height="44" rx="10" fill="#1A1530" stroke="#B98CFF" stroke-width="1" stroke-dasharray="5 4"/>
+  <text x="510" y="290" fill="#D9C6FF" font-size="16" text-anchor="middle">Fetch.ai Agentverse mailbox  ·  REST API (owner token)  ·  repo watcher</text>
+  <line x1="190" y1="229" x2="190" y2="260" stroke="#8A93A3" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="510" y1="229" x2="510" y2="260" stroke="#8A93A3" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="830" y1="229" x2="830" y2="260" stroke="#8A93A3" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="510" y1="306" x2="510" y2="336" stroke="#8A93A3" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- ===== Row 2: the gate agent ===== -->
+  <text x="40" y="330" fill="#4DA3FF" font-size="15" font-weight="700" letter-spacing="2">2 · THE GATE</text>
+  <rect x="40" y="340" width="940" height="200" rx="18" fill="#121826" stroke="#4DA3FF" stroke-width="2"/>
+  <text x="64" y="376" fill="#F5F5F7" font-size="22" font-weight="700">doppel  (Fetch.ai uAgent, port 8001)</text>
+  <text x="64" y="402" fill="#8A93A3" font-size="14">agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg</text>
+  <g font-size="15">
+    <rect x="64" y="420" width="214" height="98" rx="12" fill="#1A1F2A"/>
+    <text x="80" y="448" fill="#F5F5F7" font-weight="600">Router + chat</text>
+    <text x="80" y="472" fill="#C9CED8">Meta reads free text,</text>
+    <text x="80" y="494" fill="#C9CED8">maps it to a command</text>
+
+    <rect x="290" y="420" width="214" height="98" rx="12" fill="#1A1F2A"/>
+    <text x="306" y="448" fill="#F5F5F7" font-weight="600">Task planner</text>
+    <text x="306" y="472" fill="#C9CED8">Muse picks the repo,</text>
+    <text x="306" y="494" fill="#C9CED8">issues and their order</text>
+
+    <rect x="516" y="420" width="214" height="98" rx="12" fill="#1A1F2A"/>
+    <text x="532" y="448" fill="#F5F5F7" font-weight="600">Memory</text>
+    <text x="532" y="472" fill="#C9CED8">role, focus, standards,</text>
+    <text x="532" y="494" fill="#C9CED8">history, devices</text>
+
+    <rect x="742" y="420" width="214" height="98" rx="12" fill="#1A1F2A"/>
+    <text x="758" y="448" fill="#F5F5F7" font-weight="600">Access control</text>
+    <text x="758" y="472" fill="#C9CED8">owner-only actions,</text>
+    <text x="758" y="494" fill="#C9CED8">guests read-only</text>
+  </g>
+
+  <!-- ===== Row 3: helpers (Bureau) ===== -->
+  <text x="40" y="580" fill="#4DA3FF" font-size="15" font-weight="700" letter-spacing="2">3 · HELPER AGENTS  (uAgents Bureau, port 8002)</text>
+  <line x1="510" y1="540" x2="510" y2="586" stroke="#8A93A3" stroke-width="2" marker-end="url(#a)" marker-start="url(#a)"/>
+  <g font-size="15" text-anchor="middle">
+    <rect x="40"  y="590" width="108" height="56" rx="10" fill="#161A23" stroke="#3A4252"/><text x="94"  y="623" fill="#F5F5F7">planner</text>
+    <rect x="157" y="590" width="108" height="56" rx="10" fill="#161A23" stroke="#3A4252"/><text x="211" y="623" fill="#F5F5F7">coder</text>
+    <rect x="274" y="590" width="108" height="56" rx="10" fill="#161A23" stroke="#3A4252"/><text x="328" y="623" fill="#F5F5F7">suite</text>
+    <rect x="391" y="590" width="108" height="56" rx="10" fill="#161A23" stroke="#3A4252"/><text x="445" y="623" fill="#F5F5F7">tamper</text>
+    <rect x="508" y="590" width="120" height="56" rx="10" fill="#161A23" stroke="#3A4252"/><text x="568" y="623" fill="#F5F5F7">blind-writer</text>
+    <rect x="637" y="590" width="108" height="56" rx="10" fill="#161A23" stroke="#3A4252"/><text x="691" y="623" fill="#F5F5F7">mutation</text>
+    <rect x="754" y="590" width="112" height="56" rx="10" fill="#161A23" stroke="#3A4252"/><text x="810" y="623" fill="#F5F5F7">differential</text>
+    <rect x="875" y="590" width="105" height="56" rx="10" fill="#161A23" stroke="#FF9F0A"/><text x="927" y="623" fill="#FF9F0A">judge</text>
+  </g>
+
+  <!-- ===== Row 4: the agent loop ===== -->
+  <text x="40" y="700" fill="#FF9F0A" font-size="15" font-weight="700" letter-spacing="2">4 · THE AGENT LOOP  (SubQ judges every round, max 3)</text>
+  <rect x="40" y="712" width="940" height="196" rx="18" fill="#14120C" stroke="#FF9F0A" stroke-width="1.5"/>
+  <g font-size="15">
+    <rect x="60" y="732" width="190" height="96" rx="12" fill="#1A1F2A" stroke="#4DA3FF"/>
+    <text x="76" y="760" fill="#4DA3FF" font-weight="700">Hidden exam</text>
+    <text x="76" y="784" fill="#C9CED8">Meta writes tests</text>
+    <text x="76" y="806" fill="#C9CED8">from the issue alone</text>
+
+    <rect x="290" y="732" width="170" height="96" rx="12" fill="#1A1F2A" stroke="#4DA3FF"/>
+    <text x="306" y="760" fill="#4DA3FF" font-weight="700">Meta writes</text>
+    <text x="306" y="784" fill="#C9CED8">muse-wonder-1.0</text>
+    <text x="306" y="806" fill="#C9CED8">the fix</text>
+
+    <rect x="500" y="732" width="230" height="96" rx="12" fill="#1A1F2A" stroke="#8A93A3"/>
+    <text x="516" y="760" fill="#F5F5F7" font-weight="700">Evidence</text>
+    <text x="516" y="784" fill="#C9CED8">pytest sandbox · tamper rules</text>
+    <text x="516" y="806" fill="#C9CED8">mutation · exam · differential</text>
+
+    <rect x="770" y="732" width="190" height="96" rx="12" fill="#1A1F2A" stroke="#FF9F0A" stroke-width="2"/>
+    <text x="786" y="760" fill="#FF9F0A" font-weight="700">SubQ decides</text>
+    <text x="786" y="784" fill="#C9CED8">ship / don’t ship</text>
+    <text x="786" y="806" fill="#C9CED8">+ named problem</text>
+  </g>
+  <line x1="250" y1="780" x2="286" y2="780" stroke="#8A93A3" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="460" y1="780" x2="496" y2="780" stroke="#8A93A3" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="730" y1="780" x2="766" y2="780" stroke="#8A93A3" stroke-width="2" marker-end="url(#a)"/>
+  <!-- rework -->
+  <path d="M865,828 L865,876 L375,876 L375,832" fill="none" stroke="#FF9F0A" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ao)"/>
+  <text x="620" y="896" fill="#FF9F0A" font-size="14" text-anchor="middle">reject → rework with SubQ’s diagnosis (never the hidden tests)</text>
+  <!-- ship -->
+  <text x="40" y="946" fill="#30D158" font-size="16" font-weight="600">approve → pull request on GitHub with the evidence attached · the owner merges</text>
+
+  <!-- ===== Right column: models ===== -->
+  <text x="1030" y="140" fill="#8A93A3" font-size="15" font-weight="700" letter-spacing="2">MODELS</text>
+  <rect x="1030" y="155" width="530" height="210" rx="18" fill="#121826" stroke="#4DA3FF" stroke-width="2"/>
+  <text x="1054" y="192" fill="#4DA3FF" font-size="22" font-weight="700">Meta Model API · the brain</text>
+  <g font-size="16" fill="#C9CED8">
+    <text x="1054" y="226"><tspan fill="#F5F5F7" font-weight="600">muse-wonder-1.0</tspan>  writes code (falls back to spark)</text>
+    <text x="1054" y="256"><tspan fill="#F5F5F7" font-weight="600">muse-spark-1.3</tspan>  hidden exams, task and day plans,</text>
+    <text x="1054" y="280">routing, chat, role lens, baseline reviewer</text>
+    <text x="1054" y="318" fill="#8A93A3" font-size="14">OpenAI-compatible · api.meta.ai/v1</text>
+    <text x="1054" y="342" fill="#8A93A3" font-size="14">lessons from the playbook go into every prompt</text>
+  </g>
+
+  <rect x="1030" y="390" width="530" height="190" rx="18" fill="#14120C" stroke="#FF9F0A" stroke-width="2"/>
+  <text x="1054" y="427" fill="#FF9F0A" font-size="22" font-weight="700">SubQ Snap 1.1 · the judge</text>
+  <g font-size="16" fill="#C9CED8">
+    <text x="1054" y="461">votes only, never writes text:</text>
+    <text x="1054" y="487">• ship / don’t ship on the evidence</text>
+    <text x="1054" y="511">• reviews every day plan</text>
+    <text x="1054" y="535">• confirms each role-lens concern (p ≥ 0.6)</text>
+    <text x="1054" y="563" fill="#8A93A3" font-size="14">POST api.subq.ai/v1/systemone · billed on input tokens</text>
+  </g>
+
+  <!-- connections -->
+  <text x="1030" y="626" fill="#8A93A3" font-size="15" font-weight="700" letter-spacing="2">CONNECTIONS  (read-only)</text>
+  <g font-size="16">
+    <rect x="1030" y="640" width="166" height="60" rx="12" fill="#161A23" stroke="#3A4252"/><text x="1113" y="676" fill="#F5F5F7" text-anchor="middle">GitHub (gh)</text>
+    <rect x="1212" y="640" width="166" height="60" rx="12" fill="#161A23" stroke="#3A4252"/><text x="1295" y="676" fill="#F5F5F7" text-anchor="middle">Calendar (iCal)</text>
+    <rect x="1394" y="640" width="166" height="60" rx="12" fill="#161A23" stroke="#3A4252"/><text x="1477" y="676" fill="#F5F5F7" text-anchor="middle">Gmail (IMAP)</text>
+  </g>
+
+  <!-- feedback loop -->
+  <text x="1030" y="748" fill="#30D158" font-size="15" font-weight="700" letter-spacing="2">SELF-IMPROVING PLAYBOOK</text>
+  <rect x="1030" y="762" width="530" height="146" rx="18" fill="#0F1A14" stroke="#30D158" stroke-width="1.5"/>
+  <g font-size="16" fill="#C9CED8">
+    <text x="1054" y="796"><tspan fill="#F5F5F7" font-weight="600">confirmed failure</tspan> (SubQ block + evidence)</text>
+    <text x="1054" y="822">→ lesson for Meta (versioned)</text>
+    <text x="1054" y="848">→ tested on held-out work</text>
+    <text x="1054" y="874">→ <tspan fill="#30D158" font-weight="600">adopt</tspan> if better, else <tspan fill="#FF9F0A" font-weight="600">roll back</tspan></text>
+  </g>
+
+  <!-- links from the loop/gate to the right column -->
+  <path d="M980,440 L1030,300" fill="none" stroke="#4DA3FF" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ab)"/>
+  <path d="M960,770 L1030,520" fill="none" stroke="#FF9F0A" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ao)"/>
+  <path d="M980,860 L1028,840" fill="none" stroke="#30D158" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <text x="40" y="1010" fill="#8A93A3" font-size="15">Benchmarks: SubQ gate caught 11/12 bad PRs (92%) with 0/6 honest PRs blocked · MBPP 500: wrong answers shipped 40 → 36 · github.com/mlzerotoheroyoutube/doppel</text>
+</svg>
