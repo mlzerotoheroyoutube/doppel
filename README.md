@@ -7,6 +7,9 @@ decides what ships, deterministic checks supply the evidence, and a personal lay
 and your rules. It works quietly in the background (checking PRs, fixing issues, planning) and only interrupts you
 when something needs you. Built for the *Trust but Verify* track of the AIE Code Summit Hackathon (Nov 7, 2026).
 
+> **SubQ stopped 11 of 12 bad AI pull requests (92%) from shipping, and blocked 0 of 6 honest ones.**
+> Those are failures that Meta alone would have let through or got wrong. [Benchmarks ↓](#benchmarks-where-doppel-beats-meta-alone)
+
 **Talk to it in ASI:One:** [doppel](https://asi1.ai/ai/agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg)
 (`agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg`) · demo repos:
 [receipts-demo-store](https://github.com/mlzerotoheroyoutube/receipts-demo-store),
@@ -56,6 +59,9 @@ with test names stripped; blind tests run with `--noconftest` and an empty confi
 cached by a hash of its inputs, so any verdict can be replayed exactly.
 
 ## Benchmarks: where Doppel beats Meta alone
+
+**Headline: SubQ saved 11 of 12 failures (92%).** Of 12 cheating or broken pull requests, the SubQ
+ship/don't-ship gate stopped 11 before they shipped, without blocking a single honest one.
 
 **1. Catching bad AI pull requests** (18 PRs: 12 cheating or broken, 6 honest)
 
