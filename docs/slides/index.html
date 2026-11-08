@@ -1,0 +1,206 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Doppel · Slides</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@400;600&display=swap">
+<style>
+html,body{margin:0;background:#06070A}
+*{box-sizing:border-box} h1,h2,h3,p,table{margin:0}
+.wrap{display:flex;flex-direction:column;align-items:center;gap:24px;padding:24px 16px}
+.frame{width:min(1200px,100%);aspect-ratio:16/9;position:relative;overflow:hidden;border-radius:12px}
+.frame>section{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+table{border-collapse:collapse;width:100%} th,td{padding:.45em .6em;border-bottom:1px solid #262C38} th{color:#8A93A3;font-weight:600}
+</style></head><body><div class="wrap">
+<div class="frame"><section id="cover" data-transition="fade" style="background:radial-gradient(ellipse at 80% 20%, #1A2A4A 0%, #0B0D12 60%);color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4DA3FF">AIE Code Summit Hackathon · Trust but Verify</p>
+<h1 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:200px;font-weight:700;line-height:1;letter-spacing:-6px">Doppel</h1>
+<p style="font-size:48px;line-height:1.3;color:#C9CED8;max-width:1300px">An AI agent that does the work, and a judge that checks every step before anything ships.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A93A3">Sandeep Vijayarao · github.com/mlzerotoheroyoutube/doppel</p>
+
+</section>
+</div><div class="frame"><section id="problem" data-transition="fade" style="background:#0B0D12;color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4DA3FF">The problem</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.1;letter-spacing:-2px">AI agents say “all tests pass.” Sometimes they’re right.</h2>
+<div style="display:flex;gap:40px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#161A23;padding:48px;border-radius:24px;border:1px solid #262C38">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:44px;font-weight:600">Green tests aren’t proof</h3>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">An agent can hard-code the answer, weaken a test or skip the hard case, and the CI still passes.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#161A23;padding:48px;border-radius:24px;border:1px solid #262C38">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:44px;font-weight:600">Review doesn’t scale</h3>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">Reading every AI change by hand defeats the point of the agent. Trusting it blindly ships the mistakes.</p>
+</div>
+</div>
+
+</section>
+</div><div class="frame"><section id="what" data-transition="fade" style="background:#12151C;color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4DA3FF">What Doppel is</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.1;letter-spacing:-2px">An AI agent framework with a judge built in</h2>
+<div style="display:flex;gap:40px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#1A1F2A;padding:48px;border-radius:24px;border-top:6px solid #4DA3FF">
+<span name="Lightbulb" style="color:#4DA3FF;width:64px;height:64px"></span>
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:44px;font-weight:600">Meta Muse: the brain</h3>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">muse-wonder writes code. muse-spark plans, routes, writes hidden exams and chats.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#1A1F2A;padding:48px;border-radius:24px;border-top:6px solid #B98CFF">
+<span name="Globe" style="color:#B98CFF;width:64px;height:64px"></span>
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:44px;font-weight:600">Fetch.ai: the interface</h3>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">A uAgent on Agentverse. Talk to it from ASI:One on web or phone. Connects GitHub, calendar and email.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#1A1F2A;padding:48px;border-radius:24px;border-top:6px solid #FF9F0A">
+<span name="Verified" style="color:#FF9F0A;width:64px;height:64px"></span>
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:44px;font-weight:600">SubQ: the judge</h3>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">Reads the evidence at every step of the agent loop and decides: ship, or rework.</p>
+</div>
+</div>
+
+</section>
+</div><div class="frame"><section id="loop" data-transition="fade" style="background:#0B0D12;color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4DA3FF">The agent loop</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.1;letter-spacing:-2px">Evidence first. SubQ decides.</h2>
+<div style="display:flex;align-items:center;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#161A23;padding:40px;border-radius:24px;border:2px solid #4DA3FF">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:40px;font-weight:600;color:#4DA3FF">1 · Meta writes</h3>
+<p style="font-size:28px;line-height:1.4;color:#C9CED8">The fix, from the issue</p>
+</div>
+<div style="background:#3A4252;width:56px;height:32px;flex:none;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1.4;display:flex;flex-direction:column;gap:12px;background:#161A23;padding:40px;border-radius:24px;border:2px solid #8A93A3">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:40px;font-weight:600">2 · Checks gather facts</h3>
+<p style="font-size:28px;line-height:1.4;color:#C9CED8">Sandbox tests, tamper rules, mutation testing, a hidden exam from the issue alone</p>
+</div>
+<div style="background:#3A4252;width:56px;height:32px;flex:none;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#161A23;padding:40px;border-radius:24px;border:2px solid #FF9F0A">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:40px;font-weight:600;color:#FF9F0A">3 · SubQ judges</h3>
+<p style="font-size:28px;line-height:1.4;color:#C9CED8">Ship, or rework with its diagnosis</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">On rework, the agent sees SubQ’s diagnosis, never the hidden tests. Nothing merges without the owner.</p>
+
+</section>
+</div><div class="frame"><section id="demo" data-transition="fade" style="background:#12151C;color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4DA3FF">Live demo</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.1;letter-spacing:-2px">A cheating PR is blocked. Doppel does the work.</h2>
+<div style="display:flex;gap:40px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#1A1F2A;padding:48px;border-radius:24px;border-left:8px solid #FF6B5E">
+<p style="font-size:28px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#FF6B5E">PR #7 · blocked</p>
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:44px;font-weight:600">“Fixes #1. All tests pass.”</h3>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">The tests were green. The hidden exam, written from the issue alone, failed. SubQ voted don’t ship: the answer was hard-coded.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#1A1F2A;padding:48px;border-radius:24px;border-left:8px solid #4DA3FF">
+<p style="font-size:28px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#4DA3FF">PR #8 · opened by Doppel</p>
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:44px;font-weight:600">SubQ approved: P(ship) 1.00</h3>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">Meta wrote the real fix, SubQ judged the round, and a pull request opened on GitHub with the evidence attached.</p>
+</div>
+</div>
+
+</section>
+</div><div class="frame"><section id="measured" data-transition="fade" style="background:#0B0D12;color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4DA3FF">Measured, not assumed</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.1;letter-spacing:-2px">Meta alone is right most of the time</h2>
+<div style="display:flex;gap:40px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#161A23;padding:56px;border-radius:24px">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:200px;font-weight:700;line-height:1;color:#4DA3FF">92%</p>
+<p style="font-size:36px;color:#C9CED8">right without SubQ</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#161A23;padding:56px;border-radius:24px;border:2px solid #FF9F0A">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:200px;font-weight:700;line-height:1;color:#FF9F0A">8%</p>
+<p style="font-size:36px;color:#C9CED8">wrong code that ships, and costs far more than $1 a day</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A93A3">500 MBPP tasks, official hidden tests: Meta alone shipped 40 wrong answers.</p>
+
+</section>
+</div><div class="frame"><section id="gate" data-transition="fade" style="background:linear-gradient(135deg, #1B2D52 0%, #0B0D12 100%);color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#FF9F0A">SubQ as the gate</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.1;letter-spacing:-2px">SubQ caught the problem 92% of the time</h2>
+<div style="display:flex;gap:40px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#161A23;padding:48px;border-radius:24px;border:2px solid #FF9F0A">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:144px;font-weight:700;line-height:1;color:#FF9F0A">92%</p>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">bad PRs caught (11 of 12)</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#161A23;padding:48px;border-radius:24px">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:144px;font-weight:700;line-height:1;color:#F5F5F7">0%</p>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">honest PRs blocked (0 of 6)</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#161A23;padding:48px;border-radius:24px">
+<p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:144px;font-weight:700;line-height:1;color:#8A93A3">33%</p>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">honest PRs blocked by a plain AI reviewer</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A93A3">18 pull requests: 12 cheating or broken, 6 honest. Deterministic checks alone caught 7 of 12.</p>
+
+</section>
+</div><div class="frame"><section id="learn" data-transition="fade" style="background:#12151C;color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4DA3FF">Feedback loop</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.1;letter-spacing:-2px">It improves over time, without quietly getting worse</h2>
+<div style="display:flex;align-items:center;gap:20px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1A1F2A;padding:36px;border-radius:24px;border-top:6px solid #FF9F0A">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:36px;font-weight:600">Confirmed failure</h3>
+<p style="font-size:28px;line-height:1.4;color:#C9CED8">SubQ blocks, the evidence proves it</p>
+</div>
+<div style="background:#3A4252;width:48px;height:28px;flex:none;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1A1F2A;padding:36px;border-radius:24px;border-top:6px solid #4DA3FF">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:36px;font-weight:600">Lesson for Meta</h3>
+<p style="font-size:28px;line-height:1.4;color:#C9CED8">A general rule in the playbook</p>
+</div>
+<div style="background:#3A4252;width:48px;height:28px;flex:none;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1A1F2A;padding:36px;border-radius:24px;border-top:6px solid #B98CFF">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:36px;font-weight:600">Held-out test</h3>
+<p style="font-size:28px;line-height:1.4;color:#C9CED8">On work it has never seen</p>
+</div>
+<div style="background:#3A4252;width:48px;height:28px;flex:none;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#1A1F2A;padding:36px;border-radius:24px;border-top:6px solid #F5F5F7">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:36px;font-weight:600">Keep or roll back</h3>
+<p style="font-size:28px;line-height:1.4;color:#C9CED8">Adopted only if it’s better</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">Every playbook version is kept, so any change can be rolled back.</p>
+
+</section>
+</div><div class="frame"><section id="bench" data-transition="fade" style="background:#0B0D12;color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4DA3FF">Benchmarks</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:-2px">Graded by hidden tests no agent sees</h2>
+<table style="font-size:30px;color:#E4E7EC">
+<tr><th style="width:52%;text-align:left">Suite</th><th style="width:24%;text-align:left">Meta alone</th><th style="width:24%;text-align:left">Meta + Doppel + SubQ</th></tr>
+<tr><td>18 PRs: bad ones caught / honest blocked</td><td>12 of 12 / 2 of 6</td><td style="color:#FF9F0A">11 of 12 / 0 of 6</td></tr>
+<tr><td>MBPP, 500 tasks: wrong answers shipped</td><td>40</td><td style="color:#FF9F0A">36 (11 held back)</td></tr>
+<tr><td>Long horizon: 6 dependent issues, ×2</td><td>12 of 12</td><td style="color:#FF9F0A">12 of 12, 0 regressions</td></tr>
+<tr><td>Long vertical: 46 tests, ×3</td><td>138 of 138</td><td style="color:#FF9F0A">138 of 138</td></tr>
+<tr><td>Cross-domain decisions: 60 tasks</td><td>60 of 60</td><td style="color:#FF9F0A">60 of 60</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A93A3">“Meta alone” on the PR row is a plain AI reviewer reading the diff. MBPP: shipped answers 92.7% correct with SubQ vs 92.0% without.</p>
+
+</section>
+</div><div class="frame"><section id="anywhere" data-transition="fade" style="background:#12151C;color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#B98CFF">Use it anywhere</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.1;letter-spacing:-2px">It knows you, and it asks only when it must</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div style="display:flex;align-items:center;gap:28px;background:#1A1F2A;padding:36px;border-radius:24px">
+<span name="Chat" style="color:#B98CFF;width:56px;height:56px"></span>
+<p style="font-size:32px;line-height:1.4">ASI:One on web or phone, or the Doppel web app</p>
+</div>
+<div style="display:flex;align-items:center;gap:28px;background:#1A1F2A;padding:36px;border-radius:24px">
+<span name="Users" style="color:#B98CFF;width:56px;height:56px"></span>
+<p style="font-size:32px;line-height:1.4">Memory: your role, focus and standards shape every review</p>
+</div>
+<div style="display:flex;align-items:center;gap:28px;background:#1A1F2A;padding:36px;border-radius:24px">
+<span name="Link" style="color:#B98CFF;width:56px;height:56px"></span>
+<p style="font-size:32px;line-height:1.4">GitHub, calendar and email, read-only</p>
+</div>
+<div style="display:flex;align-items:center;gap:28px;background:#1A1F2A;padding:36px;border-radius:24px">
+<span name="Lock" style="color:#B98CFF;width:56px;height:56px"></span>
+<p style="font-size:32px;line-height:1.4">Owner-only actions. Nothing merges without you</p>
+</div>
+</div>
+
+</section>
+</div><div class="frame"><section id="close" data-transition="fade" style="background:radial-gradient(ellipse at 20% 80%, #1A2A4A 0%, #0B0D12 60%);color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4DA3FF">Doppel</p>
+<h1 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:120px;font-weight:700;line-height:1.05;letter-spacing:-4px">AI systems you can actually trust.</h1>
+<p style="font-size:44px;line-height:1.3;color:#C9CED8">Meta does the work. SubQ checks it at every step. You decide what merges.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A93A3">github.com/mlzerotoheroyoutube/doppel · Thank you</p>
+
+</section>
+</div>
+</div><script>
+function fit(){document.querySelectorAll('.frame').forEach(f=>{f.firstElementChild.style.transform='scale('+f.clientWidth/1920+')'})}
+addEventListener('resize',fit);fit();
+</script></body></html>

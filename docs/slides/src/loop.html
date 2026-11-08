@@ -1,0 +1,22 @@
+<section id="loop" data-transition="fade" style="background:#0B0D12;color:#F5F5F7;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4DA3FF">The agent loop</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:88px;font-weight:700;line-height:1.1;letter-spacing:-2px">Evidence first. SubQ decides.</h2>
+<div style="display:flex;align-items:center;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#161A23;padding:40px;border-radius:24px;border:2px solid #4DA3FF">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:40px;font-weight:600;color:#4DA3FF">1 · Meta writes</h3>
+<p style="font-size:28px;line-height:1.4;color:#C9CED8">The fix, from the issue</p>
+</div>
+<x-shape kind="arrow-right" style="background:#3A4252;width:56px;height:32px"></x-shape>
+<div style="flex:1.4;display:flex;flex-direction:column;gap:12px;background:#161A23;padding:40px;border-radius:24px;border:2px solid #8A93A3">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:40px;font-weight:600">2 · Checks gather facts</h3>
+<p style="font-size:28px;line-height:1.4;color:#C9CED8">Sandbox tests, tamper rules, mutation testing, a hidden exam from the issue alone</p>
+</div>
+<x-shape kind="arrow-right" style="background:#3A4252;width:56px;height:32px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#161A23;padding:40px;border-radius:24px;border:2px solid #FF9F0A">
+<h3 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:40px;font-weight:600;color:#FF9F0A">3 · SubQ judges</h3>
+<p style="font-size:28px;line-height:1.4;color:#C9CED8">Ship, or rework with its diagnosis</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#C9CED8">On rework, the agent sees SubQ’s diagnosis, never the hidden tests. Nothing merges without the owner.</p>
+<aside>For the agent loop we use SubQ as the judge at every step. Meta writes, deterministic checks gather evidence, SubQ decides. A rejection sends the agent back with SubQ’s diagnosis.</aside>
+</section>
