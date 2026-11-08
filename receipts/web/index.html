@@ -411,7 +411,9 @@ $("form").onsubmit = (e) => { e.preventDefault(); send($("input").value); };
 $("input").addEventListener("input", autosize);
 $("input").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send($("input").value); } });
 $("unlock").onclick = async () => { await api("/login", { passcode: $("pass").value }); $("lock").classList.remove("show"); health(); };
-requestAnimationFrame(() => show(location.hash.startsWith("#connections") ? "connections" : location.hash.startsWith("#demo") ? "demo" : "chat"));
+const firstTab = location.hash.startsWith("#connections") ? "connections" : location.hash.startsWith("#demo") ? "demo" : "chat";
+requestAnimationFrame(() => show(firstTab));
+window.addEventListener("load", () => setTimeout(() => show(document.querySelector("#seg button.on").dataset.tab), 50));
 health(); poll();
 </script>
 </body>
