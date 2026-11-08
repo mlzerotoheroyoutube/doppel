@@ -23,6 +23,7 @@ PROMPT = """# Commands you can run (use the exact syntax)
 - `plan`                                    show today's plan
 - `watch <owner>/<repo>` / `unwatch <owner>/<repo>`
 - `inbox`                                   what the repo watcher found
+- `fix all issues in <owner>/<repo>`        fix every open issue one by one ("fix all", "fix them all one by one")
 - `fix issue <n> in <owner>/<repo>`         fix a GitHub issue and open a PR
 - `fix demo issue <n>`                      fix a demo store issue (1, 2 or 3)
 - `<GitHub PR link>`                        verify a pull request

@@ -47,6 +47,7 @@ HELP = """**Doppel** is a teammate that only ships work it can prove.
 - `new project <name>: <idea>`: Meta scaffolds a tested starter project, I create the repo and its first issues (asks you first)
 
 **Work**
+- `fix all issues in <repo>`: fix every open issue, one by one, each with its own PR
 - `fix demo issue 1` or `fix issue 3 in owner/repo`: Meta writes the fix, Doppel collects evidence,
   SubQ judges each round, and it reworks until approved (max 3 rounds)
 - paste a GitHub PR link, or `demo list` then `demo i1-bad-ignores-qty`, to verify one PR
@@ -124,6 +125,31 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             return
         await ctx.send(to, ChatMessage(content=[TextContent(text=text)],
                                        msg_id=uuid4(), timestamp=datetime.now(timezone.utc)))
+
+    async def start_fix(ctx: Context, user: str, repo: str, number: int, title: str = "") -> bool:
+        """Start the work loop on one GitHub issue; False if it couldn't start."""
+        try:
+            label, base, issue, info = await asyncio.to_thread(targets.issue_target, f"fix issue {number} in {repo}")
+        except Exception as e:  # noqa: BLE001
+            await reply(ctx, user, f"Skipping {repo}#{number}: {e}")
+            return False
+        await reply(ctx, user, f"🔧 **{repo}#{number}**{': ' + title if title else ''}\n\n"
+                               f"{llm.who('exam')} writes a hidden exam, {llm.who('implementer')} writes the fix, "
+                               f"{llm.who('judge')} judges every round.")
+        await ctx.send(addr["coder"], FixRequest(user=user, label=label, issue=issue, base=str(base), repo_info=info))
+        return True
+
+    async def next_in_queue(ctx: Context, user: str) -> None:
+        """Fix-all mode: start the next queued issue, one at a time."""
+        key = f"queue:{user}"
+        queue = ctx.storage.get(key) or []
+        while queue:
+            item = queue.pop(0)
+            ctx.storage.set(key, queue)
+            left = f" ({len(queue)} more after this)" if queue else " (last one)"
+            if await start_fix(ctx, user, item["repo"], item["number"], item.get("title", "") + left):
+                return
+        ctx.storage.set(key, [])
 
     async def broadcast(ctx: Context, uid: str, text: str) -> None:
         """Proactive messages (watcher, digest) go to every device this person has used."""
@@ -521,6 +547,60 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
                                      + "\n".join(f"- Issue: {u}" for u in res["issues"])
                                      + f"\n\nI'm watching it now. Say `fix issue 1 in {full}` to have me build the first feature.")
             return
+        if (m := re.match(r"(?:please\s+)?(?:fix|solve|resolve|work on)\s+(?:all|every|each)\b(.*)$", low)):
+            rest = m.group(1)
+            if "stop" in rest or "cancel" in rest:
+                ctx.storage.set(f"queue:{sender}", [])
+                await reply(ctx, sender, "Stopped: no more queued issues. The one in progress will finish.")
+                return
+            me_login = await asyncio.to_thread(github_ops.me)
+            repo = ""
+            if (r := re.search(r"([\w.-]+/[\w.-]+)", rest)):
+                repo = r.group(1)
+            else:
+                words = [w for w in re.findall(r"[\w.-]+", rest) if w not in
+                         ("the", "issues", "issue", "in", "on", "of", "one", "by", "open", "repo", "please", "them", "my")]
+                known = [k.split("/")[1] for k in profile["repos"]]
+                if words:
+                    import difflib
+                    try:
+                        mine = [x["name"] for x in await asyncio.to_thread(github_ops.list_repos, 50)]
+                    except Exception:  # noqa: BLE001
+                        mine = []
+                    hit = difflib.get_close_matches(words[-1], known + mine, n=1, cutoff=0.75)
+                    repo = f"{me_login}/{hit[0]}" if hit else ""
+                repo = repo or profile.get("last_fix_repo", "")
+            if not repo:
+                await reply(ctx, sender, "Which repo? Say `fix all issues in receipts-demo-store`.")
+                return
+            try:
+                issues = await asyncio.to_thread(github_ops.list_issues, repo)
+                prs = await asyncio.to_thread(github_ops.list_prs, repo)
+            except Exception as e:  # noqa: BLE001
+                await reply(ctx, sender, f"Couldn't read {repo}: {e}")
+                return
+            covered = {int(n) for pr in prs for n in re.findall(r"#(\d+)", pr.get("title", ""))}
+            todo, skipped = [], []
+            for iss in sorted(issues, key=lambda i: i["number"]):
+                names = {lb.get("name") for lb in iss.get("labels", [])}
+                if iss["number"] in covered or "doppel-working" in names:
+                    skipped.append(f"#{iss['number']}")
+                else:
+                    todo.append({"repo": repo, "number": iss["number"], "title": iss["title"]})
+            profile["last_fix_repo"] = repo
+            memory.save(ctx.storage, sender, profile)
+            if not todo:
+                await reply(ctx, sender, f"Nothing to do in **{repo}**: every open issue already has a PR"
+                                         + (f" ({', '.join(skipped)})." if skipped else "."))
+                return
+            ctx.storage.set(f"queue:{sender}", todo)
+            await reply(ctx, sender, f"**Fixing {len(todo)} issue{'s' if len(todo) > 1 else ''} in {repo}, one by one:**\n"
+                                     + "\n".join(f"- #{t['number']} {t['title']}" for t in todo)
+                                     + (f"\n\nSkipping {', '.join(skipped)}: already has a PR." if skipped else "")
+                                     + "\n\nEach one: hidden exam, fix, evidence, SubQ judges, then a PR. "
+                                       "Say `fix all stop` to stop after the current one.")
+            await next_in_queue(ctx, sender)
+            return
         if low.startswith("fix "):
             # Fill in shorthand: no repo, a bare repo name, or the "owner/repo" placeholder.
             if "demo issue" not in low:
@@ -640,6 +720,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
     async def on_done(ctx: Context, sender: str, msg: FixDone):
         if msg.error:
             await reply(ctx, msg.user, f"The work loop failed: {msg.error}")
+            await next_in_queue(ctx, msg.user)
             return
         profile = memory.load(ctx.storage, msg.user)
         status = msg.result.get("status", "failed")
@@ -658,6 +739,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
         if msg.pr_url:
             text = f"🚀 **Pull request opened:** {msg.pr_url}\n\n" + text
         await reply(ctx, msg.user, text)
+        await next_in_queue(ctx, msg.user)
 
     watching = {"busy": False}
 
