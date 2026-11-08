@@ -26,7 +26,8 @@ def _blank() -> dict:
             "repos": {},     # "owner/repo" -> {"seen": {"<pr number>": "<head sha>"}}
             "inbox": [],     # verdicts the watcher produced
             "digest": [],    # verdicts held back during quiet hours
-            "channels": []}  # every device/channel this person has used
+            "channels": [],  # every device/channel this person has used
+            "persona": {"role": "", "focus": "", "standards": ""}}  # who you are; drives the role lens
 
 
 # ---------------------------------------------------------------- one person, many devices

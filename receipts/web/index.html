@@ -170,6 +170,10 @@ a.r { color: var(--blue); text-decoration: none; }
         <div class="large">Live demo</div>
         <p class="lede">An AI cheats on a pull request. Doppel catches it, then fixes the bug properly and opens a real PR. Every step runs for real.</p>
         <div class="steps">
+          <div class="step" id="s0"><div class="ring" id="r0">★</div><div>
+            <h3>Doppel knows you</h3>
+            <div class="s">Pick your role. Every check also reviews the change the way you would, and SubQ confirms each concern.</div>
+            <div class="actions" id="rolepick"></div><div class="out" id="o0"></div></div></div>
           <div class="step" id="s1"><div class="ring" id="r1">1</div><div>
             <h3>A coding agent opens a pull request</h3>
             <div class="s">“Fixes #1. All tests pass ✅” and the tests really are green.</div>
@@ -283,6 +287,16 @@ function stepState(n, state) {
 }
 const line = (t) => esc(t.split("\n")[0].replace(/\*\*/g, "").replace(/`/g, ""));
 let demoPR = "";
+for (const r of ["Security engineer", "Backend engineer", "ML engineer"]) {
+  const b = document.createElement("button"); b.className = "btn"; b.textContent = r;
+  b.onclick = async () => {
+    document.querySelectorAll("#rolepick .btn").forEach(x => x.classList.toggle("fill", x === b));
+    await api("/chat", { text: "role: " + r });
+    $("r0").className = "ring done"; $("r0").textContent = "✓";
+    $("o0").innerHTML = `<div class="foot" style="margin:0">Got it. You’re a <b style="color:var(--label)">${esc(r.toLowerCase())}</b>. I’ll review changes the way you would.</div>`;
+  };
+  $("rolepick").appendChild(b);
+}
 $("b1").onclick = async () => {
   $("b1").disabled = true; stepState(1, "run");
   const r = await api("/demo/open-cheat", {});
@@ -301,8 +315,11 @@ $("b2").onclick = async () => {
   const verdict = await done;
   if (!verdict) { stepState(2, "fail"); $("b2").disabled = false; return; }
   const blocked = /BLOCK/.test(verdict);
-  const reasons = [...new Set([...verdict.matchAll(/### \d+\. (.+)/g)].map(m => m[1].replace(/`/g, "")))].slice(0, 3)
-    .map(r => `<li>${esc(r)}</li>`).join("");
+  const all = [...new Set([...verdict.matchAll(/### \d+\. (.+)/g)].map(m => m[1].replace(/`/g, "")))];
+  const mine = all.filter(r => r.startsWith("As a "));
+  const reasons = all.filter(r => !r.startsWith("As a ")).slice(0, 3).map(r => `<li>${esc(r)}</li>`).join("")
+    + (mine.length ? `</ul><div class="section" style="margin:12px 0 6px">From your point of view · confirmed by SubQ</div><ul class="foot" style="padding-left:1.2em;margin:0">`
+       + mine.slice(0, 3).map(r => `<li style="color:var(--label)">${esc(r)}</li>`).join("") : "");
   $("o2").innerHTML = `<div class="group"><div class="cell"><div class="icon" style="background:${blocked ? "var(--red)" : "var(--green)"}">${blocked ? "✕" : "✓"}</div>
     <div class="main"><div class="t">${blocked ? "Blocked" : "Passed"}</div><div class="s">“Doppel” status check posted on GitHub</div></div>
     <a class="r" href="${esc(demoPR)}" target="_blank">View ›</a></div></div>${reasons ? `<ul class="foot" style="padding-left:1.2em">${reasons}</ul>` : ""}`;
@@ -332,7 +349,16 @@ async function loadMemory() {
   const p = out.profile, plan = p.plan || {}, pol = p.policy || {}, pb = p.playbook || {};
   const cells = (rows, empty) => rows.length ? rows.join("") : `<div class="cell"><div class="main"><div class="s">${empty}</div></div></div>`;
   const lessons = Object.entries(pb.domains || {}).flatMap(([d, v]) => (v.lessons || []).map(l => `<div class="cell"><div class="main"><div class="s">${esc(d)}</div><div class="t" style="font-size:15px">${esc(l)}</div></div></div>`));
+  const per = p.persona || {};
+  const ROLES = ["Backend engineer", "ML engineer", "Security engineer", "Frontend engineer", "Data engineer", "Engineering manager"];
   g.innerHTML = `
+    <div class="section">About you</div><div class="group">
+      <div class="cell"><div class="icon" style="background:var(--indigo)">◎</div><div class="main"><div class="t">${esc(per.role || "Tell Doppel your role")}</div>
+        <div class="s">Every PR is also reviewed from your point of view. SubQ confirms each concern first.</div></div></div>
+      <div class="cell"><div class="chips" style="padding:0;flex-wrap:wrap">${ROLES.map(r => `<button class="chip" style="${per.role === r ? "background:var(--blue);color:#fff" : ""}" onclick="act('role: ${r}')">${r}</button>`).join("")}</div></div>
+      <div class="cell"><input class="field" id="pfocus" placeholder="What you care about, e.g. secrets, input validation" value="${esc(per.focus || "")}"><button class="btn" onclick="act('focus: ' + document.getElementById('pfocus').value)">Save</button></div>
+      <div class="cell"><input class="field" id="pstd" placeholder="Your standards, e.g. every endpoint validates input" value="${esc(per.standards || "")}"><button class="btn" onclick="act('standards: ' + document.getElementById('pstd').value)">Save</button></div>
+    </div>
     <div class="section">Today</div><div class="group">
       <div class="cell"><div class="icon" style="background:var(--orange)">★</div><div class="main"><div class="t">${esc(p.targets || "No targets yet")}</div>
       <div class="s">${p.plan_review && p.plan_review.decision ? "Plan " + (p.plan_review.decision === "APPROVE" ? "approved" : "flagged") + " by SubQ" : "Say “plan my day” in Chat"}</div></div></div>

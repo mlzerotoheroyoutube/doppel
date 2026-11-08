@@ -19,7 +19,7 @@ from uagents import Agent, Context, Model, Protocol
 from uagents_core.contrib.protocols.chat import (ChatAcknowledgement, ChatMessage, TextContent,
                                                  chat_protocol_spec)
 
-from .. import blind, connections, github_ops, llm, mutation, planner, playbook, publish, tamper
+from .. import blind, connections, github_ops, lens, llm, loop, mutation, planner, playbook, publish, tamper
 from ..models import Receipt
 from ..verify import blind_receipts, decide, mutation_receipts, subq_gate, to_markdown
 from . import access, memory, targets, understand
@@ -51,7 +51,7 @@ HELP = """**Doppel** is a teammate that only ships work it can prove.
   SubQ judges each round, and it reworks until approved (max 3 rounds)
 - paste a GitHub PR link, or `demo list` then `demo i1-bad-ignores-qty`, to verify one PR
 
-**Calendar & email**\n- `calendar`: today's events · `emails`: unread mail, triaged by Meta\n\n**Any device**
+**About you**\n- `role: security engineer` · `focus: secrets, input validation` · `standards: …`: every PR is also reviewed from your point of view\n\n**Calendar & email**\n- `calendar`: today's events · `emails`: unread mail, triaged by Meta\n\n**Any device**
 - `link <name>` here, and use the same name from the HTTP API on any other device: one memory, everywhere
 
 **Teach me**
@@ -208,6 +208,14 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             ctx.logger.warning(f"SubQ gate unavailable: {e}")
             receipts.append(Receipt("judge", "J000", "info", "SubQ was unavailable; this verdict uses the evidence only."))
         profile = memory.load(ctx.storage, user)
+        persona = profile.get("persona") or {}
+        if persona.get("role"):  # review it the way this person would; SubQ confirms each concern
+            try:
+                diff = await asyncio.to_thread(loop.cumulative_diff, target.base, target.head)
+                found = "\n".join(f"- {r.rule}: {r.title}" for r in receipts if r.severity != "info") or "nothing"
+                receipts += await asyncio.to_thread(lens.review, persona, target.issue, diff, found)
+            except Exception as e:  # noqa: BLE001
+                ctx.logger.warning(f"role lens failed: {e}")
         receipts, notes = memory.apply_policy(profile, receipts)
         verdict = decide(receipts, stats)
         deciding = {"BLOCK": "block", "WARN": "warn"}.get(verdict.decision)
@@ -401,6 +409,16 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             except Exception:  # noqa: BLE001
                 summary = ""
             await reply(ctx, sender, f"**Unread email{tag}**\n{listing}" + (f"\n\n**What matters**\n{summary}" if summary else ""))
+            return
+        if (m := re.match(r"(role|focus|standards)\s*:\s*(.*)$", t, re.I | re.S)):
+            field, value = m.group(1).lower(), m.group(2).strip()[:300]
+            persona = profile.setdefault("persona", {"role": "", "focus": "", "standards": ""})
+            persona[field] = value
+            memory.save(ctx.storage, sender, profile)
+            labels = {"role": "Role", "focus": "You care about", "standards": "Your standards"}
+            await reply(ctx, sender, f"**{labels[field]}:** {value or '(cleared)'}\n\n"
+                        + ("From now on every PR I check also gets a review from your point of view; "
+                           "SubQ confirms each concern before I report it." if persona.get("role") else ""))
             return
         if low in ("plan", "my plan", "show plan"):
             await reply(ctx, sender, planner.to_markdown(profile["plan"]) if profile["plan"]
@@ -761,7 +779,7 @@ def make_gate(workers: dict[str, Agent]) -> Agent:
             "repos": sorted(p.get("repos", {})), "inbox": p.get("inbox", [])[-15:],
             "history": p.get("history", [])[-15:], "policy": p.get("policy", {}),
             "learned": sorted(memory.learned_downgrades(p)), "feedback": len(p.get("feedback", [])),
-            "devices": len(p.get("channels", [])),
+            "devices": len(p.get("channels", [])), "persona": p.get("persona", {}),
             "playbook": {"version": pb.get("version", 0), "domains": pb.get("domains", {}),
                          "history": pb.get("history", [])[-10:]},
         }
