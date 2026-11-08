@@ -25,6 +25,25 @@ PAGE = Path(__file__).with_name("web") / "index.html"
 GATE = os.environ.get("RECEIPTS_URL", "http://127.0.0.1:8001")
 TOKEN = os.environ.get("RECEIPTS_API_TOKEN", "")
 OWNER = os.environ.get("RECEIPTS_OWNER", "")
+
+# Every reply goes into one numbered log, and each open window reads what it hasn't seen yet (`since`),
+# so two windows (laptop + phone, or two tabs) both see every reply instead of racing to drain it.
+import threading  # noqa: E402
+LOG: list[tuple[int, str]] = []
+LOG_LOCK = threading.Lock()
+
+
+def _remember(messages) -> None:
+    with LOG_LOCK:
+        for m in messages or []:
+            LOG.append(((LOG[-1][0] + 1) if LOG else 1, m))
+        del LOG[:-500]
+
+
+def _since(n: int) -> dict:
+    with LOG_LOCK:
+        new = [(i, m) for i, m in LOG if i > n]
+        return {"ok": True, "messages": [m for _, m in new], "seq": new[-1][0] if new else max(n, LOG[-1][0] if LOG else 0)}
 SESSIONS: set[str] = set()
 
 
@@ -140,8 +159,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
             if self.path == "/chat":
                 text = str(body.get("text", ""))[:8000]
                 out = gate("/api/chat", {"token": TOKEN, "user": OWNER, "text": text})
+                _remember(out.pop("messages", []))  # every window picks these up through /poll
             elif self.path == "/poll":
-                out = gate("/api/messages", {"token": TOKEN, "user": OWNER})
+                _remember(gate("/api/messages", {"token": TOKEN, "user": OWNER}).get("messages", []))
+                out = _since(int(body.get("since") or 0))
             elif self.path == "/connections":
                 allowed = {"calendar_mode", "calendar_ics_url", "gmail_mode", "gmail_address", "gmail_app_password"}
                 update = {k: v for k, v in body.items() if k in allowed}

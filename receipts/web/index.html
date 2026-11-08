@@ -241,13 +241,23 @@ async function send(text, quiet) {
   if (!quiet) add("me", text);
   $("input").value = ""; autosize(); $("send").disabled = true;
   try {
+    if (seq < 0) await pollNow();  // know where the log is before asking, so the reply isn't skipped
     const out = await api("/chat", { text });
     if (!out.ok && out.error) add("them", "⚠️ " + out.error);
-    (out.messages || []).forEach(m => add("them", m));
+    pollNow();
   } catch (e) { if (e.message !== "locked") add("them", "⚠️ Couldn’t reach Doppel."); }
   $("send").disabled = false;
 }
-async function poll() { try { (await api("/poll", {})).messages?.forEach(m => add("them", m)); } catch (e) {} setTimeout(poll, 2000); }
+let seq = -1, polling = false;
+async function pollNow() {
+  if (polling) return; polling = true;
+  try {
+    const out = await api("/poll", { since: Math.max(seq, 0) });
+    if (seq >= 0) (out.messages || []).forEach(m => add("them", m));  // first poll: just catch up the counter
+    if (typeof out.seq === "number") seq = out.seq;
+  } catch (e) {} finally { polling = false; }
+}
+async function poll() { await pollNow(); setTimeout(poll, 2000); }
 async function health() {
   try {
     const h = await api("/health");
@@ -371,7 +381,7 @@ async function loadMemory() {
     <div class="section">What Doppel has learned · playbook v${esc(pb.version || 0)}</div><div class="group">${cells(lessons, "No lessons adopted yet.")}</div>
     <div class="foot">Lessons come only from confirmed failures and are kept only if they beat the current playbook on work Doppel never trained on.</div>`;
 }
-async function act(cmd) { const out = await api("/chat", { text: cmd }); (out.messages || []).forEach(m => add("them", m)); setTimeout(loadMemory, 400); }
+async function act(cmd) { await api("/chat", { text: cmd }); pollNow(); setTimeout(loadMemory, 400); }
 
 async function loadConnections() {
   let st; try { st = await api("/connections"); } catch (e) { return; }
