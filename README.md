@@ -8,7 +8,7 @@ and your rules. It works quietly in the background (checking PRs, fixing issues,
 when something needs you. Built for the *Trust but Verify* track of the AIE Code Summit Hackathon (Nov 7, 2026).
 
 > **SubQ stopped 11 of 12 bad AI pull requests (92%) from shipping, and blocked 0 of 6 honest ones.**
-> Those are failures that Meta alone would have let through or got wrong. [Benchmarks ↓](#benchmarks-where-doppel-beats-meta-alone)
+> Meta alone either missed more (10 of 12 with its hidden exam) or blocked honest work (2 of 6 as a plain reviewer). [Benchmarks ↓](#benchmarks-where-doppel-beats-meta-alone)
 
 **Talk to it in ASI:One:** [doppel](https://asi1.ai/ai/agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg)
 (`agent1q0qv0zfjg8vwzdx9dle5yxreyfwmg3mnrlfqkqeayl6hlq6vaztuk3wxcsg`) · demo repos:
