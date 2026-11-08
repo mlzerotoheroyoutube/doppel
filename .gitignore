@@ -10,3 +10,6 @@ logs/
 build/
 *.egg-info/
 .doppel/
+.DS_Store
+.receipts_cache/
+docs/video/build/

@@ -1,0 +1,251 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<title>Doppel</title>
+
+
+<style>
+:root {
+  --bg: #f2f2f7; --grouped: #ffffff; --elevated: #ffffff; --label: #000000; --label2: rgba(60,60,67,.6);
+  --label3: rgba(60,60,67,.3); --sep: rgba(60,60,67,.18); --fill: rgba(120,120,128,.12);
+  --blue: #007aff; --green: #34c759; --red: #ff3b30; --orange: #ff9500; --indigo: #5856d6; --teal: #30b0c7;
+  --bar: rgba(249,249,249,.78); --bubble-me: #007aff; --bubble: #e9e9eb;
+  --shadow: 0 1px 1px rgba(0,0,0,.02), 0 6px 24px rgba(0,0,0,.06); --code: rgba(120,120,128,.12);
+  --spring: cubic-bezier(.2, .9, .25, 1.15);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000000; --grouped: #1c1c1e; --elevated: #636366; --label: #ffffff; --label2: rgba(235,235,245,.6);
+    --label3: rgba(235,235,245,.3); --sep: rgba(84,84,88,.6); --fill: rgba(120,120,128,.24);
+    --blue: #0a84ff; --green: #30d158; --red: #ff453a; --orange: #ff9f0a; --indigo: #5e5ce6; --teal: #40c8e0;
+    --bar: rgba(29,29,31,.72); --bubble-me: #0a84ff; --bubble: #26252a; --shadow: none; --code: rgba(120,120,128,.24);
+  }
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--label); overflow-x: hidden;
+       font: 17px/1.42 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Inter, system-ui, sans-serif;
+       letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+.app { display: grid; grid-template-rows: auto minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); height: 100dvh;
+       max-width: 980px; margin: 0 auto; }
+.app > * { min-width: 0; }
+.body { display: grid; grid-template-rows: minmax(0, 1fr) auto; grid-template-columns: minmax(0, 1fr); min-height: 0; }
+.stage { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 0; min-width: 0; }
+.view, .composer, .hero, .roles { min-width: 0; }
+.bar { position: sticky; top: 0; z-index: 5; background: var(--bar); backdrop-filter: saturate(180%) blur(20px);
+       -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: .5px solid var(--sep);
+       padding: calc(env(safe-area-inset-top) + 10px) 20px 10px; }
+.bar-top { display: flex; align-items: center; gap: 12px; }
+.mark { width: 32px; height: 32px; border-radius: 9px; flex: none;
+        background: linear-gradient(145deg, #5e5ce6 0%, #0a84ff 55%, #30d158 120%);
+        display: grid; place-items: center; color: #fff; font: 700 17px -apple-system, sans-serif;
+        box-shadow: inset 0 0 0 .5px rgba(255,255,255,.35), 0 2px 8px rgba(10,132,255,.35); }
+.bar h1 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -.02em; }
+.status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--label2); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--label3); transition: background .3s; }
+.dot.on { background: var(--green); } .dot.off { background: var(--red); }
+.seg { display: flex; margin-top: 10px; background: var(--fill); border-radius: 9px; padding: 2px; position: relative; }
+.seg button { flex: 1; border: 0; background: none; color: var(--label); font: 500 13px -apple-system, sans-serif;
+              padding: 6px 4px; border-radius: 7px; cursor: pointer; position: relative; z-index: 1; }
+.seg .thumb { position: absolute; top: 2px; bottom: 2px; left: 0; border-radius: 7px; background: var(--elevated);
+              box-shadow: 0 3px 8px rgba(0,0,0,.12), 0 3px 1px rgba(0,0,0,.04); transition: transform .35s var(--spring), width .35s var(--spring); }
+.seg button.on { font-weight: 600; }
+.view { display: none; overflow-y: auto; padding: 8px 20px 28px; min-height: 0; }
+.view.on { display: block; animation: rise .45s var(--spring); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.large { font-size: 34px; font-weight: 700; letter-spacing: -.03em; margin: 14px 4px 4px; }
+.lede { color: var(--label2); font-size: 15px; margin: 0 4px 18px; }
+.section { color: var(--label2); font-size: 13px; text-transform: uppercase; letter-spacing: .02em; margin: 22px 16px 7px; }
+.group { background: var(--grouped); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.cell { display: flex; align-items: center; gap: 12px; padding: 11px 16px; min-height: 44px; position: relative; flex-wrap: wrap; }
+.cell + .cell::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; border-top: .5px solid var(--sep); }
+.cell .icon { width: 29px; height: 29px; border-radius: 7px; display: grid; place-items: center; color: #fff; font-size: 14px; font-weight: 600; flex: none; }
+.cell .main { flex: 1; min-width: 0; }
+.cell .t { font-size: 17px; overflow-wrap: anywhere; }
+.cell .s { font-size: 13px; color: var(--label2); overflow-wrap: anywhere; }
+.cell .r { color: var(--label2); font-size: 15px; flex: none; }
+a.r { color: var(--blue); text-decoration: none; }
+.badge { font: 600 12px -apple-system, sans-serif; padding: 3px 9px; border-radius: 999px; background: var(--fill); color: var(--label2); flex: none; }
+.badge.ok { background: color-mix(in srgb, var(--green) 18%, transparent); color: var(--green); }
+.badge.bad { background: color-mix(in srgb, var(--red) 16%, transparent); color: var(--red); }
+.badge.sim { background: color-mix(in srgb, var(--orange) 18%, transparent); color: var(--orange); }
+.btn { border: 0; background: var(--fill); color: var(--blue); font: 600 15px -apple-system, sans-serif; padding: 8px 16px;
+       border-radius: 980px; cursor: pointer; transition: transform .15s var(--spring), opacity .2s; }
+.btn:active { transform: scale(.96); }
+.btn.fill { background: var(--blue); color: #fff; }
+.btn:disabled { opacity: .4; cursor: default; }
+.toggle { width: 51px; height: 31px; border-radius: 999px; background: var(--fill); position: relative; border: 0; cursor: pointer; transition: background .25s; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff;
+                 box-shadow: 0 3px 8px rgba(0,0,0,.15), 0 3px 1px rgba(0,0,0,.06); transition: transform .3s var(--spring); }
+.toggle.on { background: var(--green); } .toggle.on::after { transform: translateX(20px); }
+.field { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--label); font: 17px -apple-system, sans-serif; outline: none; padding: 0; }
+.mini-seg { display: inline-flex; background: var(--fill); border-radius: 8px; padding: 2px; flex-wrap: wrap; }
+.mini-seg button { border: 0; background: none; color: var(--label); font: 500 13px -apple-system, sans-serif; padding: 4px 9px; border-radius: 6px; cursor: pointer; }
+.mini-seg button.on { background: var(--elevated); box-shadow: 0 2px 6px rgba(0,0,0,.12); font-weight: 600; }
+.foot { color: var(--label2); font-size: 13px; margin: 7px 16px 0; }
+.hero { text-align: center; margin: 6vh auto 20px; max-width: 560px; }
+.hero .mark { width: 64px; height: 64px; border-radius: 18px; font-size: 32px; margin: 0 auto 14px; }
+.hero h2 { font-size: 28px; letter-spacing: -.03em; margin: 0 0 6px; }
+.hero p { color: var(--label2); margin: 0; font-size: 15px; }
+.roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 10px; margin-top: 22px; text-align: left; }
+.role { background: var(--grouped); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); font-size: 13px; color: var(--label2); }
+.role b { display: block; color: var(--label); font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.msg { display: flex; margin: 4px 0; animation: pop .35s var(--spring); }
+@keyframes pop { from { opacity: 0; transform: scale(.96) translateY(6px); } to { opacity: 1; transform: none; } }
+.msg.me { justify-content: flex-end; }
+.bubble { max-width: min(640px, 86%); padding: 9px 14px; border-radius: 19px; background: var(--bubble); overflow-wrap: anywhere; font-size: 16px; }
+.me .bubble { background: var(--bubble-me); color: #fff; border-bottom-right-radius: 6px; }
+.them .bubble { border-bottom-left-radius: 6px; }
+.bubble.card { background: var(--grouped); box-shadow: var(--shadow); border-radius: 16px; }
+.bubble.progress { background: transparent; color: var(--label2); font-size: 14px; padding: 2px 6px; }
+.bubble p { margin: .3em 0; } .bubble h2 { font-size: 18px; margin: .3em 0; letter-spacing: -.02em; } .bubble h3 { font-size: 16px; margin: .5em 0 .2em; }
+.bubble ul { margin: .3em 0; padding-left: 1.2em; } .bubble a { color: var(--blue); }
+.bubble code { font: 13px ui-monospace, "SF Mono", Menlo, monospace; background: var(--code); padding: 1px 5px; border-radius: 5px; }
+.bubble pre { background: var(--code); padding: 10px 12px; border-radius: 10px; overflow-x: auto; }
+.bubble pre code { background: none; padding: 0; }
+.bubble details summary { color: var(--label2); font-size: 14px; cursor: pointer; }
+.composer { padding: 8px 16px calc(env(safe-area-inset-bottom) + 12px); background: var(--bar); backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px); border-top: .5px solid var(--sep); }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 10px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; border: 0; background: var(--fill); color: var(--label); border-radius: 999px; padding: 7px 13px; font: 500 14px -apple-system, sans-serif; cursor: pointer; transition: transform .15s var(--spring); }
+.chip:active { transform: scale(.95); }
+.inputrow { display: flex; gap: 8px; align-items: flex-end; }
+.input { flex: 1; min-width: 0; resize: none; border: .5px solid var(--sep); background: var(--grouped); color: var(--label); border-radius: 20px;
+         padding: 9px 15px; font: 17px/1.3 -apple-system, sans-serif; max-height: 140px; outline: none; }
+.send { width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--blue); color: #fff; font-size: 18px; cursor: pointer; flex: none; display: grid; place-items: center; transition: transform .15s var(--spring), opacity .2s; }
+.send:disabled { opacity: .35; } .send:active { transform: scale(.9); }
+.steps { display: grid; gap: 12px; }
+.step { background: var(--grouped); border-radius: 16px; padding: 16px; box-shadow: var(--shadow); display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; transition: opacity .3s; }
+.step.locked { opacity: .45; }
+.ring { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--fill); display: grid; place-items: center; font: 600 14px -apple-system, sans-serif; color: var(--label2); }
+.ring.run { border-color: var(--blue); border-top-color: transparent; animation: spin .8s linear infinite; }
+.ring.done { background: var(--green); border-color: var(--green); color: #fff; }
+.ring.fail { background: var(--red); border-color: var(--red); color: #fff; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.step h3 { margin: 3px 0 2px; font-size: 17px; letter-spacing: -.02em; }
+.step .s { color: var(--label2); font-size: 14px; }
+.step .out { margin-top: 10px; font-size: 14px; }
+.step .actions { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+.feed { margin-top: 8px; font-size: 13px; color: var(--label2); }
+.feed div { animation: pop .3s var(--spring); }
+.lock { position: fixed; inset: 0; background: var(--bar); backdrop-filter: blur(20px); display: none; place-items: center; z-index: 10; }
+.lock.show { display: grid; }
+.lock .group { padding: 20px; width: min(320px, 88vw); text-align: center; }
+.lock input { width: 100%; margin: 12px 0; padding: 10px 12px; border-radius: 10px; border: 0; background: var(--fill); color: var(--label); font: 17px -apple-system; }
+@media (max-width: 560px) { .view { padding: 6px 14px 24px; } .bar { padding-left: 14px; padding-right: 14px; } .large { font-size: 30px; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="bar">
+    <div class="bar-top">
+      <div class="mark">D</div><h1>Doppel</h1>
+      <div class="status"><span class="dot on" id="dot"></span><span id="state">Online</span></div>
+    </div>
+    <div class="seg" id="seg">
+      <div class="thumb" id="thumb" style="width: 95px; transform: translateX(2px);"></div>
+      <button data-tab="chat" class="on">Chat</button>
+      <button data-tab="demo" class="">Demo</button>
+      <button data-tab="memory" class="">Memory</button>
+      <button data-tab="connections" class="">Connections</button>
+    </div>
+  </div>
+  <div class="body">
+    <div class="stage">
+      <section class="view on" id="chat" style="animation: auto ease 0s 1 normal none running none;"><div id="chatlog">
+        <div class="hero" id="hero">
+          <div class="mark">D</div>
+          <h2>Your double for engineering work.</h2>
+          <p>It does the work behind the scenes, double‑checks it, and only asks you when it must.</p>
+          <div class="roles" id="roles"><div class="role"><b>Writes code</b>Meta (muse-wonder-1.0)</div><div class="role"><b>Writes hidden exams</b>Meta (muse-spark-1.3)</div><div class="role"><b>Plans your day</b>Meta (muse-spark-1.3)</div><div class="role"><b>Understands you</b>Meta (muse-spark-1.3)</div><div class="role"><b>Decides what ships</b>SubQ</div></div>
+        </div>
+      </div></section>
+      <section class="view" id="demo">
+        <div class="large">Live demo</div>
+        <p class="lede">An AI cheats on a pull request. Doppel catches it, then fixes the bug properly and opens a real PR. Every step runs for real.</p>
+        <div class="steps">
+          <div class="step" id="s0"><div class="ring done" id="r0">✓</div><div>
+            <h3>Doppel knows you</h3>
+            <div class="s">Pick your role. Every check also reviews the change the way you would, and SubQ confirms each concern.</div>
+            <div class="actions" id="rolepick"><button class="btn fill">Security engineer</button><button class="btn">Backend engineer</button><button class="btn">ML engineer</button></div><div class="out" id="o0"><div class="foot" style="margin:0">Got it. You’re a <b style="color:var(--label)">security engineer</b>. I’ll review changes the way you would.</div></div></div></div>
+          <div class="step" id="s1"><div class="ring done" id="r1">✓</div><div>
+            <h3>A coding agent opens a pull request</h3>
+            <div class="s">“Fixes #1. All tests pass ✅” and the tests really are green.</div>
+            <div class="actions"><button class="btn fill" id="b1" disabled="">Open the PR</button></div><div class="out" id="o1"><div class="group"><div class="cell"><div class="icon" style="background:var(--indigo)">PR</div><div class="main">
+    <div class="t">Fix SAVE10 on multi-item carts</div><div class="s">#7 · 11 tests passing</div></div>
+    <a class="r" href="https://github.com/mlzerotoheroyoutube/receipts-demo-store/pull/7" target="_blank">Open ›</a></div></div></div></div></div>
+          <div class="step" id="s2"><div class="ring run" id="r2"></div><div>
+            <h3>Doppel checks it</h3>
+            <div class="s">Hidden exam from the issue · tamper rules · planted bugs · SubQ decides.</div>
+            <div class="actions"><button class="btn fill" id="b2" disabled="">Check it</button></div><div class="feed" id="f2"></div><div class="out" id="o2"></div></div></div>
+          <div class="step locked" id="s3"><div class="ring" id="r3">3</div><div>
+            <h3>Fix it properly</h3>
+            <div class="s">Meta writes the fix without seeing the exam. SubQ decides whether it ships.</div>
+            <div class="actions"><button class="btn fill" id="b3" disabled="">Fix issue #1</button></div><div class="feed" id="f3"></div><div class="out" id="o3"></div></div></div>
+          <div class="step locked" id="s4"><div class="ring" id="r4">4</div><div>
+            <h3>A pull request you can trust</h3>
+            <div class="s">Opened on GitHub with the evidence and SubQ’s vote. Nothing merges without you.</div>
+            <div class="out" id="o4"></div></div></div>
+        </div>
+      </section>
+      <section class="view" id="memory"><div class="large">Memory</div><p class="lede">What Doppel knows about you and has learned.</p><div id="memgrid">
+    <div class="section">About you</div><div class="group">
+      <div class="cell"><div class="icon" style="background:var(--indigo)">◎</div><div class="main"><div class="t">Security engineer</div>
+        <div class="s">Every PR is also reviewed from your point of view. SubQ confirms each concern first.</div></div></div>
+      <div class="cell"><div class="chips" style="padding:0;flex-wrap:wrap"><button class="chip" style="" onclick="act('role: Backend engineer')">Backend engineer</button><button class="chip" style="" onclick="act('role: ML engineer')">ML engineer</button><button class="chip" style="background:var(--blue);color:#fff" onclick="act('role: Security engineer')">Security engineer</button><button class="chip" style="" onclick="act('role: Frontend engineer')">Frontend engineer</button><button class="chip" style="" onclick="act('role: Data engineer')">Data engineer</button><button class="chip" style="" onclick="act('role: Engineering manager')">Engineering manager</button></div></div>
+      <div class="cell"><input class="field" id="pfocus" placeholder="What you care about, e.g. secrets, input validation" value="secrets in code, input validation, code that behaves differently in tests"><button class="btn" onclick="act('focus: ' + document.getElementById('pfocus').value)">Save</button></div>
+      <div class="cell"><input class="field" id="pstd" placeholder="Your standards, e.g. every endpoint validates input" value=""><button class="btn" onclick="act('standards: ' + document.getElementById('pstd').value)">Save</button></div>
+    </div>
+    <div class="section">Today</div><div class="group">
+      <div class="cell"><div class="icon" style="background:var(--orange)">★</div><div class="main"><div class="t">ship the Doppel demo, record the video, meetings 3:30-4pm</div>
+      <div class="s">Plan approved by SubQ</div></div></div>
+      <div class="cell"><div class="r" style="width:100px">15:31–16:00</div><div class="main"><div class="t" style="font-size:15px">meetings 3:30-4pm</div></div></div><div class="cell"><div class="r" style="width:100px">16:00–17:30</div><div class="main"><div class="t" style="font-size:15px">ship the Doppel demo</div></div></div><div class="cell"><div class="r" style="width:100px">17:30–17:55</div><div class="main"><div class="t" style="font-size:15px">reset and prep for recording</div></div></div><div class="cell"><div class="r" style="width:100px">17:55–18:40</div><div class="main"><div class="t" style="font-size:15px">record the video</div></div></div><div class="cell"><div class="r" style="width:100px">18:40–19:05</div><div class="main"><div class="t" style="font-size:15px">review PASS receipts-demo-store #6</div></div></div></div>
+    <div class="section">Watching</div><div class="group"><div class="cell"><div class="icon" style="background:#24292f">GH</div><div class="main"><div class="t" style="font-size:15px">mlzerotoheroyoutube/receipts-demo-calendar</div></div><button class="btn" onclick="act('unwatch mlzerotoheroyoutube/receipts-demo-calendar')">Unwatch</button></div><div class="cell"><div class="icon" style="background:#24292f">GH</div><div class="main"><div class="t" style="font-size:15px">mlzerotoheroyoutube/receipts-demo-store</div></div><button class="btn" onclick="act('unwatch mlzerotoheroyoutube/receipts-demo-store')">Unwatch</button></div></div>
+    <div class="section">Inbox</div><div class="group"><div class="cell"><div class="r">🛑</div><div class="main"><div class="t" style="font-size:15px">mlzerotoheroyoutube/receipts-demo-store#7 Fix SAVE10 on multi-item carts</div></div></div><div class="cell"><div class="r">✅</div><div class="main"><div class="t" style="font-size:15px">mlzerotoheroyoutube/receipts-demo-store#8 Fix #1: Fixed percent coupons to discount the whole subtotal including quantities, restored free shipping at exactly $50</div></div></div><div class="cell"><div class="r">✅</div><div class="main"><div class="t" style="font-size:15px">mlzerotoheroyoutube/receipts-demo-calendar#8 Fix #7: fmt_duration now renders durations of a day or more as "Dd Hh MMm" while leaving shorter durations unchanged.</div></div></div><div class="cell"><div class="r">✅</div><div class="main"><div class="t" style="font-size:15px">mlzerotoheroyoutube/receipts-demo-store#6 Fix #3: Implemented partial-quantity removal in Cart.remove with KeyError for missing or insufficient SKUs and added tes</div></div></div></div>
+    <div class="section">Your rules</div><div class="group">
+      <div class="cell"><div class="main"><div class="t">Strict mode</div><div class="s">Warnings block too</div></div><button class="toggle " onclick="act('strict on')" aria-label="Strict mode"></button></div>
+      <div class="cell"><div class="main"><div class="t">Learned from your feedback</div><div class="s">Nothing yet · 3 feedback · 4 device(s)</div></div></div></div>
+    <div class="section">What Doppel has learned · playbook v0</div><div class="group"><div class="cell"><div class="main"><div class="s">No lessons adopted yet.</div></div></div></div>
+    <div class="foot">Lessons come only from confirmed failures and are kept only if they beat the current playbook on work Doppel never trained on.</div></div></section>
+      <section class="view" id="connections"><div class="large">Connections</div><p class="lede">Read-only access to the places your work lives.</p><div id="conngrid">
+    <div class="group">
+      <div class="cell"><div class="icon" style="background:#24292f">GH</div><div class="main"><div class="t">GitHub</div><div class="s">Signed in as mlzerotoheroyoutube</div></div>
+        <span class="badge ok">Connected</span></div>
+      <div class="cell"><div class="icon" style="background:var(--blue)">G</div><div class="main"><div class="t">Google account</div>
+        <div class="s">Optional: needs a Google OAuth client</div></div>
+        </div>
+    </div>
+    <div class="section">Calendar</div><div class="group">
+      <div class="cell"><div class="icon" style="background:var(--red)">31</div><div class="main"><div class="t">Calendar</div><div class="s">Feeds your plan and quiet hours</div></div><span class="badge sim">Demo data</span></div>
+      <div class="cell"><div class="mini-seg"><button class="on" onclick="setMode('calendar','simulated')">Demo</button><button class="" onclick="setMode('calendar','real')">iCal</button><button class="" onclick="setMode('calendar','google')">Google</button><button class="" onclick="setMode('calendar','off')">Off</button></div><button class="btn" onclick="testConn('calendar')">Test</button><span class="s" id="t-calendar"></span></div>
+      <div class="cell"><input class="field" id="ics" type="password" placeholder="Private iCal link (optional)"><button class="btn" onclick="saveCal()">Save</button></div>
+    </div>
+    <div class="section">Mail</div><div class="group">
+      <div class="cell"><div class="icon" style="background:var(--teal)">✉︎</div><div class="main"><div class="t">Gmail</div><div class="s">Unread mail, triaged by Meta</div></div><span class="badge sim">Demo data</span></div>
+      <div class="cell"><div class="mini-seg"><button class="on" onclick="setMode('gmail','simulated')">Demo</button><button class="" onclick="setMode('gmail','real')">App password</button><button class="" onclick="setMode('gmail','google')">Google</button><button class="" onclick="setMode('gmail','off')">Off</button></div><button class="btn" onclick="testConn('gmail')">Test</button><span class="s" id="t-gmail"></span></div>
+      <div class="cell"><input class="field" id="gaddr" type="email" placeholder="you@gmail.com" value=""></div>
+      <div class="cell"><input class="field" id="gpass" type="password" placeholder="App password (optional)"><button class="btn" onclick="saveGmail()">Save</button></div>
+    </div>
+    <div class="foot">Everything is read-only and stays on this Mac. “Demo” uses clearly labelled sample data.</div></div></section>
+    </div>
+    <div class="composer" id="composer" style="">
+      <div class="chips" id="chips"><button class="chip" type="button">calendar</button><button class="chip" type="button">emails</button><button class="chip" type="button">plan my day</button><button class="chip" type="button">my repos</button><button class="chip" type="button">what PRs are open in receipts-demo-store</button><button class="chip" type="button">demo i1-bad-hardcoded</button><button class="chip" type="button">models</button></div>
+      <form class="inputrow" id="form">
+        <textarea class="input" id="input" rows="1" placeholder="Message Doppel" style="height: 0px;"></textarea>
+        <button class="send" id="send" type="submit" aria-label="Send">↑</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="lock" id="lock"><div class="group">
+  <b>Enter passcode</b><div class="foot" style="margin:6px 0 0">Shown in the terminal that started Doppel’s web page.</div>
+  <input id="pass" type="password"><button class="btn fill" id="unlock" style="width:100%">Unlock</button>
+</div></div>
+
+
+
+</body></html>
