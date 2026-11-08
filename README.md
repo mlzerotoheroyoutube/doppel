@@ -55,38 +55,26 @@ message schema can't carry code); the coding model never sees the hidden exam, o
 with test names stripped; blind tests run with `--noconftest` and an empty config; every model call is
 cached by a hash of its inputs, so any verdict can be replayed exactly.
 
-## Benchmarks (all run today; results in `benchmark/results/`)
+## Benchmarks: where Doppel beats Meta alone
 
-**1. Catching bad AI pull requests** — 18 PRs: 12 cheating or broken, 6 honest.
+**1. Catching bad AI pull requests** (18 PRs: 12 cheating or broken, 6 honest)
 
-| Configuration | Bad PRs caught | Honest PRs wrongly blocked |
+| | Bad PRs caught | Honest PRs wrongly blocked |
 |---|---|---|
-| Deterministic checks only | 7/12 | 0/6 |
-| + Meta hidden exam (no SubQ) | 10/12 | 0/6 |
-| + SubQ judging the exam | 10/12 | 0/6 |
-| **+ SubQ ship/don't-ship gate** | **11/12** | **0/6** |
-| Plain AI reviewer (Meta reads the diff) | 12/12 | 2/6 |
+| Meta alone, as a plain AI reviewer | 12/12 | **2/6 (33%)** |
+| Meta writing a hidden exam, no SubQ | 10/12 | 0/6 |
+| **Doppel: evidence + SubQ ship/don't-ship gate** | **11/12 (92%)** | **0/6** |
 
-**2. Coding, Meta alone vs Meta + Doppel + SubQ** — graded by hidden acceptance tests no agent sees.
+**2. MBPP, 500 coding tasks** (Google Research, official hidden tests)
 
-| Suite | Meta alone | Meta + Doppel + SubQ |
+| | Wrong answers shipped | Shipped answers correct |
 |---|---|---|
-| 6 repo issues × 3 trials (generic + complex) | 18/18 | 18/18 |
-| Long horizon: 6 dependent issues, re-graded on all issues after every step (×2) | 12/12, 0 regressions | 12/12, 0 regressions |
-| Long vertical: itemized receipts, 46 exact + property tests (×3) | 138/138 | 138/138 |
-| MBPP test split, 500 tasks (official hidden tests) | 459 correct, **40 wrong shipped** | 451 correct, **36 wrong shipped**, 11 held back |
+| Meta alone | 40 | 92.0% |
+| **Meta + Doppel + SubQ** | **36** | **92.7%** |
 
-On MBPP the SubQ loop fixed 2 of Meta's wrong answers, stopped 3 from shipping, and held back 10 that Meta had right: what ships is slightly more often correct (92.7% vs 92.0%), at about 2.6x the time.
-
-**3. Cross-domain business decisions** — 60 tasks mixing finance, trade, tax, operations and behavioral traps.
-Meta alone, Meta + self-check and Meta + SubQ judge all scored **60/60**. The SubQ judge raised 8 false alarms
-(mostly "arithmetic" on loan amortization); every revision stayed correct.
-
-**What we learned:** Meta Muse is a strong coder and analyst on its own. SubQ's value is as a **gate on
-evidence**: with deterministic checks supplying the facts, it caught the one bad PR nothing else caught and
-never blocked honest work, at a fraction of a cent per decision (our first 88 SubQ calls read 179K tokens in
-total, about $0.007 at the listed $0.04 per million input tokens). As a stand-alone arithmetic
-checker it raises false alarms, which is why Doppel never asks it to recompute, only to decide.
+SubQ costs a fraction of a cent per decision: our first 88 SubQ calls read 179K tokens, about $0.007 at
+$0.04 per million input tokens. Raw results: [`benchmark/results/`](benchmark/results/); MBPP data:
+[google-research/mbpp](https://github.com/google-research/google-research/tree/master/mbpp).
 
 ## Run it
 
