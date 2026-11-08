@@ -2,332 +2,390 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <title>Doppel</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
 <style>
 :root {
-  --bg: #f6f6f4; --panel: #ffffff; --ink: #17171a; --muted: #6b6b73; --line: #e6e6e1;
-  --accent: #6d4aff; --accent-ink: #ffffff; --me: #efeafe; --ok: #138a52; --bad: #c43c3c; --warn: #b7791f;
-  --code: #f2f1ee; --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --bg: #f2f2f7; --grouped: #ffffff; --elevated: #ffffff; --label: #000000; --label2: rgba(60,60,67,.6);
+  --label3: rgba(60,60,67,.3); --sep: rgba(60,60,67,.18); --fill: rgba(120,120,128,.12);
+  --blue: #007aff; --green: #34c759; --red: #ff3b30; --orange: #ff9500; --indigo: #5856d6; --teal: #30b0c7;
+  --bar: rgba(249,249,249,.78); --bubble-me: #007aff; --bubble: #e9e9eb;
+  --shadow: 0 1px 1px rgba(0,0,0,.02), 0 6px 24px rgba(0,0,0,.06); --code: rgba(120,120,128,.12);
+  --spring: cubic-bezier(.2, .9, .25, 1.15);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0f0f12; --panel: #17171c; --ink: #ececf1; --muted: #9b9ba6; --line: #2a2a31;
-    --accent: #8f74ff; --me: #241e3d; --code: #1f1f26; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    --bg: #000000; --grouped: #1c1c1e; --elevated: #636366; --label: #ffffff; --label2: rgba(235,235,245,.6);
+    --label3: rgba(235,235,245,.3); --sep: rgba(84,84,88,.6); --fill: rgba(120,120,128,.24);
+    --blue: #0a84ff; --green: #30d158; --red: #ff453a; --orange: #ff9f0a; --indigo: #5e5ce6; --teal: #40c8e0;
+    --bar: rgba(29,29,31,.72); --bubble-me: #0a84ff; --bubble: #26252a; --shadow: none; --code: rgba(120,120,128,.24);
   }
 }
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { height: 100%; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 Inter, system-ui, sans-serif;
-       -webkit-font-smoothing: antialiased; }
-body { overflow-x: hidden; }
-.app { display: grid; grid-template-rows: auto auto 1fr auto; grid-template-columns: minmax(0, 1fr); height: 100dvh;
-       max-width: 920px; margin: 0 auto; }
+body { margin: 0; background: var(--bg); color: var(--label); overflow-x: hidden;
+       font: 17px/1.42 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Inter, system-ui, sans-serif;
+       letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+.app { display: grid; grid-template-rows: auto minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); height: 100dvh;
+       max-width: 980px; margin: 0 auto; }
 .app > * { min-width: 0; }
-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
-.logo { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), #2fd3b0);
-        display: grid; place-items: center; color: #fff; font-weight: 700; letter-spacing: -.5px; }
-.title { font-weight: 650; letter-spacing: -.2px; }
-.subtitle { color: var(--muted); font-size: 12.5px; }
-.status { margin-left: auto; display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--muted); }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
-.dot.on { background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 22%, transparent); }
-.dot.off { background: var(--bad); }
-main { overflow-y: auto; padding: 18px 16px 8px; scroll-behavior: smooth; }
-.empty { text-align: center; color: var(--muted); margin: 8vh auto 0; max-width: 520px; }
-.empty h1 { color: var(--ink); font-size: 26px; letter-spacing: -.6px; margin: 0 0 6px; }
-.roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 22px 0 0; text-align: left; }
-.role { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: 12.5px; }
-.role b { display: block; color: var(--ink); font-size: 13px; }
-.msg { display: flex; margin: 10px 0; }
+.body { display: grid; grid-template-rows: minmax(0, 1fr) auto; grid-template-columns: minmax(0, 1fr); min-height: 0; }
+.stage { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 0; min-width: 0; }
+.view, .composer, .hero, .roles { min-width: 0; }
+.bar { position: sticky; top: 0; z-index: 5; background: var(--bar); backdrop-filter: saturate(180%) blur(20px);
+       -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: .5px solid var(--sep);
+       padding: calc(env(safe-area-inset-top) + 10px) 20px 10px; }
+.bar-top { display: flex; align-items: center; gap: 12px; }
+.mark { width: 32px; height: 32px; border-radius: 9px; flex: none;
+        background: linear-gradient(145deg, #5e5ce6 0%, #0a84ff 55%, #30d158 120%);
+        display: grid; place-items: center; color: #fff; font: 700 17px -apple-system, sans-serif;
+        box-shadow: inset 0 0 0 .5px rgba(255,255,255,.35), 0 2px 8px rgba(10,132,255,.35); }
+.bar h1 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -.02em; }
+.status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--label2); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--label3); transition: background .3s; }
+.dot.on { background: var(--green); } .dot.off { background: var(--red); }
+.seg { display: flex; margin-top: 10px; background: var(--fill); border-radius: 9px; padding: 2px; position: relative; }
+.seg button { flex: 1; border: 0; background: none; color: var(--label); font: 500 13px -apple-system, sans-serif;
+              padding: 6px 4px; border-radius: 7px; cursor: pointer; position: relative; z-index: 1; }
+.seg .thumb { position: absolute; top: 2px; bottom: 2px; left: 0; border-radius: 7px; background: var(--elevated);
+              box-shadow: 0 3px 8px rgba(0,0,0,.12), 0 3px 1px rgba(0,0,0,.04); transition: transform .35s var(--spring), width .35s var(--spring); }
+.seg button.on { font-weight: 600; }
+.view { display: none; overflow-y: auto; padding: 8px 20px 28px; min-height: 0; }
+.view.on { display: block; animation: rise .45s var(--spring); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.large { font-size: 34px; font-weight: 700; letter-spacing: -.03em; margin: 14px 4px 4px; }
+.lede { color: var(--label2); font-size: 15px; margin: 0 4px 18px; }
+.section { color: var(--label2); font-size: 13px; text-transform: uppercase; letter-spacing: .02em; margin: 22px 16px 7px; }
+.group { background: var(--grouped); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.cell { display: flex; align-items: center; gap: 12px; padding: 11px 16px; min-height: 44px; position: relative; flex-wrap: wrap; }
+.cell + .cell::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; border-top: .5px solid var(--sep); }
+.cell .icon { width: 29px; height: 29px; border-radius: 7px; display: grid; place-items: center; color: #fff; font-size: 14px; font-weight: 600; flex: none; }
+.cell .main { flex: 1; min-width: 0; }
+.cell .t { font-size: 17px; overflow-wrap: anywhere; }
+.cell .s { font-size: 13px; color: var(--label2); overflow-wrap: anywhere; }
+.cell .r { color: var(--label2); font-size: 15px; flex: none; }
+a.r { color: var(--blue); text-decoration: none; }
+.badge { font: 600 12px -apple-system, sans-serif; padding: 3px 9px; border-radius: 999px; background: var(--fill); color: var(--label2); flex: none; }
+.badge.ok { background: color-mix(in srgb, var(--green) 18%, transparent); color: var(--green); }
+.badge.bad { background: color-mix(in srgb, var(--red) 16%, transparent); color: var(--red); }
+.badge.sim { background: color-mix(in srgb, var(--orange) 18%, transparent); color: var(--orange); }
+.btn { border: 0; background: var(--fill); color: var(--blue); font: 600 15px -apple-system, sans-serif; padding: 8px 16px;
+       border-radius: 980px; cursor: pointer; transition: transform .15s var(--spring), opacity .2s; }
+.btn:active { transform: scale(.96); }
+.btn.fill { background: var(--blue); color: #fff; }
+.btn:disabled { opacity: .4; cursor: default; }
+.toggle { width: 51px; height: 31px; border-radius: 999px; background: var(--fill); position: relative; border: 0; cursor: pointer; transition: background .25s; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff;
+                 box-shadow: 0 3px 8px rgba(0,0,0,.15), 0 3px 1px rgba(0,0,0,.06); transition: transform .3s var(--spring); }
+.toggle.on { background: var(--green); } .toggle.on::after { transform: translateX(20px); }
+.field { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--label); font: 17px -apple-system, sans-serif; outline: none; padding: 0; }
+.mini-seg { display: inline-flex; background: var(--fill); border-radius: 8px; padding: 2px; flex-wrap: wrap; }
+.mini-seg button { border: 0; background: none; color: var(--label); font: 500 13px -apple-system, sans-serif; padding: 4px 9px; border-radius: 6px; cursor: pointer; }
+.mini-seg button.on { background: var(--elevated); box-shadow: 0 2px 6px rgba(0,0,0,.12); font-weight: 600; }
+.foot { color: var(--label2); font-size: 13px; margin: 7px 16px 0; }
+.hero { text-align: center; margin: 6vh auto 20px; max-width: 560px; }
+.hero .mark { width: 64px; height: 64px; border-radius: 18px; font-size: 32px; margin: 0 auto 14px; }
+.hero h2 { font-size: 28px; letter-spacing: -.03em; margin: 0 0 6px; }
+.hero p { color: var(--label2); margin: 0; font-size: 15px; }
+.roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 10px; margin-top: 22px; text-align: left; }
+.role { background: var(--grouped); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); font-size: 13px; color: var(--label2); }
+.role b { display: block; color: var(--label); font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.msg { display: flex; margin: 4px 0; animation: pop .35s var(--spring); }
+@keyframes pop { from { opacity: 0; transform: scale(.96) translateY(6px); } to { opacity: 1; transform: none; } }
 .msg.me { justify-content: flex-end; }
-.bubble { max-width: min(680px, 92%); padding: 11px 14px; border-radius: 14px; background: var(--panel);
-          border: 1px solid var(--line); box-shadow: var(--shadow); overflow-wrap: anywhere; }
-.me .bubble { background: var(--me); border-color: transparent; box-shadow: none; }
-.bubble.progress { background: transparent; border: 1px dashed var(--line); box-shadow: none; color: var(--muted); font-size: 13.5px; padding: 7px 12px; }
-.bubble p { margin: .35em 0; } .bubble h2, .bubble h3 { margin: .5em 0 .3em; letter-spacing: -.2px; }
-.bubble h2 { font-size: 17px; } .bubble h3 { font-size: 15px; }
-.bubble ul { margin: .3em 0; padding-left: 1.2em; }
-.bubble code { font: 12.5px/1.5 "JetBrains Mono", ui-monospace, monospace; background: var(--code); padding: 1px 5px; border-radius: 5px; }
+.bubble { max-width: min(640px, 86%); padding: 9px 14px; border-radius: 19px; background: var(--bubble); overflow-wrap: anywhere; font-size: 16px; }
+.me .bubble { background: var(--bubble-me); color: #fff; border-bottom-right-radius: 6px; }
+.them .bubble { border-bottom-left-radius: 6px; }
+.bubble.card { background: var(--grouped); box-shadow: var(--shadow); border-radius: 16px; }
+.bubble.progress { background: transparent; color: var(--label2); font-size: 14px; padding: 2px 6px; }
+.bubble p { margin: .3em 0; } .bubble h2 { font-size: 18px; margin: .3em 0; letter-spacing: -.02em; } .bubble h3 { font-size: 16px; margin: .5em 0 .2em; }
+.bubble ul { margin: .3em 0; padding-left: 1.2em; } .bubble a { color: var(--blue); }
+.bubble code { font: 13px ui-monospace, "SF Mono", Menlo, monospace; background: var(--code); padding: 1px 5px; border-radius: 5px; }
 .bubble pre { background: var(--code); padding: 10px 12px; border-radius: 10px; overflow-x: auto; }
 .bubble pre code { background: none; padding: 0; }
-.bubble a { color: var(--accent); }
-.bubble details { margin: .3em 0; } .bubble summary { cursor: pointer; color: var(--muted); font-size: 13px; }
-.who { font-size: 11.5px; color: var(--muted); margin: 0 0 2px 4px; }
-footer { padding: 10px 16px 16px; border-top: 1px solid var(--line); background: var(--bg); }
-.chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
-.chip { flex: none; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 999px;
-        padding: 6px 11px; font: 500 12.5px Inter, sans-serif; cursor: pointer; transition: border-color .15s, transform .1s; }
-.chip:hover { border-color: var(--accent); } .chip:active { transform: scale(.97); }
-form { display: flex; gap: 8px; }
-textarea { flex: 1; resize: none; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 12px;
-           padding: 11px 13px; font: 15px/1.4 Inter, sans-serif; max-height: 160px; outline: none; }
-textarea:focus { border-color: var(--accent); }
-button.send { border: 0; background: var(--accent); color: var(--accent-ink); border-radius: 12px; padding: 0 18px;
-              font: 600 14px Inter, sans-serif; cursor: pointer; }
-button.send:disabled { opacity: .5; cursor: default; }
-.lock { position: fixed; inset: 0; background: color-mix(in srgb, var(--bg) 92%, transparent); display: none; place-items: center; }
+.bubble details summary { color: var(--label2); font-size: 14px; cursor: pointer; }
+.composer { padding: 8px 16px calc(env(safe-area-inset-bottom) + 12px); background: var(--bar); backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px); border-top: .5px solid var(--sep); }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 10px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; border: 0; background: var(--fill); color: var(--label); border-radius: 999px; padding: 7px 13px; font: 500 14px -apple-system, sans-serif; cursor: pointer; transition: transform .15s var(--spring); }
+.chip:active { transform: scale(.95); }
+.inputrow { display: flex; gap: 8px; align-items: flex-end; }
+.input { flex: 1; min-width: 0; resize: none; border: .5px solid var(--sep); background: var(--grouped); color: var(--label); border-radius: 20px;
+         padding: 9px 15px; font: 17px/1.3 -apple-system, sans-serif; max-height: 140px; outline: none; }
+.send { width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--blue); color: #fff; font-size: 18px; cursor: pointer; flex: none; display: grid; place-items: center; transition: transform .15s var(--spring), opacity .2s; }
+.send:disabled { opacity: .35; } .send:active { transform: scale(.9); }
+.steps { display: grid; gap: 12px; }
+.step { background: var(--grouped); border-radius: 16px; padding: 16px; box-shadow: var(--shadow); display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; transition: opacity .3s; }
+.step.locked { opacity: .45; }
+.ring { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--fill); display: grid; place-items: center; font: 600 14px -apple-system, sans-serif; color: var(--label2); }
+.ring.run { border-color: var(--blue); border-top-color: transparent; animation: spin .8s linear infinite; }
+.ring.done { background: var(--green); border-color: var(--green); color: #fff; }
+.ring.fail { background: var(--red); border-color: var(--red); color: #fff; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.step h3 { margin: 3px 0 2px; font-size: 17px; letter-spacing: -.02em; }
+.step .s { color: var(--label2); font-size: 14px; }
+.step .out { margin-top: 10px; font-size: 14px; }
+.step .actions { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+.feed { margin-top: 8px; font-size: 13px; color: var(--label2); }
+.feed div { animation: pop .3s var(--spring); }
+.lock { position: fixed; inset: 0; background: var(--bar); backdrop-filter: blur(20px); display: none; place-items: center; z-index: 10; }
 .lock.show { display: grid; }
-.lock .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); width: min(340px, 90vw); }
-.lock input { width: 100%; margin: 12px 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: 15px Inter; }
-nav { display: flex; gap: 4px; padding: 0 16px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
-.card { min-width: 0; overflow-wrap: anywhere; } .view { min-width: 0; }
-nav button { border: 0; background: none; color: var(--muted); font: 600 13.5px Inter, sans-serif; padding: 10px 12px;
-             border-bottom: 2px solid transparent; cursor: pointer; }
-nav button.on { color: var(--ink); border-bottom-color: var(--accent); }
-.view { display: none; overflow-y: auto; padding: 18px 16px 24px; }
-.view.on { display: block; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 12px; }
-.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow); }
-.card h3 { margin: 0 0 8px; font-size: 14px; letter-spacing: -.1px; display: flex; align-items: center; gap: 8px; }
-.card .muted, .muted { color: var(--muted); font-size: 13px; }
-.card ul { margin: 6px 0 0; padding-left: 1.1em; font-size: 13.5px; }
-.card li { margin: 3px 0; }
-.pill { display: inline-block; font: 600 11px Inter; padding: 2px 8px; border-radius: 999px; background: var(--code); color: var(--muted); }
-.pill.ok { background: color-mix(in srgb, var(--ok) 15%, transparent); color: var(--ok); }
-.pill.sim { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
-.pill.bad { background: color-mix(in srgb, var(--bad) 15%, transparent); color: var(--bad); }
-.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
-.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-.seg button { border: 0; background: var(--panel); color: var(--muted); font: 600 12.5px Inter; padding: 6px 10px; cursor: pointer; }
-.seg button.on { background: var(--accent); color: var(--accent-ink); }
-.field { width: 100%; margin-top: 8px; padding: 9px 11px; border-radius: 10px; border: 1px solid var(--line);
-         background: var(--bg); color: var(--ink); font: 13.5px Inter; }
-.btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 10px; padding: 7px 12px;
-       font: 600 12.5px Inter; cursor: pointer; }
-.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
-.small { font-size: 12px; color: var(--muted); margin-top: 6px; }
-.small a { color: var(--accent); }
-.block { display: grid; grid-template-columns: 92px 1fr; gap: 8px; font-size: 13.5px; padding: 4px 0; border-top: 1px dashed var(--line); }
-.block:first-child { border-top: 0; }
-.big { font-size: 26px; font-weight: 700; letter-spacing: -.5px; }
-@media (max-width: 560px) { .subtitle { display: none; } main, .view { padding: 12px 10px 6px; } footer { padding: 8px 10px 12px; }
-                            nav { padding: 0 8px; } }
+.lock .group { padding: 20px; width: min(320px, 88vw); text-align: center; }
+.lock input { width: 100%; margin: 12px 0; padding: 10px 12px; border-radius: 10px; border: 0; background: var(--fill); color: var(--label); font: 17px -apple-system; }
+@media (max-width: 560px) { .view { padding: 6px 14px 24px; } .bar { padding-left: 14px; padding-right: 14px; } .large { font-size: 30px; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
 <div class="app">
-  <header>
-    <div class="logo">D</div>
-    <div>
-      <div class="title">Doppel</div>
-      <div class="subtitle">Your double: does the work behind the scenes, double-checks it, asks only when it must.</div>
+  <div class="bar">
+    <div class="bar-top">
+      <div class="mark">D</div><h1>Doppel</h1>
+      <div class="status"><span class="dot" id="dot"></span><span id="state">Connecting</span></div>
     </div>
-    <div class="status"><span class="dot" id="dot"></span><span id="state">connecting…</span></div>
-  </header>
-  <nav>
-    <button class="on" data-tab="chat">Chat</button>
-    <button data-tab="memory">Memory</button>
-    <button data-tab="connections">Connections</button>
-  </nav>
-  <section class="view" id="memory"><div class="grid" id="memgrid"><div class="muted">Loading…</div></div></section>
-  <section class="view" id="connections"><div class="grid" id="conngrid"><div class="muted">Loading…</div></div></section>
-  <main id="log">
-    <div class="empty" id="empty">
-      <h1>What should Doppel take care of?</h1>
-      <div>Check a pull request, fix an issue, plan your day, or just ask. Meta does the work; SubQ decides what ships.</div>
-      <div class="roles" id="roles"></div>
+    <div class="seg" id="seg">
+      <div class="thumb" id="thumb"></div>
+      <button data-tab="chat" class="on">Chat</button>
+      <button data-tab="demo">Demo</button>
+      <button data-tab="memory">Memory</button>
+      <button data-tab="connections">Connections</button>
     </div>
-  </main>
-  <footer>
-    <div class="chips" id="chips"></div>
-    <form id="form">
-      <textarea id="input" rows="1" placeholder="Ask Doppel… e.g. “what PRs are open in receipts-demo-store”" autofocus></textarea>
-      <button class="send" id="send" type="submit">Send</button>
-    </form>
-  </footer>
+  </div>
+  <div class="body">
+    <div class="stage">
+      <section class="view on" id="chat"><div id="chatlog">
+        <div class="hero" id="hero">
+          <div class="mark">D</div>
+          <h2>Your double for engineering work.</h2>
+          <p>It does the work behind the scenes, double‑checks it, and only asks you when it must.</p>
+          <div class="roles" id="roles"></div>
+        </div>
+      </div></section>
+      <section class="view" id="demo">
+        <div class="large">Live demo</div>
+        <p class="lede">An AI cheats on a pull request. Doppel catches it, then fixes the bug properly and opens a real PR. Every step runs for real.</p>
+        <div class="steps">
+          <div class="step" id="s1"><div class="ring" id="r1">1</div><div>
+            <h3>A coding agent opens a pull request</h3>
+            <div class="s">“Fixes #1. All tests pass ✅” and the tests really are green.</div>
+            <div class="actions"><button class="btn fill" id="b1">Open the PR</button></div><div class="out" id="o1"></div></div></div>
+          <div class="step locked" id="s2"><div class="ring" id="r2">2</div><div>
+            <h3>Doppel checks it</h3>
+            <div class="s">Hidden exam from the issue · tamper rules · planted bugs · SubQ decides.</div>
+            <div class="actions"><button class="btn fill" id="b2" disabled>Check it</button></div><div class="feed" id="f2"></div><div class="out" id="o2"></div></div></div>
+          <div class="step locked" id="s3"><div class="ring" id="r3">3</div><div>
+            <h3>Fix it properly</h3>
+            <div class="s">Meta writes the fix without seeing the exam. SubQ decides whether it ships.</div>
+            <div class="actions"><button class="btn fill" id="b3" disabled>Fix issue #1</button></div><div class="feed" id="f3"></div><div class="out" id="o3"></div></div></div>
+          <div class="step locked" id="s4"><div class="ring" id="r4">4</div><div>
+            <h3>A pull request you can trust</h3>
+            <div class="s">Opened on GitHub with the evidence and SubQ’s vote. Nothing merges without you.</div>
+            <div class="out" id="o4"></div></div></div>
+        </div>
+      </section>
+      <section class="view" id="memory"><div class="large">Memory</div><p class="lede">What Doppel knows about you and has learned.</p><div id="memgrid"></div></section>
+      <section class="view" id="connections"><div class="large">Connections</div><p class="lede">Read-only access to the places your work lives.</p><div id="conngrid"></div></section>
+    </div>
+    <div class="composer" id="composer">
+      <div class="chips" id="chips"></div>
+      <form class="inputrow" id="form">
+        <textarea class="input" id="input" rows="1" placeholder="Message Doppel"></textarea>
+        <button class="send" id="send" type="submit" aria-label="Send">↑</button>
+      </form>
+    </div>
+  </div>
 </div>
-<div class="lock" id="lock"><div class="card">
-  <div class="title">Enter passcode</div>
-  <div class="subtitle" style="display:block">Shown in the terminal that started the web page.</div>
-  <input id="pass" type="password" autocomplete="one-time-code">
-  <button class="send" id="unlock" style="width:100%;padding:10px">Unlock</button>
+<div class="lock" id="lock"><div class="group">
+  <b>Enter passcode</b><div class="foot" style="margin:6px 0 0">Shown in the terminal that started Doppel’s web page.</div>
+  <input id="pass" type="password"><button class="btn fill" id="unlock" style="width:100%">Unlock</button>
 </div></div>
 <script>
 const $ = (id) => document.getElementById(id);
-const CHIPS = ["calendar", "emails", "plan my day", "my repos", "what PRs are open in receipts-demo-store",
-  "issues mlzerotoheroyoutube/receipts-demo-calendar", "demo i1-bad-hardcoded", "inbox", "models", "help"];
+const esc = (t) => String(t ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const CHIPS = ["calendar", "emails", "plan my day", "my repos", "what PRs are open in receipts-demo-store", "demo i1-bad-hardcoded", "models"];
 const PROGRESS = /^(Fetching|Checking|Working on|Planning your|Round \d|Writing the hidden|Exam frozen|Reviewing|Approved\. Opening|Creating `)/;
-const ROLE_NAMES = { router: "Understands you", planner: "Plans your day", exam: "Writes hidden exams",
-                     implementer: "Writes code", judge: "Decides what ships" };
+const ROLE_NAMES = { router: "Understands you", planner: "Plans your day", exam: "Writes hidden exams", implementer: "Writes code", judge: "Decides what ships" };
+const listeners = new Set();
 
 function render(md) {
-  const html = window.marked ? marked.parse(md, { breaks: true }) : md.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const html = window.marked ? marked.parse(md, { breaks: true }) : esc(md);
   return window.DOMPurify ? DOMPurify.sanitize(html, { ADD_TAGS: ["details", "summary"] }) : html;
 }
 function add(who, text) {
-  $("empty")?.remove();
-  const row = document.createElement("div");
-  row.className = "msg " + (who === "me" ? "me" : "them");
-  const wrap = document.createElement("div");
-  if (who !== "me") { const w = document.createElement("div"); w.className = "who"; w.textContent = "Doppel"; wrap.appendChild(w); }
+  $("hero")?.remove();
+  const row = document.createElement("div"); row.className = "msg " + (who === "me" ? "me" : "them");
   const b = document.createElement("div");
-  b.className = "bubble" + (who !== "me" && PROGRESS.test(text) ? " progress" : "");
-  b.innerHTML = who === "me" ? "" : render(text);
-  if (who === "me") b.textContent = text;
-  wrap.appendChild(b); row.appendChild(wrap); $("log").appendChild(row);
-  $("log").scrollTop = $("log").scrollHeight;
+  const progress = who !== "me" && PROGRESS.test(text);
+  b.className = "bubble" + (progress ? " progress" : who !== "me" && text.length > 160 ? " card" : "");
+  if (who === "me") b.textContent = text; else b.innerHTML = render(text);
+  row.appendChild(b); $("chatlog").appendChild(row);
+  $("chat").scrollTop = $("chat").scrollHeight;
+  if (who !== "me") listeners.forEach(fn => fn(text));
 }
 async function api(path, body) {
-  const r = await fetch(path, { method: body ? "POST" : "GET", headers: { "Content-Type": "application/json" },
-                                body: body ? JSON.stringify(body) : undefined });
+  const r = await fetch(path, { method: body ? "POST" : "GET", headers: { "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined });
   if (r.status === 401) { $("lock").classList.add("show"); throw new Error("locked"); }
   return r.json();
 }
-async function send(text) {
+async function send(text, quiet) {
   text = text.trim(); if (!text) return;
-  add("me", text); $("input").value = ""; autosize();
-  $("send").disabled = true;
+  if (!quiet) add("me", text);
+  $("input").value = ""; autosize(); $("send").disabled = true;
   try {
     const out = await api("/chat", { text });
     if (!out.ok && out.error) add("them", "⚠️ " + out.error);
     (out.messages || []).forEach(m => add("them", m));
-  } catch (e) { if (e.message !== "locked") add("them", "⚠️ Couldn't reach Doppel."); }
-  $("send").disabled = false; $("input").focus();
+  } catch (e) { if (e.message !== "locked") add("them", "⚠️ Couldn’t reach Doppel."); }
+  $("send").disabled = false;
 }
-async function poll() {
-  try { const out = await api("/poll", {}); (out.messages || []).forEach(m => add("them", m)); } catch (e) {}
-  setTimeout(poll, 2500);
-}
+async function poll() { try { (await api("/poll", {})).messages?.forEach(m => add("them", m)); } catch (e) {} setTimeout(poll, 2000); }
 async function health() {
   try {
     const h = await api("/health");
-    $("dot").className = "dot " + (h.ok ? "on" : "off");
-    $("state").textContent = h.ok ? "online" : "offline";
+    $("dot").className = "dot " + (h.ok ? "on" : "off"); $("state").textContent = h.ok ? "Online" : "Offline";
     if (h.locked) $("lock").classList.add("show");
-    if (h.ok && $("roles") && !$("roles").childElementCount) {
-      for (const [k, v] of Object.entries(h.roles || {})) {
-        if (!ROLE_NAMES[k]) continue;
-        const d = document.createElement("div"); d.className = "role";
-        d.innerHTML = `<b>${ROLE_NAMES[k]}</b>${v.replace(/[&<>]/g, "")}`; $("roles").appendChild(d);
-      }
-    }
-  } catch (e) { $("dot").className = "dot off"; $("state").textContent = "offline"; }
+    if (h.ok && $("roles") && !$("roles").childElementCount)
+      for (const [k, v] of Object.entries(h.roles || {})) if (ROLE_NAMES[k])
+        $("roles").insertAdjacentHTML("beforeend", `<div class="role"><b>${ROLE_NAMES[k]}</b>${esc(v)}</div>`);
+  } catch (e) { $("dot").className = "dot off"; $("state").textContent = "Offline"; }
   setTimeout(health, 15000);
 }
-function autosize() { const t = $("input"); t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight, 160) + "px"; }
-for (const c of CHIPS) {
-  const b = document.createElement("button"); b.className = "chip"; b.type = "button"; b.textContent = c;
-  b.onclick = () => c.endsWith(": ") ? ($("input").value = c, $("input").focus()) : send(c);
-  $("chips").appendChild(b);
-}
-$("form").onsubmit = (e) => { e.preventDefault(); send($("input").value); };
-$("input").addEventListener("input", autosize);
-$("input").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send($("input").value); } });
-$("unlock").onclick = async () => {
-  await api("/login", { passcode: $("pass").value });
-  $("lock").classList.remove("show"); health();
-};
-// ---------------------------------------------------------------- tabs
+function autosize() { const t = $("input"); t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight, 140) + "px"; }
+
 function show(tab) {
-  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
-  $("log").style.display = tab === "chat" ? "" : "none";
-  document.querySelector("footer").style.display = tab === "chat" ? "" : "none";
-  $("memory").classList.toggle("on", tab === "memory");
-  $("connections").classList.toggle("on", tab === "connections");
+  const btns = [...document.querySelectorAll("#seg button")];
+  btns.forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
+  const on = btns.find(b => b.dataset.tab === tab);
+  $("thumb").style.width = on.offsetWidth + "px"; $("thumb").style.transform = `translateX(${on.offsetLeft}px)`;
+  for (const v of ["chat", "demo", "memory", "connections"]) $(v).classList.toggle("on", v === tab);
+  $("composer").style.display = tab === "chat" ? "" : "none";
   if (tab === "memory") loadMemory();
   if (tab === "connections") loadConnections();
 }
-document.querySelectorAll("nav button").forEach(b => b.onclick = () => show(b.dataset.tab));
-const esc = (t) => String(t ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const icon = { BLOCK: "🛑", WARN: "⚠️", PASS: "✅" };
+document.querySelectorAll("#seg button").forEach(b => b.onclick = () => show(b.dataset.tab));
+window.addEventListener("resize", () => show(document.querySelector("#seg button.on").dataset.tab));
 
-async function loadMemory() {
-  const g = $("memgrid");
-  let out;
-  try { out = await api("/memory"); } catch (e) { return; }
-  if (!out.ok) { g.innerHTML = `<div class="muted">Couldn't load memory: ${esc(out.error || "not available")}</div>`; return; }
-  const p = out.profile, plan = p.plan || {}, pol = p.policy || {}, pb = p.playbook || {};
-  const blocks = (plan.blocks || []).map(b => `<div class="block"><b>${esc(b.start)}–${esc(b.end)}</b><span>${esc(b.task)}</span></div>`).join("");
-  const lessons = Object.entries(pb.domains || {}).map(([d, v]) =>
-    `<li><b>${esc(d)}</b>: ${(v.lessons || []).length} lesson(s)${v.model ? `, model ${esc(v.model)}` : ""}</li>` +
-    (v.lessons || []).map(l => `<li class="muted">${esc(l)}</li>`).join("")).join("");
-  const pbhist = (pb.history || []).slice(-5).reverse().map(h => `<li>v${esc(h.version)} · ${esc(h.domain)} · ${esc(h.change)} (validation ${Math.round((h.val || 0) * 100)}%)</li>`).join("");
-  g.innerHTML = `
-    <div class="card"><h3>🎯 Today</h3><div class="muted">${esc(p.targets || "No targets yet. Tell me in Chat: today: …")}</div>
-      ${blocks ? `<div style="margin-top:10px">${blocks}</div>` : ""}
-      ${p.plan_review && p.plan_review.decision ? `<div class="small">Plan ${p.plan_review.decision === "APPROVE" ? "approved" : "flagged"} by SubQ</div>` : ""}</div>
-    <div class="card"><h3>👀 Watched repos</h3>
-      ${(p.repos || []).map(r => `<div class="row" style="margin-top:4px;justify-content:space-between"><span>${esc(r)}</span>
-        <button class="btn" onclick="act('unwatch ${esc(r)}')">Unwatch</button></div>`).join("") || '<div class="muted">None. Try: watch owner/repo</div>'}</div>
-    <div class="card"><h3>📥 Watcher inbox</h3><ul>${(p.inbox || []).slice().reverse().map(i => `<li>${icon[i.decision] || "•"} ${esc(i.target)}</li>`).join("") || '<li class="muted">Nothing yet</li>'}</ul></div>
-    <div class="card"><h3>🧾 Recent verdicts</h3><ul>${(p.history || []).slice().reverse().map(h => `<li>${icon[h.decision] || "•"} ${esc(h.target)}${h.rules && h.rules.length ? ` <span class="pill">${esc(h.rules.join(", "))}</span>` : ""}</li>`).join("") || '<li class="muted">None yet</li>'}</ul></div>
-    <div class="card"><h3>⚙️ Your rules</h3>
-      <div class="row" style="justify-content:space-between"><span>Strict mode (warnings block)</span>
-        <div class="seg"><button class="${pol.strict ? "on" : ""}" onclick="act('strict on')">On</button><button class="${pol.strict ? "" : "on"}" onclick="act('strict off')">Off</button></div></div>
-      <div class="small">Muted rules: ${esc((pol.muted || []).join(", ") || "none")} · Learned from your feedback: ${esc((p.learned || []).join(", ") || "nothing yet")} · ${esc(p.feedback)} feedback · ${esc(p.devices)} device(s) linked</div></div>
-    <div class="card"><h3>🧠 What Doppel has learned</h3><div class="muted">Playbook v${esc(pb.version || 0)}: lessons are adopted only if they beat the current version on held-out work.</div>
-      <ul>${lessons || '<li class="muted">No lessons yet</li>'}</ul>${pbhist ? `<div class="small">Recent changes</div><ul>${pbhist}</ul>` : ""}</div>`;
+function waitFor(pattern, onLine, timeoutMs) {
+  return new Promise((resolve) => {
+    const fn = (text) => { onLine && onLine(text); if (pattern.test(text)) { listeners.delete(fn); resolve(text); } };
+    listeners.add(fn);
+    setTimeout(() => { listeners.delete(fn); resolve(null); }, timeoutMs);
+  });
 }
-async function act(cmd) {
-  const out = await api("/chat", { text: cmd });
-  (out.messages || []).forEach(m => add("them", m));
-  setTimeout(loadMemory, 400);
+function stepState(n, state) {
+  $("r" + n).className = "ring " + state; $("r" + n).textContent = state === "done" ? "✓" : state === "fail" ? "!" : state === "run" ? "" : n;
+  if (state === "done" && $("s" + (n + 1))) { $("s" + (n + 1)).classList.remove("locked"); const b = $("b" + (n + 1)); if (b) b.disabled = false; }
 }
-
-const CONN = {
-  google: { name: "Google account", emoji: "🔐", about: "Sign in once to give Doppel read-only access to your Google Calendar and Gmail." },
-  github: { name: "GitHub", emoji: "🐙", about: "Repos, PRs, issues, status checks and fixes. Uses the signed-in gh login on this laptop." },
-  calendar: { name: "Google Calendar", emoji: "📅", about: "Today's meetings feed your plan and quiet hours. Read-only." },
-  gmail: { name: "Gmail", emoji: "✉️", about: "Unread mail, triaged by Meta (`emails` in Chat). Read-only; never marks mail as read." },
+const line = (t) => esc(t.split("\n")[0].replace(/\*\*/g, "").replace(/`/g, ""));
+let demoPR = "";
+$("b1").onclick = async () => {
+  $("b1").disabled = true; stepState(1, "run");
+  const r = await api("/demo/open-cheat", {});
+  if (!r.ok) { stepState(1, "fail"); $("o1").textContent = r.error || "Couldn’t open the PR"; $("b1").disabled = false; return; }
+  demoPR = r.url;
+  $("o1").innerHTML = `<div class="group"><div class="cell"><div class="icon" style="background:var(--indigo)">PR</div><div class="main">
+    <div class="t">Fix SAVE10 on multi-item carts</div><div class="s">#${r.number} · 11 tests passing</div></div>
+    <a class="r" href="${esc(r.url)}" target="_blank">Open ›</a></div></div>`;
+  stepState(1, "done");
 };
+$("b2").onclick = async () => {
+  $("b2").disabled = true; stepState(2, "run"); $("f2").innerHTML = "";
+  const done = waitFor(/Doppel: (BLOCK|WARN|PASS)|Static review|couldn't/i,
+    (t) => { if (PROGRESS.test(t)) $("f2").insertAdjacentHTML("beforeend", `<div>• ${line(t)}</div>`); }, 300000);
+  send(demoPR, true);
+  const verdict = await done;
+  if (!verdict) { stepState(2, "fail"); $("b2").disabled = false; return; }
+  const blocked = /BLOCK/.test(verdict);
+  const reasons = [...new Set([...verdict.matchAll(/### \d+\. (.+)/g)].map(m => m[1].replace(/`/g, "")))].slice(0, 3)
+    .map(r => `<li>${esc(r)}</li>`).join("");
+  $("o2").innerHTML = `<div class="group"><div class="cell"><div class="icon" style="background:${blocked ? "var(--red)" : "var(--green)"}">${blocked ? "✕" : "✓"}</div>
+    <div class="main"><div class="t">${blocked ? "Blocked" : "Passed"}</div><div class="s">“Doppel” status check posted on GitHub</div></div>
+    <a class="r" href="${esc(demoPR)}" target="_blank">View ›</a></div></div>${reasons ? `<ul class="foot" style="padding-left:1.2em">${reasons}</ul>` : ""}`;
+  stepState(2, "done");
+};
+$("b3").onclick = async () => {
+  $("b3").disabled = true; stepState(3, "run"); $("f3").innerHTML = "";
+  const done = waitFor(/Shipped|Stopped after|loop failed|Pull request opened/i,
+    (t) => { if (PROGRESS.test(t) || /approved by|rejected by/.test(t)) $("f3").insertAdjacentHTML("beforeend", `<div>• ${line(t)}</div>`); }, 600000);
+  send("fix issue 1 in mlzerotoheroyoutube/receipts-demo-store", true);
+  const result = await done;
+  if (!result || !/Shipped|Pull request opened/.test(result)) { stepState(3, "fail"); $("b3").disabled = false; return; }
+  const pr = (result.match(/https:\/\/github\.com\/[^\s)]+\/pull\/\d+/) || [""])[0];
+  const pship = (result.match(/P\(ship\) = ([\d.]+)/) || [, "—"])[1];
+  stepState(3, "done");
+  $("o4").innerHTML = `<div class="group"><div class="cell"><div class="icon" style="background:var(--green)">↑</div><div class="main">
+    <div class="t">Pull request opened</div><div class="s">Written by Meta · approved by SubQ · P(ship) ${esc(pship)}</div></div>
+    ${pr ? `<a class="r" href="${esc(pr)}" target="_blank">Open ›</a>` : ""}</div></div>`;
+  stepState(4, "done");
+};
+
+const icon = { BLOCK: "🛑", WARN: "⚠️", PASS: "✅" };
+async function loadMemory() {
+  let out; try { out = await api("/memory"); } catch (e) { return; }
+  const g = $("memgrid");
+  if (!out.ok) { g.innerHTML = `<div class="foot">Couldn’t load memory.</div>`; return; }
+  const p = out.profile, plan = p.plan || {}, pol = p.policy || {}, pb = p.playbook || {};
+  const cells = (rows, empty) => rows.length ? rows.join("") : `<div class="cell"><div class="main"><div class="s">${empty}</div></div></div>`;
+  const lessons = Object.entries(pb.domains || {}).flatMap(([d, v]) => (v.lessons || []).map(l => `<div class="cell"><div class="main"><div class="s">${esc(d)}</div><div class="t" style="font-size:15px">${esc(l)}</div></div></div>`));
+  g.innerHTML = `
+    <div class="section">Today</div><div class="group">
+      <div class="cell"><div class="icon" style="background:var(--orange)">★</div><div class="main"><div class="t">${esc(p.targets || "No targets yet")}</div>
+      <div class="s">${p.plan_review && p.plan_review.decision ? "Plan " + (p.plan_review.decision === "APPROVE" ? "approved" : "flagged") + " by SubQ" : "Say “plan my day” in Chat"}</div></div></div>
+      ${(plan.blocks || []).map(b => `<div class="cell"><div class="r" style="width:100px">${esc(b.start)}–${esc(b.end)}</div><div class="main"><div class="t" style="font-size:15px">${esc(b.task)}</div></div></div>`).join("")}</div>
+    <div class="section">Watching</div><div class="group">${cells((p.repos || []).map(r => `<div class="cell"><div class="icon" style="background:#24292f">GH</div><div class="main"><div class="t" style="font-size:15px">${esc(r)}</div></div><button class="btn" onclick="act('unwatch ${esc(r)}')">Unwatch</button></div>`), "No repos. Say “watch owner/repo”.")}</div>
+    <div class="section">Inbox</div><div class="group">${cells((p.inbox || []).slice().reverse().slice(0, 6).map(i => `<div class="cell"><div class="r">${icon[i.decision] || "•"}</div><div class="main"><div class="t" style="font-size:15px">${esc(i.target)}</div></div></div>`), "Nothing new.")}</div>
+    <div class="section">Your rules</div><div class="group">
+      <div class="cell"><div class="main"><div class="t">Strict mode</div><div class="s">Warnings block too</div></div><button class="toggle ${pol.strict ? "on" : ""}" onclick="act('strict ${pol.strict ? "off" : "on"}')" aria-label="Strict mode"></button></div>
+      <div class="cell"><div class="main"><div class="t">Learned from your feedback</div><div class="s">${esc((p.learned || []).join(", ") || "Nothing yet")} · ${esc(p.feedback)} feedback · ${esc(p.devices)} device(s)</div></div></div></div>
+    <div class="section">What Doppel has learned · playbook v${esc(pb.version || 0)}</div><div class="group">${cells(lessons, "No lessons adopted yet.")}</div>
+    <div class="foot">Lessons come only from confirmed failures and are kept only if they beat the current playbook on work Doppel never trained on.</div>`;
+}
+async function act(cmd) { const out = await api("/chat", { text: cmd }); (out.messages || []).forEach(m => add("them", m)); setTimeout(loadMemory, 400); }
+
 async function loadConnections() {
   let st; try { st = await api("/connections"); } catch (e) { return; }
-  const g = $("conngrid");
-  const pill = (c, k) => k === "google" ? (c.signed_in ? `<span class="pill ok">Signed in</span>` : `<span class="pill">Not signed in</span>`)
-    : c.mode === "google" ? `<span class="pill ok">Google</span>` : k === "github" ? (c.connected ? `<span class="pill ok">Connected · ${esc(c.account)}</span>` : `<span class="pill bad">Not signed in</span>`)
-    : c.mode === "real" ? `<span class="pill ok">Connected</span>` : c.mode === "simulated" ? `<span class="pill sim">Simulated</span>` : `<span class="pill">Off</span>`;
-  g.innerHTML = Object.entries(CONN).map(([k, meta]) => {
-    const c = st[k] || {};
-    let body = "";
-    if (k === "github") body = `<div class="small">To switch account: <code>gh auth switch</code> in a terminal on this laptop.</div>`;
-    if (k === "google") body = c.signed_in
-      ? `<div class="row"><span>Signed in as <b>${esc(c.email)}</b></span><button class="btn" onclick="googleOut()">Sign out</button></div>`
-      : c.configured
-        ? `<div class="row"><button class="btn primary" onclick="location.href='/oauth/start'">Sign in with Google</button></div>
-           <div class="small">Read-only: calendar.readonly and gmail.readonly. You can revoke it any time.</div>`
-        : `<div class="small">One-time setup: create an OAuth client (Web application) in Google Cloud with redirect URI
-           <code>http://127.0.0.1:8080/oauth/callback</code> and save its JSON as <code>.doppel/google_client.json</code>.</div>`;
-    if (k === "calendar") body = `
-      <div class="row"><div class="seg">${["google", "simulated", "real", "off"].map(m => `<button class="${c.mode === m ? "on" : ""}" onclick="setMode('calendar','${m}')">${m === "real" ? "iCal" : m[0].toUpperCase() + m.slice(1)}</button>`).join("")}</div></div>
-      <input class="field" id="ics" type="password" placeholder="${c.has_real ? "iCal link saved (paste to replace)" : "Paste your private iCal link"}">
-      <div class="small">Google Calendar → Settings → your calendar → Integrate calendar → <b>Secret address in iCal format</b>. Stored only on this laptop.</div>
-      <div class="row"><button class="btn primary" onclick="saveCal()">Save</button><button class="btn" onclick="testConn('calendar')">Test</button><span class="small" id="t-calendar"></span></div>`;
-    if (k === "gmail") body = `
-      <div class="row"><div class="seg">${["google", "simulated", "real", "off"].map(m => `<button class="${c.mode === m ? "on" : ""}" onclick="setMode('gmail','${m}')">${m === "real" ? "App password" : m[0].toUpperCase() + m.slice(1)}</button>`).join("")}</div></div>
-      <input class="field" id="gaddr" type="email" placeholder="you@gmail.com" value="${esc(c.address || "")}">
-      <input class="field" id="gpass" type="password" placeholder="${c.has_real ? "App password saved (type to replace)" : "16-character Google app password"}">
-      <div class="small">Google Account → Security → 2-Step Verification → <b>App passwords</b>. Stored only on this laptop; read-only IMAP.</div>
-      <div class="row"><button class="btn primary" onclick="saveGmail()">Save</button><button class="btn" onclick="testConn('gmail')">Test</button><span class="small" id="t-gmail"></span></div>`;
-    return `<div class="card"><h3>${meta.emoji} ${meta.name} ${pill(c, k)}</h3><div class="muted">${meta.about}</div>${body}
-      ${k === "github" ? `<div class="row"><button class="btn" onclick="testConn('github')">Test</button><span class="small" id="t-github"></span></div>` : ""}</div>`;
-  }).join("");
-}
-async function googleOut() { await api("/connections/google/signout", {}); loadConnections(); }
-if (location.hash.startsWith("#connections")) {
-  const msg = decodeURIComponent((location.hash.split("google=")[1] || location.hash.split("error=")[1] || ""));
-  setTimeout(() => { show("connections"); if (msg) add("them", location.hash.includes("google=") ? `✅ Signed in with Google as **${msg}**. Calendar and Gmail now use your real account.` : `⚠️ Google sign-in: ${msg}`); }, 300);
+  const badge = (m) => m === "google" || m === "real" ? `<span class="badge ok">Connected</span>` : m === "simulated" ? `<span class="badge sim">Demo data</span>` : `<span class="badge">Off</span>`;
+  const modes = (which, cur) => `<div class="mini-seg">${[["simulated", "Demo"], ["real", which === "calendar" ? "iCal" : "App password"], ["google", "Google"], ["off", "Off"]]
+    .map(([m, l]) => `<button class="${cur === m ? "on" : ""}" onclick="setMode('${which}','${m}')">${l}</button>`).join("")}</div>`;
+  const g = st.github || {}, go = st.google || {}, cal = st.calendar || {}, gm = st.gmail || {};
+  $("conngrid").innerHTML = `
+    <div class="group">
+      <div class="cell"><div class="icon" style="background:#24292f">GH</div><div class="main"><div class="t">GitHub</div><div class="s">${g.connected ? "Signed in as " + esc(g.account) : "Not signed in"}</div></div>
+        <span class="badge ${g.connected ? "ok" : "bad"}">${g.connected ? "Connected" : "Off"}</span></div>
+      <div class="cell"><div class="icon" style="background:var(--blue)">G</div><div class="main"><div class="t">Google account</div>
+        <div class="s">${go.signed_in ? "Signed in as " + esc(go.email) : go.configured ? "Read-only Calendar and Gmail" : "Optional: needs a Google OAuth client"}</div></div>
+        ${go.signed_in ? `<button class="btn" onclick="googleOut()">Sign out</button>` : go.configured ? `<button class="btn fill" onclick="location.href='/oauth/start'">Sign in</button>` : ""}</div>
+    </div>
+    <div class="section">Calendar</div><div class="group">
+      <div class="cell"><div class="icon" style="background:var(--red)">31</div><div class="main"><div class="t">Calendar</div><div class="s">Feeds your plan and quiet hours</div></div>${badge(cal.mode)}</div>
+      <div class="cell">${modes("calendar", cal.mode)}<button class="btn" onclick="testConn('calendar')">Test</button><span class="s" id="t-calendar"></span></div>
+      <div class="cell"><input class="field" id="ics" type="password" placeholder="${cal.has_real ? "iCal link saved" : "Private iCal link (optional)"}"><button class="btn" onclick="saveCal()">Save</button></div>
+    </div>
+    <div class="section">Mail</div><div class="group">
+      <div class="cell"><div class="icon" style="background:var(--teal)">✉︎</div><div class="main"><div class="t">Gmail</div><div class="s">Unread mail, triaged by Meta</div></div>${badge(gm.mode)}</div>
+      <div class="cell">${modes("gmail", gm.mode)}<button class="btn" onclick="testConn('gmail')">Test</button><span class="s" id="t-gmail"></span></div>
+      <div class="cell"><input class="field" id="gaddr" type="email" placeholder="you@gmail.com" value="${esc(gm.address || "")}"></div>
+      <div class="cell"><input class="field" id="gpass" type="password" placeholder="${gm.has_real ? "App password saved" : "App password (optional)"}"><button class="btn" onclick="saveGmail()">Save</button></div>
+    </div>
+    <div class="foot">Everything is read-only and stays on this Mac. “Demo” uses clearly labelled sample data.</div>`;
 }
 async function setMode(which, mode) { await api("/connections", { [which + "_mode"]: mode }); loadConnections(); }
-async function saveCal() {
-  const v = $("ics").value.trim();
-  await api("/connections", v ? { calendar_ics_url: v, calendar_mode: "real" } : {});
-  loadConnections();
-}
-async function saveGmail() {
-  const a = $("gaddr").value.trim(), pw = $("gpass").value.trim();
-  const body = {}; if (a) body.gmail_address = a; if (pw) { body.gmail_app_password = pw; body.gmail_mode = "real"; }
-  await api("/connections", body); loadConnections();
-}
-async function testConn(which) {
-  const el = $("t-" + which); if (el) el.textContent = "testing…";
-  const r = await api("/connections/test", { which });
-  if ($("t-" + which)) $("t-" + which).textContent = (r.ok ? "✅ " : "⚠️ ") + (r.detail || "");
-}
+async function saveCal() { const v = $("ics").value.trim(); if (v) await api("/connections", { calendar_ics_url: v, calendar_mode: "real" }); loadConnections(); }
+async function saveGmail() { const a = $("gaddr").value.trim(), pw = $("gpass").value.trim(); const b = {}; if (a) b.gmail_address = a; if (pw) { b.gmail_app_password = pw; b.gmail_mode = "real"; } await api("/connections", b); loadConnections(); }
+async function testConn(which) { $("t-" + which).textContent = "Testing…"; const r = await api("/connections/test", { which }); $("t-" + which).textContent = (r.ok ? "✓ " : "⚠︎ ") + (r.detail || ""); }
+async function googleOut() { await api("/connections/google/signout", {}); loadConnections(); }
+
+for (const c of CHIPS) { const b = document.createElement("button"); b.className = "chip"; b.type = "button"; b.textContent = c; b.onclick = () => send(c); $("chips").appendChild(b); }
+$("form").onsubmit = (e) => { e.preventDefault(); send($("input").value); };
+$("input").addEventListener("input", autosize);
+$("input").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send($("input").value); } });
+$("unlock").onclick = async () => { await api("/login", { passcode: $("pass").value }); $("lock").classList.remove("show"); health(); };
+requestAnimationFrame(() => show(location.hash.startsWith("#connections") ? "connections" : location.hash.startsWith("#demo") ? "demo" : "chat"));
 health(); poll();
 </script>
 </body>

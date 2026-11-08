@@ -22,7 +22,7 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "benchmark" / "results" / "long"
+OUT = Path(os.environ.get("LONG_OUT", ROOT / "benchmark" / "results" / "long"))
 G = ROOT / "benchmark" / "graders"
 
 HORIZON = {"fixture": "benchmark/fixtures/calendar_horizon",

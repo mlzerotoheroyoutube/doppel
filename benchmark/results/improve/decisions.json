@@ -1,0 +1,83 @@
+{
+ "domain": "decisions",
+ "sizes": {
+  "train": 60,
+  "val": 42,
+  "test": 48
+ },
+ "rounds": [
+  {
+   "round": 1,
+   "train_acc": 1.0,
+   "train_wrong": 0,
+   "subq_stopped": 2,
+   "subq_caught_wrong": 0,
+   "subq_false_alarms": 2,
+   "candidates": [
+    {
+     "change": "lessons",
+     "lessons": [
+      "Recalculate exponential factors with full precision rather than approximating intermediate powers early.",
+      "Carry unrounded values through all intermediate steps and round only for final presentation.",
+      "Cross-check derived totals independently by recomputing from components in reverse order."
+     ],
+     "val": 0.9047619047619048
+    },
+    {
+     "change": "model -> muse-wonder-1.0",
+     "lessons": [],
+     "val": 1.0
+    }
+   ],
+   "adopted": null
+  },
+  {
+   "round": 2,
+   "train_acc": 1.0,
+   "train_wrong": 0,
+   "subq_stopped": 3,
+   "subq_caught_wrong": 0,
+   "subq_false_alarms": 3,
+   "candidates": [
+    {
+     "change": "lessons",
+     "lessons": [
+      "Carry full precision through all intermediate calculations and round only the final result.",
+      "Recompute every derived total independently from original inputs before choosing an answer.",
+      "Write each formula with substituted inputs so every step can be verified without guessing."
+     ],
+     "val": 0.9285714285714286
+    }
+   ],
+   "adopted": null
+  },
+  {
+   "round": 3,
+   "train_acc": 1.0,
+   "train_wrong": 0,
+   "subq_stopped": 3,
+   "subq_caught_wrong": 0,
+   "subq_false_alarms": 3,
+   "candidates": [
+    {
+     "change": "lessons",
+     "lessons": [
+      "Recompute every arithmetic step exactly from primary inputs and retain full precision until final reporting.",
+      "Verify compound growth factors and payment formulas independently instead of trusting memorized approximations.",
+      "Sum all cost components explicitly and check eligibility constraints before ranking alternatives."
+     ],
+     "val": 0.9761904761904762
+    }
+   ],
+   "adopted": null
+  }
+ ],
+ "start_val": 1.0,
+ "test_first": 0.9791666666666666,
+ "test_final": 0.9791666666666666,
+ "final": {
+  "model": null,
+  "lessons": []
+ },
+ "minutes": 43.0
+}

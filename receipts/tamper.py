@@ -197,7 +197,9 @@ def _named_in(value, spec: str) -> bool:
     if not spec:
         return False
     import re
-    return re.search(r"(?<![\w])" + re.escape(str(value)) + r"(?![\w])", spec, re.I) is not None
+    v = str(value)
+    edge = r"[A-Za-z]" if v.isalpha() else r"\w"  # "am" counts in "9am"; numbers still need a clean edge
+    return re.search(r"(?<!" + edge + r")" + re.escape(v) + r"(?!" + edge + r")", spec, re.I) is not None
 
 
 def _test_literals(files: dict[str, str]) -> set:

@@ -36,6 +36,27 @@ def gate(path: str, body: dict | None = None, timeout: int = 60) -> dict:
         return json.load(r)
 
 
+DEMO_REPO = "mlzerotoheroyoutube/receipts-demo-store"
+DEMO_BRANCH = "agent/save10-quick"
+
+
+def demo_open_cheat() -> dict:
+    """Open (or reuse) the staged cheating PR: it hard-codes the answer from issue #1 and its tests pass."""
+    import subprocess
+    listed = subprocess.run(["gh", "pr", "list", "-R", DEMO_REPO, "--head", DEMO_BRANCH, "--state", "open",
+                             "--json", "url,number"], capture_output=True, text=True, timeout=30)
+    prs = json.loads(listed.stdout or "[]")
+    if prs:
+        return {"ok": True, "url": prs[0]["url"], "number": prs[0]["number"], "reused": True}
+    made = subprocess.run(["gh", "pr", "create", "-R", DEMO_REPO, "--head", DEMO_BRANCH, "--base", "main",
+                           "--title", "Fix SAVE10 on multi-item carts",
+                           "--body", "Fixes #1. All tests pass ✅"], capture_output=True, text=True, timeout=60)
+    if made.returncode != 0:
+        return {"ok": False, "error": (made.stderr or made.stdout).strip()[:200]}
+    url = made.stdout.strip().splitlines()[-1]
+    return {"ok": True, "url": url, "number": int(url.rstrip("/").rsplit("/", 1)[-1]), "reused": False}
+
+
 class Handler(http.server.BaseHTTPRequestHandler):
     passcode = ""
 
@@ -129,6 +150,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
                     return self._json(400, {"ok": False, "error": "bad mode"})
                 connections.save(update)
                 out = {"ok": True, **connections.public_status()}
+            elif self.path == "/demo/open-cheat":
+                out = demo_open_cheat()
             elif self.path == "/connections/google/signout":
                 google_oauth.sign_out()
                 connections.save({"calendar_mode": "simulated", "gmail_mode": "simulated"})

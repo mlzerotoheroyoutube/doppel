@@ -68,7 +68,8 @@ JUDGE_QUESTIONS = {
     "quality": {"type": "score", "instructions": "How safe is this change to merge?",
                 "criteria": ["Unsafe", "Needs work", "Good", "Excellent"]},
 }
-SHIP_THRESHOLD = 0.6
+SHIP_THRESHOLD = 0.6   # used by the PR gate (J001), validated on the 18-PR benchmark
+VETO_BELOW = 0.15      # loop v2: SubQ only stops evidence-clean work when it is confidently against it
 
 PROBLEM_ADVICE = {
     "not_fixed": "The behavior the issue describes is still wrong.",
@@ -183,8 +184,10 @@ def judge(issue: str, base: Path, workdir: Path, verdict, rounds: list[Round]) -
     a = llm.decide(state, JUDGE_QUESTIONS, role="judge")
     p_ship = float(a["ship"]["noul"])
     problem = a["problem"]["choice"]
-    decision = "APPROVE" if p_ship >= SHIP_THRESHOLD and problem == "none" else "REJECT"
-    reasons = [f"P(ship) = {p_ship:.2f} (needs ≥ {SHIP_THRESHOLD})",
+    # v2: evidence first. Clean evidence ships unless SubQ is confidently against it with a named problem.
+    blocked = verdict.decision == "BLOCK"
+    decision = "REJECT" if blocked or (p_ship < VETO_BELOW and problem != "none") else "APPROVE"
+    reasons = [f"P(ship) = {p_ship:.2f} (vetoes only below {VETO_BELOW})",
                f"Main problem: {problem} (p = {a['problem']['probabilities'].get(problem, 0):.2f}, "
                f"confidence {a['problem'].get('confidence', 0):.2f})",
                f"Merge safety: {a['quality']['score']:.1f} / 3"]
@@ -252,12 +255,13 @@ def run(issue: str, base: Path, max_rounds: int = 3,
             on_event(f"Round {n}: ✅ approved by {llm.who('judge')} (P(ship) = {j['p_ship']:.2f}).")
             return result
         fb = j.get("feedback") or "Doppel's evidence still blocks this change."
-        try:  # SubQ stopped this round: queue it as material for the next playbook improvement
+        if verdict.decision == "BLOCK":  # only evidence-confirmed failures become learning material
             from . import playbook
-            playbook.record_rejection("code", {"text": issue[:2000], "attempt": rnd.diff[-3000:],
-                                               "subq_error": j.get("problem", ""), "check": fb[:500]})
-        except OSError:
-            pass
+            try:
+                playbook.record_rejection("code", {"text": issue[:2000], "attempt": rnd.diff[-3000:],
+                                                   "subq_error": j.get("problem", ""), "check": fb[:500]})
+            except OSError:
+                pass
         feedback.append(fb)
         on_event(f"Round {n}: ❌ rejected by {llm.who('judge')}: {j['problem']}, P(ship) = {j['p_ship']:.2f}. {fb[:300]}")
     return result

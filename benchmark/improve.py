@@ -185,7 +185,8 @@ def improve(name: str, rounds: int, workers: int, train_batch: int) -> dict:
         wrong = [r for r in results if not r["correct"]]
         stopped = [r for r in results if r["stopped"]]
         caught = sum(r["stopped"] for r in wrong)
-        learn_from = [r for r in results if r["stopped"] or not r["correct"]]
+        # v2: learn only from failures the checks confirm; SubQ-only flags produced lessons that hurt validation
+        learn_from = [r for r in results if not r["correct"]]
         entry = {"round": rnd, "train_acc": score(results), "train_wrong": len(wrong), "subq_stopped": len(stopped),
                  "subq_caught_wrong": caught, "subq_false_alarms": len(stopped) - caught, "candidates": []}
         print(f"[{name}] round {rnd}: train {score(results):.1%}; SubQ stopped {len(stopped)} "
